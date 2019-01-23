@@ -1,0 +1,16 @@
+set inputs = 3                  ; sum of input and output is
+set outputs = 2                 ;   number of columns
+set pterms = 4                  ; 4 product terms (number of rows)
+set vddwidth = 6                ; 6 lambda-wide supply rails
+set groundwidth = 6
+set buttingcontact = off        ; use buried contacts instead
+set samesideoutput = on         ; outputs on same side as inputs
+set flexible = on               ; use nonrigid arcs
+set fixedangle = on             ; use fixed-angle arcs
+set name = Sample               ; name to use for top-level cell
+begin   ;  Input        Output
+	;	1	2	3		1	2
+		1	1	0		1	0	; product term 1
+		0	0	X		1	0	; product term 2
+		1	X	1		0	1	; product term 3
+		0	X	0		0	1	; product term 4

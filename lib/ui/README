@@ -1,0 +1,5 @@
+To look these forms in Qt Designer you need to load custom widgets:
+1) Start Qt Designer
+2) Select "Tools/Custom/EditCustomWidgets..."
+3) Press "Load Descriptions..." button.
+4) Select file "electric.cw"

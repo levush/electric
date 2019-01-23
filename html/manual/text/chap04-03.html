@@ -1,0 +1,68 @@
+<HTML><HEAD><TITLE>Using Electric 4-3: Creating and Deleting Editing Windows</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap04-03"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 4: THE DISPLAY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap04-02.html#chap04-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>4-3: Creating and Deleting Editing Windows</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap04-04.html#chap04-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Multiple Editing Windows</H3>
+<P>
+Initially, there is only one editing window on the screen.
+Electric allows you to create multiple editing windows,
+each of which can show a different cell.
+You can also have the same cell in more than one window to see it at different scales and locations.
+<P>
+New windows are created by checking the appropriate checkbox in the <B>Edit Cell...</B> command of the <B>Cells</B> menu.
+New windows can also be created with the <B>New Window</B> command of the <B>Windows</B> menu.
+To delete a window, click its close box, or use the <B>Delete Window</B> command of the <B>Windows</B> menu.
+Note that you cannot delete the last window on UNIX systems,
+because the UNIX pulldown menus are part of the edit windows.
+<P>
+When there are many editing windows on the display,
+you can arrange them neatly with the <B>Adjust Position</B> subcommands of the <B>Windows</B> menu.
+The <B>Tile Horizontally</B> subcommand adjusts the windows so that they are full-width,
+but just tall enough to fill the screen, one above the other.
+The <B>Tile Vertically</B> subcommand adjusts the windows so that they are full-height,
+but just wide enough to fill the screen, one next to the other.
+The <B>Cascade</B> subcommand adjusts the windows so that they are all the same size and overlap each other uniformly from the upper-left to the lower-right.
+<P>
+<H3>Splitting Editing Windows</H3>
+<P>
+Each editing window can be split into multiple subwindows by using subcommands of the <B>Window Partitions</B> command.
+The <B>Split</B> subommand divides the current window in half, either vertically or horizontally,
+When splitting windows,
+the aspect ratio of the editing window and its contents are used to determine how the window is split.
+<P>
+Once the original is split, only one half is the current window, and its border is highlighted.
+The current window changes, however, whenever the cursor moves to another window and a command is issued.
+You can grab the border and slide it to adjust the location of the split.
+<P>
+The <B>Split</B> command can be used repeatedly to subdivide windows into halves, quarters, and so on.
+Once the initial split has been made, there is no longer a choice between horizontal and vertical splits:
+Each division follows an alternating sequence to achieve a clean binary tree of windows.
+<P>
+To undo the partitioning of a window,
+use the <B>Delete</B> subcommand of the <B>Window Partitions</B> command of the <B>Windows</B> menu,
+which deletes the current partition and merges it with its neighbor.
+This command can be issued only to a window at the bottom of the subdivision tree.
+To back out completely from multiple partitions,
+use the <B>Make 1 Window</B> subcommand, which returns to a single partition.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap04-02.html#chap04-02"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap04-02.html#chap04-02">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap04-04.html#chap04-04">Next</A></TD>
+<TD><A HREF="chap04-04.html#chap04-04"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

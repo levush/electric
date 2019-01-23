@@ -1,0 +1,634 @@
+<HTML><HEAD><TITLE>Using Electric 11-2: The Lisp Interface</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap11-02"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 11: INTERPRETERS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap11-01.html#chap11-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>11-2: The Lisp Interface</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap11-03.html#chap11-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+This section explains the Lisp interpretive language interface in the Electric VLSI design system.
+This interface is built on top of ELK Lisp 3.0, a Scheme dialect
+(see <A HREF="http://www-rn.informatik.uni-bremen.de/software/elk/elk.html">http://www-rn.informatik.uni-bremen.de/software/elk/elk.html</A>).
+<P>
+Throughout this section, examples of Lisp code will appear <U>underlined</U>.
+For example, the "getarcproto" predicate takes the name of an arc prototype and returns a pointer to that object.
+This is coded as <U>(getarcproto 'Metal-1)</U> which evaluates to the pointer of the form <U>#[arcproto Metal-1]</U>.
+<P>
+This section assumes that the reader is very familiar with the use of Electric,
+and somewhat familiar with the internals of the system.
+The Internals Manual (a document that is available from <A HREF="http://www.staticfreesoft.com">Static Free Software</A>)
+provides a broad, C-oriented view of the information described here.
+For users of Lisp, however, this section summarizes the relevant aspects of the Internals Manual.
+In general, the best way to understand this section is to try each command as it is explained.
+
+<H3>Session Control</H3>
+
+<P>
+To invoke the Lisp interpreter, use the <B>LISP...</B> subcommand of the <B>Language Interpreter</B>
+command of the <B>Tools</B> menu.
+On some systems it may be necessary to move the cursor into the messages window
+(the text window) in order for the interpreter to "hear" you.
+<P>
+If you have a disk file with Lisp code in it, you can read it into the interpreter by typing:
+<BR>&nbsp;&nbsp;<U>(load 'FILENAME)</U><BR>
+<P>
+To get back to Electric from Lisp, type ^D (hold the Control key and type a "D").
+On Windows, you must type the ESC key instead.
+
+<H3>Database Structure</H3>
+
+<P>
+The entire Electric database is a collection of objects, each of which has an arbitrary number of attributes.
+This section briefly outlines the object types and shows how they are related.
+Further detail can be found in the Internals Manual.
+See <A HREF="chap11-05.html#chap11-05">Section 11-5</A> for a list of attributes on these objects.
+<P>
+Individual components inside of circuits are described with <U>NODEINST</U> objects (instances of nodes),
+and individual wires are described with <U>ARCINST</U> objects (instances of arcs).
+Connections between components and wires are described with <U>PORTARCINST</U> objects
+(instances of ports that connect to arcs).
+Because both components and wires have geometry, each one also has an associated <U>GEOM</U> object,
+and all of the <U>GEOM</U> objects in a cell are organized spatially into an R-tree with a collection of
+<U>RTNODE</U> objects.
+<P>
+Class objects also exist to describe all individuals of a given type.
+The <U>NODEPROTO</U> object describes the prototypical component,
+which may have many individual <U>NODEINST</U> objects associated with it.
+For example, the CMOS P-Transistor is described with a single <U>NODEPROTO</U> object,
+and many <U>NODEINST</U> objects for each instance of such a transistor in any circuit.
+Hierarchy is implemented by having complex components, better known as cells,
+represented in the same way as the primitive components such as transistors.
+For example, the ALU circuit is described with a single <U>NODEPROTO</U> object,
+and each instance of that circuit higher up the hierarchy is described with a <U>NODEINST</U> object.
+<P>
+The <U>CELL</U> object aggregates different views and versions of a circuit.
+Each of these is called a "cell" (represented with a <U>NODEPROTO</U> object)
+and a cell has both a <U>VIEW</U> pointer and a version number.
+<P>
+In addition to component prototypes,
+the <U>ARCPROTO</U> describes classes of wires and the <U>PORTPROTO</U> describes classes of component-wire connections.
+An additional object, the <U>PORTEXPINST</U>, exists for exports.
+The <U>NETWORK</U> object describes electrically connected <U>ARCINST</U> and <U>PORTPROTO</U> objects
+within a CELL.
+<P>
+As a further aggregation of objects, the <U>LIBRARY</U> is a collection of cells and cells.
+The <U>TECHNOLOGY</U> is a collection of primitive components (<U>NODEPROTO</U>s) and all wire classes (<U>ARCPROTO</U>s).
+<P>
+In addition to the above object pointers,
+there are some standard types of values that can be accessed through <U>getval</U>:
+<CENTER><TABLE BORDER=1>
+<TR><TD><U>integer</U></TD><TD>32-bit integer</TD></TR>
+<TR><TD><U>address</U></TD><TD>32-bit integer</TD></TR>
+<TR><TD><U>char</U></TD><TD>8-bit byte</TD></TR>
+<TR><TD><U>string</U></TD><TD>null-terminated string of bytes</TD></TR>
+<TR><TD><U>float</U></TD><TD>32-bit floating point number</TD></TR>
+<TR><TD><U>double</U></TD><TD>64-bit floating point number</TD></TR>
+<TR><TD><U>fract</U></TD><TD>fractional integer number that is multiplied by 120</TD></TR>
+<TR><TD><U>short</U></TD><TD>16-bit integer</TD></TR>
+<TR><TD><U>window</U></TD><TD>window partition object</TD></TR>
+<TR><TD><U>window-frame</U></TD><TD>display window object</TD></TR>
+<TR><TD><U>constraint</U></TD><TD>constraint system object</TD></TR>
+<TR><TD><U>graphics</U></TD><TD>graphical attributes object</TD></TR>
+</TABLE></CENTER>
+<P>
+Also, there is the ability to have displayable variables (those whose values appear on the object)
+with the keyword: <U>displayable</U>.
+
+
+<H3>Database Examination</H3>
+
+<P>
+To begin a search through the database, it is important to know the current library.
+This is done with:
+<BR>&nbsp;&nbsp;<U>(curlib)</U><BR>
+which returns a pointer to a <U>LIBRARY</U> object (for example <U>#[library noname]</U>).
+From here, the current cell can be obtained with:
+<BR>&nbsp;&nbsp;<U>(getval (curlib) 'firstnodeproto)</U><BR>
+<P>
+Essentially, any attribute can be examined with <U>getval</U>, and new attributes can be created with <U>setval</U>.
+<U>Getval</U> has the following format:
+<BR>&nbsp;&nbsp;<U>(getval OBJECT 'ATTRIBUTE)</U><BR>
+where <U>OBJECT</U> is the object being accessed and <U>ATTRIBUTE</U> is the attribute being requested.
+A list of all existing attributes on the Electric objects is given at the end of this document.
+<P>
+New attributes can be created on any object with <U>setval</U>.
+In general, many of the existing attributes that are described at the end of this document cannot be set with <U>setval</U>,
+but rather are controlled with special database modification predicates.
+The format for <U>setval</U> is:
+<BR>&nbsp;&nbsp;<U>(setval OBJECT 'ATTRIBUTE VALUE OPTIONS)</U><BR>
+Where the <U>OPTIONS</U> are either <U>0</U> or <U>'displayable</U> to show this attribute when displaying the object.
+For example, to add a new attribute called "power-consumption" to the transistor component "t1",
+and give it the value 75, use:
+<BR>&nbsp;&nbsp;<U>(setval t1 'power-consumption 75 0)</U><BR>
+To add a displayed name to node "t1", use:
+<BR>&nbsp;&nbsp;<U>(setval t1 'NODE_name "Q1" 'displayable)</U><BR>
+To set an array of values, use <U>vectors</U>.
+For example, to set the shape of pure-layer node "metal" to be a diamond, use:
+<BR>&nbsp;&nbsp;<U>(setval metal 'trace (vector -1000 0 0 1000 1000 0 0 -1000) 0)</U><BR>
+<P>
+Single entries in array attributes can be set, with:
+<BR>&nbsp;&nbsp;<U>(setind OBJECT 'ATTRIBUTE INDEX VALUE)</U><BR>
+where <U>INDEX</U> is the 0-based entry in the array.
+<P>
+Finally, attributes can be deleted with:
+<BR>&nbsp;&nbsp;<U>(delval OBJECT 'ATTRIBUTE)</U><BR>
+However, only those attributes that have been created with <U>setval</U> can be deleted in this way.
+The other attributes are protected.
+
+<H3>Basic Synthesis</H3>
+
+<P>
+To create a new cell in the current library, use:
+<BR>&nbsp;&nbsp;<U>(newnodeproto 'CELLNAME (curlib))</U><BR>
+which returns a <U>NODEPROTO</U> pointer that can be used in subsequent calls which place components and wires in that cell.
+<P>
+To get the address of an existing <U>NODEPROTO</U>, use:
+<BR>&nbsp;&nbsp;<U>(getnodeproto 'CELLNAME)</U><BR>
+which returns the same type of value as <U>newnodeproto</U>.
+Thus, the code:
+<BR>&nbsp;&nbsp;<U>(define mycell (newnodeproto 'adder{lay} (curlib)))</U><BR>
+is the same as the code:
+<BR>&nbsp;&nbsp;<U>(newnodeproto 'adder{lay} (curlib))</U><BR>
+&nbsp;&nbsp;<U>(define mycell (getnodeproto 'adder{lay}))</U><BR>
+and both deal with the "layout" view of the cell called "adder".
+<P>
+As an aside, the predicate <U>getcell</U> can be used to get a <U>CELL</U> object, such that:
+<BR>&nbsp;&nbsp;<U>(getcell 'adder)</U><BR>
+returns the same thing as:
+<BR>&nbsp;&nbsp;<U>(getval mycell 'cell)</U><BR>
+<P>
+To create a component in a cell, use:
+<BR>&nbsp;&nbsp;<U>(newnodeinst PROTO LOWX HIGHX LOWY HIGHY TRANSPOSE ANGLE CELL)</U><BR>
+where <U>PROTO</U> is a <U>NODEPROTO</U> of the component that is to be created,
+<U>LOWX</U>, <U>HIGHX</U>, <U>LOWY</U>, and <U>HIGHY</U> are the bounds of the component,
+<U>ANGLE</U> is the number of tenth-degrees of rotation for the component,
+<U>TRANSPOSE</U> is nonzero to transpose the component's orientation (after rotation),
+and <U>CELL</U> is the <U>NODEPROTO</U> in which to place the component.
+<P>
+The four bounds values are somewhat confusing to compute.
+For primitive components (such as Transistors), any value is acceptable and the component will scale.
+However, it is still nice to know the default value,
+which can be obtained from the <U>NODEPROTO</U> with <U>getval</U> as follows:
+<BR>&nbsp;&nbsp;<U>(define tran (getnodeproto 'P-Transistor))</U><BR>
+&nbsp;&nbsp;<U>(define lowx  (getval tran 'lowx))</U><BR>
+&nbsp;&nbsp;<U>(define highx (getval tran 'highx))</U><BR>
+&nbsp;&nbsp;<U>(define lowy  (getval tran 'lowy))</U><BR>
+&nbsp;&nbsp;<U>(define highy (getval tran 'highy))</U><BR>
+When complex components (cells) are placed,
+the bounds MUST be exactly the same as the bounding box of the cell's contents.
+This information is available in the above manner.
+As an example of <U>newnodeinst</U>, and given the above bounds calculations,
+a default size P-Transistor is created in cell "adder" with:
+<BR>&nbsp;&nbsp;<U>(define t1 (newnodeinst tran lowx highx lowy highy 0 0 mycell))</U><BR>
+The returned pointer to the transistor component will be used later when wiring.
+<P>
+To wire two components, it is necessary to know these four things:
+<UL>
+<LI>The component objects on the two ends, returned by <U>newnodeinst</U>
+<LI>The <U>PORTPROTO</U> values of the connection sites on the components
+<LI>The X and Y coordinates of the connection sites
+<LI>The type, width, and other characteristics of the wire being created
+</UL>
+Connection sites are called <U>PORTPROTO</U>s and are associated with <U>NODEPROTO</U>s.
+To get the address, use:
+<BR>&nbsp;&nbsp;<U>(getportproto NODEPROTO 'PORTNAME)</U><BR>
+For example, to get the polysilicon port on the left side of the MOSIS CMOS P-Transistor, use:
+<BR>&nbsp;&nbsp;<U>(define polyleft (getportproto tran 'p-trans-poly-left))</U><BR>
+Unfortunately, there is no good way to get a list of port names on the primitive components.
+There are, however, some simplifications.
+For example, if there is only one port (as is the case with most contacts and pins)
+then its name is not necessary:
+<BR>&nbsp;&nbsp;<U>(define port (getval tran 'firstportproto))</U><BR>
+This will obtain the first port on the P-Transistor component.
+To obtain the coordinates of a port for wiring, use:
+<BR>&nbsp;&nbsp;<U>(portposition NODE PORT)</U><BR>
+This returns a vector with the coordinates.  For example:
+<BR>&nbsp;&nbsp;<U>(define portpos (portposition t1 polyleft))</U><BR>
+will obtain the coordinate of the "p-trans-poly-left" port on the newly created P-Transistor, t1.
+The X value will be <U>(vector-ref portpos 0)</U> and the Y value will be <U>(vector-ref portpos 1)</U>.
+<P>
+The final piece of information necessary is the type of arc and the width of the arc.
+Given an arc name, the type can be obtained with:
+<BR>&nbsp;&nbsp;<U>(getarcproto 'ARCNAME)</U><BR>
+Given an <U>ARCPROTO</U>, its default width can be obtained with:
+<BR>&nbsp;&nbsp;<U>(getval ARCTYPE 'nominalwidth)</U><BR>
+When all of the information is ready, the call:
+<BR>&nbsp;&nbsp;<U>(newarcinst ARCTYPE WIDTH BITS NODEA PORTA XA YA NODEB PORTB XB YB CELL)</U><BR>
+places the wire.
+You can ignore the value of <U>BITS</U> and set it to zero.
+<P>
+Here is a complete example of placing a transistor, a contact, and running a wire between them
+(the result is shown here).
+<TABLE><TR><TD>
+<P>
+&nbsp;&nbsp;<U>; create a cell called "tran-contact" in the current library</U><BR>
+&nbsp;&nbsp;<U>(define mycell (newnodeproto 'tran-contact (curlib)))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get pointers to primitives</U><BR>
+&nbsp;&nbsp;<U>(define tran (getnodeproto 'P-Transistor))</U><BR>
+&nbsp;&nbsp;<U>(define contact (getnodeproto 'Metal-1-Polysilicon-1-Con))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get default sizes of these primitives</U><BR>
+&nbsp;&nbsp;<U>(define tlowx  (getval tran 'lowx))</U><BR>
+&nbsp;&nbsp;<U>(define thighx (getval tran 'highx))</U><BR>
+&nbsp;&nbsp;<U>(define tlowy  (getval tran 'lowy))</U><BR>
+&nbsp;&nbsp;<U>(define thighy (getval tran 'highy))</U><BR>
+&nbsp;&nbsp;<U>(define clowx  (getval contact 'lowx))</U><BR>
+&nbsp;&nbsp;<U>(define chighx (getval contact 'highx))</U><BR>
+&nbsp;&nbsp;<U>(define clowy  (getval contact 'lowy))</U><BR>
+&nbsp;&nbsp;<U>(define chighy (getval contact 'highy))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get pointer to Polysilicon arc and its default width</U><BR>
+&nbsp;&nbsp;<U>(define arctype (getarcproto 'Polysilicon-1))</U><BR>
+&nbsp;&nbsp;<U>(define width (getval arctype 'nominalwidth))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; create the transistor and the contact to its left</U><BR>
+&nbsp;&nbsp;<U>(define c1 (newnodeinst contact clowx chighx clowy chighy</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>0 0 mycell))</U><BR>
+&nbsp;&nbsp;<U>(define t1 (newnodeinst tran (+ tlowx 8000) (+ thighx 8000)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>tlowy thighy 0 0 mycell))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get the transistor's left port coordinates</U><BR>
+&nbsp;&nbsp;<U>(define tport (getportproto tran 'p-trans-poly-left))</U><BR>
+&nbsp;&nbsp;<U>(define tpos (portposition t1 tport))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get the contacts's only port coordinates</U><BR>
+&nbsp;&nbsp;<U>(define cport (getval contact 'firstportproto))</U><BR>
+&nbsp;&nbsp;<U>(define cpos (portposition c1 cport))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; run a wire between the primitives</U><BR>
+&nbsp;&nbsp;<U>(newarcinst arctype width 0</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>t1 tport (vector-ref tpos 0) (vector-ref tpos 1)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>c1 cport (vector-ref cpos 0) (vector-ref cpos 1) mycell)</U><BR>
+</TD><TD VALIGN=TOP><CENTER><IMG SRC="../images/chap11-01.png" ALT="Figure 11.1"></CENTER></TD></TR></TABLE>
+
+<H3>Hierarchy</H3>
+
+<P>
+Cells, as created by <U>newnodeproto</U>, can be placed in other cells with <U>newnodeinst</U>.
+The instances simply use complex <U>NODEPROTO</U> fields rather than primitive
+<U>NODEPROTO</U>s as in the above example.
+For example, the following code creates a new cell called "two-trans"
+and places two instances of the above "tran-contact" cell, one above the other.
+<TABLE><TR><TD>
+<P>
+&nbsp;&nbsp;<U>; create a cell called "two-trans"</U><BR>
+&nbsp;&nbsp;<U>(define highercell (newnodeproto 'two-trans (curlib)))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get pointer to the "tran-contact" cell</U><BR>
+&nbsp;&nbsp;<U>(define t-c (getnodeproto 'tran-contact))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get size of this cell</U><BR>
+&nbsp;&nbsp;<U>(define lowx  (getval t-c 'lowx))</U><BR>
+&nbsp;&nbsp;<U>(define highx (getval t-c 'highx))</U><BR>
+&nbsp;&nbsp;<U>(define lowy  (getval t-c 'lowy))</U><BR>
+&nbsp;&nbsp;<U>(define highy (getval t-c 'highy))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; create the two cell instances, one above the other</U><BR>
+&nbsp;&nbsp;<U>(define o1 (newnodeinst t-c lowx highx lowy highy</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>0 0 highercell))</U><BR>
+&nbsp;&nbsp;<U>(define o2 (newnodeinst t-c lowx highx</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(+ lowy 10000) (+ highy 10000) 0 0 highercell))</U><BR>
+</TD><TD><CENTER><IMG SRC="../images/chap11-02.png" ALT="Figure 11.2"></CENTER></TD></TR></TABLE>
+<P>
+Another necessary feature, when making hierarchy,
+is the ability to place wires between connection sites on cell instances.
+To do this, it is necessary to create exports.
+This takes a port on a primitive component (for example,
+the transistor or contact in the "tran-contact" cell) and makes it into an export on the current cell.
+This is done with:
+<BR>&nbsp;&nbsp;<U>(newportproto CELL NODE-IN-CELL PORT-ON-NODE 'PORTNAME)</U><BR>
+where <U>CELL</U> is the cell containing the component whose port is being exported,
+<U>NODE-IN-CELL</U> is that component,
+and <U>PORT-ON-NODE</U> is the particular port on that node being exported.
+For example, to export the top and bottom diffusion ports in the "tran-contact" cell (as shown here),
+the following code can be added:
+<TABLE><TR><TD>
+<BR>&nbsp;&nbsp;<U>(newportproto mycell t1</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(getportproto tran 'p-trans-diff-top) 'topdiff)</U><BR>
+&nbsp;&nbsp;<U>(newportproto mycell t1</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(getportproto tran 'p-trans-diff-bottom) 'botdiff)</U></U><BR>
+</TD><TD><CENTER><IMG SRC="../images/chap11-03.png" ALT="Figure 11.3"></CENTER></TD></TR></TABLE>
+<P>
+And then, the components "o1" and "o2" in the cell "two-trans" can be wired,
+using the ports called "topdiff" and "botdiff":
+<TABLE><TR><TD>
+<P>
+&nbsp;&nbsp;<U>; get pointer to P-Active arc and its default width</U><BR>
+&nbsp;&nbsp;<U>(define darctype (getarcproto 'P-Active))</U><BR>
+&nbsp;&nbsp;<U>(define dwidth (getval darctype 'nominalwidth))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get the bottom cell's top port</U><BR>
+&nbsp;&nbsp;<U>(define lowport (getportproto mycell 'topdiff))</U><BR>
+&nbsp;&nbsp;<U>(define lowpos (portposition o1 lowport))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; get the top cell's bottom port</U><BR>
+&nbsp;&nbsp;<U>(define highport (getportproto mycell 'botdiff))</U><BR>
+&nbsp;&nbsp;<U>(define highpos (portposition o2 highport))</U><BR>
+<BR>
+&nbsp;&nbsp;<U>; run a wire between the primitives</U><BR>
+&nbsp;&nbsp;<U>(newarcinst darctype dwidth 0</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>o1 lowport (vector-ref lowpos 0) (vector-ref lowpos 1)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>o2 highport (vector-ref highpos 0)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(vector-ref highpos 1) highercell)</U><BR>
+</TD><TD><CENTER><IMG SRC="../images/chap11-04.png" ALT="Figure 11.4"></CENTER></TD></TR></TABLE>
+
+
+<H3>Modification</H3>
+
+<P>
+Two types of modification can be done to existing objects: deletion and change.
+To delete a cell, use:
+<BR>&nbsp;&nbsp;<U>(killnodeproto CELL)</U><BR>
+<P>
+To make a copy of a cell (within the same library or from one library to another), use:
+<BR>&nbsp;&nbsp;<U>(copynodeproto FROM-CELL TO-LIBRARY 'TO-CELL-NAME)</U><BR>
+where <U>FROM-CELL</U> is the original cell (<U>NODEPROTO</U>)
+and <U>TO-LIBRARY</U> is the destination library.
+Use <U>(curlib)</U> to copy to the same library.
+The new cell name is the last parameter.
+The predicate returns the address of the new cell (<U>NODEPROTO</U>).
+<P>
+To delete a component, use:
+<BR>&nbsp;&nbsp;<U>(killnodeinst NODE)</U><BR>
+Before a component can be deleted, all wires and exports must be removed.
+<P>
+To change the size or orientation of a component, use:
+<BR>&nbsp;&nbsp;<U>(modifynodeinst NODE DLOWX DLOWY DHIGHX DHIGHY DROTATION DTRN)</U><BR>
+where <U>DLOWX</U>, <U>DLOWY</U>, <U>DHIGHX</U>, and <U>DHIGHY</U> are the changes to position and size.
+<U>DROTATION</U> and <U>DTRN</U> are changes to the orientation.
+<P>
+To change the prototype of a component, use:
+<BR>&nbsp;&nbsp;<U>(replacenodeinst OLD-NODE NEW-PROTOTYPE)</U><BR>
+where the old component is <U>OLD-NODE</U>,
+and the new <U>NODEPROTO</U> that should be in its place is <U>NEW-PROTOTYPE</U>.
+This new prototype must be able to connect to all existing arcs.
+The predicate returns the address of the new component.
+<P>
+To delete a wire, use:
+<BR>&nbsp;&nbsp;<U>(killarcinst ARC)</U><BR>
+<P>
+To change the width or position of a wire, use:
+<BR>&nbsp;&nbsp;<U>(modifyarcinst ARC DWIDTH DX1 DY1 DX2 DY2)</U><BR>
+where <U>DWIDTH</U>, <U>DX1</U>, <U>DY1</U>, <U>DX2</U>, and <U>DY2</U> are the changes to the width,
+X/Y position of end 1, and X/Y position of end 2.
+Note that position changes cannot cause the connecting nodes to move,
+so the changes may only be small ones that work within the ports.
+<P>
+To change the prototype of a wire, use:
+<BR>&nbsp;&nbsp;<U>(replacearcinst OLD-ARC NEW-PROTOTYPE)</U><BR>
+where <U>OLD-ARC</U> is the former wire and <U>NEW-PROTOTYPE</U> is the new <U>ARCPROTO</U> to use.
+The nodes on either end must be able to accept this new type of wire.
+The predicate returns the address of the new wire.
+<P>
+To delete an export, use:
+<BR>&nbsp;&nbsp;<U>(killportproto CELL PORT)</U><BR>
+which will remove port <U>PORT</U> on cell <U>CELL</U>.
+<P>
+To move an export from one component to another (keeping connected wires), use:
+<BR>&nbsp;&nbsp;<U>(moveportproto CELL OLD-PORT NEW-NODE PORT-ON-NEW-NODE)</U><BR>
+where the old port is <U>OLD-PORT</U> in cell <U>CELL</U>,
+and it is now moved to component <U>NEW-NODE</U> (which is also in cell <U>CELL</U>),
+port <U>PORT-ON-NEW-NODE</U> of that component.
+
+<H3>Search</H3>
+
+<P>
+A common operation is a search of all components in a cell.
+The following code prints the name of all components in the cell "mycell":
+<P>
+&nbsp;&nbsp;<U>(do</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(node (getval mycell 'firstnodeinst)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval node 'nextnodeinst))</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>((null? node))</U><BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(format #t "Found ~s node~%" (describenode node))</U><BR>
+&nbsp;&nbsp;<U>)</U><BR>
+<P>
+Where <U>describenode</U> is defined as follows
+(the name of a node is found in different places depending on whether it is a primitive or complex <U>NODEPROTO</U>):
+<P>
+&nbsp;&nbsp;<U>(define describenode</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(lambda (node)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(define proto (getval node 'proto))</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(if (= (getval proto 'primindex) 0)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval (getval proto 'cell) 'cellname)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval proto 'primname)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;<U>)</U><BR>
+<P>
+And the following code prints the name of all wires in the cell "mycell":
+<P>
+&nbsp;&nbsp;<U>(do</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(arc (getval mycell 'firstarcinst)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval arc 'nextarcinst))</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>((null? arc))</U><BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(format #t "Found ~s arc~%"</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval (getval arc 'proto) 'protoname))</U><BR>
+&nbsp;&nbsp;<U>)</U><BR>
+<P>
+To do a search of all nodes and arcs in a rectangular area of a cell, first call:
+<BR>&nbsp;&nbsp;<U>(initsearch LOWX HIGHX LOWY HIGHY CELL)</U><BR>
+where <U>LOWX</U>, <U>HIGHX</U>, <U>LOWY</U>, and <U>HIGHY</U> are the coordinates to search in cell <U>CELL</U>
+(a <U>NODEPROTO</U>).
+This predicate will return a search key that can then be passed repeatedly to:
+<BR>&nbsp;&nbsp;<U>(nextobject SEARCHKEY)</U><BR>
+which will return <U>GEOM</U> objects of each node and arc in the search area.
+When this predicate returns <U>Null</U>, the search is complete.
+<U>GEOM</U> objects can point to either nodes or arcs, depending on their "entryisnode" attribute.
+Then, the "entryaddr" attribute will point to the actual <U>NODEINST</U> or <U>ARCINST</U>.
+Here is an example of code that prints the names of all nodes and arcs in the area
+(2000 <= X <= 10000, -3000 <= Y <= 3000).
+The selected area is shown as a black box here.
+<TABLE><TR><TD>
+<P>
+&nbsp;&nbsp;<U>(define key (initsearch 2000 10000 -3000 3000 mycell))</U><BR>
+&nbsp;&nbsp;<U>(do</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(object (nextobject key) (nextobject key))</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>((null? object))</U><BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(define isnode (getval object 'entryisnode))</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>(if (= isnode 0)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(format t "Found ~s arc~%"</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(getval object 'entryaddr)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>'proto)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>'protoname)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(format t "Found ~s node~%"</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>(describenode (getval object 'entryaddr))</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<U>)</U><BR>
+&nbsp;&nbsp;<U>)</U><BR>
+</TD><TD><CENTER><IMG SRC="../images/chap11-05.png" ALT="Figure 11.5"></CENTER></TD></TR></TABLE>
+
+<H3>Views</H3>
+
+<P>
+A view is an object that describes a cell.
+There are many standard views: Layout, Schematic, Icon, Simulation-snapshot,
+Skeleton, VHDL, Verilog, Document, Unknown, and many flavors of Netlist.
+In addition, new views can be created with "newview":
+<BR>&nbsp;&nbsp;<U>(newview 'VIEWNAME 'ABBREVIATION)</U><BR>
+and views can be deleted with <U>killview</U> (the standard views cannot be deleted):
+<BR>&nbsp;&nbsp;<U>(killview VIEW)</U><BR>
+To get a view object, use <U>getview</U> on its name.
+<P>
+To associate different views of a cell,
+the predicates <U>iconview</U> and <U>contentsview</U> obtain different cells.
+For example:
+<BR>&nbsp;&nbsp;<U>(iconview mycell)</U><BR>
+finds the associated icon cell of the cell in which "mycell" resides.
+
+<H3>Libraries</H3>
+
+<P>
+In the above examples, the current library was always used.
+This is determined by calling:
+<BR>&nbsp;&nbsp;<U>(curlib)</U><BR>
+However, there can be other libraries.
+To get a specific named library, use:
+<BR>&nbsp;&nbsp;<U>(getlibrary 'LIBNAME)</U><BR>
+<P>
+To create a new library, use:
+<BR>&nbsp;&nbsp;<U>(newlibrary 'LIBRARYNAME 'LIBRARYFILE)</U><BR>
+where <U>LIBRARYNAME</U> is the name to use, and <U>LIBRARYFILE</U> is the path name where this library will be saved.
+This predicate returns the address of a new library object that can then be used when creating cells.
+<P>
+Only one library is the current one, and to switch, you must use:
+<BR>&nbsp;&nbsp;<U>(selectlibrary LIBRARY)</U><BR>
+<P>
+A library can be deleted with:
+<BR>&nbsp;&nbsp;<U>(killlibrary LIBRARY)</U><BR>
+<P>
+A library can be erased (its cells deleted, but not the library) with:
+<BR>&nbsp;&nbsp;<U>(eraselibrary LIBRARY)</U><BR>
+
+<H3>Technologies</H3>
+
+<P>
+A technology is an environment of design that includes primitive components and wire prototypes.
+The current technology can be obtained with:
+<BR>&nbsp;&nbsp;<U>(curtech)</U><BR>
+<P>
+A specific technology can be obtained from its name with:
+<BR>&nbsp;&nbsp;<U>(gettechnology 'TECHNAME)</U><BR>
+<P>
+All technologies can be found by traversing a linked list,
+the head of which is a technology named "Generic".
+
+<H3>Tools</H3>
+
+<P>
+A tool is a piece of synthesis or analysis code that can operate upon the database.
+A particular tool object can be obtained with:
+<BR>&nbsp;&nbsp;<U>(gettool 'TOOLNAME)</U><BR>
+where the possible names of tools are:
+<CENTER><TABLE BORDER=1>
+<TR><TD><U>compaction</U></TD><TD>circuit compaction</TD></TR>
+<TR><TD><U>compensation</U></TD><TD>geometry compensation</TD></TR>
+<TR><TD><U>drc</U></TD><TD>design-rule checking</TD></TR>
+<TR><TD><U>erc</U></TD><TD>electrical-rule checking</TD></TR>
+<TR><TD><U>io</U></TD><TD>input/output control</TD></TR>
+<TR><TD><U>logeffort</U></TD><TD>logical effort analysis</TD></TR>
+<TR><TD><U>network</U></TD><TD>network maintenance</TD></TR>
+<TR><TD><U>pla</U></TD><TD>programmable logic array generator</TD></TR>
+<TR><TD><U>project</U></TD><TD>project management</TD></TR>
+<TR><TD><U>routing</U></TD><TD>automatic wire routing</TD></TR>
+<TR><TD><U>silicon-compiler</U></TD><TD>netlist-to-layout silicon assembler</TD></TR>
+<TR><TD><U>simulation</U></TD><TD>simulation</TD></TR>
+<TR><TD><U>user</U></TD><TD>the user interface</TD></TR>
+<TR><TD><U>vhdl-compiler</U></TD><TD>VHDL-to-netlist compiler</TD></TR>
+</TABLE></CENTER>
+The number of tools is available with:
+<BR>&nbsp;&nbsp;<U>(maxtool)</U><BR>
+And a particular tool, indexed from 0 to (<U>maxtool</U>)-1 can be obtained with:
+<BR>&nbsp;&nbsp;<U>(indextool INDEX)</U><BR>
+<P>
+A tool can be switched on with:
+<BR>&nbsp;&nbsp;<U>(toolturnon TOOL)</U><BR>
+where <U>TOOL</U> is a tool object.
+<P>
+A tool can be turned off with:
+<BR>&nbsp;&nbsp;<U>(toolturnoff TOOL)</U><BR>
+<P>
+A tool can be given a specific instruction with:
+<BR>&nbsp;&nbsp;<U>(telltool TOOL PARAMETERS)</U><BR>
+For example, to list all technologies, use this code:
+<BR>&nbsp;&nbsp;<U>(telltool (gettool 'user) 'show 'technologies)</U><BR>
+These commands are from the low-level command interpreter,
+which is documented fully in the Internals Manual.
+
+<H3>Miscellaneous</H3>
+
+<P>
+Every change to the database is queued internally in a "batch"
+which includes the change and any constrained side-effects of that change.
+A new batch is created for each Lisp session with the interpreter
+(also for each Electric command that is issued from the keyboard/mouse).
+To reverse the last batch of changes, use:
+<BR>&nbsp;&nbsp;<U>(undoabatch)</U><BR>
+<P>
+Multiple calls to this predicate in a single batch will undo multiple batches.
+To erase the list of change batches, use:
+<BR>&nbsp;&nbsp;<U>(noundoallowed)</U><BR>
+<P>
+If you are creating a wire that makes many bends, it is necessary to create special nodes called "pins" at each bend.
+To find out what kind of pin to use for a given wire type, use:
+<BR>&nbsp;&nbsp;<U>(getpinproto ARC-PROTO)</U><BR>
+where <U>ARC-PROTO</U> is the wire type,
+and the predicate returns the component type (<U>NODEPROTO</U>) of the pin.
+<P>
+Network objects can be obtained by name with the predicate <U>getnetwork</U>
+which takes a name and a cell in which to search.
+For example, the code:
+<BR>&nbsp;&nbsp;<U>(getnetwork 'insig mycell)</U><BR>
+obtains the address of the network called "insig" in cell <U>mycell</U>.
+<P>
+The generic function of a node instance can be determined with:
+<BR>&nbsp;&nbsp;<U>(nodefunction NODE)</U><BR>
+which returns a value from the list of constants in the C header file "efunction.h".
+This value is essentially the same one as would be obtained by looking at the "userbits" field of the node's prototype.
+However, certain components that have generic prototypes will be made more specific by this predicate.
+<P>
+To get an attribute value from an instance above this in the hierarchy, use:
+<BR>&nbsp;&nbsp;<U>(getparentval 'name DEFAULT HEIGHT)</U><BR>
+where <U>name</U> is the attribute name, <U>DEFAULT</U> is the default value to return if the attribute is not found,
+and <U>HEIGHT</U> is the number of levels of hierarchy to climb when looking for the attribute (0 for infinite).
+As a shortcut for finding parameter values, there are four macros which use this routine:
+<UL>
+<LI><U>(P 'xx)</U> obtains the value of parameter <U>xx</U> from the parent instance in the hierarchy.
+<LI><U>(PD 'xx def)</U> obtains the value of parameter <U>xx</U> from the parent instance in the hierarchy and uses the value <U>def</U>
+if the parameter cannot be found.
+<LI><U>(PAR 'xx)</U> obtains the value of parameter <U>xx</U> from any higher instance, anywhere in the hierarchy.
+<LI><U>(PARD 'xx def)</U> obtains the value of parameter <U>xx</U> from any higher instance,
+anywhere in the hierarchy and uses the value <U>def</U> if the parameter cannot be found.
+</UL>
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap11-01.html#chap11-01"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap11-01.html#chap11-01">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap11-03.html#chap11-03">Next</A></TD>
+<TD><A HREF="chap11-03.html#chap11-03"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

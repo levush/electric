@@ -1,0 +1,161 @@
+<HTML><HEAD><TITLE>Using Electric 9-5: Routing</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap09-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 9: TOOLS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap09-04.html#chap09-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>9-5: Routing</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap09-06.html#chap09-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+The routing tool contains a number of different subsystems for creating wires.
+Two <I>stitching</I> routers can be used in array-based design to connect adjoining cells.
+A maze-router runs individual wires.
+A river-router is also available for running multiple parallel wires.
+<P>
+Some of these routers make use of the "Unrouted Arc",
+a thin-line arc that can connect any two components.
+Creating "rats nests" of these arcs forms a graphical specification that the router can use.
+The unrouted arc is from the Generic Technology
+(see <A HREF="chap07-09.html#chap07-09">Section 7-9</A>).
+To create one, use the <B>Get Unrouted Wire</B> subcommand of the <B>Routing</B>
+command of the <B>Tools</B> menu before making a connection.
+Another way to get unrouted wires is to select all or part of an existing route
+(made with any arc) and use the <B>Unroute</B> subcommand.
+<P>
+Finally, the <B>Copy Routing Topology</B> and <B>Paste Routing Topology</B>
+subcommands can be used to create unrouted arcs in one cell (the "pasted" cell)
+where there are connections of any kind on another cell (the "copied" cell).
+The <B>Paste Routing Topology</B> command uses node and arc names to associate the two cells.
+<P>
+<H3>Auto Stitching</H3>
+<P>
+The auto-stitching router looks for adjoining nodes that make implicit connections,
+and places wires at those connections to make them explicit.
+For example, if a cell has power and ground rails at the top and bottom,
+and there are ports on the left and right of each rail,
+ then the auto-stitching router can be used to connect all of these rails in a horizontal string of these cells.
+<P>
+The auto-stitcher places a wire when all of these conditions are met:
+<UL>
+<LI>The design is layout (auto stitching does not work in schematics).
+<LI>Ports exist on both nodes.
+Because wires must run between two ports, you must make exports at every location where wiring may occur.
+<LI>The nodes inside of the cells
+(the ones with the exports)
+must touch or overlap, thus creating an implicit connection.
+When a pin node has an export, it should be the same size as any wires connected to it inside of the cell.
+This is because a small pin connected to a wide arc will not make an implicit connection when the arc touches something,
+because the pin is inside of the arc.
+<LI>The ports must not already be connected to each other.
+</UL>
+<P>
+To run the auto-stitcher, use the <B>Enable Auto-Stitching</B> subcommand of the <B>Routing</B>
+command of the <B>Tools</B> menu.
+The router will make all necessary connections, and incrementally add wires as further changes are made to the circuit.
+To stop stitching, use the same menu entry, which now reads <B>Disable Auto-Stitching</B>.
+To run the auto-stitcher only once, and in the highlighted area only,
+use the <B>Auto-Stitch Highlighted Now</B> subcommand.
+Note that this auto-stitches all cell instances that intersect the highlighted area,
+so even if only a portion of a cell falls into the highlighted area,
+the entire cell is stitched.
+<P>
+<TABLE><TR>
+<TD><CENTER><IMG SRC="../images/chap09-05.png" ALT="Figure 9.5"></CENTER></TD><TD>
+The auto-stitcher allows you to specify a particular type of wire to use in routing.
+By default, the router figures out which wire to use.
+However, with the <B>Routing Options...</B> subcommand,
+a specified wire can be given (or automatic selection can be resumed by selecting the "DEFAULT ARC" entry).
+</TD></TR></TABLE>
+<P>
+<H3>Mimic Stitching</H3>
+<P>
+One problem with the auto-stitcher is that it may take a different view of the circuit than originally intended.
+In an area where more than two cells meet,
+the auto-stitcher may place many wires in an attempt to connect all touching ports.
+Another problem with the auto-stitcher is that it makes explicit only what is already implicit,
+and so cannot add all necessary wires.
+<P>
+To control the wiring of arrays of cells more directly,
+there is the mimic-router.
+This tool lets the designer place a wire between two cells,
+and then it adds other wires between all other similarly configured cells in the circuit.
+Thus, it mimics your actions.
+<P>
+Specifically, it mimics single wires (if you make a multibend wire, that cannot be mimicked)
+in all situations where the same ports on the same type of nodes exist,
+separated by the same distance.
+<P>
+The <B>Routing Options...</B> command provides variations on these rules.
+First, you can request that the mimic stitcher also mimic wire deletions.
+Second, you can request that the mimic stitcher relax its restriction about mimicing arcs
+(by allowing the ports to be different, the nodes to be different, or the node sizes to be different).
+You can also ask the mimic stitcher to work interactively,
+which causes it to examine all possible restriction sets,
+offering to route wires with increasingly relaxed acceptance criteria.
+<P>
+To turn on the mimic-stitcher, use the <B>Enable Mimic-Stitching</B> subcommand,
+and to disable the subsystem, use the command in the same menu location, which now reads <B>Disable Mimic-Stitching</B>.
+You can also request that the mimic-stitcher run just once
+(mimicing the very last wire that was created or deleted) by using the <B>Mimic-Stitch Now</B> command.
+Finally, you can request that the mimic-stitcher run just once, mimicing the currently selected arc,
+by using the <B>Mimic-Selected</B> command.
+<P>
+<H3>Maze Routing</H3>
+<P>
+The maze router replaces unrouted arcs with actual geometry.
+The <B>Maze-Route Selected</B> subcommand replaces the selected unrouted arcs,
+and the <B>Maze-Route Cell</B> subcommand replaces all unrouted arcs in the cell.
+<P>
+Note that maze routing is done one wire at a time, and may fail if no path can be found.
+Therefore it may be preferable to route the unrouted wires one-at-a-time in order to better control the process.
+<P>
+Note also that maze routing constructs an array which is the size of the circuit,
+and searches the array for a routing path.
+Therefore, long wires will use large amounts of memory and time.
+<P>
+For an example of maze routing, open the library file "samples.txt" and edit the cell "tool-RoutingMaze"
+(you can read the library with the <B>Readable Dump</B> subcommand of the <B>Import</B> command of the <B>File</B> menu).
+This cell has a number of unrouted wires that can be routed.
+<P>
+<H3>River Routing</H3>
+<P>
+River routing is the running of multiple parallel wires between two parallel rows
+(presumably along facing sides of two cell instances).
+The wires must remain in sequential order and cannot cross each other.
+Thus, they appear as a flowing stream of lines, and have the appearance of a river.
+<P>
+To specify an intended path for the river-router,
+every connection must be made with an Unrouted arc.
+Thus, before river-routing, there should be a series of direct (and presumably nonmanhattan) unrouted arcs.
+These arcs ares replaced with the appropriate geometry during river-routing.
+<P>
+To convert the unrouted wires into layout,
+use the <B>River-Route</B> subcommand of the <B>Routing</B> command of the <B>Tools</B> menu.
+If there are unrouted arcs selected, these will be the only ones converted.
+Otherwise, all unrouted arcs in the cell will be converted.
+If it is necessary, nodes may be moved to make room for the river-routed wires.
+<P>
+The river router always routes to the left or bottom side of the routing channel.
+Thus, if there is a vertical channel that is very wide,
+the wires will run to the left side and then jog to their proper location there.
+The only way to force routing to the right or top side is to rotate the entire circuit so that these sides are on the left and bottom.
+<P>
+For an example of river routing, open the library file "samples.txt" and edit the cell "tool-RoutingRiver"
+(you can read the library with the <B>Readable Dump</B> subcommand of the <B>Import</B> command of the <B>File</B> menu).
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap09-04.html#chap09-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap09-04.html#chap09-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap09-06.html#chap09-06">Next</A></TD>
+<TD><A HREF="chap09-06.html#chap09-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

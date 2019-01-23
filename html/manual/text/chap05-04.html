@@ -1,0 +1,104 @@
+<HTML><HEAD><TITLE>Using Electric 5-4: Other Arc Properties</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap05-04"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 5: WIRE PROPERTIES</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap05-03.html#chap05-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>5-4: Other Arc Properties</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap05-05.html#chap05-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+In addition to the constraining properties,
+there are a set of characteristics that can be placed on arcs.
+These properties affect the appearance of the arc and cause it to be redrawn in a different style.
+<P>
+<H3>Directionality</H3>
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap05-07.png" ALT="Figure 5.7"></CENTER></TD><TD>
+For documentation purposes, it is possible to display a <I>directional</I> arrow on arcs that indicates flow.
+This property can be set or reset with the <B>Directional</B> command of the <B>Arc</B> menu.
+It may also be controlled by checking the appropriate box in the <B>Get Info</B> command of the <B>Info</B> menu.
+</TD></TR></TABLE>
+<P>
+The arrow always runs from the tail of the arc to the head of the arc unless you reverse the arc
+(with the <B>Reverse</B> command of the <B>Arc</B> menu or by checking the "Reverse head and tail" box in the <B>Get Info</B> dialog).
+If the head of the arc is "skipped" (with the <B>Skip Head</B> command or by checking the appropriate box
+in the <B>Get Info</B> dialog), then the arrow head is not drawn.
+<P>
+<H3>Negation</H3>
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap05-09.png" ALT="Figure 5.9"></CENTER></TD><TD>
+Arcs in the Schematic technology may be <I>negated</I>,
+which causes them to have a bubble drawn where they attach to schematic elements.
+This property can be set or reset with the <B>Negated</B> command of the <B>Arc</B> menu.
+It may also be controlled by checking the appropriate box in the <B>Get Info</B> dialog.
+</TD></TR></TABLE>
+<P>
+Although Electric attempts to place the bubble on the correct end of the arc,
+it can be reversed with the <B>Reverse</B> command of the <B>Arc</B>
+menu or by checking the appropriate box in the <B>Get Info</B> dialog.
+Note that there can be only one negating bubble on an arc,
+so users who want two must use two arcs, connected by a pin.
+<P>
+If the tail of the arc is "skipped" (with the <B>Skip Tail</B> command or by checking the appropriate box
+in the <B>Get Info</B> dialog), then the negating bubble is not drawn.
+Beware of doing this, because the negation is still part of the arc, even though it is not visible.
+Negated arcs make no sense in layout technologies and are ignored.
+<P>
+<H3>End Extension</H3>
+<P>
+All arcs are drawn so that their geometry extends beyond their endpoints by one-half of their width.
+This property can be set or reset with the <B>Ends-extend</B> command of the <B>Arc</B> menu.
+It may also be controlled by checking the appropriate box in the <B>Get Info</B> dialog.
+<P>
+<TABLE><TR><TD>
+Individual ends of an arc may be controlled with the <B>Skip Head</B> and <B>Skip Tail</B> commands,
+or by checking the "Ignore head" and "Ignore tail" boxes in the <B>Get Info</B> dialog.
+When an end has been ignored, the property associated with it does not occur.
+This means that directional arcs have their arrowhead omitted (when the head is ignored);
+negated arcs do not have the bubble drawn (when the tail is ignored);
+and arcs with their ends not extended have that end extended.
+</TD><TD><CENTER><IMG SRC="../images/chap05-10.png" ALT="Figure 5.10"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Naming</H3>
+<P>
+Another property of an arc is its name.
+This is a character string that is displayed on the arc and used to name the electrical network connected to that arc.
+The "Name" field in the <B>Get Info</B> dialog allows you to specify this property,
+which is then displayed on the arc.
+Note that creating exports is another way of naming a network.
+<P>
+<H3>Curvature</H3>
+<P>
+The final arc properties to be mentioned are used only in circular geometry.
+Although most arcs cannot handle curvature, those in the Artwork and Round CMOS ("rcmos")
+technologies can.
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap05-08.png" ALT="Figure 5.8"></CENTER></TD><TD>
+The <B>Curve through Cursor</B> command of the <B>Arc</B>
+menu requests that the currently highlighted arc curve in such a way that it passes through the location of the cursor.
+The <B>Curve about Cursor</B>
+command requests that the currently highlighted arc curve between its endpoints such that the center of curvature is at the location of the cursor.
+Click at the appropriate point on the screen after issuing these commands and the arc will change.
+</TD></TR></TABLE>
+<P>
+In the <B>Curve about Cursor</B> command, two curvatures are possible
+(clockwise and counterclockwise),
+so use the "Reverse head and tail" checkbox in the <B>Get Info</B> dialog to make a distinction.
+The <B>Remove Curvature</B> command makes the arc straight.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap05-03.html#chap05-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap05-03.html#chap05-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap05-05.html#chap05-05">Next</A></TD>
+<TD><A HREF="chap05-05.html#chap05-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

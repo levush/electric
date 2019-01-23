@@ -1,0 +1,183 @@
+<HTML><HEAD><TITLE>Using Electric 1-5: Windows Installation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap01-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 1: INTRODUCTION</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap01-04.html#chap01-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>1-5: Windows Installation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap01-06.html#chap01-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Electric runs under Windows 95/98/ME, Windows NT 4.0, Windows 2000, or Windows XP.
+The system compiles with Visual C++ 5.0 or later
+(project files are included).
+<P>
+The Electric distribution is a single file in UNIX "tar" format,
+GNU-zipped.
+This can be extracted by a number of programs, including "WinZip"
+(see <A HREF="http://www.gzip.org">http://www.gzip.org</A> for more information).
+To install Electric, follow this procedure:
+<UL>
+
+<LI>Extract the contents of the "tar" file.
+When using WinZip, make sure that the "TAR File Smart CR/LF Conversion"
+box is checked in the "Configuration..." dialog of the "Options" menu.
+Once extracted,
+you will have a top-level directory called <B>electric-</B><I>VERSION</I> with four subdirectories:
+<B>src</B>, <B>lib</B>, <B>examples</B>, and <B>html</B>.
+
+<LI>For users of Visual C++ 5.0 or 6.0, open the workspace file <B>Electric.dsw</B>
+(both it and the associated file <B>Electric.dsp</B> are in the top level, alongside
+the <B>src</B> directory).
+Visual Studio .NET users can open <B>Electric.vcproj</B>.
+If you have trouble with any of these files, use the MAKE file
+<B>Electric.mak</B>.
+
+Compile Electric.
+This will create a new directory in the top level called <B>Debug</B>,
+which will contain all of the object files.
+
+<LI>Inside of the <B>Debug</B> directory, you will find the executable file <B>Electric</B>.
+Move this file out of the <B>Debug</B> directory and place it in the top-level directory.
+Double-click the <B>Electric</B> executable to run the system.
+</UL>
+<P>
+<HR>
+<P>
+Here are some detail on the Electric distribution:
+<UL>
+<LI>The <B>src</B> directory contains the source code.
+It is hierarchically organized by function.
+
+<LI>The <B>html</B> directory contains one subdirectory, <B>manual</B>,
+which is this manual in HTML format.
+To see the document,
+point your browser to the file <B>index.html</B> inside of the <B>manual</B> directory.
+
+<LI>The <B>examples</B> directory has some demo files.
+
+<LI>The IRSIM simulator, LISP interpreter, and Foreign language interfaces are not distributed as part of the GNU download.
+Users who wish to add this facility must acquire the sources <A HREF="http://www.staticfreesoft.com/productsFree.html">separately</A>.
+Use the same procedure to extract this extension file (which will also be a GNU-zipped tar file).
+Extract it into the same location as the main source distribution and it will add the necessary files to the source tree.
+Then use the file <B>ElectricLang.dsw</B> to build Electric with the language extension.
+The resulting executable will be in the <B>DebugLang</B> directory.
+
+<LI>To add the Java interpreter, follow these instructions:
+<UL>
+<LI>Download the Java Development Kit (JDK) from <A HREF="http://java.sun.com">http://java.sun.com</A>.
+Install it.
+Although it can be placed anywhere,
+these instructions will assume that you have installed it in location <B>C:\Program Files\JavaSDK</B>.
+If you install it elsewhere, adjust these instructions accordingly.
+
+<LI>Edit the environment variables in the "System" Control Panel.
+On some systems, you click on the "Environment" tab; 
+on others, click on the "Advanced" tab and then click the "Environment Variables" button.
+Under "System variables", select "Path" and in the "Value:" area, add this string to the end:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>;C:\Program Files\JavaSDK\jre\bin\classic;C:\Program Files\JavaSDK\bin</CODE><BR>
+On some newer versions of the Java Development Kit, you may also have to include this path:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>;C:\Program Files\JavaSDK\bin\client</CODE><BR>
+On Windows 95 and Windows 98 systems, you may have to edit C:\AUTOEXE.BAT and append this to the PATH variable.
+You must restart your computer after making this change.
+
+<LI>In Visual C++ 5.0 or 6.0, use the "Settings" command of the "Project" menu.
+Select the "C/C++" tab and the "Preprocessor" category.
+In the "Preprocessor definitions" area, add this to the end:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>,FORCEJAVA=1</CODE><BR>
+In the "Additional include directories" area, add this to the end:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>,C:\Program Files\JavaSDK\include,C:\Program Files\JavaSDK\include\win32</CODE><BR>
+Select the "Link" tab and the "General" category.
+In the "Object/library modules" area, enter this:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>jvm.lib</CODE><BR>
+Select the "Link" tab and the "Input" category.
+In the "Additional library path" area, enter this:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>C:\Program Files\JavaSDK\lib</CODE><BR>
+
+<LI>In Visual Studio .NET, right-click on the "Electric" solution and choose "Properties".
+Select "C/C++" on the left and choose the "General" category under it.
+In the "Additional Include Directories" area, add this to the end:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>;C:\Program Files\JavaSDK\include,C:\Program Files\JavaSDK\include\win32</CODE><BR>
+Next choose the "Preprocessor" category of "C/C++" and in the
+"Preprocessor Definitions" area add this to the end:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>;FORCEJAVA=1</CODE><BR>
+Select "Linker" on the left and choose the "General" category under it.
+In the "Additional Library Directories" area, enter this:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>;C:\Program Files\JavaSDK\lib</CODE><BR>
+Next choose the "Input" category of "Linker" and in the "Additional Dependencies" area enter this:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>jvm.lib</CODE><BR>
+
+<LI>Electric's Java interface works better if you also install the "Bean Shell"
+(see <A HREF="http://www.beanshell.org">www.beanshell.org</A>).
+Download the ".jar" file and place it in the "java" subdirectory of your "lib" directory.
+You must use version 1.1Alpha4 or later (version 1.01 is not acceptable).
+
+<LI>Once Java is installed, you must compile the ROM generator.
+In a command window, change directories to the <B>lib\java</B> directory and run the command:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>javac romgen.java</CODE>
+</UL>
+
+<LI>To add the TCL interpreter, follow these instructions:
+<UL>
+<LI>Download ActiveTcl from <A HREF="http://www.tcl.tk">http://www.tcl.tk</A> and install it.
+<LI>In the compiler, edit the Project Settings and find the field "Additional include directories" (under "C/C++").
+Add a new path to the installed TCL Includes (typically "C:\Program Files\Tcl\include").
+<LI>Also in the compiler, edit the Project Settings and find the field "Additional library path" (under "Linker").
+Add a new path to the installed TCL Libraries (typically "C:\Program Files\Tcl\lib").
+<LI>Edit the file <B>src/include/config.h</B> and make sure that the constant "TCLLIBDIR" points
+to the proper location of the initialization files ("init.tcl" and others).
+This is typically "C:\Program Files\Tcl\lib\tcl8.3"
+(note that each backslash is doubled in this file, and you should follow this convention).
+</UL>
+
+<LI>Electric must run on a display that is set to "65536 Colors" or "True Color".
+Anything less will cause the colors to appear wrong.
+
+<LI>If you have trouble reading the cursor or icon files (".cur" or ".ico")
+you can find a text-encoded version of these binary files in <B>\src\graph\graphpc.uue</B>.
+Use "WinZip" to extract the files into the same directory.
+
+<LI>Installation of Electric requires some care.
+Although Electric will run properly from the directory where it was built,
+you cannot move the executable to a different location and expect it to work.
+This is because Electric makes use of a collection of <I>support files</I>.
+The main support file is called <B>cadrc</B>.
+In addition, Electric needs to find the <B>lib</B> and <B>html</B> directories.
+If these support files cannot be found,
+Electric will not be able to initialize its graphical user interface
+(just type "-quit" to exit the program if this happens).
+It is sufficient to move the support files, along with the executable, to a public location.
+Then make a shortcut to the executable and place that anywhere you like.
+When the shortcut is run, the directory with the executable will become the current directory,
+and all of the needed support files will be found.
+
+<LI>Electric can speak your language!
+Currently, it has been translated into French.
+Contact Static Free Software if you are interestested in doing a translation.
+To use this facility, you must obtain the Static Free Software
+extensions and build the "International" version of Electric.
+Before compiling, set the
+desired language by changing the routine "elanguage()" in "graph/graphpccode.cpp".
+<BR>
+At any time, you can disable the foreign language and return to English by moving the
+translation files.
+These files are in the "lib/international" folder, with a subfolder
+that has the language name (for example, French translations are in "lib/international/fr").
+Beneath that is a folder called "LC_MESSAGES" and inside of that are the translation files.
+</UL>
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap01-04.html#chap01-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap01-04.html#chap01-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap01-06.html#chap01-06">Next</A></TD>
+<TD><A HREF="chap01-06.html#chap01-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

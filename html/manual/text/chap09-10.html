@@ -1,0 +1,56 @@
+<HTML><HEAD><TITLE>Using Electric 9-10: VHDL Compiler</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap09-10"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 9: TOOLS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap09-09.html#chap09-09"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>9-10: VHDL Compiler</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap09-11.html#chap09-11"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+The VHDL compiler translates structural VHDL code into netlists.
+It can generate a number of different netlist formats including ones for the simulator and the silicon compiler.
+Typical use of the simulator and silicon compiler automatically drives the VHDL compiler,
+so the average user will not need to use the commands described here.
+<P>
+Use the <B>Compile for Silicon Compiler</B>, <B>Compile for Simulation</B>,
+<B>Compile for RNL</B>, <B>Compile for RSIM</B>,
+and <B>Compile for SILOS</B> subcommands of the <B>VHDL Compiler</B> command of the <B>Tools</B>
+menu to generate appropriate format netlists.
+<P>
+<TABLE><TR><TD>
+By default,
+the compiler reads VHDL from the "vhdl"
+view of the cell in the current window and writes netlists to appropriate "netlist" views of this cell.
+This can be changed with the <B>VHDL Options...</B> subcommand of the <B>VHDL Compiler</B> command of the <B>Tools</B> menu.
+By unchecking "VHDL stored in cell", the VHDL is taken from the file "XXX.vhdl", where XXX is the current cell name.
+By unchecking "Netlist stored in cell", the netlist is written to the file "XXX.sci" (for the silicon compiler),
+"XXX.net" (for the simulator, RNL, and RSIM), or "XXX.sil" (for SILOS) where XXX is the current cell name.
+Recheck these items to locate the text in the cells.
+</TD><TD><CENTER><IMG SRC="../images/chap09-10.png" ALT="Figure 9.10"></CENTER></TD></TR></TABLE>
+<P>
+The Options dialog also controls how the VHDL generator produces symbol names for schematics nodes.
+The dialog shows each schematics node, along with its regular and negated VHDL symbol
+(the use of "%d" is replaced by the number of inputs on the gate).
+<P>
+Another feature of the VHDL compiler is its ability to generate VHDL from a schematic or layout.
+Use the <B>Make VHDL View</B> command of the <B>View</B> menu to convert the current cell into VHDL.
+Note that the state of the "VHDL stored in cell"
+entry of the Options dialog determines whether this VHDL is written to disk or a cell.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap09-09.html#chap09-09"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap09-09.html#chap09-09">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap09-11.html#chap09-11">Next</A></TD>
+<TD><A HREF="chap09-11.html#chap09-11"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,148 @@
+<HTML><HEAD><TITLE>Using Electric 2-2: Circuit Creation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap02-02"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 2: BASIC EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap02-01.html#chap02-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>2-2: Circuit Creation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap02-03.html#chap02-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Node Creation</H3>
+<P>
+Node creation is done by selecting a node from the component menu on the left,
+or by using one of the <B>New</B> commands of the <B>Edit</B> menu (<B>New Cell Instance</B>,
+<B>New Analog Part</B>, <B>New Spice Part</B>,
+<B>New Pure Layer Node</B>, <B>New Special Object</B>).
+These commands then wait for a click in the editing window to place the component.
+The location of the cursor is aligned to the nearest grid unit,
+and this adjustment can be controlled with the <B>Alignment Options...</B> command of the <B>Windows</B> menu.
+<P>
+When placing a node, the cursor points to the <I>grab point</I> of the newly created node.
+By default, this is the center (for primitives) or the lower-left corner (for cell instances).
+Primitive nodes can use the lower-left corner as the grab-point by unchecking the
+"Center-based primitives" checkbox in the <B>Selection Options...</B> subcommand of the <B>Selection</B> command of the <B>Edit</B> menu.
+When this is unchecked, the <B>Get Info</B> dialog shows the node's lower-left position,
+rather than its center.
+<P>
+Cell instances can change their grab-point by placing a Cell-Center node inside of their layout
+(see <A HREF="chap03-03.html#chap03-03">Section 3-3</A>).
+<P>
+<H3>Arc Creation</H3>
+<P>
+As the introductory example showed, arcs are created by clicking the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I> button.
+This can actually function in two different ways, depending on what is highlighted.
+<P>
+If one node is highlighted, <I>segment wiring</I> is done,
+in which an arc is drawn from the highlighted node to the location of the cursor.
+If there is nothing at that location, a pin is created, and it is left highlighted.
+Using the <I>creation</I> button again runs an arc from the pin to another location.
+By clicking and holding the <I>creation</I> button,
+you can see the path that the new arc will follow.
+<P>
+If the cursor is over another object when this command is issued,
+the new wire attaches to that object.
+To disable this "attach" feature of segment drawing,
+use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-right  Windows:shift-right  Mac:shift-cmd-click">wire</A></I> button instead of the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I> button.
+<P>
+In general, all wiring operations should be done by clicking and <U>holding</U> the <I>creation</I> button,
+then moving the cursor until the intended wiring is shown,
+and finally releasing.
+This is recommended because wiring is quite complex and can follow many different paths.
+<P>
+The other way that the creation button can operate is <I>two-point wiring</I>,
+in which two nodes are highlighted and one or more arcs are created to connect them.
+Highlighting of these two nodes is done by clicking the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I> button over the first one,
+and then using the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> button on the second.
+Note that if the second node is obscured by other objects, you can cycle through the objects under the cursor with the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-ctrl-left  Windows:shift-ctrl-left  Mac:shift-ctrl-click">toggle select another</A></I> button.
+Once the two nodes are highlighted,
+use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I> button to wire them together.
+Note that the highlighted ports on the selected nodes are important:
+arcs will run between them, so they must be compatible in their wiring capabilities.
+<P>
+<TABLE><TR><TD>
+Two-point wire creation first attempts to run a single arc.
+Generally, this can happen only if the ports are lined up accurately.
+Failing single arc placement,
+an attempt is made to connect with two or three arcs and intermediate nodes.
+The determination of arc location depends upon the position of the cursor when the creation button is clicked.
+If the cursor is inside of the area defined by the two components,
+the connection will make a "Z" bend through the cursor.
+If the cursor is to one side of the components,
+the connection will make a "U" bend through the cursor location.
+Finally, if the cursor is in a corner outside of the components,
+the connection will make an "L" bend towards the cursor.
+</TD><TD><CENTER><IMG SRC="../images/chap02-04.png" ALT="Figure 2.4"></CENTER></TD></TR></TABLE>
+The nature of the connection can also be affected by the directionality of the ports,
+which, if it exists, will override cursor location to obtain a sensible connection.
+Note that for "Z" bends, there are two arcs in one direction, and a third that is perpendicular to them.
+If there are no other factors (such as directionality),
+the orientation of the "Z" is made so that the perpendicular arc is shortest.
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap02-05.png" ALT="Figure 2.5"></CENTER></TD><TD>
+In addition to running an arc between two nodes,
+you can also use arcs as the starting or ending point of arc creation.
+If it is sensible,
+the creation command actually uses one of the nodes on an end of the selected arc.
+However, if the connection falls inside the arc,
+it is split and a new node is created to make a "T" connection.
+</TD></TR></TABLE>
+<P>
+Whenever an arc is created, the system makes a clicking sound.
+The sound is a single click for one arc, a double-click for two arcs, and a triple-click for three or more arcs.
+To disable this sound, use the <B>General Options...</B> subcommand of the <B>User Interface</B>
+command of the <B>Info</B> menu and uncheck "Click sounds when arcs are created".
+<P>
+<H3>Special Cases</H3>
+<P>
+When connecting between two objects that are on different layers, Electric will insert a via to change layers.
+Only one via can be inserted.
+Thus, you can wire from a metal-1 pin to a metal-2 pin, and a single via will be created;
+but you cannot wire from a metal-1 pin to a metal-3 pin, because that would require two vias.
+When a via is inserted, it is placed closest to the "destination" node (or farthest from the original node).
+<P>
+The width of a new arc is automatically chosen according to a number of factors.
+The default width is set in the <B>New Arc Options...</B> command of the <B>Arc</B> menu.
+If there are other arcs of this type already connected to the new one,
+and they are wider than normal, then the new arc will use that width.
+<P>
+Note that all arcs overlap their endpoint by half of their width,
+so very wide arcs may overlap their destination with too much geometry.
+You can turn off this overlap by using the <B>Ends-extend</B> command of the <B>Arc</B> menu.
+<P>
+<TABLE><TR><TD>
+An unusual circuit creation command is the <B>Insert Jog In Arc</B> command of the <B>Edit</B> menu.
+This command inserts a jog in the highlighted arc by replacing it with three new arcs.
+Two of the new arcs run to the location of the cursor,
+and the third arc is perpendicular to them, connecting the ends at the cursor location
+(initially it has zero length).
+Once the jog is inserted, either half of the arc may be moved without affecting the other half,
+and the perpendicular arc will keep the circuit connected.
+</TD><TD><CENTER><IMG SRC="../images/chap02-11.png" ALT="Figure 2.11"></CENTER></TD></TR></TABLE>
+<P>
+Beginning users often leave many extra pins in their circuits.
+With the <B>Cleanup Pins</B> subcommand of the <B>Cleanup Cell</B> command of the <B>Edit</B> menu,
+these pins are automatically removed from your circuit, leaving a cleaner network.
+The command does other pin organizations, such as making sure that text on these pins is located correctly,
+identifying zero-sized pins, and identifying oversized pins.
+The <B>Cleanup Pins Everywhere</B> command does this function for all cells at once.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap02-01.html#chap02-01"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap02-01.html#chap02-01">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap02-03.html#chap02-03">Next</A></TD>
+<TD><A HREF="chap02-03.html#chap02-03"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

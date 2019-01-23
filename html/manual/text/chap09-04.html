@@ -1,0 +1,345 @@
+<HTML><HEAD><TITLE>Using Electric 9-4: Simulation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap09-04"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 9: TOOLS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap09-03.html#chap09-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>9-4: Simulation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap09-05.html#chap09-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+The <B>Simulation (Built-in)</B> command of the <B>Tools</B> menu controls the internal simulator,
+ which can simulate schematics, IC layout, and VHDL specifications.
+<A HREF="chap10-01.html#chap10-01">Chapter 10</A> discusses this simulator more fully.
+<P>
+The <B>Simulation (SPICE)</B>, <B>Simulation (Verilog)</B>, and
+<B>Simulation (Others)</B> commands of the <B>Tools</B>
+menu are able to produce input specifications for a number of different simulators.
+All these commands work on the current cell and require that all named points be exports.
+It is also necessary to have power and ground exports.
+<P>
+The possible simulators include circuit-level (SPICE, Maxwell),
+switch-level (IRSIM, ESIM, RSIM, RNL, COSMOS, and MOSSIM), gate-level
+(ABEL-PAL), and functional (VERILOG, TEGAS, and SILOS).
+In addition, you can generate a deck for the FastHenry inductance analysis system.
+<P>
+To produce an input deck for any of these simulators,
+use the <B>Write XXX Deck</B> command (where <B>XXX</B> is the simulator's name).
+In addition to these simulators, an EDIF netlist can be produced with the <B>EDIF
+(Electronic Design Interchange Format)</B> subcommand of the <B>Export</B> command of the <B>File</B> menu.
+<P>
+<H3>Verilog</H3>
+<P>
+Besides generating Verilog decks,
+it is possible to annotate circuits with additional Verilog declarations and code that will be included in the deck.
+The subcommands <B>Add Verilog Code</B> and <B>Add Verilog Declaration</B> of the <B>Simulation (Verilog)</B>
+command of the <B>Tools</B> menu allow you to click in the circuit and type code or declarations.
+These pieces of text can be manipulated like any other text object
+(see <A HREF="chap06-08.html#chap06-08">Section 6-8</A> on text).
+<P>
+Additional control of Verilog deck generation is accomplished with the <B>Verilog Options...</B> subcommand.
+A checkbox lets you choose whether or not to use the Verilog "assign" construct.
+You can control the type of Verilog declaration that will be used for wires ("wire" by default, "trireg" if checked).
+Note that this can be overridden with the <B>Set Verilog Wire</B> subcommand of the <B>Simulation (Verilog)</B>
+command of the <B>Tools</B> menu.
+<P>
+The Verilog Options dialog also lets you attach disk files with Verilog code to any cell in the library.
+Once attached, the generated Verilog will use the contents of that file instead of examining the cell contents.
+This allows you to create your own definitions in situations where the derived Verilog would be too complex or otherwise incorrect.
+For an example of Verilog layout and code, look at the cell "tool-SimulateVERILOG" in the library "samples.txt"
+(you can read the library with the <B>Readable Dump</B> subcommand of the <B>Import</B> command of the <B>File</B> menu).
+<P>
+<CENTER><IMG SRC="../images/chap09-07.png" ALT="Figure 9.7"></CENTER>
+<P>
+After running a Verilog simulation, you can read the dump file into Electric and display it in a waveform window.
+This is done with the <B>Plot Verilog VCD Dump...</B> subcommand of the <B>Simulation (Verilog)</B>
+command of the <B>Tools</B> menu (or just <B>Plot Verilog for This Cell</B> if the cell name and file name are the same).
+Control of the waveform window is described more fully in
+<A HREF="chap10-02.html#chap10-02">Section 10-2</A>.
+<P>
+<CENTER><IMG SRC="../images/chap09-07.png" ALT="Figure 9.7"></CENTER>
+<P>
+<H3>SPICE</H3>
+<P>
+SPICE circuit simulation is a special case in Electric.
+Because the simulator is not interactive, all specifications must be done graphically, in advance.
+Note that the example shown here is available in the "samples.txt" library as cell "tool-SimulateSPICE"
+(you can read the library with the <B>Readable Dump</B>
+subcommand of the <B>Import</B> command of the <B>File</B> menu).
+<P>
+<TABLE><TR><TD>
+All input values to SPICE are controlled with special nodes,
+found in the <B>New SPICE Part</B> command of the <B>Edit</B> menu.
+These parts are also available from the "Spice" button in the component menu of the Schematics technologies.
+Note that the first time any SPICE node is placed, the library of SPICE parts is loaded into Electric.
+</TD><TD><CENTER><IMG SRC="../images/chap09-06.png" ALT="Figure 9.6"></CENTER></TD></TR></TABLE>
+<P>
+The SPICE primitives described here are for Electric's default set.
+However, additional sets can (and have) been written.
+To choose another set, change the "SPICE primitive set" popup in the <B>SPICE Options...</B>
+subcommand of the <B>Simulation (SPICE)</B> command of the <B>Tools</B> menu.
+<P>
+In this example, there is a 5-volt supply on the left.
+It was created by using the <B>DC Voltage Source</B> subcommand.
+Once placed, the text that reads "Voltage=0V" is selected and modified
+(either with <B>Get Info</B> or by double-clicking on it).
+The Pulse input signal on the right is created with the <B>Pulse</B> subcommand (it has 7 parameters).
+<P>
+This example also shows the ability to add arbitrary text to the SPICE deck with
+the <B>Add SPICE Card</B> subcommand of the <B>Simulation (SPICE)</B> command of the <B>Tools</B> menu.
+The command creates a piece of text (shown in the lower-right) that can be modified arbitrarily.
+<P>
+There are both voltage and current sources, in AC and DC form.
+The pulse input sources are available as voltage and current.
+A set of "two-gate" devices are also available: <B>CCCS</B>, <B>CCVS</B>, <B>VCCS</B>, <B>VCVS</B>,
+and <B>Transmission</B>.
+<P>
+It is possible to specify Transient, DC, or AC analysis by using the <B>Transient Analysis</B>,
+<B>DC Analysis</B>, and <B>AC Analysis</B> subcommands.
+Only one such element may exist in a circuit.
+<P>
+Bipolar transistors have their substrate connected to ground by default.
+If a <B>Substrate</B> node is encountered,
+its network will be used for the substrate connection of these transistors instead.
+The <B>Well</B> subcommand can be used to specify the well network.
+<P>
+For advanced users, there are two special SPICE nodes: <B>Node Set</B> and <B>Extension</B>.
+The Node Set may be parameterized with an arbitrary piece of SPICE code.
+Truly advanced users may create their own SPICE nodes by modifying the cells in the SPICE library.
+<P>
+Another option that can be used when modeling transistors and other component is to set a specific SPICE model to use for that component.
+Use the <B>Set Spice Model...</B> subcommand of the <B>Simulation (SPICE)</B> command of the <B>Tools</B>
+menu to create a SPICE model field on the selected component.
+Then you can select that text and set it.
+<P>
+The <B>Add Multiplier</B> subcommand places a multiplier on the currently selected node.
+Multipliers (also called "M" factors) scale the size of transistors inside of them.
+<P>
+<!-- NEED 7in -->
+<TABLE><TR>
+<TD><CENTER><IMG SRC="../images/chap09-03.png" ALT="Figure 9.3"></CENTER></TD><TD>
+Some nongraphical information can also be given to the SPICE simulator with the <B>SPICE Options...</B>
+subcommand of the <B>Simulation (SPICE)</B> command of the <B>Tools</B> menu.
+<P>
+The top part of this dialog allows you to control many of the SPICE deck parameters such as the SPICE format
+(SPICE 2, SPICE 3, HSPICE, PSPICE, Gnucap, or SmartSPICE),
+the SPICE level (1, 2, or 3),
+what format to expect when reading SPICE output,
+whether to use parasitics in the deck,
+whether to use actual node names in the deck (SPICE 2 cannot handle this),
+and whether to force power and ground to be global signal names.
+</TD></TR></TABLE>
+<P>
+When "Use Cell Parameters" is checked, any parameters defined on the cell will appear in the SPICE deck.
+When this is not checked, each parameterized cell appears multiple times in the deck,
+once for each different parameter combination.
+See <A HREF="chap06-08.html#chap06-08">Section 6-8</A> for more on parameters.
+<P>
+The "Write Trans Sizes in Lambda" dialog requests that the SPICE deck contain scalable size information
+instead of absolute size information.
+<P>
+UNIX systems can choose to run SPICE after the deck has been generated.
+In addition, they can specify special command-line options to be given to SPICE (the "With" field).
+There are five options:
+<UL>
+<LI>"Don't Run SPICE" requests deck generation only.
+<LI>"Run SPICE" causes SPICE to be run after deck generation,
+and the output shown in the messages window.
+<LI>"Run SPICE Quietly", causes SPICE to be run after deck generation, but the output is ignored.
+<LI>"Run SPICE, Read Output" causes SPICE to be run after deck generation,
+output to be shown in the messages window, and the output to be examined for waveform values
+(which are then shown in a waveform window).
+<LI>"Run SPICE Quietly, Read Output" causes SPICE to be run after deck generation, output to be not shown,
+and the output to be examined for waveform values (which are then shown in a waveform window).
+</UL>
+Note that SPICE 2 and SPICE 3 place their waveform values in the output,
+but HSPICE writes waveform values to a disk file (.tr0 file).
+Therefore, it does not make sense to choose "Run SPICE, Read Output" or
+"Run SPICE Quietly, Read Output" when using HSPICE.
+<P>
+The middle section of the Spice Options dialog controls technology-specific information.
+The upper-middle section controls parasitics, including per-layer resistance, capacitance, and edge-capacitance.
+You can also set the minimum resistance and capacitance for the entire technology.
+The lower-middle section controls header cards
+(placed at the start of the SPICE deck) and trailer cards (placed at the end of the SPICE deck).
+This dialog allows you to specify a disk file with header cards or trailer cards to be used instead of the built-in set.
+You can specify a particular file or request that the system search for files with the cell's name and a given extension.
+You can also edit the built-in header cards for the current technology by using the "Edit Built-in Header Cards" button,
+which invokes an editing window (see <A HREF="chap04-10.html#chap04-10">Section 4-10</A> for more on text editing).
+<P>
+Note that the header, trailer, and parasitic information is specific to a particular technology.
+If you set this information for one technology, but then use another technology when generating the SPICE deck,
+the information that you set will not be used.
+Note also that schematics, although a technology in Electric, are not considered to be SPICE technology.
+You can set the proper layout technology that you want to use when dealing with schematics by using the
+<B>Technology Options</B> command of the <B>Technology</B> menu and setting the
+"Use Lambda values from this Technology" popup.
+<P>
+The bottom section of the dialog allows you to specify a disk file of SPICE cards that will be used to describe any cell.
+This disk file replaces the any SPICE description that may be derived from the circuitry.
+<P>
+<H3>SPICE and Verilog Primitives</H3>
+<P>
+Electric has a set of SPICE elements (DC Voltage Source, CCCS, Pulse, etc.)
+that create appropriate SPICE deck cards.
+These elements are found in the readable dump file "spiceparts.txt" in the "lib" directory.
+This library consists of a set of icon cells that describe the various SPICE primitives,
+and each icon has a special <I>Spice Template</I> that describes the SPICE card to generate.
+<P>
+Users can define their own SPICE elements by creating new icons in this or a new library.
+The icon must have graphics, exports, parameters, and a template.
+Parameters are created with the <B>Cell Parameters...</B> subcommand of the <B>Attributes</B>
+command of the <B>Info</B> menu (see <A HREF="chap06-08.html#chap06-08">Section 6-8</A> for more on parameters).
+The SPICE template is created with the <B>Set Generic SPICE Template</B> subcommand of the <B>Simulation (SPICE)</B>
+command of the <B>Tools</B> menu.
+If the template is specific to a particular version of SPICE, use the appropriate template subcommand
+(<B>Set SPICE 2 Template</B>, <B>Set SPICE 3 Template</B>, <B>Set HSPICE Template</B>, <B>Set PSPICE Template</B>,
+<B>Set GnuCAP Template</B>, or <B>Set SmartSPICE Template</B>).
+<P>
+You can also create Verilog elements by using the <B>Set Verilog Template</B> subcommand of the <B>Simulation (Verilog)</B>
+command of the <B>Tools</B> menu.
+This template has the format as illustrated below.
+Note that a single cell can contain both Verilog and multiple SPICE templates.
+<P>
+<!-- NEED 3in -->
+<TABLE><TR><TD>
+The DC Voltage Source primitive is illustrated here.
+Graphics is placed to describe the look of the symbol (a "battery" look).
+Exports are created at the top and bottom of the battery with the names "plus" and "minus".
+A single parameter is defined called "Voltage" with a default value of "0V".
+Finally, a SPICE template is created that has the string
+<BR><CENTER><CODE>V$(node_name) $(plus) $(minus) DC $(Voltage)</CODE></CENTER><BR>
+</TD><TD><CENTER><IMG SRC="../images/chap09-23.png" ALT="Figure 9.23"></CENTER></TD></TR></TABLE>
+<P>
+This string contains substitution expressions of the form <CODE>$(SOMETHING)</CODE>
+where <CODE>SOMETHING</CODE> can be an export name, a variable, or "node_name".
+So, in this example, <CODE>$(node_name)</CODE> will be replaced with the name of the voltage node;
+<CODE>$(plus)</CODE> will be replaced with the net name attached to the positive terminal;
+and <CODE>$(Voltage)</CODE> will be replaced with the voltage value specified by the user.
+<P>
+The set of SPICE primitives in Electric is useful, but far from complete.
+A second set, called "SpicePartsS3", is tailored towards special SPICE3 primitives.
+There are no Verilog primitives in the current release of Electric.
+Users who define new primitives are encouraged to share these with the entire community by contacting
+<A HREF="mailto:info@staticfreesoft.com">Static Free Software</A>.
+<P>
+<H3>SPICE Plotting</H3>
+<P>
+Once SPICE has been run,
+you can see a plot of the simulation by reading the SPICE output file back into Electric.
+Since there are may formats of SPICE output, you must first set the "SPICE Engine" and the "Output format" fields of the
+<B>SPICE Options...</B> dialog.
+The "Output format" field can be "Standard" for the default output of the SPICE engine; "Raw" for rawfile dumps;
+and "Raw/Smart" for the rawfile dumps from SmartSPICE.
+<P>
+<!-- NEED 4in -->
+When Electric knows what type of SPICE output file to expect, use the <B>Plot SPICE Listing...</B> command to read the file
+(or just <B>Plot Spice for This Cell</B> if the cell name and file name are the same).
+The waveforms will appear in a window:
+<P>
+<CENTER><IMG SRC="../images/chap09-04.png" ALT="Figure 9.4"></CENTER>
+<P>
+The waveform window is tied to an associated schematics or layout window.
+Clicking on a signal in the waveform windows highlights the equivalent circuitry in the other window,
+and clicking on an arc in the schematics or layout window causes the waveform signal to be selected.
+Both the waveform window and the associated schematics/layout window are highlighted with a red border to indicate that they are part of the simulation activity.
+<P>
+The horizontal axis of the simulation window shows time.
+Two vertical lines are drawn, called the "main" and the "extension" cursors
+(the extension cursor has an "X" drawn at its top).
+You can click over these cursors and drag them to different time locations.
+The location of the cursors, and the value of the selected signal at those times, is shown at the top.
+The time axis can also be controlled with the appropriate <B>Windows</B> menu commands.
+Use <B>Zoom Out</B> and <B>Zoom In</B> to scale the time axis by a factor of two.
+Use <B>Fill Window</B> to display the entire range of data, fit to the screen.
+Use <B>Focus on Highlighted</B> to display the range between the main and extension cursors.
+<P>
+You can control which signals are displayed in the waveform window.
+To remove a signal, select its name and type "r" or the DELETE key.
+When adding a signal, you have a choice of showing it overlaid with an existing signal, or in its own graph.
+Typing "o" causes the signal to be overlaid onto the currently selected signal,
+and typing "a" causes the signal to be added in its own "frame".
+If you type "o" or "a" into the waveform window, you will be prompted for a list of signal names to display.
+If you type "o" or "a" in the assiciated schematics/layout window,
+then the selected signal from that window will be added to the waveform display.
+<P>
+Besides the time axis, it is possible to zoom and pan the vertical axis of a frame of the waveform window.
+Typing '7' doubles the scale (zooms-in) and typing '0' halves the scale (zooms-out).
+Type '9' to restore the scale so that the data fills the screen.
+Use '8' and '2' to shift the data values up and down.
+<P>
+One final feature is the ability to take a snapshot of the waveform window.
+Typing "p" preserves the waveform in the database
+(a cell with the "simulation-snapshot" view is created with artwork components).
+<P>
+
+Here is a summary of the single-key commands available in SPICE windows:
+<P>
+<CENTER><TABLE BORDER=1>
+<TR><TD WIDTH=5%><CENTER><B>Key</B></CENTER></TD><TD WIDTH=45%><CENTER><B>Waveform Window</B></CENTER></TD><TD WIDTH=50%><CENTER><B>Schematics/Layout Window</B></CENTER></TD></TR>
+<TR><TD><CENTER>a</CENTER></TD><TD>Add signal</TD><TD>Add selected network to waveform window</TD></TR>
+<TR><TD><CENTER>o</CENTER></TD><TD>Overlay signal on top of currently selected signal line</TD><TD>Overlay selected network on top of currently selected signal line</TD></TR>
+<TR><TD><CENTER>r<BR>DEL</CENTER></TD><TD>Remove selected signal</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>7</CENTER></TD><TD>Zoom in vertically (double data scale)</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>0</CENTER></TD><TD>Zoom out vertically (halve data scale)</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>9</CENTER></TD><TD>Scale data to fill the display</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>8</CENTER></TD><TD>Shift data up by 1/4 screen</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>2</CENTER></TD><TD>Shift data down by 1/4 screen</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>p</CENTER></TD><TD>Preserve snapshot of waveform window</TD><TD>&nbsp;</TD></TR>
+<TR><TD><CENTER>d</CENTER></TD><TD>&nbsp;</TD><TD>Move down the hierarchy (into the selected cell)</TD></TR>
+<TR><TD><CENTER>u</CENTER></TD><TD>&nbsp;</TD><TD>Move up the hierarchy (out of the current cell)</TD></TR>
+<TR><TD><CENTER>?</CENTER></TD><TD>Print this listing of single-key commands</TD><TD>Print this listing of single-key commands</TD></TR>
+</TABLE></CENTER>
+<P>
+<H3>FashHenry</H3>
+<P>
+FastHenry is an inductance analysis tool
+(see the papers of <A HREF="http://rleweb.mit.edu/rlestaff/p-whit.htm">Jacob White</A>).
+When a FastHenry deck is generated, a subset of the arcs in the current cell are written.
+To include an arc in the FastHenry deck,
+select it and use the <B>FastHenry Arc Info...</B> subcommand of the <B>Simulation (Others)</B>
+command of the <B>Tools</B> menu.
+<TABLE><TR><TD>
+This command presents a dialog with FastHenry factors for the selected arc.
+The most important factor is in the upper-left: "Include this arc in FastHenry analysis".
+By checking this, the arc is described in the FastHenry deck.
+Once this is checked, other fields in the dialog become active.
+You can set the thickness of this arc (the default value shown will be used if no override is specified).
+You can set the number of subdivisions that will be used in height and width (again,
+defaults are shown).
+You can even set the height of the two ends of the arc.
+</TD><TD><CENTER><IMG SRC="../images/chap09-19.png" ALT="Figure 9.19"></CENTER></TD></TR></TABLE>
+You can partition the arcs into different groups.
+By default, all arcs are placed in a group called "Group 1".
+By clicking the "New Group" button, you can type a new group name, and that group can be used in some of the arcs.
+<P>
+After all arcs have been marked, you can generate a FastHenry deck with the <B>Write FastHenry Deck...</B>
+subcommand of the <B>Simulation (Others)</B> command of the <B>Tools</B> menu.
+Before doing that, however, you can set other options for FastHenry deck generation To do this,
+use the <B>FastHenry Options...</B> subcommand of the <B>Simulation (Others)</B> command of the <B>Tools</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap09-18.png" ALT="Figure 9.18"></CENTER>
+<P>
+This dialog allows you to set the type of frequency analysis
+(single frequency or a sequence specified by a start, end, and number of runs per frequency).
+You can choose to use single or multiple-pole analysis
+(and if multiple, you can specify the number of poles).
+The FastHenry Options dialog also allows you to set defaults for the individual arcs that will be included in the deck.
+You can specify the default thickness, and the default number of subdivisions (in height and width).
+Other options are not implemented at this time.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap09-03.html#chap09-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap09-03.html#chap09-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap09-05.html#chap09-05">Next</A></TD>
+<TD><A HREF="chap09-05.html#chap09-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

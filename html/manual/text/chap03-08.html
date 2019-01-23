@@ -1,0 +1,47 @@
+<HTML><HEAD><TITLE>Using Electric 3-8: Rearranging Hierarchy</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-08"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-07.html#chap03-07"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-8: Rearranging Hierarchy</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap03-09.html#chap03-09"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Creating New Levels of Hierarchy</H3>
+<P>
+In order to manipulate hierarchical circuits,
+it is useful to create and delete levels of the hierarchy.
+The <B>Package into Cell...</B> command of the <B>Cells</B>
+menu collects everything in the highlighted area into a new cell.
+You will be prompted for the cell name.
+The most convenient way to specify an area for packaging is to use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I>
+button and drag a rectangle.
+Every node touching the area is included in the new cell.
+All arcs between nodes in the area are also included.
+The highlighted circuitry is not affected.
+<P>
+<H3>Removing Levels of Hierarchy</H3>
+<P>
+The opposite function is the removal of levels of hierarchy.
+This is done with the <B>Extract Cell Instance</B> command,
+which takes the currently highlighted cell instances and replaces them with their contents.
+Repeated use of this command goes further down the hierarchy until it is fully instantiated.
+All arcs that were connected to the cell instances are reconnected to the correct parts of the instantiated circuitry.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-07.html#chap03-07"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-07.html#chap03-07">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap03-09.html#chap03-09">Next</A></TD>
+<TD><A HREF="chap03-09.html#chap03-09"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,226 @@
+<HTML><HEAD><TITLE>Using Electric 1-11: Schematics Example</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap01-11"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 1: INTRODUCTION</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap01-10.html#chap01-10"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>1-11: Schematics Example</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap02-01.html#chap02-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+This section takes you through the design of some simple schematics.
+<P>
+Electric starts in IC design mode (MOSIS CMOS layout),
+so you have to switch to schematics before doing any design.
+Use the <B>Change Current Technology...</B> command from the <B>Technology</B> menu.
+Select the "schematic, digital" entry (you will have to scroll down to find it) and click OK.
+The symbols in the component menu on the left will change to a Digital schematics set.
+Analog components can be created by selecting the "schematic, analog" technology,
+but they may also be selected with the <B>New Analog Part</B> command in the <B>Edit</B> menu.
+
+<P>
+<TABLE><TR><TD>
+Before you can place any schematics, the editing window must have a cell in it.
+Use the <B>Edit Cell...</B> command in the <B>Cells</B> menu.
+This will show a dialog with a list of existing cells (which is empty, because none exist yet).
+Click on the "New Cell" button at the bottom of this dialog to create a new cell.
+You will then see a dialog which asks you for information about this new cell.
+</TD><TD><CENTER><IMG SRC="../images/chap01-03.png" ALT="Figure 1.3"></CENTER></TD></TR></TABLE>
+<P>
+
+<TABLE><TR>
+<TD><CENTER><IMG SRC="../images/chap01-24.png" ALT="Figure 1.24"></CENTER></TD><TD>
+Type the name ("MyCircuit" is used here) and click OK.
+The editing window will no longer have the "No cell in this window" message,
+ and circuitry may now be created.
+</TD></TR></TABLE>
+<P>
+
+<TABLE><TR><TD>
+Logic elements are placed by selecting nodes from the components menu,
+and then wiring them together.
+This example shows two nodes that have been created.
+This was done by clicking on the appropriate component menu entry,
+and then clicking again in the editing window to place that node.
+After clicking on the component menu entry,
+the cursor changes to a pointing hand to indicate that you must select a location for the node.
+When placing the node, if you press the button and do not release it,
+you will see an outline of the new node,
+which you can drag to its proper location before releasing the button.
+</TD><TD><CENTER><IMG SRC="../images/chap01-17.png" ALT="Figure 1.17"></CENTER></TD></TR></TABLE>
+<P>
+
+In this example,
+the top node is called a Buffer (found in the seventh entry from the bottom of the component menu).
+The node on the bottom is called an And (eighth entry from the bottom of the component menu).
+Both of these nodes are from the Schematic technology
+(which is listed as "schematics" in the status area).
+<P>
+<TABLE><TR>
+<TD><CENTER><IMG SRC="../images/chap01-18.png" ALT="Figure 1.18"></CENTER></TD><TD>
+A <I>highlighted</I> node has two selected parts: the node and a port on that node.
+Note that the And is highlighted in the example above,
+and the Buffer is highlighted in the example here.
+The little "+" sign is the currently highlighted port
+(there are two possible ports on these nodes, on the input and the output).
+</TD></TR></TABLE>
+<P>
+
+To highlight a node, use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I> button.
+The node, and the closest port to the cursor, will be selected.
+After highlighting, you can hold the mouse button down and drag the highlighted object to a new location.
+If nothing is under the cursor when the selection button is pushed,
+you may drag the cursor while the button remains down to define an area in which all objects will be selected.
+<P>
+
+Another way to affect what is highlighted is to use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> button.
+The <I>toggle select</I> button causes object highlighting to be reversed
+(highlighted objects become unhighlighted and unhighlighted objects are highlighted).
+<P>
+The shape of the highlighted port is important.
+Ports are the sites of arc connections,
+so the end point of the arc must fall inside this port area.
+Ports may be rectangles, lines, single points (displayed as a "+"), or any arbitrary shape.
+For example, the entire left side of the And gate is the input port and so its highlighting is a line.
+<P>
+
+<TABLE><TR><TD>
+To wire a component, select it, move the cursor away from the component,
+and use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I> button.
+If you click the <I>creation</I> button and hold it without releasing,
+then you can move around and see where the wire will go when you do release.
+</TD><TD><CENTER><IMG SRC="../images/chap01-19.png" ALT="Figure 1.19"></CENTER></TD></TR></TABLE>
+<P>
+A wire will be created that runs from the component to the location of the cursor.
+Note that the wire is a fixed-angle wire which means that it will be drawn along a horizontal or vertical path from the originating node.
+To see where the wire will end,
+click but do not release the button and drag the outline of the wire's terminating node
+(a pin) until it is in the proper location.
+It is highly recommended that you do all wiring operations this way, because wiring is quite complex and can follow many different paths.
+<P>
+Once a wire has been created, the other end is highlighted (see above).
+This is the highlighting of a <I>pin</I> node that was created to hold the other end of the arc.
+Because it is a node,
+the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I>
+button can be used again to continue the wire to a new location.
+If the creation command terminates over an existing component,
+the wire will attach to that component.
+<P>
+One aspect of the And, Or, and Xor gates that you will notice is that their left side
+(the input side) can accept any number of wires.
+To see this in action, place one of these components in the cell.
+Then repeatedly select its left side and use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I> button to draw wires out of it.
+After three wires have been connected to the input side,
+the gate grows to accommodate more.
+Note that the vertical cursor location along the input side is used to select the position that will be used when a new wire is added.
+<P>
+<CENTER><IMG SRC="../images/chap01-14.png" ALT="Figure 1.14"></CENTER>
+<P>
+
+<TABLE><TR><TD>
+To negate an input or output of a digital gate,
+you must negate the wire connected to that gate.
+Select a wire and use the <B>Negated</B> command from the <B>Arc</B> menu.
+With this facility, you can construct arbitrary gate configurations.
+</TD><TD><CENTER><IMG SRC="../images/chap01-15.png" ALT="Figure 1.15"></CENTER></TD></TR></TABLE>
+<P>
+
+To remove wires or components,
+you can issue the <B>Undo</B> command of the <B>Edit</B> menu to remove the last created object.
+Alternatively, you can select the component and use the <B>Erase</B> command from the <B>Edit</B> menu.
+<P>
+Once components are wired, moving them will also move their connecting wires.
+Notice that the wires stretch and move to maintain the connections.
+What actually happens is that the programmable constraint system follows instructions stored on the
+wires, and reacts to component changes.
+The default wire is <I>fixed-angle</I> and <I>slidable</I>,
+so the letters "FS" are shown when the wire is highlighted.
+<P>
+Select a wire and issue the <B>Rigid</B> command of the <B>Arc</B> menu.
+The letters change to "R" on the arc and the wire no longer stretches when components move.
+Find another arc and issue the <B>Not Fixed-angle</B> command in the <B>Arc</B> menu.
+Now observe the effects of an unconstrained arc as its neighboring nodes move.
+These arc constraints can be reversed with the <B>Rigid</B> and <B>Fixed-angle</B> commands.
+<P>
+
+Electric supports hierarchy by allowing you to create icons for a schematic and place them in another cell.
+Before creating an icon, all connection points to the schematic should be defined.
+
+<TABLE><TR>
+<TD><CENTER><IMG SRC="../images/chap01-22.png" ALT="Figure 1.22"></CENTER></TD><TD>
+Before creating an icon, there must be connection sites, or <I>exports</I> on the schematic.
+Select the output port of the Buffer node and issue the <B>Create Export...</B> command from the <B>Export</B> menu.
+You will be prompted for an export name and its characteristics
+(the characteristics can be ignored for now).
+</TD></TR></TABLE>
+<P>
+
+
+<TABLE><TR><TD>
+The output port on the buffer node is now exported to the outside world.
+Run a wire from the input side of the And node and export the pin at the end of the wire.
+Your circuit should look like this.
+</TD><TD><CENTER><IMG SRC="../images/chap01-20.png" ALT="Figure 1.20"></CENTER></TD></TR></TABLE>
+<P>
+
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap01-21.png" ALT="Figure 1.21"></CENTER></TD><TD>
+You can now make an icon for this circuit by using the <B>Make Icon</B> command of the <B>View</B> menu.
+The icon will be placed in your circuit (you may have to move it away from the rest of the circuitry).
+The result will look like this.
+</TD></TR></TABLE>
+<P>
+
+<TABLE><TR><TD>
+Now create a new cell with the <B>Edit Cell...</B> command of the <B>Cells</B> menu.
+Click on the "New Cell" button at the bottom,
+and make sure the "Make new window for cell" option is checked in the dialog.
+Then type the new cell name ("Higher" is used in the example here) and set its view.
+</TD><TD><CENTER><IMG SRC="../images/chap01-25.png" ALT="Figure 1.25"></CENTER></TD></TR></TABLE>
+<P>
+A new (empty) cell will appear in a separate window.
+Try creating a few simple nodes in this new window (place a gate or two).
+
+<TABLE><TR>
+<TD><CENTER><IMG SRC="../images/chap01-10.png" ALT="Figure 1.9"></CENTER></TD><TD>
+Now place an instance of the other cell by using the <B>New Cell Instance...</B> command from the <B>Edit</B> menu.
+You will be given a list of cells to create:
+select the one that is in the OTHER window (the one called "MyCircuit{ic}" in this example).
+Then click in the newer cell to create the instance.
+</TD></TR></TABLE>
+<P>
+
+<TABLE><TR><TD>
+The icon that appears is a node in the same sense as the Buffer and And gate:
+it can be moved, wired, and so on.
+In addition, because the node contains subcomponents,
+you can see its contents by selecting it and using the
+<B>Down Hierarchy</B> command in the <B>Cells</B> menu.
+Note that if the objects in a cell no longer fit in the display window,
+use the <B>Fill Window</B> command from the <B>Windows</B> menu.
+</TD><TD><CENTER><IMG SRC="../images/chap01-23.png" ALT="Figure 1.23"></CENTER></TD></TR></TABLE>
+<P>
+
+Some final commands that should be mentioned in this introductory example are the <B>Save Library</B>
+and the <B>Quit</B> commands which can be found in the <B>File</B> menu.
+They do the obvious things.
+Also, the <B>Help...</B> command from the <B>Info</B> menu is very useful.
+It displays a dialog with a list of subjects and offers information about each one.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap01-10.html#chap01-10"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap01-10.html#chap01-10">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap02-01.html#chap02-01">Next</A></TD>
+<TD><A HREF="chap02-01.html#chap02-01"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

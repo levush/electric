@@ -1,0 +1,46 @@
+<HTML><HEAD><TITLE>Using Electric 6-7: Undo Control</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap06-07"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 6: ADVANCED EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap06-06.html#chap06-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>6-7: Undo Control</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap06-08.html#chap06-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Electric has an undo mechanism that tracks all changes made during a session.
+When a command is issued, it and its side effects are stored.
+<P>
+The <B>Undo</B> command of the <B>Edit</B> menu reverses the last change made
+(this includes any changes that may have been made by other tools).
+Multiple uses of the <B>Undo</B> command continue to undo further back.
+The <B>Redo</B> command redoes changes, up to the most recent change made.
+<P>
+Electric stores only the last 20 changes, so anything older than that cannot be undone.
+<P>
+In Electric, almost every command is undoable.
+This includes some commands that you would not normally conside undoable,
+such as the mouse click which changes highlighting.
+Although most commands are undoable, there are some exceptions.
+Commands that write disk files are not undoable,
+because Electric would not be so presumptuous as to delete a disk file.
+Also commands that make vast changes (such as library or technology deletion)
+are not undoable.
+Finally, pure informational commands (as found in the <B>Info</B> menu)
+are not undoable.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap06-06.html#chap06-06"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap06-06.html#chap06-06">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap06-08.html#chap06-08">Next</A></TD>
+<TD><A HREF="chap06-08.html#chap06-08"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

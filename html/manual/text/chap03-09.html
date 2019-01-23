@@ -1,0 +1,224 @@
+<HTML><HEAD><TITLE>Using Electric 3-9: Libraries</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-09"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-08.html#chap03-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-9: Libraries</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap03-10.html#chap03-10"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+A <I>library</I> is a collection of cells and cells that forms a consistent hierarchy.
+To enforce this consistency,
+Electric stores an entire library in one disk file that is read or written at one time.
+It is possible, however, to have multiple libraries in Electric.
+Only one library is the current one, and this sometimes affects commands that work at the library level.
+When there are multiple libraries, you can switch between them with the <B>Change Current Library...</B>
+command of the <B>File</B> menu.
+To see which libraries are read in, use the <B>List Libraries</B> command.
+<P>
+To create a new, empty library, use the <B>New Library...</B> command of the <B>File</B> menu.
+To change the name of the current library, use the <B>Rename Library...</B> command.
+To delete a library, use the <B>Close Library</B> command.
+This removes only the memory representation, not the disk file.
+Note that library changes are too vast to be tracked by the database-change mechanism and so are not undoable.
+<P>
+It is possible to link two libraries by placing an instance of a cell from one library into another
+(this is done with the <B>New Cell Instance...</B> command of the <B>Edit</B> menu).
+When this happens, the library with the instance
+(the main library) is linked to the library with the actual cell (this is the <I>reference library</I>).
+Because the reference library is needed to complete the main library,
+it will be read whenever the main library is read.
+<P>
+If referenced libraries are edited independently,
+it is possible that a reference to a cell in another library will not match the actual cell in that library.
+When this happens, Electric creates a "placeholder" cell that matches the original specification.
+Thus, the link to the referenced library is broken because the cell there does not fit where the instance should be.
+To see a list of all placeholder cells that were created because of such problems,
+use the <B>General Cell Lists...</B> command of the <B>Cells</B> menu and select "Only placeholder cells".
+<P>
+<H3>Reading Libraries</H3>
+<P>
+The <B>Open Library...</B> command of the <B>File</B> menu brings a new library into Electric from disk.
+These disk files are in a private binary format (that is, not readable outside of Electric).
+<P>
+Besides Electric libraries,
+it is possible to read circuit descriptions that are in other formats with the <B>Import</B> command of the <B>File</B> menu.
+Most of these commands place the data into a new library that has the same name as the disk file.
+When reading these files,
+it is important that the current technology be set to the one in the file so that proper layer conversion can be done
+(use the <B>Change Current Technology...</B> command of the <B>Technology</B> menu).
+These formats can be read:
+<UL>
+<LI><B>Caltech Intermediate Format (CIF)</B> is used to describe integrated circuit layout.
+It contains no connectivity, so after the library is read,
+it does not know about transistors and contacts: just layers.
+Use the <B>CIF Options...</B> subcommand of the <B>IO Options</B> command to affect how CIF is read.
+<LI><B>Stream (GDS II)</B> is also used to describe integrated circuit layout.
+It contains no connectivity, so after the library is read,
+it does not know about transistors and contacts: just layers.
+Use the <B>GDS Options...</B> subcommand of the <B>IO Options</B> command to affect how GDS is read.
+On Windows, it is possible to select multiple files for input.
+If you do this, all of the GDS will be read into the current library.
+<LI><B>Electronic Design Interchange Format (EDIF)</B> is used to describe both schematics and layout.
+Electric reads EDIF version 2 0 0.
+<LI><B>VHDL</B> is a hardware description language that describes the structure of a circuit.
+When VHDL is read, it is not converted to layout,
+but instead is placed into a text cell with the {vhdl} view.
+<LI><B>Library Exchange Format (LEF)</B> is an interchange format that describes the cells in a library.
+The cells that are read in contain ports, but very little contents.
+<LI><B>Design Exchange Format (DEF)</B> is an interchange format that describes the contents of a library.
+DEF input often makes use of associated LEF files which must already have been read.
+Use the <B>DEF Options...</B> subcommand of the <B>IO Options</B> command to affect how DEF is read.
+<LI><B>AutoCAD DXF</B> is a solid-modeling interchange format,
+and so it may contain 3D objects that cannot be read into Electric.
+Nevertheless, Electric creates a library of artwork primitives as well as it can
+(you must switch to the Artwork technology before importing DXF).
+Use the <B>DXF Options...</B> subcommand of the <B>IO Options</B> command to affect how DXF is read.
+<LI><B>Standard Delay Format (SDF)</B> is used to read test vector parameters and place them on cells in the current library.
+Before this data can be used by the simulator, one of the three sets
+(<B>Typical</B>, <B>Minimum</B>, or <B>Maximum</B>) must be selected with the <B>Annotate Delay Data (ALS)</B>
+subcommand of the <B>Simulate</B> command of the <B>Tools</B> menu.
+<LI><B>Schematic User Environment (SUE)</B> is a schematic editor that captures a single cell in each file.
+The circuitry in SUE files is added to the current library instead of being placed in its own library
+(because many SUE files may have to be read to build up a single Electric library).
+<LI><B>Readable Dump</B> is an Electric-specific format that captures the entire database,
+but in an editable text format.
+Because it is text, it is slower to read than Electric's binary files,
+and takes up more space on disk.
+However, it can be transferred between machines more reliably and can be edited if necessary.
+</UL>
+See <A HREF="chap07-03.html#chap07-03">Section 7-3</A>
+for more information on external formats.
+<P>
+<H3>Writing Libraries</H3>
+<P>
+Writing libraries to disk is done with the <B>Save Library</B> command of the <B>File</B> menu.
+The <B>Save All Libraries</B> command of the <B>File</B> menu writes all libraries that have changed.
+If a library was read from disk, it is written back to the same file.
+If, however, you wish to write the library to a new file
+(thus preserving the original) then use the <B>Save Library As...</B> command.
+<P>
+<TABLE><TR><TD VALIGN=TOP>
+The <B>Library Options...</B> subcommand of the <B>IO Options</B> command of the <B>File</B>
+menu controls the writing of libraries to disk.
+By default, saved libraries overwrite the previous libraries and no backup is created.
+If you choose "Backup of last library file",
+then the former library is renamed so that it has a "~" at the end.
+If you choose "Backup history of library files",
+then the former library is renamed so that it has its creation date as part of its name.
+You can also use this dialog to request that the database be checked when saves are done.
+</TD><TD><CENTER><IMG SRC="../images/chap03-19.png" ALT="Figure 3.19"></CENTER></TD></TR></TABLE>
+<P>
+<!-- NEED 2in -->
+Electric can also write external format files with the <B>Export</B> command of the <B>File</B> menu.
+These formats can be written:
+<UL>
+<LI><B>Caltech Intermediate Format (CIF)</B> is used to describe integrated circuit layout.
+The output file contains only the current cell and any circuitry below that in the hierarchy.
+Use the <B>CIF Options...</B> subcommand of the <B>IO Options</B> command to affect how CIF is written.
+<LI><B>Stream (GDS II)</B> is also used to describe integrated circuit layout.
+The output file contains only the current cell and any circuitry below that in the hierarchy.
+Use the <B>GDS Options...</B> subcommand of the <B>IO Options</B> command to affect how GDS is written.
+<LI><B>Electronic Design Interchange Format (EDIF)</B> can write either the Netlist or the Schematic view of the circuit.
+Use the <B>EDIF Options...</B> subcommand of the <B>IO Options</B> command to affect how EDIF is written.
+Electric writes EDIF version 2 0 0.
+<LI><B>Library Exchange Format (LEF)</B> is an interchange format that describes the exports on cells in a library.
+<LI><B>Circuit Design Language (CDL)</B> is a Cadence interchange format for netlists.
+<LI><B>Eagle</B> is an interface to the Eagle schematics design system (netlist format).
+Before writing Eagle files, you must give every node the "ref_des" attribute,
+and every port on these nodes the "pin" attribute.
+If you also place the "pkg_type" attribute on the node, it overrides the cell name.
+Use the <B>Define...</B> subcommand of the <B>Attributes</B> command of the <B>Info</B> menu to create these attributes
+(see <A HREF="chap06-08.html#chap06-08">Section 6-8</A> for more information).
+Also, every network must be named.
+<LI><B>ECAD</B> is an interface to the ECAD schematics design system (netlist format).
+<LI><B>Pads</B> is an interface to the Pads schematics design system (netlist format).
+<LI><B>AutoCAD DXF</B> is a solid-modeling interchange format.
+Use the <B>DXF Options...</B> subcommand of the <B>IO Options</B> command to affect how DXF is written.
+<LI><B>L</B> is the GDT language, still appearing in some commercial systems.
+The output file contains only the current cell and any circuitry below that in the hierarchy.
+<LI><B>PostScript</B> is the Adobe printing language.
+The output file contains only a visual representation of the current cell
+(or part of that cell).
+PostScript options can be controlled with the <B>Print Options...</B> command of the <B>File</B> menu.
+<LI><B>HPGL</B> is the Hewlett-Packard printing language.
+The output file contains only a visual representation of the current cell
+(or part of that cell).
+HPGL options can be controlled with the <B>Print Options...</B> command of the <B>File</B> menu.
+<LI><B>Readable Dump</B> is an Electric-specific format that captures the entire database,
+but in an editable text format.
+Because it is text, it takes up more space on disk.
+However, it can be transferred between machines more reliably and can be edited if necessary.
+</UL>
+<P>
+The exported files from Electric are often considered to be proprietary information, and must be marked appropriately.
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap03-13.png" ALT="Figure 3.13"></CENTER></TD><TD VALIGN=TOP>
+By using the <B>Copyright Options...</B> subcommand of the <B>IO Options</B> command of the <B>File</B> menu,
+a disk file with copyright information can be inserted into exported files.
+Since each export file has a different format for comments, the copyright file should not contain any such characters.
+Instead, the system will insert the proper comment characters for the particular export format.
+</TD></TR></TABLE>
+<P>
+The copyright file will be inserted into decks exported for CIF, LEF, and CDL, as well as in simulation netlists for
+Verilog, SPICE, FastHenry, IRSIM, and ESIM.
+See <A HREF="chap07-03.html#chap07-03">Section 7-3</A>
+for more information on external formats.
+<P>
+<H3>Standard-Cell Libraries</H3>
+<P>
+Electric does not come with any useful libraries for doing design.
+However, the system is able to make use of <A HREF="http://www.artisan.com">Artisan</A> libraries.
+These libraries are free, provided that you sign an Artisan license.
+Once you are licensed, you will have standard cell libaries, pad libraries, memory libraries,
+and more.
+<P>
+Artisan libraries are not distributed in Electric format.
+Instead, they come in a variety of formats that can be read into Electric.
+The GDS files contain the necessary geometry, and the LEF files contain the connectivity.
+By combining them, Electric creates a standard cell library that can be placed-and-routed
+(with the silicon compiler) and can be fabricated.
+Note that the data is not node-extracted,
+so not all of Electric's capabilities can be used with this data.
+<P>
+To create an Artisan library, follow these steps:
+<UL>
+<LI>Select the Artisan data that you want and extract the GDS and LEF files for it.
+The GDS files will have the extension ".gds2", which is not what Electric expects
+(Electric expects them to end with ".gds"), so you may want to rename them.
+<LI>Read the LEF file into Electric with the <B>LEF (Library Exchange Format)</B>
+subcommand of the <B>Import</B> command of the <B>File</B> menu.
+Keep in mind that the LEF data may come in multiple versions for different numbers of metal layers.
+<LI>Read the GDS data into Electric with the <B>GDS II (Stream)</B> subcommand of the <B>Import</B>
+command of the <B>File</B> menu.
+Note that the proper GDS layers must be established first
+(with the <B>GDS II Options...</B> subcommand of the <B>IO Options</B> command of the <B>File</B> menu).
+As an aid in this process,
+you may find it helpful to read either the file "tsmc25.txt" or "umc18.txt" in the Electric library directory
+(these are Readable Dump files that can be read with the <B>Readable Dump</B> subcommand of the <B>Import</B>
+command of the <B>File</B> menu).
+Note that there will now be two libraries in memory: one with the GDS data and one with the LEF data.
+<LI>Merge the port information from the LEF library into the GDS library.
+It is important that the GDS library be the "current library"
+(use the <B>Change Current Library...</B> command of the <B>File</B> menu if it is not).
+To merge the LEF port information, use the <B>Add Export from Library...</B> command of the <B>Export</B> menu.
+You will be prompted for a library, and should select the one with the LEF data.
+<LI>At this point, the GDS library now has standard cells in it.
+Before saving it to disk, you should probably use the <B>Cell Options...</B> command of the <B>Cells</B>
+menu and set all of the cells to be "Part of a cell-library".
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-08.html#chap03-08"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-08.html#chap03-08">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap03-10.html#chap03-10">Next</A></TD>
+<TD><A HREF="chap03-10.html#chap03-10"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,40 @@
+#undef STDC_HEADERS
+
+#undef HAVE_FTIME
+#undef HAVE_GETCWD
+#undef HAVE_GETHOSTID
+#undef HAVE_GETPAGESIZE
+#undef HAVE_GETTIMEOFDAY
+#undef HAVE_GETWD
+#undef HAVE_PTHREAD
+#undef HAVE_QSORT
+#undef HAVE_SCANDIR
+#undef HAVE_SETLOCALE
+#undef HAVE_STRCHR
+#undef HAVE_VALLOC
+#undef HAVE_VSNPRINTF
+
+#undef HAVE_POSIX_READDIR_R
+
+#undef HAVE_DB_H
+#undef HAVE_DIRENT_H
+#undef HAVE_FCNTL_H
+#undef HAVE_INTTYPES_H
+#undef HAVE_LOCALE_H
+#undef HAVE_NDIR_H
+#undef HAVE_SGTTY_H
+#undef HAVE_STDINT_H
+#undef HAVE_STRING_H
+#undef HAVE_STRINGS_H
+#undef HAVE_SYS_DIR_H
+#undef HAVE_SYS_NDIR_H
+#undef HAVE_SYS_INT_TYPES_H
+#undef HAVE_SYS_TIME_H
+#undef HAVE_SYS_TIMEB_H
+#undef HAVE_SYS_TYPES_H
+#undef HAVE_SYS_WAIT_H
+#undef HAVE_TERMIO_H
+#undef HAVE_TERMIOS_H
+#undef HAVE_UNISTD_H
+#undef HAVE_VFORK_H
+#define RETSIGTYPE        void

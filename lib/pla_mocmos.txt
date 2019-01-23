@@ -1,0 +1,3378 @@
+****library: "pla_mocmos"
+version: 6.05bi
+aids: 14
+aidname: user
+aidname: io
+aidname: compaction
+aidname: pla
+aidname: routing
+aidname: silicon-compiler
+aidname: vhdl-compiler
+aidname: compensation
+aidname: logeffort
+aidname: network
+aidname: drc
+aidname: erc
+aidname: simulation
+aidname: project
+userbits: 2
+techcount: 16
+techname: generic lambda: 2000
+techname: nmos lambda: 4000
+techname: cmos lambda: 4000
+techname: mocmos lambda: 400
+variables: 1
+TECH_last_state[01,00/00]: 8
+techname: mocmosold lambda: 2000
+techname: mocmossub lambda: 400
+variables: 1
+TECH_last_state[01,00/00]: 8
+techname: bicmos lambda: 2000
+techname: rcmos lambda: 2000
+techname: cmosdodn lambda: 2000
+techname: bipolar lambda: 4000
+techname: schematic lambda: 4000
+techname: fpga lambda: 2000
+techname: pcb lambda: 2540000
+techname: artwork lambda: 2000
+variables: 1
+TECH_last_state[01,00/00]: 0
+techname: gem lambda: 2000
+techname: efido lambda: 20000
+view: schematic-page-2{p2}
+view: schematic-page-1{p1}
+view: layout{lay}
+view: schematic{sch}
+view: icon{ic}
+view: documentation{doc}
+view: compensated{comp}
+view: skeleton{sk}
+view: Verilog{ver}
+view: VHDL{vhdl}
+view: netlist{net}
+view: netlist-als-format{net-als}
+view: netlist-quisc-format{net-quisc}
+view: netlist-silos-format{net-silos}
+view: netlist-rsim-format{net-rsim}
+view: netlist-netlisp-format{net-netlisp}
+view: simulation-snapshot{sim}
+view: unknown{}
+cellcount: 5
+maincell: 1
+***cell: 0
+name: io-inv-4{lay}
+version: 2
+creationdate: 983824727
+revisiondate: 985638230
+lowx: -1600 highx: 14600 lowy: 2000 highy: 62800
+aadirty: 6638
+userbits: 131072
+nodes: 60 arcs: 63 porttypes: 22
+**node: 0
+type: mocmos:Metal-2-Pin
+lowx: 11000 highx: 12200 lowy: 58000 highy: 59200
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 0
+exported: 21
+**node: 1
+type: mocmos:Metal-2-Pin
+lowx: 600 highx: 1800 lowy: 5600 highy: 6800
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 1
+exported: 20
+**node: 2
+type: mocmos:Metal-1-P-Well-Con
+lowx: 4400 highx: 11600 lowy: 54800 highy: 62000
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-well
+arc: 3
+**node: 3
+type: mocmos:Polysilicon-1-Pin
+lowx: 9600 highx: 10400 lowy: 61200 highy: 62000
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 4
+arc: 5
+**node: 4
+type: mocmos:Metal-1-Pin
+lowx: 3400 highx: 4600 lowy: 5600 highy: 6800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 6
+arc: 7
+**node: 5
+type: mocmos:Metal-1-Pin
+lowx: 2200 highx: 3400 lowy: 5600 highy: 6800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 6
+arc: 8
+**node: 6
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 10800 highx: 13200 lowy: 2000 highy: 4400
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 12
+exported: 18
+exported: 17
+**node: 7
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 6800 highx: 9200 lowy: 2000 highy: 4400
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 13
+exported: 16
+exported: 15
+**node: 8
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 2800 highx: 5200 lowy: 2000 highy: 4400
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 7
+exported: 14
+exported: 13
+**node: 9
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: -1200 highx: 1200 lowy: 2000 highy: 4400
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 14
+exported: 12
+exported: 11
+**node: 10
+type: mocmos:Metal-1-Pin
+lowx: 13000 highx: 14600 lowy: 2400 highy: 4000
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 11
+arc: 12
+**node: 11
+type: mocmos:Metal-1-Metal-2-Con
+lowx: 9800 highx: 11800 lowy: 5200 highy: 7200
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-metal-2
+arc: 1
+arc: 15
+exported: 10
+**node: 12
+type: mocmos:P-Well-Node
+lowx: -1600 highx: 14400 lowy: 5200 highy: 18400
+rotation: 0 transpose: 0
+userbits: 3072
+**node: 13
+type: mocmos:Metal-1-P-Well-Con
+lowx: 7200 highx: 14400 lowy: 4400 highy: 11600
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-well
+arc: 10
+arc: 15
+**node: 14
+type: mocmos:Metal-1-Pin
+lowx: 7000 highx: 8600 lowy: 8200 highy: 9800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 13
+arc: 16
+**node: 15
+type: mocmos:Metal-1-Pin
+lowx: 5200 highx: 6800 lowy: 8200 highy: 9800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 9
+arc: 16
+**node: 16
+type: mocmos:Metal-1-N-Active-Con
+lowx: 7200 highx: 14400 lowy: 8400 highy: 15600
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 10
+arc: 17
+arc: 19
+**node: 17
+type: mocmos:N-Transistor
+lowx: 4800 highx: 11200 lowy: 7600 highy: 16400
+rotation: 2700 transpose: 0
+userbits: 3072
+*port: n-trans-poly-left
+arc: 21
+*port: n-trans-diff-top
+arc: 19
+*port: n-trans-diff-bot
+arc: 18
+**node: 18
+type: mocmos:Metal-1-N-Active-Con
+lowx: 2200 highx: 9400 lowy: 8400 highy: 15600
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 9
+arc: 18
+arc: 20
+**node: 19
+type: mocmos:N-Transistor
+lowx: 8000 highx: 14400 lowy: 9600 highy: 18400
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: n-trans-poly-left
+arc: 24
+*port: n-trans-diff-top
+arc: 17
+*port: n-trans-diff-bot
+arc: 22
+**node: 20
+type: mocmos:Metal-1-N-Active-Con
+lowx: 7200 highx: 14400 lowy: 12400 highy: 19600
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 22
+arc: 25
+arc: 26
+**node: 21
+type: mocmos:Polysilicon-1-Pin
+lowx: 12400 highx: 13200 lowy: 13600 highy: 14400
+rotation: 1800 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 23
+arc: 24
+**node: 22
+type: mocmos:Metal-1-Pin
+lowx: 13000 highx: 14600 lowy: 15000 highy: 16600
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 11
+arc: 25
+**node: 23
+type: mocmos:Metal-1-P-Active-Con
+lowx: 7200 highx: 14400 lowy: 19600 highy: 26800
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 26
+arc: 27
+**node: 24
+type: mocmos:P-Transistor
+lowx: 8000 highx: 14400 lowy: 20800 highy: 29600
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: p-trans-poly-left
+arc: 28
+*port: p-trans-diff-top
+arc: 27
+*port: p-trans-diff-bottom
+arc: 30
+**node: 25
+type: mocmos:Polysilicon-1-Pin
+lowx: 12400 highx: 13200 lowy: 24800 highy: 25600
+rotation: 1800 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 23
+arc: 28
+arc: 29
+**node: 26
+type: mocmos:Metal-1-P-Active-Con
+lowx: 7200 highx: 14400 lowy: 23600 highy: 30800
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 30
+arc: 32
+arc: 33
+**node: 27
+type: mocmos:Metal-1-P-Active-Con
+lowx: 2200 highx: 9400 lowy: 23600 highy: 30800
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 20
+arc: 31
+**node: 28
+type: mocmos:P-Transistor
+lowx: 4800 highx: 11200 lowy: 23200 highy: 32000
+rotation: 900 transpose: 0
+userbits: 3072
+*port: p-trans-poly-left
+arc: 21
+*port: p-trans-diff-top
+arc: 31
+*port: p-trans-poly-right
+arc: 34
+*port: p-trans-diff-bottom
+arc: 32
+**node: 29
+type: mocmos:Metal-1-Pin
+lowx: 2000 highx: 3600 lowy: 29600 highy: 31200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 8
+arc: 36
+**node: 30
+type: mocmos:Metal-1-Pin
+lowx: 7000 highx: 8600 lowy: 29600 highy: 31200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 35
+arc: 36
+**node: 31
+type: mocmos:Metal-2-Pin
+lowx: 8800 highx: 14400 lowy: 30800 highy: 36400
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 38
+arc: 39
+exported: 9
+**node: 32
+type: mocmos:Metal-2-Pin
+lowx: -800 highx: 4800 lowy: 30800 highy: 36400
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 41
+exported: 8
+**node: 33
+type: mocmos:Metal-2-Pin
+lowx: 2400 highx: 4000 lowy: 32800 highy: 34400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-2
+arc: 39
+arc: 40
+arc: 41
+**node: 34
+type: mocmos:Metal-1-Metal-2-Con
+lowx: 2200 highx: 4200 lowy: 32600 highy: 34600
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-metal-2
+arc: 40
+arc: 42
+**node: 35
+type: mocmos:Metal-2-Pin
+lowx: 10000 highx: 11600 lowy: 32800 highy: 34400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-2
+arc: 37
+arc: 38
+**node: 36
+type: mocmos:Metal-1-Metal-2-Con
+lowx: 9800 highx: 11800 lowy: 32600 highy: 34600
+rotation: 1800 transpose: 0
+userbits: 3072
+*port: metal-1-metal-2
+arc: 33
+arc: 37
+**node: 37
+type: mocmos:Metal-1-N-Well-Con
+lowx: -400 highx: 6800 lowy: 31600 highy: 38800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-substrate
+arc: 42
+arc: 44
+**node: 38
+type: mocmos:Polysilicon-1-Pin
+lowx: 7600 highx: 8400 lowy: 34800 highy: 35600
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 34
+arc: 43
+**node: 39
+type: mocmos:Polysilicon-1-Pin
+lowx: 9600 highx: 10400 lowy: 34800 highy: 35600
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 4
+arc: 43
+**node: 40
+type: mocmos:Metal-1-P-Active-Con
+lowx: 4400 highx: 11600 lowy: 35600 highy: 42800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 35
+arc: 47
+arc: 48
+**node: 41
+type: mocmos:P-Transistor
+lowx: 2800 highx: 9200 lowy: 34800 highy: 43600
+rotation: 2700 transpose: 0
+userbits: 68608
+*port: p-trans-poly-left
+arc: 49
+*port: p-trans-diff-top
+arc: 47
+*port: p-trans-diff-bottom
+arc: 46
+**node: 42
+type: mocmos:Metal-1-P-Active-Con
+lowx: -400 highx: 6800 lowy: 35600 highy: 42800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 44
+arc: 45
+arc: 46
+**node: 43
+type: mocmos:P-Transistor
+lowx: -400 highx: 6000 lowy: 36800 highy: 45600
+rotation: 0 transpose: 0
+userbits: 3072
+*port: p-trans-poly-left
+arc: 50
+*port: p-trans-diff-top
+arc: 52
+*port: p-trans-diff-bottom
+arc: 45
+**node: 44
+type: mocmos:Polysilicon-1-Pin
+lowx: 800 highx: 1600 lowy: 40800 highy: 41600
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 50
+arc: 51
+**node: 45
+type: mocmos:Metal-1-P-Active-Con
+lowx: -400 highx: 6800 lowy: 39600 highy: 46800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 52
+arc: 53
+arc: 54
+**node: 46
+type: mocmos:Metal-1-Pin
+lowx: -800 highx: 800 lowy: 42000 highy: 43600
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 14
+arc: 54
+**node: 47
+type: mocmos:P-Well-Node
+lowx: -1600 highx: 14400 lowy: 46800 highy: 59600
+rotation: 0 transpose: 0
+userbits: 3072
+**node: 48
+type: mocmos:Metal-1-N-Active-Con
+lowx: -400 highx: 6800 lowy: 46800 highy: 54000
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 53
+arc: 55
+**node: 49
+type: mocmos:N-Transistor
+lowx: -400 highx: 6000 lowy: 48000 highy: 56800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: n-trans-poly-left
+arc: 58
+*port: n-trans-diff-top
+arc: 56
+*port: n-trans-diff-bot
+arc: 55
+**node: 50
+type: mocmos:Metal-1-N-Active-Con
+lowx: -400 highx: 6800 lowy: 50800 highy: 58000
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 2
+arc: 56
+arc: 59
+**node: 51
+type: mocmos:Metal-1-N-Active-Con
+lowx: 4400 highx: 11600 lowy: 50800 highy: 58000
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 3
+arc: 48
+arc: 60
+**node: 52
+type: mocmos:Polysilicon-1-Pin
+lowx: 800 highx: 1600 lowy: 52000 highy: 52800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 51
+arc: 57
+arc: 58
+**node: 53
+type: mocmos:N-Transistor
+lowx: 2800 highx: 9200 lowy: 50400 highy: 59200
+rotation: 900 transpose: 0
+userbits: 68608
+*port: n-trans-poly-left
+arc: 49
+*port: n-trans-diff-top
+arc: 59
+*port: n-trans-poly-right
+arc: 62
+*port: n-trans-diff-bot
+arc: 60
+**node: 54
+type: mocmos:Metal-1-Metal-2-Con
+lowx: 2200 highx: 4200 lowy: 57600 highy: 59600
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-metal-2
+arc: 0
+arc: 2
+exported: 19
+**node: 55
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 0 highx: 2400 lowy: 60400 highy: 62800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 57
+exported: 7
+exported: 6
+**node: 56
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 4000 highx: 6400 lowy: 60400 highy: 62800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-polysilicon-1
+arc: 61
+exported: 5
+exported: 4
+**node: 57
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 8000 highx: 10400 lowy: 60400 highy: 62800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 5
+exported: 3
+exported: 2
+**node: 58
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 12000 highx: 14400 lowy: 60400 highy: 62800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 29
+exported: 1
+exported: 0
+**node: 59
+type: mocmos:Polysilicon-1-Pin
+lowx: 5600 highx: 6400 lowy: 61200 highy: 62000
+rotation: 0 transpose: 0
+userbits: 66568
+*port: polysilicon-1
+arc: 61
+arc: 62
+**porttype: 0
+subnode: 58
+subport: metal-1-polysilicon-1
+name: in3.m-1.n
+descript: 0/512
+userbits: 92160
+**porttype: 1
+subnode: 58
+subport: metal-1-polysilicon-1
+name: in3.p.n
+descript: 0/512
+userbits: 92160
+**porttype: 2
+subnode: 57
+subport: metal-1-polysilicon-1
+name: in2.m-1.n
+descript: 0/512
+userbits: 92160
+**porttype: 3
+subnode: 57
+subport: metal-1-polysilicon-1
+name: in2.p.n
+descript: 0/512
+userbits: 92160
+**porttype: 4
+subnode: 56
+subport: metal-1-polysilicon-1
+name: in1.m-1.n
+descript: 0/512
+userbits: 92160
+**porttype: 5
+subnode: 56
+subport: metal-1-polysilicon-1
+name: in1.p.n
+descript: 0/512
+userbits: 92160
+**porttype: 6
+subnode: 55
+subport: metal-1-polysilicon-1
+name: in0.m-1.n
+descript: 0/512
+userbits: 92160
+**porttype: 7
+subnode: 55
+subport: metal-1-polysilicon-1
+name: in0.p.n
+descript: 0/512
+userbits: 92160
+**porttype: 8
+subnode: 32
+subport: metal-2
+name: PWR.m-2.w
+descript: 0/512
+userbits: 92160
+**porttype: 9
+subnode: 31
+subport: metal-2
+name: PWR.m-2.e
+descript: 0/512
+userbits: 92160
+**porttype: 10
+subnode: 11
+subport: metal-1-metal-2
+name: GND.m-2.se
+descript: 0/512
+userbits: 92160
+**porttype: 11
+subnode: 9
+subport: metal-1-polysilicon-1
+name: out0-bar.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 12
+subnode: 9
+subport: metal-1-polysilicon-1
+name: out0-bar.p.s
+descript: 0/512
+userbits: 92160
+**porttype: 13
+subnode: 8
+subport: metal-1-polysilicon-1
+name: out1-bar.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 14
+subnode: 8
+subport: metal-1-polysilicon-1
+name: out1-bar.p.s
+descript: 0/512
+userbits: 92160
+**porttype: 15
+subnode: 7
+subport: metal-1-polysilicon-1
+name: out2-bar.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 16
+subnode: 7
+subport: metal-1-polysilicon-1
+name: out2-bar.p.s
+descript: 0/512
+userbits: 92160
+**porttype: 17
+subnode: 6
+subport: metal-1-polysilicon-1
+name: out3-bar.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 18
+subnode: 6
+subport: metal-1-polysilicon-1
+name: out3-bar.p.s
+descript: 0/512
+userbits: 92160
+**porttype: 19
+subnode: 54
+subport: metal-1-metal-2
+name: GND.m-2.ne
+descript: 0/512
+userbits: 92160
+**porttype: 20
+subnode: 1
+subport: metal-2
+name: GND.m-2.sw
+descript: 0/512
+userbits: -1073649664
+**porttype: 21
+subnode: 0
+subport: metal-2
+name: GND.m-2.nw
+descript: 0/512
+userbits: -1073649664
+**arc: 0
+type: mocmos:Metal-2
+width: 5600 length: 8400
+userbits: 805306370
+*end: 0
+node: 54
+nodeport: metal-1-metal-2
+xpos: 3200 ypos: 58600
+*end: 1
+node: 0
+nodeport: metal-2
+xpos: 11600 ypos: 58600
+**arc: 1
+type: mocmos:Metal-2
+width: 5600 length: 9600
+userbits: 805312130
+*end: 0
+node: 11
+nodeport: metal-1-metal-2
+xpos: 10800 ypos: 6200
+*end: 1
+node: 1
+nodeport: metal-2
+xpos: 1200 ypos: 6200
+**arc: 2
+type: mocmos:Metal-1
+width: 1200 length: 3600
+userbits: 805309250
+*end: 0
+node: 50
+nodeport: metal-1-n-act
+xpos: 3200 ypos: 54800
+*end: 1
+node: 54
+nodeport: metal-1-metal-2
+xpos: 3200 ypos: 58400
+**arc: 3
+type: mocmos:Metal-1
+width: 1600 length: 3200
+userbits: 805315010
+*end: 0
+node: 2
+nodeport: metal-1-well
+xpos: 8000 ypos: 58000
+*end: 1
+node: 51
+nodeport: metal-1-n-act
+xpos: 8000 ypos: 54800
+**arc: 4
+type: mocmos:Polysilicon-1
+width: 800 length: 26400
+userbits: 805315010
+*end: 0
+node: 3
+nodeport: polysilicon-1
+xpos: 10000 ypos: 61600
+*end: 1
+node: 39
+nodeport: polysilicon-1
+xpos: 10000 ypos: 35200
+**arc: 5
+type: mocmos:Polysilicon-1
+width: 800 length: 400
+userbits: 805312130
+*end: 0
+node: 3
+nodeport: polysilicon-1
+xpos: 10000 ypos: 61600
+*end: 1
+node: 57
+nodeport: metal-1-polysilicon-1
+xpos: 9600 ypos: 61600
+**arc: 6
+type: mocmos:Metal-1
+width: 1600 length: 1200
+userbits: 805312130
+*end: 0
+node: 4
+nodeport: metal-1
+xpos: 4000 ypos: 6200
+*end: 1
+node: 5
+nodeport: metal-1
+xpos: 2800 ypos: 6200
+**arc: 7
+type: mocmos:Metal-1
+width: 1600 length: 3000
+userbits: 805309250
+*end: 0
+node: 8
+nodeport: metal-1-polysilicon-1
+xpos: 4000 ypos: 3200
+*end: 1
+node: 4
+nodeport: metal-1
+xpos: 4000 ypos: 6200
+**arc: 8
+type: mocmos:Metal-1
+width: 1600 length: 24200
+userbits: 805315010
+*end: 0
+node: 29
+nodeport: metal-1
+xpos: 2800 ypos: 30400
+*end: 1
+node: 5
+nodeport: metal-1
+xpos: 2800 ypos: 6200
+**arc: 9
+type: mocmos:Metal-1
+width: 1600 length: 2600
+userbits: 805309250
+*end: 0
+node: 15
+nodeport: metal-1
+xpos: 6000 ypos: 9000
+*end: 1
+node: 18
+nodeport: metal-1-n-act
+xpos: 6000 ypos: 11600
+**arc: 10
+type: mocmos:Metal-1
+width: 2000 length: 3600
+userbits: 805315010
+*end: 0
+node: 16
+nodeport: metal-1-n-act
+xpos: 10800 ypos: 11800
+*end: 1
+node: 13
+nodeport: metal-1-well
+xpos: 10800 ypos: 8200
+**arc: 11
+type: mocmos:Metal-1
+width: 1600 length: 12600
+userbits: 1895828298
+*end: 0
+node: 10
+nodeport: metal-1
+xpos: 13800 ypos: 3200
+*end: 1
+node: 22
+nodeport: metal-1
+xpos: 13800 ypos: 15800
+**arc: 12
+type: mocmos:Metal-1
+width: 1600 length: 1800
+userbits: 1895831170
+*end: 0
+node: 10
+nodeport: metal-1
+xpos: 13800 ypos: 3200
+*end: 1
+node: 6
+nodeport: metal-1-polysilicon-1
+xpos: 12000 ypos: 3200
+**arc: 13
+type: mocmos:Metal-1
+width: 1600 length: 5800
+userbits: 1895834058
+*end: 0
+node: 14
+nodeport: metal-1
+xpos: 7800 ypos: 9000
+*end: 1
+node: 7
+nodeport: metal-1-polysilicon-1
+xpos: 7800 ypos: 3200
+**arc: 14
+type: mocmos:Metal-1
+width: 1600 length: 39200
+userbits: 1895834058
+*end: 0
+node: 46
+nodeport: metal-1
+xpos: 0 ypos: 42800
+*end: 1
+node: 9
+nodeport: metal-1-polysilicon-1
+xpos: 0 ypos: 3600
+**arc: 15
+type: mocmos:Metal-1
+width: 1600 length: 2200
+userbits: 1895828298
+*end: 0
+node: 11
+nodeport: metal-1-metal-2
+xpos: 10800 ypos: 6200
+*end: 1
+node: 13
+nodeport: metal-1-well
+xpos: 10800 ypos: 8400
+**arc: 16
+type: mocmos:Metal-1
+width: 1600 length: 1800
+userbits: 1895831170
+*end: 0
+node: 14
+nodeport: metal-1
+xpos: 7800 ypos: 9000
+*end: 1
+node: 15
+nodeport: metal-1
+xpos: 6000 ypos: 9000
+**arc: 17
+type: mocmos:N-Active
+width: 5600 length: 900
+userbits: 1895828298
+*end: 0
+node: 16
+nodeport: metal-1-n-act
+xpos: 11100 ypos: 11600
+*end: 1
+node: 19
+nodeport: n-trans-diff-top
+xpos: 11100 ypos: 12500
+**arc: 18
+type: mocmos:N-Active
+width: 5600 length: 300
+userbits: 1895825410
+*end: 0
+node: 18
+nodeport: metal-1-n-act
+xpos: 6200 ypos: 12100
+*end: 1
+node: 17
+nodeport: n-trans-diff-bot
+xpos: 6500 ypos: 12100
+**arc: 19
+type: mocmos:N-Active
+width: 6400 length: 1300
+userbits: 1895825410
+*end: 0
+node: 17
+nodeport: n-trans-diff-top
+xpos: 9500 ypos: 12000
+*end: 1
+node: 16
+nodeport: metal-1-n-act
+xpos: 10800 ypos: 12000
+**arc: 20
+type: mocmos:Metal-1
+width: 1600 length: 15600
+userbits: 1895834058
+*end: 0
+node: 27
+nodeport: metal-1-p-act
+xpos: 5600 ypos: 27200
+*end: 1
+node: 18
+nodeport: metal-1-n-act
+xpos: 5600 ypos: 11600
+**arc: 21
+type: mocmos:Polysilicon-1
+width: 800 length: 12400
+userbits: 1895834058
+*end: 0
+node: 28
+nodeport: p-trans-poly-left
+xpos: 8000 ypos: 26000
+*end: 1
+node: 17
+nodeport: n-trans-poly-left
+xpos: 8000 ypos: 13600
+**arc: 22
+type: mocmos:N-Active
+width: 5600 length: 100
+userbits: 1895834058
+*end: 0
+node: 20
+nodeport: metal-1-n-act
+xpos: 11100 ypos: 15600
+*end: 1
+node: 19
+nodeport: n-trans-diff-bot
+xpos: 11100 ypos: 15500
+**arc: 23
+type: mocmos:Polysilicon-1
+width: 800 length: 11200
+userbits: 1895834058
+*end: 0
+node: 25
+nodeport: polysilicon-1
+xpos: 12800 ypos: 25200
+*end: 1
+node: 21
+nodeport: polysilicon-1
+xpos: 12800 ypos: 14000
+**arc: 24
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1879053954
+*end: 0
+node: 21
+nodeport: polysilicon-1
+xpos: 12800 ypos: 14000
+*end: 1
+node: 19
+nodeport: n-trans-poly-left
+xpos: 12800 ypos: 14000
+**arc: 25
+type: mocmos:Metal-1
+width: 1600 length: 3000
+userbits: 1895831170
+*end: 0
+node: 22
+nodeport: metal-1
+xpos: 13800 ypos: 15800
+*end: 1
+node: 20
+nodeport: metal-1-n-act
+xpos: 10800 ypos: 15800
+**arc: 26
+type: mocmos:Metal-1
+width: 1600 length: 7600
+userbits: 1895834058
+*end: 0
+node: 23
+nodeport: metal-1-p-act
+xpos: 10800 ypos: 23200
+*end: 1
+node: 20
+nodeport: metal-1-n-act
+xpos: 10800 ypos: 15600
+**arc: 27
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895828298
+*end: 0
+node: 23
+nodeport: metal-1-p-act
+xpos: 11100 ypos: 23200
+*end: 1
+node: 24
+nodeport: p-trans-diff-top
+xpos: 11100 ypos: 23700
+**arc: 28
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1895831170
+*end: 0
+node: 25
+nodeport: polysilicon-1
+xpos: 12800 ypos: 25200
+*end: 1
+node: 24
+nodeport: p-trans-poly-left
+xpos: 12800 ypos: 25200
+**arc: 29
+type: mocmos:Polysilicon-1
+width: 800 length: 36400
+userbits: 1895828298
+*end: 0
+node: 25
+nodeport: polysilicon-1
+xpos: 12800 ypos: 25200
+*end: 1
+node: 58
+nodeport: metal-1-polysilicon-1
+xpos: 12800 ypos: 61600
+**arc: 30
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895834058
+*end: 0
+node: 26
+nodeport: metal-1-p-act
+xpos: 11100 ypos: 27200
+*end: 1
+node: 24
+nodeport: p-trans-diff-bottom
+xpos: 11100 ypos: 26700
+**arc: 31
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895825410
+*end: 0
+node: 27
+nodeport: metal-1-p-act
+xpos: 6000 ypos: 27500
+*end: 1
+node: 28
+nodeport: p-trans-diff-top
+xpos: 6500 ypos: 27500
+**arc: 32
+type: mocmos:P-Active
+width: 6400 length: 1300
+userbits: 1879048194
+*end: 0
+node: 28
+nodeport: p-trans-diff-bottom
+xpos: 9500 ypos: 27600
+*end: 1
+node: 26
+nodeport: metal-1-p-act
+xpos: 10800 ypos: 27600
+**arc: 33
+type: mocmos:Metal-1
+width: 1600 length: 6400
+userbits: 1895834058
+*end: 0
+node: 36
+nodeport: metal-1-metal-2
+xpos: 10800 ypos: 33600
+*end: 1
+node: 26
+nodeport: metal-1-p-act
+xpos: 10800 ypos: 27200
+**arc: 34
+type: mocmos:Polysilicon-1
+width: 800 length: 6000
+userbits: 1895834058
+*end: 0
+node: 38
+nodeport: polysilicon-1
+xpos: 8000 ypos: 35200
+*end: 1
+node: 28
+nodeport: p-trans-poly-right
+xpos: 8000 ypos: 29200
+**arc: 35
+type: mocmos:Metal-1
+width: 1600 length: 8400
+userbits: 1895834058
+*end: 0
+node: 40
+nodeport: metal-1-p-act
+xpos: 7800 ypos: 38800
+*end: 1
+node: 30
+nodeport: metal-1
+xpos: 7800 ypos: 30400
+**arc: 36
+type: mocmos:Metal-1
+width: 1600 length: 5000
+userbits: 1895825410
+*end: 0
+node: 29
+nodeport: metal-1
+xpos: 2800 ypos: 30400
+*end: 1
+node: 30
+nodeport: metal-1
+xpos: 7800 ypos: 30400
+**arc: 37
+type: mocmos:Metal-2
+width: 5600 length: 0
+userbits: 1895834050
+*end: 0
+node: 36
+nodeport: metal-1-metal-2
+xpos: 10800 ypos: 33600
+*end: 1
+node: 35
+nodeport: metal-2
+xpos: 10800 ypos: 33600
+**arc: 38
+type: mocmos:Metal-2
+width: 5600 length: 800
+userbits: 1895825410
+*end: 0
+node: 35
+nodeport: metal-2
+xpos: 10800 ypos: 33600
+*end: 1
+node: 31
+nodeport: metal-2
+xpos: 11600 ypos: 33600
+**arc: 39
+type: mocmos:Metal-2
+width: 5600 length: 8400
+userbits: 1895825410
+*end: 0
+node: 33
+nodeport: metal-2
+xpos: 3200 ypos: 33600
+*end: 1
+node: 31
+nodeport: metal-2
+xpos: 11600 ypos: 33600
+**arc: 40
+type: mocmos:Metal-2
+width: 5600 length: 0
+userbits: 1895834050
+*end: 0
+node: 34
+nodeport: metal-1-metal-2
+xpos: 3200 ypos: 33600
+*end: 1
+node: 33
+nodeport: metal-2
+xpos: 3200 ypos: 33600
+**arc: 41
+type: mocmos:Metal-2
+width: 5600 length: 1200
+userbits: 1895825410
+*end: 0
+node: 32
+nodeport: metal-2
+xpos: 2000 ypos: 33600
+*end: 1
+node: 33
+nodeport: metal-2
+xpos: 3200 ypos: 33600
+**arc: 42
+type: mocmos:Metal-1
+width: 1600 length: 2000
+userbits: 1895828298
+*end: 0
+node: 34
+nodeport: metal-1-metal-2
+xpos: 3200 ypos: 33600
+*end: 1
+node: 37
+nodeport: metal-1-substrate
+xpos: 3200 ypos: 35600
+**arc: 43
+type: mocmos:Polysilicon-1
+width: 800 length: 2000
+userbits: 1895825410
+*end: 0
+node: 38
+nodeport: polysilicon-1
+xpos: 8000 ypos: 35200
+*end: 1
+node: 39
+nodeport: polysilicon-1
+xpos: 10000 ypos: 35200
+**arc: 44
+type: mocmos:Metal-1
+width: 2000 length: 4000
+userbits: 1895828298
+*end: 0
+node: 37
+nodeport: metal-1-substrate
+xpos: 3200 ypos: 35200
+*end: 1
+node: 42
+nodeport: metal-1-p-act
+xpos: 3200 ypos: 39200
+**arc: 45
+type: mocmos:P-Active
+width: 5600 length: 900
+userbits: 1895828298
+*end: 0
+node: 42
+nodeport: metal-1-p-act
+xpos: 2900 ypos: 38800
+*end: 1
+node: 43
+nodeport: p-trans-diff-bottom
+xpos: 2900 ypos: 39700
+**arc: 46
+type: mocmos:P-Active
+width: 5600 length: 1300
+userbits: 1895831170
+*end: 0
+node: 41
+nodeport: p-trans-diff-bottom
+xpos: 4500 ypos: 39300
+*end: 1
+node: 42
+nodeport: metal-1-p-act
+xpos: 3200 ypos: 39300
+**arc: 47
+type: mocmos:P-Active
+width: 5600 length: 300
+userbits: 1879053954
+*end: 0
+node: 40
+nodeport: metal-1-p-act
+xpos: 7800 ypos: 39300
+*end: 1
+node: 41
+nodeport: p-trans-diff-top
+xpos: 7500 ypos: 39300
+**arc: 48
+type: mocmos:Metal-1
+width: 1600 length: 15200
+userbits: 1895828298
+*end: 0
+node: 40
+nodeport: metal-1-p-act
+xpos: 7800 ypos: 38800
+*end: 1
+node: 51
+nodeport: metal-1-n-act
+xpos: 7800 ypos: 54000
+**arc: 49
+type: mocmos:Polysilicon-1
+width: 800 length: 12400
+userbits: 1879051082
+*end: 0
+node: 41
+nodeport: p-trans-poly-left
+xpos: 6000 ypos: 40800
+*end: 1
+node: 53
+nodeport: n-trans-poly-left
+xpos: 6000 ypos: 53200
+**arc: 50
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1895825410
+*end: 0
+node: 44
+nodeport: polysilicon-1
+xpos: 1200 ypos: 41200
+*end: 1
+node: 43
+nodeport: p-trans-poly-left
+xpos: 1200 ypos: 41200
+**arc: 51
+type: mocmos:Polysilicon-1
+width: 800 length: 11200
+userbits: 1895828298
+*end: 0
+node: 44
+nodeport: polysilicon-1
+xpos: 1200 ypos: 41200
+*end: 1
+node: 52
+nodeport: polysilicon-1
+xpos: 1200 ypos: 52400
+**arc: 52
+type: mocmos:P-Active
+width: 5600 length: 100
+userbits: 1895834058
+*end: 0
+node: 45
+nodeport: metal-1-p-act
+xpos: 2900 ypos: 42800
+*end: 1
+node: 43
+nodeport: p-trans-diff-top
+xpos: 2900 ypos: 42700
+**arc: 53
+type: mocmos:Metal-1
+width: 1600 length: 7200
+userbits: 1879051082
+*end: 0
+node: 45
+nodeport: metal-1-p-act
+xpos: 3200 ypos: 42800
+*end: 1
+node: 48
+nodeport: metal-1-n-act
+xpos: 3200 ypos: 50000
+**arc: 54
+type: mocmos:Metal-1
+width: 1600 length: 3200
+userbits: 1895825410
+*end: 0
+node: 46
+nodeport: metal-1
+xpos: 0 ypos: 42800
+*end: 1
+node: 45
+nodeport: metal-1-p-act
+xpos: 3200 ypos: 42800
+**arc: 55
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 1895828298
+*end: 0
+node: 48
+nodeport: metal-1-n-act
+xpos: 2900 ypos: 50400
+*end: 1
+node: 49
+nodeport: n-trans-diff-bot
+xpos: 2900 ypos: 50900
+**arc: 56
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 1895834058
+*end: 0
+node: 50
+nodeport: metal-1-n-act
+xpos: 2900 ypos: 54400
+*end: 1
+node: 49
+nodeport: n-trans-diff-top
+xpos: 2900 ypos: 53900
+**arc: 57
+type: mocmos:Polysilicon-1
+width: 800 length: 9200
+userbits: 1895828298
+*end: 0
+node: 52
+nodeport: polysilicon-1
+xpos: 1200 ypos: 52400
+*end: 1
+node: 55
+nodeport: metal-1-polysilicon-1
+xpos: 1200 ypos: 61600
+**arc: 58
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1895825410
+*end: 0
+node: 52
+nodeport: polysilicon-1
+xpos: 1200 ypos: 52400
+*end: 1
+node: 49
+nodeport: n-trans-poly-left
+xpos: 1200 ypos: 52400
+**arc: 59
+type: mocmos:N-Active
+width: 5600 length: 1300
+userbits: 1895831170
+*end: 0
+node: 53
+nodeport: n-trans-diff-top
+xpos: 4500 ypos: 54700
+*end: 1
+node: 50
+nodeport: metal-1-n-act
+xpos: 3200 ypos: 54700
+**arc: 60
+type: mocmos:N-Active
+width: 5600 length: 100
+userbits: 1895831170
+*end: 0
+node: 51
+nodeport: metal-1-n-act
+xpos: 7600 ypos: 54700
+*end: 1
+node: 53
+nodeport: n-trans-diff-bot
+xpos: 7500 ypos: 54700
+**arc: 61
+type: mocmos:Polysilicon-1
+width: 800 length: 800
+userbits: 805306370
+*end: 0
+node: 56
+nodeport: metal-1-polysilicon-1
+xpos: 5200 ypos: 61600
+*end: 1
+node: 59
+nodeport: polysilicon-1
+xpos: 6000 ypos: 61600
+**arc: 62
+type: mocmos:Polysilicon-1
+width: 800 length: 5200
+userbits: 805315010
+*end: 0
+node: 59
+nodeport: polysilicon-1
+xpos: 6000 ypos: 61600
+*end: 1
+node: 53
+nodeport: n-trans-poly-right
+xpos: 6000 ypos: 56400
+celldone: io-inv-4
+***cell: 1
+name: decoder_inv1{lay}
+version: 2
+creationdate: 983826062
+revisiondate: 985638867
+lowx: -11600 highx: 5200 lowy: 5200 highy: 40000
+aadirty: 6638
+userbits: 262144
+nodes: 45 arcs: 46 porttypes: 14
+variables: 1
+DRC_last_good_drc[01,00/04]: 985638874
+**node: 0
+type: mocmos:Polysilicon-1-Pin
+lowx: -9200 highx: -8400 lowy: 37600 highy: 38400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 0
+arc: 1
+**node: 1
+type: mocmos:Polysilicon-1-Pin
+lowx: -7600 highx: -6800 lowy: 37600 highy: 38400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 1
+arc: 2
+**node: 2
+type: mocmos:Polysilicon-1-Pin
+lowx: 400 highx: 1200 lowy: 36400 highy: 37200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 4
+arc: 5
+**node: 3
+type: mocmos:Metal-2-Pin
+lowx: -1600 highx: 4000 lowy: 5200 highy: 10800
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 6
+exported: 13
+**node: 4
+type: mocmos:Metal-2-Pin
+lowx: -6400 highx: -800 lowy: 5200 highy: 10800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-2
+arc: 6
+arc: 7
+arc: 9
+**node: 5
+type: mocmos:Metal-2-Pin
+lowx: -11200 highx: -5600 lowy: 5200 highy: 10800
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 7
+exported: 12
+**node: 6
+type: mocmos:Metal-1-Metal-2-Con
+lowx: -4600 highx: -2600 lowy: 7000 highy: 9000
+rotation: 900 transpose: 1
+userbits: 3072
+*port: metal-1-metal-2
+arc: 8
+arc: 9
+exported: 11
+**node: 7
+type: mocmos:P-Well-Node
+lowx: -10800 highx: 3600 lowy: 8000 highy: 16800
+rotation: 0 transpose: 0
+userbits: 3072
+**node: 8
+type: mocmos:Metal-1-N-Active-Con
+lowx: -3200 highx: 4000 lowy: 7600 highy: 14800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-n-act
+arc: 13
+arc: 17
+**node: 9
+type: mocmos:N-Transistor
+lowx: -5200 highx: 2000 lowy: 6800 highy: 15600
+rotation: 900 transpose: 0
+userbits: 3072
+*port: n-trans-poly-left
+arc: 10
+*port: n-trans-diff-top
+arc: 14
+*port: n-trans-poly-right
+arc: 21
+*port: n-trans-diff-bot
+arc: 13
+**node: 10
+type: mocmos:Metal-1-N-Active-Con
+lowx: -7200 highx: 0 lowy: 7600 highy: 14800
+rotation: 900 transpose: 1
+userbits: 3072
+*port: metal-1-n-act
+arc: 8
+arc: 12
+arc: 14
+arc: 16
+**node: 11
+type: mocmos:N-Transistor
+lowx: -9200 highx: -2000 lowy: 6800 highy: 15600
+rotation: 1800 transpose: 1
+userbits: 3072
+*port: n-trans-poly-left
+arc: 11
+*port: n-trans-diff-top
+arc: 12
+*port: n-trans-poly-right
+arc: 20
+*port: n-trans-diff-bot
+arc: 15
+**node: 12
+type: mocmos:Metal-1-N-Active-Con
+lowx: -11200 highx: -4000 lowy: 7600 highy: 14800
+rotation: 900 transpose: 1
+userbits: 3072
+*port: metal-1-n-act
+arc: 15
+arc: 18
+**node: 13
+type: mocmos:Polysilicon-1-Pin
+lowx: -2000 highx: -1200 lowy: 8800 highy: 9600
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 10
+**node: 14
+type: mocmos:Polysilicon-1-Pin
+lowx: -6000 highx: -5200 lowy: 8800 highy: 9600
+rotation: 900 transpose: 1
+userbits: 1032
+*port: polysilicon-1
+arc: 11
+**node: 15
+type: mocmos:Metal-1-Pin
+lowx: -8800 highx: -7200 lowy: 10400 highy: 12000
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 18
+arc: 19
+**node: 16
+type: mocmos:Metal-1-P-Well-Con
+lowx: -7200 highx: 0 lowy: 11600 highy: 18800
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-well
+arc: 16
+**node: 17
+type: mocmos:Polysilicon-1-Pin
+lowx: -6400 highx: -5600 lowy: 22400 highy: 23200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 24
+arc: 25
+**node: 18
+type: mocmos:Polysilicon-1-Pin
+lowx: -6000 highx: -5200 lowy: 22400 highy: 23200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 20
+arc: 24
+**node: 19
+type: mocmos:Polysilicon-1-Pin
+lowx: -2400 highx: -1600 lowy: 22400 highy: 23200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 22
+arc: 23
+**node: 20
+type: mocmos:Polysilicon-1-Pin
+lowx: -2000 highx: -1200 lowy: 22400 highy: 23200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 21
+arc: 23
+**node: 21
+type: mocmos:Metal-1-N-Well-Con
+lowx: -7600 highx: -400 lowy: 24000 highy: 31200
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-substrate
+arc: 26
+**node: 22
+type: mocmos:Metal-1-P-Active-Con
+lowx: -7600 highx: -400 lowy: 28000 highy: 35200
+rotation: 900 transpose: 1
+userbits: 3072
+*port: metal-1-p-act
+arc: 26
+arc: 28
+arc: 29
+arc: 31
+**node: 23
+type: mocmos:P-Transistor
+lowx: -5600 highx: 1600 lowy: 27200 highy: 36000
+rotation: 900 transpose: 0
+userbits: 3072
+*port: p-trans-poly-left
+arc: 22
+*port: p-trans-diff-top
+arc: 29
+*port: p-trans-poly-right
+arc: 38
+*port: p-trans-diff-bottom
+arc: 30
+**node: 24
+type: mocmos:Metal-1-P-Active-Con
+lowx: -3600 highx: 3600 lowy: 28000 highy: 35200
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 30
+arc: 33
+arc: 34
+**node: 25
+type: mocmos:P-Transistor
+lowx: -9600 highx: -2400 lowy: 27200 highy: 36000
+rotation: 1800 transpose: 1
+userbits: 3072
+*port: p-trans-poly-left
+arc: 25
+*port: p-trans-diff-top
+arc: 28
+*port: p-trans-poly-right
+arc: 41
+*port: p-trans-diff-bottom
+arc: 27
+**node: 26
+type: mocmos:Metal-1-P-Active-Con
+lowx: -11600 highx: -4400 lowy: 28000 highy: 35200
+rotation: 900 transpose: 1
+userbits: 3072
+*port: metal-1-p-act
+arc: 3
+arc: 19
+arc: 27
+**node: 27
+type: mocmos:Metal-1-Pin
+lowx: -800 highx: 800 lowy: 31200 highy: 32800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 32
+arc: 33
+**node: 28
+type: mocmos:Metal-1-Pin
+lowx: -400 highx: 1200 lowy: 31200 highy: 32800
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-1
+arc: 17
+arc: 34
+**node: 29
+type: mocmos:Metal-2-Pin
+lowx: -11600 highx: -6000 lowy: 31600 highy: 37200
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 35
+exported: 10
+**node: 30
+type: mocmos:Metal-2-Pin
+lowx: -6800 highx: -1200 lowy: 31600 highy: 37200
+rotation: 0 transpose: 0
+userbits: 1032
+*port: metal-2
+arc: 35
+arc: 36
+arc: 37
+**node: 31
+type: mocmos:Metal-2-Pin
+lowx: -2000 highx: 3600 lowy: 31600 highy: 37200
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-2
+arc: 37
+exported: 9
+**node: 32
+type: mocmos:Polysilicon-1-Pin
+lowx: -2400 highx: -1600 lowy: 33600 highy: 34400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 38
+arc: 39
+**node: 33
+type: mocmos:Polysilicon-1-Pin
+lowx: -6400 highx: -5600 lowy: 33600 highy: 34400
+rotation: 900 transpose: 1
+userbits: 1032
+*port: polysilicon-1
+arc: 40
+arc: 41
+**node: 34
+type: mocmos:Metal-1-Metal-2-Con
+lowx: -5000 highx: -3000 lowy: 33400 highy: 35400
+rotation: 900 transpose: 1
+userbits: 3072
+*port: metal-1-metal-2
+arc: 31
+arc: 36
+exported: 8
+**node: 35
+type: mocmos:Polysilicon-1-Pin
+lowx: -2400 highx: -1600 lowy: 33600 highy: 34400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 39
+arc: 42
+**node: 36
+type: mocmos:Polysilicon-1-Pin
+lowx: 4400 highx: 5200 lowy: 33600 highy: 34400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 42
+arc: 43
+**node: 37
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: -10000 highx: -7600 lowy: 33600 highy: 36000
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 0
+arc: 3
+**node: 38
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: -1200 highx: 1200 lowy: 35600 highy: 38000
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-polysilicon-1
+arc: 4
+arc: 32
+**node: 39
+type: mocmos:Polysilicon-1-Pin
+lowx: -6400 highx: -5600 lowy: 35600 highy: 36400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 40
+arc: 44
+**node: 40
+type: mocmos:Polysilicon-1-Pin
+lowx: -3600 highx: -2800 lowy: 35600 highy: 36400
+rotation: 0 transpose: 0
+userbits: 1032
+*port: polysilicon-1
+arc: 44
+arc: 45
+**node: 41
+type: mocmos:Polysilicon-1-Pin
+lowx: -7600 highx: -6800 lowy: 39200 highy: 40000
+rotation: 0 transpose: 0
+userbits: 3080
+*port: polysilicon-1
+arc: 2
+exported: 7
+exported: 6
+**node: 42
+type: mocmos:Polysilicon-1-Pin
+lowx: -3600 highx: -2800 lowy: 39200 highy: 40000
+rotation: 0 transpose: 0
+userbits: 3080
+*port: polysilicon-1
+arc: 45
+exported: 5
+exported: 4
+**node: 43
+type: mocmos:Polysilicon-1-Pin
+lowx: 400 highx: 1200 lowy: 39200 highy: 40000
+rotation: 0 transpose: 0
+userbits: 3080
+*port: polysilicon-1
+arc: 5
+exported: 3
+exported: 2
+**node: 44
+type: mocmos:Polysilicon-1-Pin
+lowx: 4400 highx: 5200 lowy: 39200 highy: 40000
+rotation: 0 transpose: 0
+userbits: 3080
+*port: polysilicon-1
+arc: 43
+exported: 1
+exported: 0
+**porttype: 0
+subnode: 44
+subport: polysilicon-1
+name: LINE0.p.n
+descript: 0/512
+userbits: -2147391488
+**porttype: 1
+subnode: 44
+subport: polysilicon-1
+name: IN_R.p
+descript: 0/512
+userbits: 92160
+**porttype: 2
+subnode: 43
+subport: polysilicon-1
+name: LINE1.p.n
+descript: 0/512
+userbits: -1878956032
+**porttype: 3
+subnode: 43
+subport: polysilicon-1
+name: OUT_R.p
+descript: 0/512
+userbits: 92160
+**porttype: 4
+subnode: 42
+subport: polysilicon-1
+name: LINE2.p.n
+descript: 0/512
+userbits: -2147391488
+**porttype: 5
+subnode: 42
+subport: polysilicon-1
+name: IN_L.p
+descript: 0/512
+userbits: -2147391488
+**porttype: 6
+subnode: 41
+subport: polysilicon-1
+name: LINE3.p.n
+descript: 0/512
+userbits: -1878956032
+**porttype: 7
+subnode: 41
+subport: polysilicon-1
+name: OUT_L.p
+descript: 0/512
+userbits: -1878956032
+**porttype: 8
+subnode: 34
+subport: metal-1-metal-2
+name: PWR.via
+descript: 0/512
+userbits: 92160
+**porttype: 9
+subnode: 31
+subport: metal-2
+name: PWR.m-2.e
+descript: 0/512
+userbits: -1342085120
+**porttype: 10
+subnode: 29
+subport: metal-2
+name: PWR.m-2.w
+descript: 0/512
+userbits: -1342085120
+**porttype: 11
+subnode: 6
+subport: metal-1-metal-2
+name: GND.via
+descript: 0/512
+userbits: 92160
+**porttype: 12
+subnode: 5
+subport: metal-2
+name: GND.m-2.w
+descript: 0/512
+userbits: 92160
+**porttype: 13
+subnode: 3
+subport: metal-2
+name: GND.m-2.e
+descript: 0/512
+userbits: 92160
+**arc: 0
+type: mocmos:Polysilicon-1
+width: 800 length: 2800
+userbits: 268444098
+*end: 0
+node: 0
+nodeport: polysilicon-1
+xpos: -8800 ypos: 38000
+*end: 1
+node: 37
+nodeport: metal-1-polysilicon-1
+xpos: -8800 ypos: 35200
+**arc: 1
+type: mocmos:Polysilicon-1
+width: 800 length: 1600
+userbits: 805312130
+*end: 0
+node: 1
+nodeport: polysilicon-1
+xpos: -7200 ypos: 38000
+*end: 1
+node: 0
+nodeport: polysilicon-1
+xpos: -8800 ypos: 38000
+**arc: 2
+type: mocmos:Polysilicon-1
+width: 800 length: 1600
+userbits: 805315010
+*end: 0
+node: 41
+nodeport: polysilicon-1
+xpos: -7200 ypos: 39600
+*end: 1
+node: 1
+nodeport: polysilicon-1
+xpos: -7200 ypos: 38000
+**arc: 3
+type: mocmos:Metal-1
+width: 1600 length: 2400
+userbits: 805315010
+*end: 0
+node: 37
+nodeport: metal-1-polysilicon-1
+xpos: -8400 ypos: 34400
+*end: 1
+node: 26
+nodeport: metal-1-p-act
+xpos: -8400 ypos: 32000
+**arc: 4
+type: mocmos:Polysilicon-1
+width: 800 length: 1200
+userbits: 805312130
+*end: 0
+node: 2
+nodeport: polysilicon-1
+xpos: 800 ypos: 36800
+*end: 1
+node: 38
+nodeport: metal-1-polysilicon-1
+xpos: -400 ypos: 36800
+**arc: 5
+type: mocmos:Polysilicon-1
+width: 800 length: 2800
+userbits: 805315010
+*end: 0
+node: 43
+nodeport: polysilicon-1
+xpos: 800 ypos: 39600
+*end: 1
+node: 2
+nodeport: polysilicon-1
+xpos: 800 ypos: 36800
+**arc: 6
+type: mocmos:Metal-2
+width: 5600 length: 4800
+userbits: 1895831170
+*end: 0
+node: 3
+nodeport: metal-2
+xpos: 1200 ypos: 8000
+*end: 1
+node: 4
+nodeport: metal-2
+xpos: -3600 ypos: 8000
+**arc: 7
+type: mocmos:Metal-2
+width: 5600 length: 4800
+userbits: 1895831170
+*end: 0
+node: 4
+nodeport: metal-2
+xpos: -3600 ypos: 8000
+*end: 1
+node: 5
+nodeport: metal-2
+xpos: -8400 ypos: 8000
+**arc: 8
+type: mocmos:Metal-1
+width: 1600 length: 3200
+userbits: 1895834058
+*end: 0
+node: 10
+nodeport: metal-1-n-act
+xpos: -3600 ypos: 11200
+*end: 1
+node: 6
+nodeport: metal-1-metal-2
+xpos: -3600 ypos: 8000
+**arc: 9
+type: mocmos:Metal-2
+width: 1600 length: 0
+userbits: 1895834058
+*end: 0
+node: 6
+nodeport: metal-1-metal-2
+xpos: -3600 ypos: 8000
+*end: 1
+node: 4
+nodeport: metal-2
+xpos: -3600 ypos: 8000
+**arc: 10
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1895834058
+*end: 0
+node: 13
+nodeport: polysilicon-1
+xpos: -1600 ypos: 9200
+*end: 1
+node: 9
+nodeport: n-trans-poly-left
+xpos: -1600 ypos: 9200
+**arc: 11
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1895834058
+*end: 0
+node: 14
+nodeport: polysilicon-1
+xpos: -5600 ypos: 9200
+*end: 1
+node: 11
+nodeport: n-trans-poly-left
+xpos: -5600 ypos: 9200
+**arc: 12
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 1895825410
+*end: 0
+node: 11
+nodeport: n-trans-diff-top
+xpos: -4100 ypos: 11200
+*end: 1
+node: 10
+nodeport: metal-1-n-act
+xpos: -3600 ypos: 11200
+**arc: 13
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 1895831170
+*end: 0
+node: 8
+nodeport: metal-1-n-act
+xpos: 400 ypos: 11200
+*end: 1
+node: 9
+nodeport: n-trans-diff-bot
+xpos: -100 ypos: 11200
+**arc: 14
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 1895825410
+*end: 0
+node: 10
+nodeport: metal-1-n-act
+xpos: -3600 ypos: 11200
+*end: 1
+node: 9
+nodeport: n-trans-diff-top
+xpos: -3100 ypos: 11200
+**arc: 15
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 1895825410
+*end: 0
+node: 12
+nodeport: metal-1-n-act
+xpos: -7600 ypos: 11200
+*end: 1
+node: 11
+nodeport: n-trans-diff-bot
+xpos: -7100 ypos: 11200
+**arc: 16
+type: mocmos:Metal-1
+width: 2000 length: 3800
+userbits: 1895834058
+*end: 0
+node: 16
+nodeport: metal-1-well
+xpos: -3600 ypos: 15000
+*end: 1
+node: 10
+nodeport: metal-1-n-act
+xpos: -3600 ypos: 11200
+**arc: 17
+type: mocmos:Metal-1
+width: 1600 length: 20800
+userbits: 1895834058
+*end: 0
+node: 28
+nodeport: metal-1
+xpos: 400 ypos: 32000
+*end: 1
+node: 8
+nodeport: metal-1-n-act
+xpos: 400 ypos: 11200
+**arc: 18
+type: mocmos:Metal-1
+width: 1600 length: 0
+userbits: 1879056834
+*end: 0
+node: 15
+nodeport: metal-1
+xpos: -7900 ypos: 11200
+*end: 1
+node: 12
+nodeport: metal-1-n-act
+xpos: -7900 ypos: 11200
+**arc: 19
+type: mocmos:Metal-1
+width: 1600 length: 20800
+userbits: 1895834058
+*end: 0
+node: 26
+nodeport: metal-1-p-act
+xpos: -8000 ypos: 32000
+*end: 1
+node: 15
+nodeport: metal-1
+xpos: -8000 ypos: 11200
+**arc: 20
+type: mocmos:Polysilicon-1
+width: 800 length: 9600
+userbits: 1895834058
+*end: 0
+node: 18
+nodeport: polysilicon-1
+xpos: -5600 ypos: 22800
+*end: 1
+node: 11
+nodeport: n-trans-poly-right
+xpos: -5600 ypos: 13200
+**arc: 21
+type: mocmos:Polysilicon-1
+width: 800 length: 9600
+userbits: 1895834058
+*end: 0
+node: 20
+nodeport: polysilicon-1
+xpos: -1600 ypos: 22800
+*end: 1
+node: 9
+nodeport: n-trans-poly-right
+xpos: -1600 ypos: 13200
+**arc: 22
+type: mocmos:Polysilicon-1
+width: 800 length: 6800
+userbits: 1895828298
+*end: 0
+node: 19
+nodeport: polysilicon-1
+xpos: -2000 ypos: 22800
+*end: 1
+node: 23
+nodeport: p-trans-poly-left
+xpos: -2000 ypos: 29600
+**arc: 23
+type: mocmos:Polysilicon-1
+width: 800 length: 400
+userbits: 1895825410
+*end: 0
+node: 19
+nodeport: polysilicon-1
+xpos: -2000 ypos: 22800
+*end: 1
+node: 20
+nodeport: polysilicon-1
+xpos: -1600 ypos: 22800
+**arc: 24
+type: mocmos:Polysilicon-1
+width: 800 length: 400
+userbits: 1895825410
+*end: 0
+node: 17
+nodeport: polysilicon-1
+xpos: -6000 ypos: 22800
+*end: 1
+node: 18
+nodeport: polysilicon-1
+xpos: -5600 ypos: 22800
+**arc: 25
+type: mocmos:Polysilicon-1
+width: 800 length: 6800
+userbits: 1895828298
+*end: 0
+node: 17
+nodeport: polysilicon-1
+xpos: -6000 ypos: 22800
+*end: 1
+node: 25
+nodeport: p-trans-poly-left
+xpos: -6000 ypos: 29600
+**arc: 26
+type: mocmos:Metal-1
+width: 2000 length: 4000
+userbits: 1895834058
+*end: 0
+node: 22
+nodeport: metal-1-p-act
+xpos: -4000 ypos: 31800
+*end: 1
+node: 21
+nodeport: metal-1-substrate
+xpos: -4000 ypos: 27800
+**arc: 27
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895825410
+*end: 0
+node: 26
+nodeport: metal-1-p-act
+xpos: -8000 ypos: 32000
+*end: 1
+node: 25
+nodeport: p-trans-diff-bottom
+xpos: -7500 ypos: 32000
+**arc: 28
+type: mocmos:P-Active
+width: 5600 length: 900
+userbits: 1879048194
+*end: 0
+node: 25
+nodeport: p-trans-diff-top
+xpos: -4500 ypos: 32000
+*end: 1
+node: 22
+nodeport: metal-1-p-act
+xpos: -3600 ypos: 32000
+**arc: 29
+type: mocmos:P-Active
+width: 5600 length: 100
+userbits: 1895825410
+*end: 0
+node: 22
+nodeport: metal-1-p-act
+xpos: -3600 ypos: 32000
+*end: 1
+node: 23
+nodeport: p-trans-diff-top
+xpos: -3500 ypos: 32000
+**arc: 30
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895831170
+*end: 0
+node: 24
+nodeport: metal-1-p-act
+xpos: 0 ypos: 32000
+*end: 1
+node: 23
+nodeport: p-trans-diff-bottom
+xpos: -500 ypos: 32000
+**arc: 31
+type: mocmos:Metal-1
+width: 1600 length: 2400
+userbits: 1895834058
+*end: 0
+node: 34
+nodeport: metal-1-metal-2
+xpos: -4000 ypos: 34400
+*end: 1
+node: 22
+nodeport: metal-1-p-act
+xpos: -4000 ypos: 32000
+**arc: 32
+type: mocmos:Metal-1
+width: 1600 length: 4400
+userbits: 1895834058
+*end: 0
+node: 38
+nodeport: metal-1-polysilicon-1
+xpos: 0 ypos: 36400
+*end: 1
+node: 27
+nodeport: metal-1
+xpos: 0 ypos: 32000
+**arc: 33
+type: mocmos:Metal-1
+width: 1600 length: 0
+userbits: 1895834050
+*end: 0
+node: 27
+nodeport: metal-1
+xpos: 0 ypos: 32000
+*end: 1
+node: 24
+nodeport: metal-1-p-act
+xpos: 0 ypos: 32000
+**arc: 34
+type: mocmos:Metal-1
+width: 1600 length: 0
+userbits: 1879056834
+*end: 0
+node: 28
+nodeport: metal-1
+xpos: 300 ypos: 32000
+*end: 1
+node: 24
+nodeport: metal-1-p-act
+xpos: 300 ypos: 32000
+**arc: 35
+type: mocmos:Metal-2
+width: 5600 length: 4800
+userbits: 1895825410
+*end: 0
+node: 29
+nodeport: metal-2
+xpos: -8800 ypos: 34400
+*end: 1
+node: 30
+nodeport: metal-2
+xpos: -4000 ypos: 34400
+**arc: 36
+type: mocmos:Metal-2
+width: 5600 length: 0
+userbits: 1895834050
+*end: 0
+node: 34
+nodeport: metal-1-metal-2
+xpos: -4000 ypos: 34400
+*end: 1
+node: 30
+nodeport: metal-2
+xpos: -4000 ypos: 34400
+**arc: 37
+type: mocmos:Metal-2
+width: 5600 length: 4800
+userbits: 1895825410
+*end: 0
+node: 30
+nodeport: metal-2
+xpos: -4000 ypos: 34400
+*end: 1
+node: 31
+nodeport: metal-2
+xpos: 800 ypos: 34400
+**arc: 38
+type: mocmos:Polysilicon-1
+width: 800 length: 400
+userbits: 1895834058
+*end: 0
+node: 32
+nodeport: polysilicon-1
+xpos: -2000 ypos: 34000
+*end: 1
+node: 23
+nodeport: p-trans-poly-right
+xpos: -2000 ypos: 33600
+**arc: 39
+type: mocmos:Polysilicon-1
+width: 800 length: 0
+userbits: 1895834058
+*end: 0
+node: 35
+nodeport: polysilicon-1
+xpos: -2000 ypos: 34000
+*end: 1
+node: 32
+nodeport: polysilicon-1
+xpos: -2000 ypos: 34000
+**arc: 40
+type: mocmos:Polysilicon-1
+width: 800 length: 2000
+userbits: 1895834058
+*end: 0
+node: 39
+nodeport: polysilicon-1
+xpos: -6000 ypos: 36000
+*end: 1
+node: 33
+nodeport: polysilicon-1
+xpos: -6000 ypos: 34000
+**arc: 41
+type: mocmos:Polysilicon-1
+width: 800 length: 400
+userbits: 1895834058
+*end: 0
+node: 33
+nodeport: polysilicon-1
+xpos: -6000 ypos: 34000
+*end: 1
+node: 25
+nodeport: p-trans-poly-right
+xpos: -6000 ypos: 33600
+**arc: 42
+type: mocmos:Polysilicon-1
+width: 800 length: 6800
+userbits: 1895831170
+*end: 0
+node: 36
+nodeport: polysilicon-1
+xpos: 4800 ypos: 34000
+*end: 1
+node: 35
+nodeport: polysilicon-1
+xpos: -2000 ypos: 34000
+**arc: 43
+type: mocmos:Polysilicon-1
+width: 800 length: 5600
+userbits: 1895834058
+*end: 0
+node: 44
+nodeport: polysilicon-1
+xpos: 4800 ypos: 39600
+*end: 1
+node: 36
+nodeport: polysilicon-1
+xpos: 4800 ypos: 34000
+**arc: 44
+type: mocmos:Polysilicon-1
+width: 800 length: 2800
+userbits: 1895825410
+*end: 0
+node: 39
+nodeport: polysilicon-1
+xpos: -6000 ypos: 36000
+*end: 1
+node: 40
+nodeport: polysilicon-1
+xpos: -3200 ypos: 36000
+**arc: 45
+type: mocmos:Polysilicon-1
+width: 800 length: 3600
+userbits: 1895828298
+*end: 0
+node: 40
+nodeport: polysilicon-1
+xpos: -3200 ypos: 36000
+*end: 1
+node: 42
+nodeport: polysilicon-1
+xpos: -3200 ypos: 39600
+celldone: decoder_inv1
+***cell: 2
+name: nmos_one{lay}
+version: 2
+creationdate: 983826073
+revisiondate: 983826073
+lowx: -2400 highx: 4800 lowy: -3200 highy: 8000
+aadirty: 6638
+userbits: 262144
+nodes: 3 arcs: 2 porttypes: 4
+variables: 1
+DRC_last_good_drc[01,00/04]: 983826128
+**node: 0
+type: mocmos:N-Active-Pin
+lowx: -2400 highx: 4800 lowy: -3200 highy: 4000
+rotation: 0 transpose: 0
+userbits: 2056
+*port: n-active
+arc: 0
+exported: 3
+**node: 1
+type: mocmos:N-Transistor
+lowx: -2400 highx: 4800 lowy: -2000 highy: 6800
+rotation: 0 transpose: 0
+userbits: 67584
+*port: n-trans-poly-left
+exported: 1
+*port: n-trans-diff-top
+arc: 1
+*port: n-trans-poly-right
+exported: 2
+*port: n-trans-diff-bot
+arc: 0
+**node: 2
+type: mocmos:Metal-1-N-Active-Con
+lowx: -2400 highx: 4800 lowy: 800 highy: 8000
+rotation: 0 transpose: 0
+userbits: 67584
+*port: metal-1-n-act
+arc: 1
+exported: 0
+**porttype: 0
+subnode: 2
+subport: metal-1-n-act
+name: OUT.m-1.n
+descript: 0/512
+userbits: 92160
+**porttype: 1
+subnode: 1
+subport: n-trans-poly-left
+name: GATE.p.w
+descript: 0/512
+userbits: 46260
+**porttype: 2
+subnode: 1
+subport: n-trans-poly-right
+name: GATE.p.e
+descript: 0/512
+userbits: 46080
+**porttype: 3
+subnode: 0
+subport: n-active
+name: GND.d.s
+descript: 0/512
+userbits: 92160
+**arc: 0
+type: mocmos:N-Active
+width: 7200 length: 500
+userbits: 536873802
+*end: 0
+node: 0
+nodeport: n-active
+xpos: 1200 ypos: 400
+*end: 1
+node: 1
+nodeport: n-trans-diff-bot
+xpos: 1200 ypos: 900
+**arc: 1
+type: mocmos:N-Active
+width: 5600 length: 500
+userbits: 536879562
+*end: 0
+node: 2
+nodeport: metal-1-n-act
+xpos: 1200 ypos: 4400
+*end: 1
+node: 1
+nodeport: n-trans-diff-top
+xpos: 1200 ypos: 3900
+celldone: nmos_one
+***cell: 3
+name: pmos_one{lay}
+version: 2
+creationdate: 983826082
+revisiondate: 983826082
+lowx: -4800 highx: 2400 lowy: -4800 highy: 6400
+aadirty: 6638
+userbits: 262144
+nodes: 3 arcs: 2 porttypes: 4
+variables: 1
+DRC_last_good_drc[01,00/04]: 983826134
+**node: 0
+type: mocmos:Metal-1-P-Active-Con
+lowx: -4800 highx: 2400 lowy: -4800 highy: 2400
+rotation: 0 transpose: 0
+userbits: 2048
+*port: metal-1-p-act
+arc: 0
+exported: 3
+**node: 1
+type: mocmos:P-Transistor
+lowx: -4800 highx: 2400 lowy: -3600 highy: 5200
+rotation: 0 transpose: 0
+userbits: 2048
+*port: p-trans-poly-left
+exported: 1
+*port: p-trans-diff-top
+arc: 1
+*port: p-trans-poly-right
+exported: 2
+*port: p-trans-diff-bottom
+arc: 0
+**node: 2
+type: mocmos:Metal-1-P-Active-Con
+lowx: -4800 highx: 2400 lowy: -800 highy: 6400
+rotation: 0 transpose: 0
+userbits: 2048
+*port: metal-1-p-act
+arc: 1
+exported: 0
+**porttype: 0
+subnode: 2
+subport: metal-1-p-act
+name: IN.m-1.n
+descript: 0/512
+userbits: 92160
+**porttype: 1
+subnode: 1
+subport: p-trans-poly-left
+name: GATE.p.w
+descript: 0/512
+userbits: 46260
+**porttype: 2
+subnode: 1
+subport: p-trans-poly-right
+name: GATE.p.e
+descript: 0/512
+userbits: 46080
+**porttype: 3
+subnode: 0
+subport: metal-1-p-act
+name: OUT.m-1.s
+descript: 0/512
+userbits: 92160
+**arc: 0
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 536873802
+*end: 0
+node: 0
+nodeport: metal-1-p-act
+xpos: -1200 ypos: -1200
+*end: 1
+node: 1
+nodeport: p-trans-diff-bottom
+xpos: -1200 ypos: -700
+**arc: 1
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 536879562
+*end: 0
+node: 2
+nodeport: metal-1-p-act
+xpos: -1200 ypos: 2800
+*end: 1
+node: 1
+nodeport: p-trans-diff-top
+xpos: -1200 ypos: 2300
+celldone: pmos_one
+***cell: 4
+name: pullups{lay}
+version: 2
+creationdate: 983826091
+revisiondate: 983905036
+lowx: -8800 highx: 15200 lowy: -7200 highy: 8800
+aadirty: 6638
+userbits: 262144
+nodes: 28 arcs: 31 porttypes: 8
+variables: 1
+DRC_last_good_drc[01,00/04]: 983905081
+**node: 0
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: 12000 highx: 14400 lowy: -6400 highy: -4000
+rotation: 0 transpose: 0
+userbits: 2048
+*port: metal-1-polysilicon-1
+arc: 7
+exported: 5
+**node: 1
+type: mocmos:Metal-1-Polysilicon-1-Con
+lowx: -8000 highx: -5600 lowy: -6400 highy: -4000
+rotation: 0 transpose: 0
+userbits: 2048
+*port: metal-1-polysilicon-1
+arc: 8
+exported: 4
+**node: 2
+type: mocmos:Metal-1-Pin
+lowx: 8400 highx: 10000 lowy: -6000 highy: -4400
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-1
+arc: 3
+exported: 3
+**node: 3
+type: mocmos:Metal-1-Pin
+lowx: 4400 highx: 6000 lowy: -6000 highy: -4400
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-1
+arc: 4
+exported: 2
+**node: 4
+type: mocmos:Metal-1-Pin
+lowx: 400 highx: 2000 lowy: -6000 highy: -4400
+rotation: 0 transpose: 0
+userbits: 3080
+*port: metal-1
+arc: 5
+exported: 1
+**node: 5
+type: mocmos:Metal-1-Pin
+lowx: -3600 highx: -2000 lowy: -6000 highy: -4400
+rotation: 0 transpose: 0
+userbits: 2056
+*port: metal-1
+arc: 6
+exported: 0
+**node: 6
+type: mocmos:Metal-1-P-Active-Con
+lowx: 5600 highx: 12800 lowy: -7200 highy: 0
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 3
+arc: 10
+**node: 7
+type: mocmos:Metal-1-P-Active-Con
+lowx: 1600 highx: 8800 lowy: -7200 highy: 0
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 4
+arc: 9
+**node: 8
+type: mocmos:Metal-1-P-Active-Con
+lowx: -2400 highx: 4800 lowy: -7200 highy: 0
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 5
+arc: 11
+**node: 9
+type: mocmos:Metal-1-P-Active-Con
+lowx: -6400 highx: 800 lowy: -7200 highy: 0
+rotation: 0 transpose: 0
+userbits: 3072
+*port: metal-1-p-act
+arc: 6
+arc: 12
+**node: 10
+type: mocmos:P-Transistor
+lowx: -2000 highx: 4400 lowy: -6000 highy: 3600
+rotation: 0 transpose: 0
+userbits: 68608
+*port: p-trans-poly-left
+arc: 16
+*port: p-trans-diff-top
+arc: 18
+*port: p-trans-poly-right
+arc: 15
+*port: p-trans-diff-bottom
+arc: 11
+**node: 11
+type: mocmos:P-Transistor
+lowx: 2000 highx: 8400 lowy: -6000 highy: 3600
+rotation: 0 transpose: 0
+userbits: 68608
+*port: p-trans-poly-left
+arc: 15
+*port: p-trans-diff-top
+arc: 19
+*port: p-trans-poly-right
+arc: 14
+*port: p-trans-diff-bottom
+arc: 9
+**node: 12
+type: mocmos:P-Transistor
+lowx: 6000 highx: 12400 lowy: -6000 highy: 3600
+rotation: 0 transpose: 0
+userbits: 68608
+*port: p-trans-poly-left
+arc: 14
+*port: p-trans-diff-top
+arc: 20
+*port: p-trans-poly-right
+arc: 13
+*port: p-trans-diff-bottom
+arc: 10
+**node: 13
+type: mocmos:P-Transistor
+lowx: -6000 highx: 400 lowy: -6000 highy: 3600
+rotation: 0 transpose: 0
+userbits: 68608
+*port: p-trans-poly-left
+arc: 17
+*port: p-trans-diff-top
+arc: 21
+*port: p-trans-poly-right
+arc: 16
+*port: p-trans-diff-bottom
+arc: 12
+**node: 14
+type: mocmos:Polysilicon-1-Pin
+lowx: -7200 highx: -6400 lowy: -1600 highy: -800
+rotation: 0 transpose: 0
+userbits: 8
+*port: polysilicon-1
+arc: 8
+arc: 17
+**node: 15
+type: mocmos:Polysilicon-1-Pin
+lowx: 12800 highx: 13600 lowy: -1600 highy: -800
+rotation: 0 transpose: 0
+userbits: 8
+*port: polysilicon-1
+arc: 7
+arc: 13
+**node: 16
+type: mocmos:Metal-1-P-Active-Con
+lowx: -6400 highx: 800 lowy: -2400 highy: 4800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-p-act
+arc: 21
+arc: 23
+arc: 24
+**node: 17
+type: mocmos:Metal-1-P-Active-Con
+lowx: -2400 highx: 4800 lowy: -2400 highy: 4800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-p-act
+arc: 18
+arc: 26
+**node: 18
+type: mocmos:Metal-1-P-Active-Con
+lowx: 1600 highx: 8800 lowy: -2400 highy: 4800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-p-act
+arc: 19
+arc: 28
+**node: 19
+type: mocmos:Metal-1-P-Active-Con
+lowx: 5600 highx: 12800 lowy: -2400 highy: 4800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-p-act
+arc: 20
+arc: 29
+arc: 30
+**node: 20
+type: mocmos:Metal-1-N-Well-Con
+lowx: -6400 highx: 800 lowy: 1600 highy: 8800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-substrate
+arc: 23
+**node: 21
+type: mocmos:Metal-1-Pin
+lowx: -3600 highx: -2000 lowy: 2400 highy: 4000
+rotation: 0 transpose: 0
+userbits: 66568
+*port: metal-1
+arc: 0
+arc: 22
+arc: 24
+**node: 22
+type: mocmos:Metal-1-Pin
+lowx: 400 highx: 2000 lowy: 2400 highy: 4000
+rotation: 0 transpose: 0
+userbits: 66568
+*port: metal-1
+arc: 22
+arc: 25
+arc: 26
+**node: 23
+type: mocmos:Metal-1-Pin
+lowx: 4400 highx: 6000 lowy: 2400 highy: 4000
+rotation: 0 transpose: 0
+userbits: 66568
+*port: metal-1
+arc: 25
+arc: 27
+arc: 28
+**node: 24
+type: mocmos:Metal-1-N-Well-Con
+lowx: 5600 highx: 12800 lowy: 1600 highy: 8800
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-substrate
+arc: 29
+**node: 25
+type: mocmos:Metal-1-Pin
+lowx: 8400 highx: 10000 lowy: 2400 highy: 4000
+rotation: 0 transpose: 0
+userbits: 66568
+*port: metal-1
+arc: 1
+arc: 27
+arc: 30
+**node: 26
+type: mocmos:Metal-1-Metal-2-Con
+lowx: -7000 highx: -5000 lowy: 2200 highy: 4200
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-metal-2
+arc: 0
+arc: 2
+exported: 6
+**node: 27
+type: mocmos:Metal-1-Metal-2-Con
+lowx: 11400 highx: 13400 lowy: 2200 highy: 4200
+rotation: 0 transpose: 0
+userbits: 68608
+*port: metal-1-metal-2
+arc: 1
+arc: 2
+exported: 7
+**porttype: 0
+subnode: 5
+subport: metal-1
+name: PULLUP0.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 1
+subnode: 4
+subport: metal-1
+name: PULLUP1.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 2
+subnode: 3
+subport: metal-1
+name: PULLUP2.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 3
+subnode: 2
+subport: metal-1
+name: PULLUP3.m-1.s
+descript: 0/512
+userbits: 92160
+**porttype: 4
+subnode: 1
+subport: metal-1-polysilicon-1
+name: GND.m-1.sw
+descript: 0/512
+userbits: 92160
+**porttype: 5
+subnode: 0
+subport: metal-1-polysilicon-1
+name: GND.m-1.se
+descript: 0/512
+userbits: 92160
+**porttype: 6
+subnode: 26
+subport: metal-1-metal-2
+name: PWR.m-2w
+descript: 0/512
+userbits: -1342085120
+**porttype: 7
+subnode: 27
+subport: metal-1-metal-2
+name: PWR.m-2e
+descript: 0/512
+userbits: -1342085120
+**arc: 0
+type: mocmos:Metal-1
+width: 5600 length: 3200
+userbits: 805312130
+*end: 0
+node: 21
+nodeport: metal-1
+xpos: -2800 ypos: 3200
+*end: 1
+node: 26
+nodeport: metal-1-metal-2
+xpos: -6000 ypos: 3200
+**arc: 1
+type: mocmos:Metal-1
+width: 5600 length: 3200
+userbits: 805306370
+*end: 0
+node: 25
+nodeport: metal-1
+xpos: 9200 ypos: 3200
+*end: 1
+node: 27
+nodeport: metal-1-metal-2
+xpos: 12400 ypos: 3200
+**arc: 2
+type: mocmos:Metal-2
+width: 5600 length: 18400
+userbits: 1895825410
+*end: 0
+node: 26
+nodeport: metal-1-metal-2
+xpos: -6000 ypos: 3200
+*end: 1
+node: 27
+nodeport: metal-1-metal-2
+xpos: 12400 ypos: 3200
+**arc: 3
+type: mocmos:Metal-1
+width: 1600 length: 1600
+userbits: 1895828298
+*end: 0
+node: 2
+nodeport: metal-1
+xpos: 9200 ypos: -5200
+*end: 1
+node: 6
+nodeport: metal-1-p-act
+xpos: 9200 ypos: -3600
+**arc: 4
+type: mocmos:Metal-1
+width: 1600 length: 1600
+userbits: 1895828298
+*end: 0
+node: 3
+nodeport: metal-1
+xpos: 5200 ypos: -5200
+*end: 1
+node: 7
+nodeport: metal-1-p-act
+xpos: 5200 ypos: -3600
+**arc: 5
+type: mocmos:Metal-1
+width: 1600 length: 1600
+userbits: 1895828298
+*end: 0
+node: 4
+nodeport: metal-1
+xpos: 1200 ypos: -5200
+*end: 1
+node: 8
+nodeport: metal-1-p-act
+xpos: 1200 ypos: -3600
+**arc: 6
+type: mocmos:Metal-1
+width: 1600 length: 1600
+userbits: 1895828298
+*end: 0
+node: 5
+nodeport: metal-1
+xpos: -2800 ypos: -5200
+*end: 1
+node: 9
+nodeport: metal-1-p-act
+xpos: -2800 ypos: -3600
+**arc: 7
+type: mocmos:Polysilicon-1
+width: 1600 length: 4000
+userbits: 1895834058
+*end: 0
+node: 15
+nodeport: polysilicon-1
+xpos: 13200 ypos: -1200
+*end: 1
+node: 0
+nodeport: metal-1-polysilicon-1
+xpos: 13200 ypos: -5200
+**arc: 8
+type: mocmos:Polysilicon-1
+width: 1600 length: 4000
+userbits: 1895834058
+*end: 0
+node: 14
+nodeport: polysilicon-1
+xpos: -6800 ypos: -1200
+*end: 1
+node: 1
+nodeport: metal-1-polysilicon-1
+xpos: -6800 ypos: -5200
+**arc: 9
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895834058
+*end: 0
+node: 11
+nodeport: p-trans-diff-bottom
+xpos: 5200 ypos: -3100
+*end: 1
+node: 7
+nodeport: metal-1-p-act
+xpos: 5200 ypos: -3600
+**arc: 10
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895834058
+*end: 0
+node: 12
+nodeport: p-trans-diff-bottom
+xpos: 9200 ypos: -3100
+*end: 1
+node: 6
+nodeport: metal-1-p-act
+xpos: 9200 ypos: -3600
+**arc: 11
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895828298
+*end: 0
+node: 8
+nodeport: metal-1-p-act
+xpos: 1200 ypos: -3600
+*end: 1
+node: 10
+nodeport: p-trans-diff-bottom
+xpos: 1200 ypos: -3100
+**arc: 12
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895828298
+*end: 0
+node: 9
+nodeport: metal-1-p-act
+xpos: -2800 ypos: -3600
+*end: 1
+node: 13
+nodeport: p-trans-diff-bottom
+xpos: -2800 ypos: -3100
+**arc: 13
+type: mocmos:Polysilicon-1
+width: 1600 length: 2400
+userbits: 1895831170
+*end: 0
+node: 15
+nodeport: polysilicon-1
+xpos: 13200 ypos: -1200
+*end: 1
+node: 12
+nodeport: p-trans-poly-right
+xpos: 10800 ypos: -1200
+**arc: 14
+type: mocmos:Polysilicon-1
+width: 1600 length: 800
+userbits: 1879048194
+*end: 0
+node: 11
+nodeport: p-trans-poly-right
+xpos: 6800 ypos: -1200
+*end: 1
+node: 12
+nodeport: p-trans-poly-left
+xpos: 7600 ypos: -1200
+**arc: 15
+type: mocmos:Polysilicon-1
+width: 1600 length: 800
+userbits: 1895831170
+*end: 0
+node: 11
+nodeport: p-trans-poly-left
+xpos: 3600 ypos: -1200
+*end: 1
+node: 10
+nodeport: p-trans-poly-right
+xpos: 2800 ypos: -1200
+**arc: 16
+type: mocmos:Polysilicon-1
+width: 1600 length: 800
+userbits: 1895831170
+*end: 0
+node: 10
+nodeport: p-trans-poly-left
+xpos: -400 ypos: -1200
+*end: 1
+node: 13
+nodeport: p-trans-poly-right
+xpos: -1200 ypos: -1200
+**arc: 17
+type: mocmos:Polysilicon-1
+width: 1600 length: 2400
+userbits: 1895825410
+*end: 0
+node: 14
+nodeport: polysilicon-1
+xpos: -6800 ypos: -1200
+*end: 1
+node: 13
+nodeport: p-trans-poly-left
+xpos: -4400 ypos: -1200
+**arc: 18
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895828298
+*end: 0
+node: 10
+nodeport: p-trans-diff-top
+xpos: 1200 ypos: 700
+*end: 1
+node: 17
+nodeport: metal-1-p-act
+xpos: 1200 ypos: 1200
+**arc: 19
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1879051082
+*end: 0
+node: 11
+nodeport: p-trans-diff-top
+xpos: 5200 ypos: 700
+*end: 1
+node: 18
+nodeport: metal-1-p-act
+xpos: 5200 ypos: 1200
+**arc: 20
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895828298
+*end: 0
+node: 12
+nodeport: p-trans-diff-top
+xpos: 9200 ypos: 700
+*end: 1
+node: 19
+nodeport: metal-1-p-act
+xpos: 9200 ypos: 1200
+**arc: 21
+type: mocmos:P-Active
+width: 5600 length: 500
+userbits: 1895834058
+*end: 0
+node: 16
+nodeport: metal-1-p-act
+xpos: -2800 ypos: 1200
+*end: 1
+node: 13
+nodeport: p-trans-diff-top
+xpos: -2800 ypos: 700
+**arc: 22
+type: mocmos:Metal-1
+width: 5600 length: 4000
+userbits: 1879048194
+*end: 0
+node: 21
+nodeport: metal-1
+xpos: -2800 ypos: 3200
+*end: 1
+node: 22
+nodeport: metal-1
+xpos: 1200 ypos: 3200
+**arc: 23
+type: mocmos:Metal-1
+width: 1600 length: 3600
+userbits: 1895834058
+*end: 0
+node: 20
+nodeport: metal-1-substrate
+xpos: -2800 ypos: 4800
+*end: 1
+node: 16
+nodeport: metal-1-p-act
+xpos: -2800 ypos: 1200
+**arc: 24
+type: mocmos:Metal-1
+width: 1600 length: 2000
+userbits: 1895834058
+*end: 0
+node: 21
+nodeport: metal-1
+xpos: -2800 ypos: 3200
+*end: 1
+node: 16
+nodeport: metal-1-p-act
+xpos: -2800 ypos: 1200
+**arc: 25
+type: mocmos:Metal-1
+width: 5600 length: 4000
+userbits: 1895831170
+*end: 0
+node: 23
+nodeport: metal-1
+xpos: 5200 ypos: 3200
+*end: 1
+node: 22
+nodeport: metal-1
+xpos: 1200 ypos: 3200
+**arc: 26
+type: mocmos:Metal-1
+width: 1600 length: 2000
+userbits: 1895834058
+*end: 0
+node: 22
+nodeport: metal-1
+xpos: 1200 ypos: 3200
+*end: 1
+node: 17
+nodeport: metal-1-p-act
+xpos: 1200 ypos: 1200
+**arc: 27
+type: mocmos:Metal-1
+width: 5600 length: 4000
+userbits: 1895831170
+*end: 0
+node: 25
+nodeport: metal-1
+xpos: 9200 ypos: 3200
+*end: 1
+node: 23
+nodeport: metal-1
+xpos: 5200 ypos: 3200
+**arc: 28
+type: mocmos:Metal-1
+width: 1600 length: 2000
+userbits: 1895834058
+*end: 0
+node: 23
+nodeport: metal-1
+xpos: 5200 ypos: 3200
+*end: 1
+node: 18
+nodeport: metal-1-p-act
+xpos: 5200 ypos: 1200
+**arc: 29
+type: mocmos:Metal-1
+width: 1600 length: 3600
+userbits: 1879056842
+*end: 0
+node: 24
+nodeport: metal-1-substrate
+xpos: 9200 ypos: 4800
+*end: 1
+node: 19
+nodeport: metal-1-p-act
+xpos: 9200 ypos: 1200
+**arc: 30
+type: mocmos:Metal-1
+width: 1600 length: 2000
+userbits: 1895834058
+*end: 0
+node: 25
+nodeport: metal-1
+xpos: 9200 ypos: 3200
+*end: 1
+node: 19
+nodeport: metal-1-p-act
+xpos: 9200 ypos: 1200
+celldone: pullups

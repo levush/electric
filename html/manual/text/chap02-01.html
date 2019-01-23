@@ -1,0 +1,182 @@
+<HTML><HEAD><TITLE>Using Electric 2-1: Selection</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<HR>
+
+<CENTER><H1><A NAME="chap02-01">Chapter 2: BASIC EDITING</A></H1></CENTER>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap01-11.html#chap01-11"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>2-1: Selection</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap02-02.html#chap02-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+<H3>Selecting Nodes and Arcs</H3>
+<P>
+Electric is a <I>noun/verb</I> system, meaning that all commands work by first selecting something (the noun)
+and then doing an operation (the verb).
+For this reason, selection is important.
+<P>
+Selection is done with clicks of the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I> button
+(this is typically just the left button).
+Individual nodes and arcs are selected by clicking over them.
+Once selected, they are highlighted on the screen.
+If you use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> button
+(typically the same as the <I>selection</I> button but with the shift key held), unhighlighted nodes
+and arcs are added to the selection, but objects that are already highlighted become deselected.
+<P>
+If there are multiple objects under the cursor,
+use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:ctrl-left  Windows:ctrl-left  Mac:ctrl-click">select another</A></I> button to cycle through them
+(this is typically the same as the <I>selection</I> button but with the control key held).
+If there are multiple objects under the cursor,
+and you are trying to do a <I>toggle select</I> to add to the selection,
+then use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-ctrl-left  Windows:shift-ctrl-left  Mac:shift-ctrl-click">toggle select another</A></I> button to cycle through them
+(this is typically the same as the <I>selection</I> button but with the control and shift keys held).
+<P>
+To select an object by its name, use the subcommands of the <B>Selection</B> command of the <B>Edit</B> menu.
+The <B>Select Node...</B> subcommand selects a node by name, <B>Select Arc...</B> selects an arc by name,
+<B>Select Network...</B> selects a network by name, and <B>Select Export...</B> selects an export by name.
+You can also use the Cell Explorer to select from a list of objects
+(see <A HREF="chap03-07.html#chap03-07">Section 3-7</A>).
+<P>
+To select everything in the cell,
+use the <B>Select All</B> subcommand of the <B>Selection</B> command of the <B>Edit</B> menu.
+To select everything in the cell that is the same as the currently selected objects,
+use the <B>Select All Like This</B> subcommand of the <B>Selection</B> command of the <B>Edit</B> menu.
+<P>
+<H3>Selection Appearance</H3>
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap02-03.png" ALT="Figure 2.3"></CENTER></TD><TD>
+Highlighted objects have a box drawn around them.
+In some cases, the object extends beyond the box,
+but the box encloses the essential part of the object.
+For example, MOS transistors are highlighted where the two materials cross,
+even though the materials extend on all four sides.
+Also, CMOS active arcs have implants that surround them,
+but the highlight covers only the central active part.
+</TD></TR></TABLE>
+<P>
+Besides the basic box, there will be other things drawn when an object is highlighted.
+Highlighted arcs have their constraint characteristics displayed.
+The example above shows an arc that is both fixed-angle ("F") and slidable ("S").
+The letter "R" is used for rigid arcs, and an "X" appears when none of these constraints apply.
+See <A HREF="chap05-01.html#chap05-01">section 5-1</A> for more information on arc constraints.
+<P>
+When nodes are selected, a port is also highlighted.
+The port that is highlighted is the one closest to the cursor when the node is selected.
+If the port is a single point, you see a "+" at the port.
+If the port is larger than a single point, it is shown as a line or rectangle.
+<P>
+<TABLE><TR><TD>
+Highlighted nodes will also show the entire network that extends out of the highlighted port.
+Arcs in that network will be drawn with dashed lines,
+and nodes in that network will be indicated with dots.
+The example here shows the highlighting of a pin node (in the upper-right)
+with a single-point port ("+") which is connected to a contact and a transistor.
+</TD><TD><CENTER><IMG SRC="../images/chap02-08.png" ALT="Figure 2.8"></CENTER></TD></TR></TABLE>
+<P>
+It is important to understand that Electric is not a WYSIWYG editor (what-you-see-is-what-you-get).
+Nodes that are touching on the screen may not actually be connected if there are no arcs joining them.
+The best way to ensure that the circuit is correct is to highlight a node and see the extent of the connections on it.
+<P>
+<H3>Selecting Areas</H3>
+<P>
+Besides highlighting nodes and arcs, Electric can also highlight an arbitrary rectangular area.
+The notion of a <I>highlighted area</I>, as opposed to a <I>highlighted object</I>,
+is used in some commands, and it generally implies highlighting of everything in the area.
+<P>
+There are two ways to highlight an area.
+If you click the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I> button where there is no object,
+and hold it down while dragging over objects, all of those objects will be highlighted.
+If you need to start the area over an existing object,
+first deselect everything and then use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> button.
+<P>
+To more precisely define a highlighted area, drag a rectangle using the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I> button.
+This leaves the highlight rectangle on the screen exactly as it was drawn.
+You can convert this selection to a set of actual nodes and arcs with the <B>Enclosed Objects</B> subcommand of the
+<B>Selection</B> command of the <B>Edit</B> menu.
+<P>
+<H3>Selecting Text</H3>
+<P>
+<I>Highlighted text</I> appears as an "X" over the letters.
+However, text is a special case, so it will not be covered until later
+(<A HREF="chap06-08.html#chap06-08">section 6-8</A>).
+For now, if you highlight some text, it is best to click again and select something else.
+<P>
+<H3>Controlling Selection</H3>
+<P>
+Once a selection is made, you can save it with the <B>Push Selection</B> subcommand of the
+<B>Selection</B> command of the <B>Edit</B> menu.
+The highlighting is not changed, but it is saved on a stack.
+To restore this selection at a later time, use the <B>Pop Selection</B> subcommand.
+<P>
+The <B>Deselect All Arcs</B> command deselects all selected arcs.
+This is useful when you wish to select a set of nodes,
+but you have selected the entire area, including nodes and arcs.
+The <B>Select Nothing</B> command deselects everything.
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap02-09.png" ALT="Figure 2.9"></CENTER></TD><TD>
+To control special selection features,
+use the <B>Selection Options...</B> subcommand of the <B>Selection</B> command of the <B>Edit</B> menu.
+The "Center-based primitives" option controls how primitive nodes are created
+(see <A HREF="chap02-02.html#chap02-02">Section 2-2</A>).
+The "Dragging must enclose entire object" requests that area-selection completely enclose an object in order to select it.
+The default is that any object touching the area is selected.
+</TD></TR></TABLE>
+<P>
+<H3>Easy and Hard Selection</H3>
+<P>
+In a busy circuit, many objects may overlap, causing confusion when selecting.
+To simplify selection, objects can be marked so that they are no longer <I>easy-to-select</I>,
+which means that standard selection does not work on them.
+When objects are not easy-to-select,
+they require the use of the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-left  Windows:alt-left  Mac:opt-click">special select</A></I> button in order to find them
+(typically the same as the <I>selection</I> button but with the Alt/Meta/Option key held).
+Toggling selection of objects that are not easy-to-select requires the use of the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-meta-left  Windows:shift-alt-left  Mac:shift-opt-click">toggle special select</A></I> button.
+Cycling through multiple objects that are not easy-to-select requires the use of the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:ctrl-meta-left  Windows:ctrl-alt-left  Mac:ctrl-opt-click">special select another</A></I> button.
+Finally, toggling and cycling through objects that are not easy-to-select is done with the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-ctrl-meta-left  Windows:shift-ctrl-alt-left  Mac:shift-ctrl-opt-click">toggle special select another</A></I> button.
+<P>
+Ease of selection extends to more than just nodes and arcs.
+There are four "classes" of objects that can be selected:
+<UL>
+<LI>Basic objects (all arcs, primitive nodes, and port names)
+<LI>Cell instances
+<LI>Annotation text (names and other text placed on nodes and arcs)
+<LI>Special objects (the text of a cell instance's name)
+</UL>
+By default, the first three classes are easy-to-select, and special objects are hard-to-select.
+If you uncheck "Easy selection of cell instances" in the <B>Selection Options...</B> dialog,
+then cell instances become hard-to-select.
+If you uncheck "Easy selection of annotation text" in the <B>Selection Options...</B> dialog,
+then annotation text becomes hard-to-select.
+<P>
+Although all nodes and arcs are typically easy-to-select,
+you can control them individually by unchecking the "Easy to Select" field in their info dialog
+(use the <B>Get Info</B> command of the <B>Info</B> menu).
+If multiple objects are selected, the <B>Get Info</B> dialog has a popup in the lower-right for changing their selection difficulty.
+Special commands exist in the <B>Selection</B> menu for dealing with easy-to-select nodes and arcs.
+You can select all of the easy-to-select objects in the current cell with the <B>Select All Easy</B> command.
+Similarly, you can select those that are not easy-to-select with the <B>Select All Hard</B> command.
+To change the ease of selection for a set of objects,
+select them and use either <B>Make Selected Easy</B> or <B>Make Selected Hard</B>.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap01-11.html#chap01-11"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap01-11.html#chap01-11">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap02-02.html#chap02-02">Next</A></TD>
+<TD><A HREF="chap02-02.html#chap02-02"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

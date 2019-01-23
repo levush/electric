@@ -1,0 +1,266 @@
+<HTML><HEAD><TITLE>Using Electric 12-9: The Technology Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-09"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-08.html#chap12-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-9: The Technology Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-10.html#chap12-10"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-09.png" ALT="Figure 12.9"></CENTER>
+<P>
+Technologies are collections of primitive nodes and arcs built out of layers of geometry.
+Layers have color, design-rules and I/O correspondences.
+Nodes and arcs have geometry and other information.
+<P>
+A large set of technologies comes with Electric.
+These include many varieties of MOS as well as Schematics, Artwork, and more.
+A single cell may contain components from different technologies,
+simply by switching technologies and placing new components alongside the old ones.
+A Generic technology exists for making cross-technology interconnect as well as other special-purpose functions.
+<P>
+Besides being able to switch technologies and set information about the current technology,
+there is a technology editor that can make major changes and create new technologies.
+This editor works by converting a technology into a library of cells and back again.
+Standard editing techniques are then used on the library.
+<P>
+<H3>Change Current Technology... <A HREF="chap07-01.html#chap07-01">[7-1]</A></H3>
+<P>
+	This command allows you to switch the set of primitives that are used in editing.
+	A list of technologies will be presented.
+	After selection, the menu on the left will change to show the primitives in the new technology.
+	Note that the current technology is shown in the status area under the heading "TECHNOLOGY".
+<P>
+<H3>Technology Options... <A HREF="chap07-01.html#chap07-01">[7-1]</A></H3>
+<P>
+	This command displays a dialog for technology-specific options.
+	The MOSIS CMOS, Artwork, and Schematic technologies can be affected.
+	<P>
+	<CENTER><IMG SRC="../images/chap07-14.png" ALT="Figure 7.14"></CENTER>
+<P>
+<!-- NEED 5in -->
+<H3>Change Units... <A HREF="chap07-02.html#chap07-02">[7-2]</A></H3>
+<P>
+	The left side of the dialog allows you to change the displayed units for various electrical properties.
+	You can also change the internal unit size (be very careful when changing this).
+	<P>
+	<CENTER><IMG SRC="../images/chap07-01.png" ALT="Figure 7.1"></CENTER>
+	<P>
+	The right side of this dialog allows you to change the value of "lambda" for any technology.
+	Lambda is the number of internal units per grid unit
+	(the current value, in microns, is shown in the status area under the heading "LAMBDA").
+	When changing this value, you can choose to scale all objects
+	(which will keep them looking the same as before, only scaled), or to just update the technology
+	(which will alter the appearance of existing objects).
+	You can also choose to make this change to all libraries or just the current one.
+	Do not use this command to adjust the lambda size when editing technologies:
+	use the <B>Edit Miscellaneous Info</B> command instead.
+<P>
+<H3>Document Technology <A HREF="chap07-01.html#chap07-01">[7-1]</A></H3>
+<P>
+	This command writes a disk file with a textual description of a technology.
+	The description lists layers, nodes, and arcs, and other relevant information.
+	The file is for descriptive purposes only and cannot be read back into Electric.
+<P>
+<H3>Describe Current Technology <A HREF="chap07-01.html#chap07-01">[7-1]</A></H3>
+<P>
+	This command displays information about the current environment of design.
+<P>
+<HR><BR>
+<P>
+<H3>Convert and Edit Technology... <A HREF="chap08-02.html#chap08-02">[8-2]</A></H3>
+<P>
+	This command allows an existing technology to be modified using the technology editing facilities.
+	You will be prompted for the technology to edit.
+	This technology will then be converted to a library of the same name,
+	and that library will become the current library.
+	Editing any cell of this library will be done in <I>technology editing mode</I>,
+	which means that a new button is defined for making changes to the highlighted object:
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">technology edit</A></I>.
+	The remainder of the commands in the <B>Technology</B> menu apply to technology editing.
+	<P>
+	Once in technology editing mode, this menu entry changes to <B>Convert Library to Technology...</B>
+	so that the library can be translated back into a new technology and the mode can be terminated.
+	This command presents a dialog for creating a new technology from the library.
+	Note that the new technology name may have to be changed because there will probably already be one with that name.
+	After creating the technology, you may switch to it with the <B>Change Current Technology...</B> command above.
+	To save an edited technology, use the <B>Save Library</B> command of the <B>File</B> menu,
+	just as you would save any other library.
+	The library can then be restored with the <B>Load Technology Library</B> command below.
+<P>
+<H3>Load Technology Library <A HREF="chap08-02.html#chap08-02">[8-2]</A></H3>
+<P>
+	This command causes an existing technology library to be read from disk and converted to a technology.
+<P>
+<H3>Delete Technology... <A HREF="chap08-02.html#chap08-02">[8-2]</A></H3>
+<P>
+	This command prompts for a technology name and deletes it.
+	There cannot be any uses of the primitives in that technology or else the command will fail.
+<P>
+<H3>Rename Technology... <A HREF="chap08-02.html#chap08-02">[8-2]</A></H3>
+<P>
+	This command allows you to rename the current technology.
+<P>
+<HR><BR>
+<P>
+<H3>Edit Primitive Node... <A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	This command causes a primitive node from the currently edited technology to be brought into the window.
+	Because each primitive node is represented as a cell of the library,
+	it is also possible to edit a node by using the <B>Edit Cell...</B> command in the <B>Cells</B> menu.
+	However, the node names are somewhat encoded in the library,
+	so it is more convenient to use this command.
+	<P>
+	The cell describing a primitive node contains four examples of the node, scaled in both axes.
+	These images are built from separate layers which may be selected,
+	edited, etc.
+	(use the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">technology edit</A></I>
+	button to change what is highlighted).
+	In addition to the geometry layers,
+	there is also a highlight layer which shows where the highlighting will appear when the primitive is selected.
+	Finally, there are port layers that show where arcs will connect to the primitive.
+	In the upper-left (least scaled) version of the node,
+	the ports have additional information such as arc connectivity and connection angle ranges.
+	<P>
+	Besides the four examples,
+	there are special messages on the right that set special attributes of the node.
+<P>
+<H3>Edit Primitive Arc... <A HREF="chap08-07.html#chap08-07">[8-7]</A></H3>
+<P>
+	This command causes an arc from the currently edited technology to be brought into the window.
+	Because each arc is represented as a cell of the library,
+	it is also possible to edit an arc by using the <B>Edit Cell...</B> command in the <B>Cells</B> menu.
+	However, the arc names are somewhat encoded in the library, so it is more convenient to use this command.
+	<P>
+	The cell describing an arc contains one example of the arc, laid out horizontally.
+	The length of this arc is not important.
+	On the right are special messages that describe the arc.
+	To change an object,
+	highlight it and use the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">technology edit</A></I> button.
+<P>
+<H3>Edit Layer... <A HREF="chap08-05.html#chap08-05">[8-5]</A></H3>
+<P>
+	This command causes a specified layer from the currently edited technology to be brought into the window.
+	Because each layer is represented as a cell of the library,
+	it is also possible to edit a layer by using the <B>Edit Cell...</B> command in the <B>Cells</B> menu.
+	However, the layer names are somewhat encoded in the library,
+	so it is more convenient to use this command.
+	<P>
+	The cell describing a layer contains a stipple pattern and a color box for describing the appearance of the layer.
+	Special information is shown on the right, including the color to use and I/O correspondences for the layer.
+	The stipple pattern is used only if the color is not a "Transparent" one.
+	To change anything in the cell,
+	highlight it and use the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">technology edit</A></I> button.
+<P>
+<H3>Edit Next Primitive <A HREF="chap08-05.html#chap08-05">[8-5]</A>&nbsp;&nbsp;
+<A HREF="chap08-07.html#chap08-07">[8-7]</A>&nbsp;&nbsp;
+<A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	This command edits the next primitive node, arc, or layer (whichever is currently being edited).
+	If the last primitive is being edited, the first is displayed.
+<P>
+<H3>New Primitive <A HREF="chap08-05.html#chap08-05">[8-5]</A>&nbsp;&nbsp;
+<A HREF="chap08-07.html#chap08-07">[8-7]</A>&nbsp;&nbsp;
+<A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-21.png" ALT="Figure 12.21"></CENTER></TD><TD VALIGN=TOP>
+	The subcommands of this command create new cells to describe a primitive node,
+	arc, or layer in the currently edited technology.
+	</TD></TR></TABLE>
+<P>
+<H3>Reorder Primitives <A HREF="chap08-05.html#chap08-05">[8-5]</A>&nbsp;&nbsp;
+<A HREF="chap08-07.html#chap08-07">[8-7]</A>&nbsp;&nbsp;
+<A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-22.png" ALT="Figure 12.22"></CENTER></TD><TD VALIGN=TOP>
+	The subcommands of this command produce lists of primitive nodes, arcs,
+	and layers in an edit window and allows you to rearrange the order in which they will appear in the technology.
+	</TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Edit Colors... <A HREF="chap08-06.html#chap08-06">[8-6]</A></H3>
+<P>
+	This command causes the color map for the edited technology to be presented for modification.
+<P>
+<H3>Edit Design Rules... <A HREF="chap08-06.html#chap08-06">[8-6]</A></H3>
+<P>
+	This command causes the design rules for the edited technology to be displayed in a text editing window.
+	Each design rule consists of a spacing distance and two layer names.
+	If the spacing distance is preceded by a "c",
+	this rule applies only when the two layers are electrically connected.
+<P>
+<H3>Edit Variables... <A HREF="chap08-04.html#chap08-04">[8-4]</A></H3>
+<P>
+	This command allows you to specify additional pieces of information about the technology being edited.
+	A dialog shows two lists of variables that can be attached to the technology.
+	On the left is a list of variables that are currently attached,
+	and on the right is a list of all known variables that can be attached to the technology.
+	To add a new variable to the current list,
+	select it in the list of possibilities and click the "&lt;&lt; Copy" button.
+	To remove a variable from the technology, select it in the left-hand list and click the "Remove" button.
+	When a variable in either list is selected, its description and type are shown.
+	When the variable is of type "Integer", "Real", or "String", you may change its value in the "Value" field.
+	When you have selected a variable of type "Strings"
+	(note the final "s") then it must be edited in a separate window with the "Edit Strings" button.
+	The "Edit Strings" button first exits this dialog and then opens a text edit window for manipulating this variable.
+	See <A HREF="chap04-10.html#chap04-10">Section 4-10</A> for more on text editing.
+	<CENTER><IMG SRC="../images/chap08-03.png" ALT="Figure 8.3"></CENTER>
+<P>
+<!-- NEED 4in -->
+<H3>Edit Library Dependencies... <A HREF="chap08-03.html#chap08-03">[8-3]</A></H3>
+<P>
+	This command allows you to enter a list of technology libraries that will be combined with the current library when defining a technology.
+	This is a list of <I>dependent libraries</I> that combine to define the technology.
+	<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	The dialog contains two lists of libraries.
+	The list on the left shows the dependent libraries and the list on the right shows all current libraries.
+	By selecting a library name from the list on the right and clicking on the "&lt;&lt; Add" button,
+	it is added to the list on the left.
+	To add a library not shown, type its name into the box on the right and click the "&lt;&lt; Add" button.
+	To remove a library from the list on the left, select it and click the "Remove" button.
+	</TD><TD><CENTER><IMG SRC="../images/chap08-01.png" ALT="Figure 8.1"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Edit Miscellaneous Information <A HREF="chap08-04.html#chap08-04">[8-4]</A></H3>
+<P>
+	This command causes miscellaneous factors from the currently edited technology to be brought into the window for modification.
+	To change a factor, highlight it and use the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">technology edit</A></I> button.
+<P>
+<H3>Identify Primitive Layers <A HREF="chap08-07.html#chap08-07">[8-7]</A>&nbsp;&nbsp;
+<A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	This command causes all of the layers in the currently edited primitive node or arc to be labeled.
+	The labels are temporary, and disappear when the window is redrawn in any way.
+<P>
+<H3>Identify Ports <A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	This command causes all of the ports in the currently edited primitive node to be labeled.
+	The labels are temporary, and disappear when the window is redrawn in any way.
+<P>
+<HR><BR>
+<P>
+<H3>Delete this Primitive <A HREF="chap08-05.html#chap08-05">[8-5]</A>&nbsp;&nbsp;
+<A HREF="chap08-07.html#chap08-07">[8-7]</A>&nbsp;&nbsp;
+<A HREF="chap08-08.html#chap08-08">[8-8]</A></H3>
+<P>
+	This command deletes the primitive node, arc, or layer in the current window.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-08.html#chap12-08"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-08.html#chap12-08">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-10.html#chap12-10">Next</A></TD>
+<TD><A HREF="chap12-10.html#chap12-10"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

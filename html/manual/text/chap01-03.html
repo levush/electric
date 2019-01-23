@@ -1,0 +1,240 @@
+<HTML><HEAD><TITLE>Using Electric 1-3: UNIX Installation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap01-03"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 1: INTRODUCTION</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap01-02.html#chap01-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>1-3: UNIX Installation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap01-04.html#chap01-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Electric runs on most UNIX variants, including SunOS, Solaris, BSD, HPUX, AIX,
+and (of course) GNU/Linux.
+<P>
+The Electric distribution is a single file in UNIX "tar" format,
+GNU-zipped (see <A HREF="http://www.gzip.org">http://www.gzip.org</A> for more information).
+To install Electric, follow this procedure:
+<UL>
+<LI>Extract the contents of the "tar" file.
+This will create a top-level directory called <B>electric-</B><I>VERSION</I> with four subdirectories:
+<B>src</B>, <B>lib</B>, <B>examples</B>, and <B>html</B>.
+<LI>To configure for your system, go into the top-level directory and type:
+<P>
+<CENTER><B>./configure</B></CENTER><BR>
+This will examine the system and create a file called <B>Makefile</B>.
+<LI>To build electric you now only need to type <B>make</B>.
+This compiles Electric and creates the executable file <B>electric</B> in the top level.
+<LI>Type <B>./electric</B> to run the system.
+</UL>
+<P>
+<HR>
+<P>
+Here are some detail on the Electric distribution:
+<UL>
+<LI>The <B>src</B> directory contains the source code.
+It is hierarchically organized by function.
+
+<LI>The <B>html</B> directory contains one subdirectory, <B>manual</B>,
+which is this manual in HTML format.
+To see the document, point your browser to the file <B>index.html</B> inside of the <B>manual</B> directory.
+
+<LI>The <B>examples</B> directory has some demo files.
+
+<LI>Electric uses "widget libraries" to control the windows on the display.
+The default widget library is <A HREF="http://www.opennc.org/openmotif/">Motif</A>.
+You can use <A HREF="http://www.lesstif.org">Lesstif</A>, but has some bugs
+(you will have to remove the "XtDestroyWidget()" call in "DiaDoneDialog()").
+You can also use <A HREF="http://www.trolltech.com">Qt</A> by editing the <B>Makefile</B> after running "configure"
+(comments near the top explain what to do).
+Note that when you download these packages,
+you must download both the libraries for your system and the "devel" package which has header files for the compiler.
+Also note that many systems use shared libraries for these widget packages,
+and this may require some additional steps when installing.
+This is because the libraries get installed in a place that the shared library system doesn't know about.
+If you have superuser access, you can use <B>ldconfig</B> to tell the system where to find the libraries.
+Otherwise, you can use the LD_LIBRARY_PATH environment variable
+(on AIX use LIBPATH and on HP-UP use SHLIB_PATH).
+This variable is a colon-separated list of paths to be searched for shared libraries.
+For example, this setting will work on many systems:
+<BR>&nbsp;&nbsp;<CODE>LD_LIBRARY_PATH = /usr/X11R6/lib/</CODE>
+<BR>&nbsp;&nbsp;<CODE>export LD_LIBRARY_PATH</CODE><BR>
+
+<LI>Electric's TrueType package is Rainer Menzner's "T1Lib".
+You can get it from here:
+<A HREF="ftp://sunsite.unc.edu/pub/Linux/libs/graphics">ftp://sunsite.unc.edu/pub/Linux/libs/graphics</A>
+<BR>
+Once you have it, unpack it (it will create a directory with the version number as part of its name, for example "T1-1.1.0"),
+go into that directory, type "./configure" and then type "make".
+You can then install with "make install".
+<P>
+Now go to the Electric directory and edit the "Makefile".
+Near the top are comments labeled "T1LIB TRUETYPE".
+Uncomment the two lines (remove the "#" from the beginning of the lines)
+and change the lines so that they point into the T1Lib folder that you have just installed.
+For example,
+if the T1Lib libraries installed into "/usr/local/lib" and the T1Lib headers installed into "/usr/local/include",
+then you want these lines to read:
+<BR>&nbsp;&nbsp;<CODE>TRUETYPE_LIBS = /usr/local/lib/libt1.a</CODE>
+<BR>&nbsp;&nbsp;<CODE>TRUETYPECFLAGS = -DTRUETYPE=1 -I/usr/local/include</CODE><BR>
+Next (this is the most painful part),
+you have to set the environment variable T1LIB_CONFIG to point to the file "t1lib.config".
+This file may be installed in "/usr/local/share/t1lib".
+There will certainly be a copy in the "examples" folder of the distribution.
+The catch here is that this file has relative path names in it which must be converted to absolute.
+So, if you have extracted the T1Lib distribution into the folder "/home/strubin/T1-1.1.0",
+then the file should look like this:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>This is a configuration file for t1lib</CODE>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>FONTDATABASE=/home/strubin/T1-1.1.0/examples/FontDataBase</CODE>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>ENCODING=/home/strubin/T1-1.1.0/Fonts/enc:.</CODE>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>AFM=/home/strubin/T1-1.1.0/Fonts/afm:.</CODE>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>TYPE1=/home/strubin/T1-1.1.0/Fonts/type1:.</CODE><BR>
+Finally, rebuild Electric with the TrueType library.
+When you run it,
+you will get a warning if any of the TrueType initialization fails
+(in which case it will revert to the non-TrueType code).
+Otherwise, you have it.
+Note that Electric uses the first font in the database by default.
+To change the font that Electric uses,
+set the environment variable ELECTRIC_TRUETYPE_FONT to the desired font name.
+You can see a list of available fonts by setting this environment variable to an unknown name,
+in which case Electric will show all fonts in its error message.
+
+<LI>On Solaris, when using the Forte C compiler, uncomment the line that starts with "FORTECFLAGS" in <B>Makefile</B>.
+
+<LI>Installation of Electric requires some care.
+Although Electric will run properly from the directory where it was built,
+you cannot move the executable to a different location and expect it to work.
+This is because Electric makes use of a collection of <I>support files</I>.
+The main support file is called <B>.cadrc</B>.
+In addition, Electric needs to find the <B>lib</B> and <B>html</B> directories.
+If these support files cannot be found,
+Electric will not be able to initialize its graphical user interface
+(just type "-quit" to exit the program if this happens).
+<BR>
+The <B>make install</B> command will place the executable and the support files in a public location,
+but they may not be together.
+For example, it is not uncommon for the executable to be placed in "/usr/local/bin",
+but the support files in "/usr/local/lib/electric".
+Because of this, the executable needs to know where the support files are located.
+There are three ways to do this:
+<UL>
+<LI>You can set the ELECTRIC_LIBDIR environment variable to point to the location of the support files.
+<LI>You can change the #define of "LIBDIR" in "src/include/config.h" to point to the location of the support files.
+<LI>You can keep a local copy of ".cadrc"
+(this file can be in your home directory or in the current directory).
+Inside of the ".cadrc" file,
+change the "electric library default-path" command to point to the remaining support files
+(the <B>lib</B> and <B>html</B> directories).
+</UL>
+<BR>
+You can use the command <B>make install.html</B> to install the online manual in a public place
+(typically "/usr/local/share/doc/electric/html").
+Be sure that the #define of "DOCDIR" in "src/include/config.h" agrees with this path,
+or else the <B>See Manual</B> command will not work.
+
+<LI>The IRSIM simulator and LISP interpreter are not distributed as part of the GNU download.
+Users who wish to add these facilities must acquire the Static Free Software extras
+<A HREF="http://www.staticfreesoft.com/productsFree.html">described here</A>.
+Use the same procedure to extract this extension file (which will also be a GNU-zipped tar file).
+Extract it into the same location as the main source distribution and it will add the necessary files to the source tree.
+Then edit <B>Makefile</B> and you will find the instructions necessary to enable these facilities.
+It will be necessary to recompile all of Electric when adding these extras.
+
+<LI>To add Java, follow these instructions:
+<UL>
+<LI>Download the Java Development Kit (JDK) from <A HREF="http://java.sun.com">http://java.sun.com</A>.
+Install it.
+For the purposes of these instructions, assume that it is installed into <B>/usr/java/jdk</B>.
+If you install it elsewhere, adjust these instructions accordingly.
+<LI>After configuration, but before making Electric,
+edit the <B>Makefile</B> and uncomment the lines near the top that enable Java.
+Change the definition of LANGJAVA_DIR to point to the installed JDK location.
+<LI>On Solaris, add this string to the environment variable LD_LIBRARY_PATH:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>:/usr/java/jdk/jre/lib/sparc:/usr/java/jdk/jre/lib/sparc/classic:/usr/java/jdk/jre/lib/sparc/native_threads</CODE><BR>
+<LI>On GNU/Linux, add this string to the environment variable LD_LIBRARY_PATH:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>:/usr/java/jdk/jre/lib/i386:/usr/java/jdk/jre/lib/i386/classic:/usr/java/jdk/jre/lib/i386/native_threads</CODE><BR>
+<LI>Be sure to export "LD_LIBRARY_PATH" if your shell requires it.
+<LI>Electric's Java interface works better if you also install the "Bean Shell"
+(see <A HREF="http://www.beanshell.org">www.beanshell.org</A>).
+Download the ".jar" file and place it in the "java" subdirectory of your "lib" directory.
+You must use version 1.1Alpha4 or later (version 1.01 is not acceptable).
+</UL>
+
+<LI>To add the TCL interpreter, download it from <A HREF="http://www.tcl.tk">http://www.tcl.tk</A> and install it.
+Then edit <B>Makefile</B> and you will find the instructions necessary to enable the interpreter.
+
+<LI>Electric has two ways to control the display.
+By default, the system runs on any depth monitor,
+but is slow on older machines and must be run locally
+(that is, the client and the server must be on the same computer).
+The alternate method of display is faster and can run over the network,
+but it can only support displays that are set to 8bpp (8 bits per pixel).
+In addition, this alternate method will suffer from "colormap flashing" when the cursor enters and leaves the Electric windows.
+To switch to this alternate method, edit <B>Makefile</B> after running "configure"
+(comments near the top explain what to do).
+Note also that Motif and Lesstif do not work well with this alternate display method,
+so you will also have to switch to using the Athena widgets.
+
+<LI>Electric is able to invoke the SPICE simulator automatically.
+In order to do this, it needs to know the location of this program.
+You can change the #define of "SPICELOC" in <B>src/include/config.h</B>,
+or you can set the environment variable ELECTRIC_SPICELOC.
+
+<LI>If you wish the "file" command to recognize Electric libraries, add these two lines to "/etc/magic"
+(or wherever the "magic" information is stored):
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>0   long   031176377777   Electric library</CODE>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>0   long   037777774711   Electric library</CODE><BR>
+
+<LI>There are two command-line arguments that can be given which will control the display.
+If you use the "-m" option, Electric will look for multiple displays and use them
+(it searches for files named "/dev/fb*").
+If you use the "-geom WxH+X+Y", it will set the graphics window to be "W" wide,
+"H" high, and with its corner at (X, Y).
+
+<LI>Additional X-Windows options can be typed into the file ".Xdefaults".
+The resources "Electric.font0" through "Electric.font8" set the font to use for point sizes 4, 6, 8, 10, 12, 14, 16, 18, and 20.
+The resource "Electric.fontmenu" controls the text used in the component menu,
+and the resource "Electric.fontedit" controls the text used in the text editor.
+Here is a sample line from the file:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Electric.font5: -misc-fixed-medium-r-normal-*-*-140-*-*-*-*-*-*</CODE><BR>
+To see what all of these fonts look like, load the library <B>samples.txt</B>
+(with the <B>Readable Dump</B> subcommand of the <B>Import</B> command of the <B>File</B> menu)
+and edit the cell <B>tech-Artwork</B>.
+The top part of the cell shows text in sizes 4 through 20.
+<BR>
+Don't forget to restart X after making changes to the ".Xdefaults" file.
+
+<LI>Electric can speak your language!
+Currently, it has been translated into French.
+Contact Static Free Software if you are interestested in doing a translation.
+To use this facility, edit the "Makefile" and follow the instructions for
+"Internationalization".
+You must then set the environment variable "LANGUAGE" to the
+proper language ("fr" for French).
+On Solaris, you must also set the environment variable
+"NLSPATH" to point to Electric's "lib/international" directory.
+<BR>
+At any time, you can disable the foreign language and return to English by moving the
+translation files.
+These files are in the "lib/international" folder, with a subfolder
+that has the language name (for example, French translations are in "lib/international/fr").
+Beneath that is a folder called "LC_MESSAGES" and inside of that are the translation files.
+</UL>
+<P>
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap01-02.html#chap01-02"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap01-02.html#chap01-02">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap01-04.html#chap01-04">Next</A></TD>
+<TD><A HREF="chap01-04.html#chap01-04"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

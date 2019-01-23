@@ -1,0 +1,281 @@
+.TH electric 1 11/12/00
+.SH NAME
+electric - a VLSI design system
+
+.SH SYNOPSIS
+\fBelectric\fR [\fI-c\fR] [\fI-geom WxH+X+Y\fR] [\fI-i MACROFILE\fR] [\fI-m\fR] [\fI-n\fR] [\fI-t technology\fR] [\fIlibrary\fR]
+
+.SH DESCRIPTION
+Electric is a general purpose system for all electrical design.
+It currently knows about nMOS, CMOS, Bipolar, artwork,
+schematics, printed-circuit boards, and many other technologies.
+Its has a large set of tools including
+multiple design-rule checkers (both incremental and hierarchical),
+an electrical rules checker,
+over a dozen simulator interfaces,
+multiple generators (PLA and pad frame),
+multiple routers (stitching, maze, river),
+network comparison,
+compaction,
+compensation,
+a VHDL compiler,
+and
+a silicon compiler that places-and-routes standard cells.
+.PP
+If a \fIlibrary\fR disk file is mentioned on the command line, that
+file is read as the initial design for editing.
+In addition, the following switches are recognized:
+.IP -c
+requests that the initial ".cadrc" file be ignored (not recommended).
+.IP -geom WxH+X+Y
+requests that the initial edit window be of the specified size and location.
+.IP -i MACROFILE
+requests that the file MACROFILE be used as the initial macro file (not recommended).
+.IP -m
+specifies there may be multiple monitors and that Electric should look for them.
+.IP -n
+requests that no session logging be done.
+.IP -t
+specifies an initial technology.  The argument must be a technology name such as
+"nmos", "cmos", "mocmossub", "schematic", "artwork", etc.
+
+.SH REPRESENTATION
+Circuits are represented as networks that contain
+\fInodes\fR and connecting \fIarcs\fR.
+The nodes are electrical components such as transistors, logic gates, and
+contacts.
+The arcs are simply wires that connect the nodes.
+In addition, each node has a set of \fIports\fR which are the sites
+of arc connection.
+A \fItechnology\fR, then, is simply a set of primitive nodes and arcs
+that are the building blocks of circuits designed in that environment.
+.PP
+Collections of nodes and arcs can also be aggregated into
+\fIfacets\fR of \fIcells\fR which can be used higher
+in the hierarchy to act as nodes.
+These user-defined nodes have ports that come from internal nodes
+whose ports have been converted to \fIexports\fR.
+Facets are collected in \fIlibraries\fR which contain a hierarchically
+consistent design.
+.PP
+Arcs have properties that help constrain the design.
+For example, an arc may rotate arbitrarily or be held in a \fIfixed angle\fR.
+Arcs can also be stretchable or \fIrigid\fR under modification of their
+connecting nodes.
+These constraints propagate hierarchically from the bottom-up.
+
+.SH TECHNOLOGIES
+A large set of technologies is provided in Electric.
+These can be modified with the technology editor, or completely
+new technologies can be created.
+The following paragraphs describe some of the basic technologies.
+.PP
+The nMOS technologies have arcs available in Metal, Polysilicon, and Diffusion.
+The primitive nodes include normal contacts,
+buried contacts, transistors, and "pins" for making arc corners.
+Transistors may be serpentine and the pure layer nodes may be have an outline to form any shape.
+The "nmos" technology has the standard Mead&Conway design rules.
+.PP
+The CMOS technologies have arcs available in Metal, Polysilicon, and Diffusion.
+The Diffusion arcs may be found in a P-well implant or in a P+ implant.
+Thus, there are two types of metal-to-diffusion contacts, two types
+of diffusion pins, and two types of transistors: in P-well and in P+ implant.
+As with nMOS, the transistors may be serpentine and the pure layer primitives
+may take on any shape.
+The "cmos" technology has the standard design rules according to Griswold;
+the "mocmos" technology has design rules for the MOSIS CMOS process (double metal);
+the "mocmossub" technology has design rules for the MOSIS CMOS Submicron process (double poly and up to 6 metal);
+the "rcmos" technology has round geometry for the MOSIS CMOS process.
+.PP
+The "schematic" technology provides basic symbols for doing schematic capture.
+It contains the logic symbols: BUFFER, AND, OR, and XOR.
+Negating bubbles can be placed by negating a connecting arc.
+There are also more complex components such as
+flip-flop, off-page-connector, black-box, meter, and power source.
+Finally, there are analog components:
+transistor, resistor, diode, capacitor, and inductor.
+Two arc types exist: normal wires and variable-width busses.
+.PP
+The "artwork" technology is a sketching environment for doing
+general-purpose graphics.
+Components can be placed with arbitrary color and shape.
+.PP
+The "generic" technology exists for those miscellaneous purposes that do
+not fall into the domain of other technologies.
+It has the universal arc and pin which can connect to ANY other object
+and are therefore useful in mixed-technology designs.
+The invisible arc can be used for constraining two nodes without
+making a connection.
+The unrouted arc can be used for electrical connections that are
+to be routed later with real wires.
+The facet-center primitive, when placed in a facet, defines
+the cursor origin on instances of that facet.
+
+.SH "DESIGN-RULE CHECKING"
+The incremental design-rule checker is normally on and watches all changes
+made to the circuit.
+It does not correct but prints error messages when design rules are violated.
+Hierarchy is not handled, so the contents of subfacets are not checked.
+.PP
+The hierarchical checker looks all the way down the circuit for all design-rules.
+Another option allows an input deck to prepared for ECAD's Dracula
+design-rule checker.
+
+.SH COMPACTION
+The compactor attempts to reduce the size of a facet by removing unnecessary
+space between elements.
+When invoked it will
+compact in the vertical and horizontal directions until it can find no way
+to compact the facet any further.
+It does not do hierarchical compaction, does not guarantee optimal compaction,
+nor can it handle non-manhattan geometry properly.
+The compactor will also spread out the facet to guarantee no design-rule
+violations, if the "spread" option is set.
+
+.SH SIMULATION
+There are many simulator interfaces:
+ESIM (the default simulator: switch-level for nMOS without timing),
+RSIM (switch-level for MOS with timing),
+RNL (switch-level for MOS with timing and LISP front-end),
+MOSSIM (switch-level for MOS with timing),
+COSMOS (switch-level for MOS with timing),
+VERILOG (Cadence simulator),
+TEXSIM (a commercial simulator),
+SILOS (a commercial simulator),
+ABEL (PAL generator/simulator for schematic), and
+SPICE (circuit level).
+MOSSIM, COSMOS, VERILOG, TEXSIM, SILOS, and ABEL
+do not actually simulate: they only write an input deck of your circuit.
+.PP
+In preparation for most simulators, it is necessary to
+create exports at points that you wish to manipulate or examine.
+You must also make exports for power and ground.
+.PP
+In preparation for SPICE simulation, you must make exports for power and ground signals and
+explicitly connect them to source nodes.
+The source should then be parameterized to indicate the amount and whether
+it is voltage or current.
+For example, to make a 5 volt supply, create a source node and set the SPICE fragment to:
+"DC 5".
+Next, exports must be created at all inputs and they must be connected to the positive side
+of sources.
+Next, all exports must be created at all points that are being plotted and there must be meter nodes
+placed on them.
+The node should have the top and bottom ports connected appropriately.
+
+.SH "GENERATORS"
+There are two PLA generators, one specific to nMOS layout, and another
+specific to CMOS layout.
+The nMOS PLA generator reads a single personality table and generates the
+array and all driving circuitry including power and ground connections.
+The CMOS PLA generator reads two personality tables (AND and OR) and also
+reads a library of PLA helper components (called "pla_mocmos") and generates
+the array.
+.PP
+A pad frame generator reads a disk file that describes the pads, their placement, and their
+connection to a core facet.
+
+.SH ROUTING
+The router is able to do river routing, maze routing, and simple facet stitching
+(the explicit wiring of implicitly connected nodes that abut).
+River routing runs a bus of wires between the two opposite sides of a routing channel.
+The connections on each side must be in a line so that the bus runs between
+two parallel sets of points.
+You must use the Unrouted arc from the Generic technology
+to indicate the ports to be connected.
+The river router can also connect wires to the perpendicular sides of the
+routing channel if one or more Unrouted wires cross these sides.
+.PP
+The maze router also requires Unrouted wires, and it converts them to real geometry.
+.PP
+There are two stitching modes: auto stitching and mimic stitching.
+In auto stitching, all ports that physically touch will be stitched.
+Mimic stitching watches arcs that are created by the user
+and adds similar ones at other places in the facet.
+
+.SH "NETWORK COMPARISON"
+The network tool is able to compare the networks in the two
+facets being displayed on the screen.
+Once compared, nodes in one facet can be equated with nodes in the other.
+If the two networks are automorphic or otherwise difficult to distinguish,
+equivalence information can be specified prior to comparison by selecting
+a component in the first facet then selecting a component in the second facet.
+
+.SH AUTHOR
+.nf
+Steven M. Rubin
+   Static Free Software
+   4119 Alpine Road
+   Portola Valley, Ca 94028
+
+Also a cast of thousands:
+   Philip Attfield (Queens University): Polygon merging, facet dates
+   Ron Bolton (University of Saskatchewan): Miscellaneous help
+   Mark Brinsmead (Calgary): Apollo porting
+   Stefano Concina (Schlumberger): Polygon clipping
+   Peter Gallant (Queen's University): ALS simulation
+   T. J. Goodman (University of Canterbury) TEXSIM simulation
+   D. Guptill (Technical University of Nova Scotia): X-window interface
+   Robert Hon (Columbia University): CIF input
+   Sundaravarathan Iyengar (Case Western Reserve University): nMOS PLA generator
+   Allan Jost (Technical University of Nova Scotia): X-window interface
+   Wallace Kroeker (University of Calgary): Digital filter technology, CMOS PLA generator
+   Andrew Kostiuk (Queen's University): QUISC 1.0 Silicon compiler
+   Glen Lawson (S-MOS Systems): GDS-II input
+   David Lewis (University of Toronto): Short circuit checker
+   John Mohammed (Schlumberger): Miscellaneous help
+   Mark Moraes (University of Toronto): X-window interface
+   Sid Penstone (Queens University): many technologies, GDS-II output, SPICE improvements, SILOS simulation, GENERIC simulation
+   J. P. Polonovski (Ecole Polytechnique, France): Memory management improvement
+   Kevin Ryan (Technical University of Nova Scotia): X-window interface
+   Nora Ryan (Schlumberger): Technology translation, Compaction
+   Brent Serbin (Queen's University): ALS Simulator
+   Lyndon Swab (Queen's University): Northern Telecom CMOS technologies
+   Brian W. Thomson (University of Toronto): Mimic stitcher, RSIM interface
+   Burnie West (Schlumberger): Network maintainer help, bipolar technology
+   Telle Whitney (Schlumberger): River router
+   Rob Winstanley (University of Calgary): CIF input, RNL interface
+   Russell Wright (Queen's University): Lots of help
+   David J. Yurach (Queen's University): QUISC 2.0 Silicon compiler
+.fi
+
+.SH "SEE ALSO"
+Rubin, Steven M., "A General-Purpose Framework for CAD Algorithms",
+\fIIEEE Communications\fR, Special Issue on Communications and VLSI, May 1991.
+.br
+Rubin, Steven M., \fIComputer Aids for VLSI Design\fR, Addison-Wesley,
+Reading, Massachusetts, 1987.
+.br
+Rubin, Steven M., "An Integrated Aid for Top-Down Electrical Design",
+\fIProceedings, VLSI '83\fR (Anceau and Aas, eds.), North Holland, Amsterdam, 1983.
+.br
+Mead, C. and Conway, L., \fIIntroduction to VLSI Systems\fR,
+Addison-Wesley, 1980.
+.br
+Electrical User's Guide.
+.br
+Electric Internals manual.
+
+.SH FILES
+.TS
+l l.
+.cadrc	Local startup file
+~/.cadrc	Personal startup file
+.electric.log	Session logging file
+*.elib	Binary input/output files
+*.txt	Text input/output files
+*.cif	CIF input/output files
+*.gds	GDS input/output files
+*.pla	PLA personality input files
+*.map	Color map files
+*.mac	Macro files
+*.sim	ESIM, RSIM, RNL, and COSMOS simulation output
+*.spi	SPICE simulation output
+*.v	VERILOG simulation output
+*.ntk	MOSSIM simulation output
+*.sil	SILOS simulation output
+*.tdl	TEXSIM simulation output
+*.pal	ABLE PAL simulation output
+
+/usr/local/bin/spice	Circuit level simulator: SPICE
+.TE

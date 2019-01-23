@@ -1,0 +1,57 @@
+<HTML><HEAD><TITLE>Using Electric 2-3: Circuit Deletion</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap02-03"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 2: BASIC EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap02-02.html#chap02-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>2-3: Circuit Deletion</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap02-04.html#chap02-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+To remove circuitry, select nodes and/or arcs and use the <B>Erase</B> command from the <B>Edit</B> menu.
+A keyboard shortcut for this is the Delete key.
+If there is a highlighted area rather than a highlighted object,
+everything in the area is erased.
+<P>
+Note that an arc always connects two nodes, and therefore it cannot remain if one of the nodes is gone.
+This means that certain rules apply to circuit deletion:
+<P>
+(1) When a node is erased, all connecting arcs are also deleted.
+However, if a node is deleted that has exactly two arcs,
+connected as though the node were in the middle of a single arc,
+then the node and two arcs are replaced with a single arc.
+<P>
+(2) In the interest of cleanliness, if an arc is erased,
+any isolated pins are also erased.
+<P>
+<TABLE><TR><TD>
+(3) If an erased node has an export on it (as in the example below),
+then the export disappears and so do all arcs connected to the port on instances of the current cell
+(for more information on hierarchy, see <A HREF="chap03-01.html#chap03-01">Chapter 3</A>).
+</TD><TD><CENTER><IMG SRC="../images/chap02-06.png" ALT="Figure 2.6"></CENTER></TD></TR></TABLE>
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap03-14.png" ALT="Figure 3.14"></CENTER></TD><TD>
+<!-- NEED 3in -->
+The <B>Erase Geometry</B> command erases all geometry in the highlighted area.
+All arcs that cross into that area will be truncated.
+Thus, this command truly erases geometry, independent of the structure of nodes and arcs.
+Note that the area to be erased is adjusted by the current alignment values
+(see <A HREF="chap04-07.html#chap04-07">Section 4-7</A>).
+</TD></TR></TABLE>
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap02-02.html#chap02-02"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap02-02.html#chap02-02">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap02-04.html#chap02-04">Next</A></TD>
+<TD><A HREF="chap02-04.html#chap02-04"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

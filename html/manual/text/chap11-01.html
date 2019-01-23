@@ -1,0 +1,68 @@
+<HTML><HEAD><TITLE>Using Electric 11-1: Introduction to Interpreters</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<HR>
+
+<CENTER><H1><A NAME="chap11-01">Chapter 11: INTERPRETERS</A></H1></CENTER>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap10-09.html#chap10-09"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>11-1: Introduction to Interpreters</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap11-02.html#chap11-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Electric has built in interpretive languages that provide great power in design.
+The TCL interpreter is a graphical user-interface language.
+The Lisp interpreter implements a Scheme Lisp dialect.
+The Java interpreter connects with the Java Virtual Machine.
+<P>
+Note, however, that because of copyright restrictions,
+these interpreters are not part of the standard GNU distribution and must be obtained separately.
+The Lisp source code are available from
+<A HREF="http://www.staticfreesoft.com">Static Free Software</A>.
+The Java interpreter is available from <A HREF="http://java.sun.com">Sun</A>.
+The TCL interpreter is available from <A HREF="http://www.tcl.tk">ActiveState</A>.
+For more details, see the installation instructions for UNIX (<A HREF="chap01-03.html#chap01-03">Section 1-3</A>),
+Macintosh (<A HREF="chap01-04.html#chap01-04">Section 1-4</A>),
+and Windows (<A HREF="chap01-05.html#chap01-05">Section 1-5</A>).
+<P>
+The <B>Interpretive Language</B> command of the <B>Windows</B> menu shows the language choices available:
+<B>TCL...</B>, <B>LISP...</B> and/or <B>Java...</B>
+Once these commands are issued,
+you are in direct communication with the interpreter and may type arbitrary expressions in the messages window.
+When done with an interpretive session, type Ctrl-D to return to Electric
+(hold the control key and type "D").
+On Windows systems, type ESC.
+<P>
+<TABLE><TR><TD>
+The Java interpreter has two options, invoked with the <B>Java Options...</B>
+subcommand of the <B>Interpretive Language</B> command of the <B>Windows</B> menu.
+You can choose to disable the Java compiler, forcing interpretation at each step (useful when debugging).
+You can also choose to disable Java evaluation completely, causing all expressions to appear in their "source" form
+(this is useful when documenting code: the expressions will appear in the place of their evaluated values).
+</TD><TD><CENTER><IMG SRC="../images/chap11-06.png" ALT="Figure 11.6"></CENTER></TD></TR></TABLE>
+<P>
+Besides basic expressions in the language, it is possible to examine and modify the Electric database.
+Special language extensions exist for doing this.
+For more information, see the following sections on Lisp <A HREF="chap11-02.html#chap11-02">(Section 11-2)</A>,
+TCL <A HREF="chap11-03.html#chap11-03">(Section 11-3)</A>, and Java <A HREF="chap11-04.html#chap11-04">(Section 11-4)</A>.
+<P>
+Another way to make use of the interpretive languages is to place code on nonlayout text, cell parameters,
+and attributes on Electric objects.
+In the <B>Define</B> subcommand of the <B>Attributes...</B> command of the <B>Info</B> menu,
+and in the <B>Get Info</B> command when text is selected,
+Change the "Not CODE" popup entry to "TCL", "LISP", or "JAVA" and type the code in the "Value" field.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap10-09.html#chap10-09"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap10-09.html#chap10-09">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap11-02.html#chap11-02">Next</A></TD>
+<TD><A HREF="chap11-02.html#chap11-02"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

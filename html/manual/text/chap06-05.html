@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>Using Electric 6-5: Spreading Circuitry</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap06-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 6: ADVANCED EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap06-04.html#chap06-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>6-5: Spreading Circuitry</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap06-06.html#chap06-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+When a large amount of circuitry has been placed too close together or too far apart,
+Electric's constraint system can help.
+All that is necessary is to make all arcs in an area rigid and then move one node.
+Of course,
+you may have to move more than one node if the one you pick is not connected to everything else you want to move.
+Also, you must make sure that arcs connecting across the area boundary are nonrigid.
+Finally, setting arc rigidity should be done temporarily so that it does not spoil an existing constraint setup.
+All these operations are handled for you by the <B>Spread...</B> subcommand of the
+<B>Move</B> command of the </b><B>Edit</B> menu.
+<P>
+<TABLE><TR><TD>
+With the <B>Spread...</B> command, the highlighted node is a focal point about which objects move.
+A dialog is presented in which an amount and a direction (up,
+down, left, or right) are specified.
+An infinite line is passed through the highlighted node's center and everything above,
+below, to the left of, or to the right of the line is moved by the specified amount.
+</TD><TD><CENTER><IMG SRC="../images/chap06-03.png" ALT="Figure 6.3"></CENTER></TD></TR></TABLE>
+<P>
+Negative spread distances compact the circuit.
+Note that the default unit for typed values is <I>lambda</I>,
+unless another unit is explicitly mentioned
+(see <A HREF="chap07-02.html#chap07-02">Section 7-2</A>).
+<P>
+Another way to spread or squeeze circuitry is to use the compaction tool
+(see <A HREF="chap09-11.html#chap09-11">Section 9-11</A>).
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap06-04.html#chap06-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap06-04.html#chap06-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap06-06.html#chap06-06">Next</A></TD>
+<TD><A HREF="chap06-06.html#chap06-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

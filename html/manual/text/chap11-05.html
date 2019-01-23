@@ -1,0 +1,317 @@
+<HTML><HEAD><TITLE>Using Electric 11-5: Interpreter Attributes</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap11-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 11: INTERPRETERS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap11-04.html#chap11-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>11-5: Interpreter Attributes</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-01.html#chap12-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+When examining the database from the language interpreters,
+you have access to many attributes on the various objects.
+This section lists the predefined attributes on the different Electric objects.
+Those attributes with a (*) next to them are relatively important to database examination.
+<P>
+This section is not meant as a full explanation of the attributes in the Electric database,
+but rather is a quick list.
+For more detail on these and other aspects of Electric internals,
+see the Electric Internals Manual
+(a document that is available from <A HREF="http://www.staticfreesoft.com">Static Free Software</A>).
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on components (<B>NODEINST</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD>&nbsp;</TD><TD>aseen</TD><TD><B>Integer</B></TD><TD>flags for the database</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstportarcinst</TD><TD><B>PORTARCINST</B></TD><TD>head of linked list of connecting arcs' ports</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstportexpinst</TD><TD><B>PORTEXPINST</B></TD><TD>head of linked list of exports</TD></TR>
+<TR><TD>&nbsp;</TD><TD>geom</TD><TD><B>GEOM</B></TD><TD>geometry module</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highx</TD><TD><B>Integer</B></TD><TD>high X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highy</TD><TD><B>Integer</B></TD><TD>high Y coordinate in database units</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastinst</TD><TD><B>NODEINST</B></TD><TD>link to previous component of this type</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastnodeinst</TD><TD><B>NODEINST</B></TD><TD>link to previous component in this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowx</TD><TD><B>Integer</B></TD><TD>low X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowy</TD><TD><B>Integer</B></TD><TD>low Y coordinate in database units</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextinst</TD><TD><B>NODEINST</B></TD><TD>link to next component of this type</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextnodeinst</TD><TD><B>NODEINST</B></TD><TD>link to next component in this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>parent</TD><TD><B>NODEPROTO</B></TD><TD>cell that contains this component</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>proto</TD><TD><B>NODEPROTO</B></TD><TD>type of this component</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>rotation</TD><TD><B>Integer</B></TD><TD>angle in degrees of this component</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>transpose</TD><TD><B>Integer</B></TD><TD>nonzero if component transposed after rot.</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on component prototypes (<B>NODEPROTO</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD>&nbsp;</TD><TD>adirty</TD><TD><B>Integer</B></TD><TD>flags for the database</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>cell</TD><TD><B>CELL</B></TD><TD>cell of which this cell is a part</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>cellview</TD><TD><B>VIEW</B></TD><TD>view of this cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>creationdate</TD><TD><B>Integer</B></TD><TD>date this cell was created</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstarcinst</TD><TD><B>ARCINST</B></TD><TD>head of list of wires in this cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstinst</TD><TD><B>NODEINST</B></TD><TD>head of list of instances of this prototype</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstnetwork</TD><TD><B>NETWORK</B></TD><TD>head of list of networks in this cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstnodeinst</TD><TD><B>NODEINST</B></TD><TD>head of list of components in this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>firstportproto</TD><TD><B>PORTPROTO</B></TD><TD>head of list of exports on this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highx</TD><TD><B>Integer</B></TD><TD>high X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highy</TD><TD><B>Integer</B></TD><TD>high Y coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>primindex</TD><TD><B>Integer</B></TD><TD>nonzero if this is a primitive prototype</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastnodeproto</TD><TD><B>NODEPROTO</B></TD><TD>link to previous prototype in lib/tech</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastversion</TD><TD><B>NODEPROTO</B></TD><TD>earlier version of this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowx</TD><TD><B>Integer</B></TD><TD>low X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowy</TD><TD><B>Integer</B></TD><TD>low Y coordinate in database units</TD></TR>
+<TR><TD>&nbsp;</TD><TD>newestversion</TD><TD><B>NODEPROTO</B></TD><TD>most recent version of this cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextnodeproto</TD><TD><B>NODEPROTO</B></TD><TD>link to next prototype in lib/tech</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextincell</TD><TD><B>NODEPROTO</B></TD><TD>next view in this cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>revisiondate</TD><TD><B>Integer</B></TD><TD>date this cell was last modified</TD></TR>
+<TR><TD>&nbsp;</TD><TD>rtree</TD><TD><B>RTNODE</B></TD><TD>root R-tree in this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>primname</TD><TD><B>String</B></TD><TD>name of this primitives (if primitive)</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>tech</TD><TD><B>TECHNOLOGY</B></TD><TD>technology in which this primitive resides</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>version</TD><TD><B>Integer</B></TD><TD>version number of this cell</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on cells (<B>CELL</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>cellname</TD><TD><B>String</B></TD><TD>name of this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>firstincell</TD><TD><B>NODEPROTO</B></TD><TD>first cell in this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lib</TD><TD><B>LIBRARY</B></TD><TD>library containing this cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>nextcell</TD><TD><B>CELL</B></TD><TD>link to next cell in this library</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on instantiated wire connections (<B>PORTARCINST</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>conarcinst</TD><TD><B>ARCINST</B></TD><TD>wire that is connected at this port</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextportarcinst</TD><TD><B>PORTARCINST</B></TD><TD>link to next instantiated wire connection</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>proto</TD><TD><B>PORTPROTO</B></TD><TD>prototype of the port that is connected</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on instantiated export instances (<B>PORTEXPINST</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>exportproto</TD><TD><B>PORTPROTO</B></TD><TD>export prototype on parent cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextportexpinst</TD><TD><B>PORTEXPINST</B></TD><TD>link to next instantiated export connection</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>proto</TD><TD><B>PORTPROTO</B></TD><TD>prototype of the port that is an export</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on connection prototypes (<B>PORTPROTO</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD>&nbsp;</TD><TD>aseen</TD><TD><B>Integer</B></TD><TD>flags for the database</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>connects</TD><TD><B>ARCPROTO</B> array</TD><TD>array of arc types that may connect</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>network</TD><TD><B>NETWORK</B></TD><TD>network object</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextportproto</TD><TD><B>PORTPROTO</B></TD><TD>link to next connection prototype</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>parent</TD><TD><B>NODEPROTO</B></TD><TD>component prototype with connection</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>protoname</TD><TD><B>String</B></TD><TD>name of connection</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>subnodeinst</TD><TD><B>NODEINST</B></TD><TD>origin component in cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>subportexpinst</TD><TD><B>PORTEXPINST</B></TD><TD>origin export component in cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>subportproto</TD><TD><B>PORTPROTO</B></TD><TD>origin port on component in cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on wires (<B>ARCINST</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD>&nbsp;</TD><TD>aseen</TD><TD><B>Integer</B></TD><TD>flags for the database</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>endshrink</TD><TD><B>Integer</B></TD><TD>data for nonmanhattan end shrinkage</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>geom</TD><TD><B>GEOM</B></TD><TD>geometry module</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastarcinst</TD><TD><B>ARCINST</B></TD><TD>link to previous wire in cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>length</TD><TD><B>Integer</B></TD><TD>length in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>network</TD><TD><B>NETWORK</B></TD><TD>network object</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextarcinst</TD><TD><B>ARCINST</B></TD><TD>link to next wire in cell</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>nodeinst1</TD><TD><B>NODEINST</B></TD><TD>component on end 1</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>nodeinst2</TD><TD><B>NODEINST</B></TD><TD>component on end 2</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>parent</TD><TD><B>NODEPROTO</B></TD><TD>cell that contains this wire</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>portarcinst1</TD><TD><B>PORTARCINST</B></TD><TD>instantiated wire connection on end 1</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>portarcinst2</TD><TD><B>PORTARCINST</B></TD><TD>instantiated wire connection on end 2</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>proto</TD><TD><B>ARCPROTO</B></TD><TD>type of this wire</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>width</TD><TD><B>Integer</B></TD><TD>width in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>xpos1</TD><TD><B>Integer</B></TD><TD>X coordinate of end 1 in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>xpos2</TD><TD><B>Integer</B></TD><TD>X coordinate of end 2 in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>ypos1</TD><TD><B>Integer</B></TD><TD>Y coordinate of end 1 in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>ypos2</TD><TD><B>Integer</B></TD><TD>Y coordinate of end 2 in database units</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on wire prototypes (<B>ARCPROTO</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD>&nbsp;</TD><TD>arcindex</TD><TD><B>Integer</B></TD><TD>0-based index of this arc type</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextarcproto</TD><TD><B>ARCPROTO</B></TD><TD>link to next arc type in this technology</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>nominalwidth</TD><TD><B>Integer</B></TD><TD>default wire width in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>protoname</TD><TD><B>String</B></TD><TD>name of this wire type</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>tech</TD><TD><B>TECHNOLOGY</B></TD><TD>technology in which this wire type resides</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on networks (<B>NETWORK</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>netname</TD><TD><B>String</B></TD><TD>name of this network</TD></TR>
+<TR><TD>&nbsp;</TD><TD>namecount</TD><TD><B>Integer</B></TD><TD>number of names</TD></TR>
+<TR><TD>&nbsp;</TD><TD>arccount</TD><TD><B>Integer</B></TD><TD>number of arcs on this network</TD></TR>
+<TR><TD>&nbsp;</TD><TD>arcaddr</TD><TD><B>ARCINST</B> array</TD><TD>address of arc(s) on this network</TD></TR>
+<TR><TD>&nbsp;</TD><TD>refcount</TD><TD><B>Integer</B></TD><TD>number of arcs on network</TD></TR>
+<TR><TD>&nbsp;</TD><TD>portcount</TD><TD><B>Integer</B></TD><TD>number of ports on this network</TD></TR>
+<TR><TD>&nbsp;</TD><TD>buslinkcount</TD><TD><B>Integer</B></TD><TD>number of busses referencing this network</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>parent</TD><TD><B>NODEPROTO</B></TD><TD>cell that has this network</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>signals</TD><TD><B>Integer</B></TD><TD>width of bus or index into bus</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>networklist</TD><TD><B>NETWORK</B> array</TD><TD>list of single-wire networks on bus</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextnetwork</TD><TD><B>NETWORK</B></TD><TD>next in linked list</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastnetwork</TD><TD><B>NETWORK</B></TD><TD>previous in linked list</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on geometric objects (<B>GEOM</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>entryisnode</TD><TD><B>Integer</B></TD><TD>nonzero for component</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>entryaddr</TD><TD><B>NODEINST</B> or <B>ARCINST</B></TD><TD>address of component or wire</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highx</TD><TD><B>Integer</B></TD><TD>high X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highy</TD><TD><B>Integer</B></TD><TD>high Y coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowx</TD><TD><B>Integer</B></TD><TD>low X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowy</TD><TD><B>Integer</B></TD><TD>low Y coordinate in database units</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on R-tree nodes (<B>RTNODE</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>flag</TD><TD><B>Integer</B></TD><TD>nonzero if pointers are terminal (geom)</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highx</TD><TD><B>Integer</B></TD><TD>high X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>highy</TD><TD><B>Integer</B></TD><TD>high Y coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowx</TD><TD><B>Integer</B></TD><TD>low X coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>lowy</TD><TD><B>Integer</B></TD><TD>low Y coordinate in database units</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>parent</TD><TD><B>RTNODE</B></TD><TD>parent R-tree node</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>pointers</TD><TD><B>RTNODE</B> array</TD><TD>children (type depends on "flag")</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>total</TD><TD><B>Integer</B></TD><TD>number of children in this node</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on cell libraries (<B>LIBRARY</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>curnodeproto</TD><TD><B>NODEPROTO</B></TD><TD>currently edited cell in library</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstcell</TD><TD><B>CELL</B></TD><TD>head of list of cells in library</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstnodeproto</TD><TD><B>NODEPROTO</B></TD><TD>head of list of cells in library</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lambda</TD><TD><B>Integer</B> array</TD><TD>values of lambda for all technologies</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>libname</TD><TD><B>String</B></TD><TD>name of this library</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>libfile</TD><TD><B>String</B></TD><TD>disk file associated with this library</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextlibrary</TD><TD><B>LIBRARY</B></TD><TD>link to next library in Electric</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on design environment objects (<B>TECHNOLOGY</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>deflambda</TD><TD><B>Integer</B></TD><TD>value of lambda in database units</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstarcproto</TD><TD><B>ARCPROTO</B></TD><TD>head of list of wire types in this technology</TD></TR>
+<TR><TD>&nbsp;</TD><TD>firstnodeproto</TD><TD><B>NODEPROTO</B></TD><TD>head of list of primitive components</TD></TR>
+<TR><TD>&nbsp;</TD><TD>techindex</TD><TD><B>Integer</B></TD><TD>0-based index of this technology</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>nexttechnology</TD><TD><B>TECHNOLOGY</B></TD><TD>link to next technology in Electric</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>techdescript</TD><TD><B>String</B></TD><TD>long description of this technology</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>techname</TD><TD><B>String</B></TD><TD>short name of this technology</TD></TR>
+<TR><TD>&nbsp;</TD><TD>userbits</TD><TD><B>Integer</B></TD><TD>miscellaneous flags (none at present)</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on views (<B>VIEW</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>nextview</TD><TD><B>VIEW</B></TD><TD>link to next view</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>viewname</TD><TD><B>String</B></TD><TD>name of this view</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>sviewname</TD><TD><B>String</B></TD><TD>abbreviated name of this view</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on editing window partition objects (<B>WINDOWPART</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>curnodeproto</TD><TD><B>NODEPROTO</B></TD><TD>cell in window</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>gridx</TD><TD><B>Integer</B></TD><TD>X spacing of grid</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>gridy</TD><TD><B>Integer</B></TD><TD>Y spacing of grid</TD></TR>
+<TR><TD>&nbsp;</TD><TD>lastwindowpart</TD><TD><B>WINDOWPART</B></TD><TD>last in linked list</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>location</TD><TD><B>String</B></TD><TD>name of window</TD></TR>
+<TR><TD>&nbsp;</TD><TD>nextwindowpart</TD><TD><B>WINDOWPART</B></TD><TD>next in linked list</TD></TR>
+<TR><TD>&nbsp;</TD><TD>screenlx</TD><TD><B>Integer</B></TD><TD>low X coordinate in cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>screenly</TD><TD><B>Integer</B></TD><TD>low Y coordinate in cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>screenhx</TD><TD><B>Integer</B></TD><TD>high X coordinate in cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>screenhy</TD><TD><B>Integer</B></TD><TD>high Y coordinate in cell</TD></TR>
+<TR><TD>&nbsp;</TD><TD>state</TD><TD><B>Integer</B></TD><TD>miscellaneous information about window</TD></TR>
+<TR><TD>&nbsp;</TD><TD>uselx</TD><TD><B>Integer</B></TD><TD>low X coordinate on screen</TD></TR>
+<TR><TD>&nbsp;</TD><TD>usely</TD><TD><B>Integer</B></TD><TD>low Y coordinate on screen</TD></TR>
+<TR><TD>&nbsp;</TD><TD>usehx</TD><TD><B>Integer</B></TD><TD>high X coordinate on screen</TD></TR>
+<TR><TD>&nbsp;</TD><TD>usehy</TD><TD><B>Integer</B></TD><TD>high Y coordinate on screen</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on graphical attribute objects (<B>GRAPHICS</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>bits</TD><TD><B>Integer</B></TD><TD>bitplanes of color display</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>col</TD><TD><B>Integer</B></TD><TD>color to use</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>raster</TD><TD><B>Integer</B> array</TD><TD>16x16 bit pattern</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on editing constraint objects (<B>CONSTRAINT</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>conname</TD><TD><B>String</B></TD><TD>name of constraint system</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>condesc</TD><TD><B>String</B></TD><TD>description of constraint system</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on synthesis and analysis tools (<B>AID</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>aidname</TD><TD><B>String</B></TD><TD>name of this tool</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>aidstate</TD><TD><B>Integer</B></TD><TD>miscellaneous flags</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>aidindex</TD><TD><B>Integer</B></TD><TD>0-based index of this tool</TD></TR>
+</TABLE></CENTER>
+<P>
+<!-- NEED 2in -->
+<CENTER><TABLE BORDER=1 WIDTH=90%>
+<TR><TD COLSPAN=4><CENTER>These basic attributes exist on polygons (<B>POLYGON</B>):</CENTER></TD></TR>
+<TR><TD WIDTH=5%>&nbsp;</TD><TD WIDTH=15%>ATTRIBUTE</TD><TD WIDTH=20%>TYPE</TD><TD WIDTH=60%>DESCRIPTION</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>count</TD><TD><B>Integer</B></TD><TD>number of points</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>desc</TD><TD><B>GRAPHICS</B></TD><TD>graphic appearance</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>font</TD><TD><B>Integer</B></TD><TD>font size</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>layer</TD><TD><B>Integer</B></TD><TD>layer number</TD></TR>
+<TR><TD>&nbsp;</TD><TD>limit</TD><TD><B>Integer</B></TD><TD>max allocated points</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>portproto</TD><TD><B>PORTPROTO</B></TD><TD>port association</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>string</TD><TD><B>String</B></TD><TD>message (if text style)</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>style</TD><TD><B>Integer</B></TD><TD>style</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>tech</TD><TD><B>TECHNOLOGY</B></TD><TD>technology</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>xv</TD><TD><B>Integer</B> array</TD><TD>X coordinate values</TD></TR>
+<TR><TD ALIGN=CENTER>*</TD><TD>yv</TD><TD><B>Integer</B> array</TD><TD>Y coordinate values</TD></TR>
+</TABLE></CENTER>
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap11-04.html#chap11-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap11-04.html#chap11-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-01.html#chap12-01">Next</A></TD>
+<TD><A HREF="chap12-01.html#chap12-01"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,200 @@
+<HTML><HEAD><TITLE>Using Electric 3-7: Cell Information</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-07"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-06.html#chap03-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-7: Cell Information</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap03-08.html#chap03-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Miscellaneous Commands</H3>
+<P>
+The most basic cell information that you can get is a list of cells.
+This can be done with the <B>Edit Cell...</B> command of the <B>Cells</B> menu.
+The dialog will show the cell names (at which point you can cancel the dialog).
+<P>
+To get some basic information about the current cell
+(size, dates, etc) use the <B>Describe this Cell</B> command of the <B>Cells</B> menu.
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap03-21.png" ALT="Figure 3.21"></CENTER></TD><TD>
+To get such information for a subset of cells, use the <B>General Cell Lists...</B> command.
+<P>
+The dialog selects a subset of the cells in the current library.
+<P>
+The section labeled "Which cells:" selects the cells to be listed
+(all, only those used in other cells,
+only those NOT used in the current cell,
+only those in the current cell,
+or only "placeholder" cells: those created because of cross-library dependency failures).
+<P>
+The section labeled "View filter:" allows only certain views to be displayed.
+<P>
+The section labeled "Version filter:" allows removal of older or newer versions of cells.
+<P>
+The section labeled "Display ordering:" controls the order in which the selected cells will be listed.
+<P>
+The section labeled "Destination:" allows you to dump this listing to a disk file,
+formatted for spreadsheets (tab-separated).
+</TD></TR></TABLE>
+<P>
+The last six columns show the usage and five state bits.
+The usage is the number of times that this cell appears as an instance in other cells.
+The state bits are:
+"L" (if the cell contents are locked),
+"I" (if instances of the cell are locked),
+"C" (if the cell is part of a cell library),
+"D" (if the cell has passed design-rule checking),
+and "N" (if the cell has passed network consistency checking).
+<P>
+To see all exports in the current cell,
+use the <B>Export</B> menu commands <B>List Exports</B>
+(for a text listing) or <B>Show Exports</B> (for a graphical indication).
+To see a list of exports that are electrically connected to the current object,
+at multiple levels of hierarchy,
+use the <B>List Exports on Network</B> and <B>List Exports below Network</B> commands from the <B>Info</B> menu.
+<P>
+For more cell information, use the subcommands of the <B>Special Cell Lists</B> submenu of the <B>Cells</B> menu.
+The <B>List Nodes in this Cell</B> subcommand shows all nonprimitive nodes in the current cell.
+The <B>List Cell Instances</B> subcommand shows all cell instances below the current cell.
+The <B>List Cell Usage...</B> subcommand looks up the hierarchy and finds cells that contain the
+a particular cell as an instance (you will be prompted for the particular cell).
+<P>
+<TABLE><TR><TD>
+The <B>Graphically, Entire Library</B> subcommand displays a graph of every cell in the library.
+The <B>Graphically, From Current Cell</B> subcommand displays a graph that places the current cell at the top.
+These commands create a graph of the cell hierarchy.
+This graph is actually a new cell, called "CellStructure",
+built from Artwork nodes, and stored with the other cells.
+If you select a name in this graph,
+then the <B>Edit Cell...</B> command of the <B>Cells</B> menu defaults to that cell.
+</TD><TD><CENTER><IMG SRC="../images/chap03-20.png" ALT="Figure 3.20"></CENTER></TD></TR></TABLE>
+<P>
+The <B>Edit Documentation View</B> command of the <B>View</B> menu allows you to store arbitrary text with the cell.
+The text editing window that appears can contain any information.
+See <A HREF="chap04-10.html#chap04-10">Section 4-10</A> for more on text editing.
+<P>
+The <B>List Layer Coverage</B> command of the <B>Info</B> menu computes the percentage of the cell that is covered by each layer.
+This is useful information for certain fabrication processes which insist on a minimum amount of each layer in the die.
+<!-- NEED 5in -->
+<P>
+<H3>Cell Options</H3>
+<P>
+To examine and set more information about existing cells,
+use the <B>Cell Options...</B> command of the <B>Cells</B> menu:
+<P>
+<CENTER><IMG SRC="../images/chap03-10.png" ALT="Figure 3.10"></CENTER>
+<P>
+The upper part of the dialog provides options on a per-cell basis
+(choose the library and the cell and then set its options).
+The checkbox "Disallow modification of anything in this cell",
+allows you to control whether the contents of a cell is editable or not.
+When modification is disallowed, no changes may be made.
+This is useful when you want to allow examination without accidental modification.
+The checkbox "Disallow modification of instances in this cell",
+also prevents changes to the selected cell, but in this case, only sub-instances are locked.
+This is useful when you have a correct instance placement and are doing wiring.
+Buttons on the right allow you to set or clear these flags for all cells.
+<TABLE><TR><TD>
+If you make a change that has been disallowed,
+a dialog appears that asks if you want to override the lock.
+You may make the change, disallow the change, or remove the lock
+(which effectively unchecks the locks in the <B>Cell Options...</B> dialog).
+</TD><TD><CENTER><IMG SRC="../images/chap03-15.png" ALT="Figure 3.15"></CENTER></TD></TR></TABLE>
+<P>
+The check box "Part of a cell-library"
+indicates that this cell is from a library of standard cells and should be treated accordingly.
+Buttons on the right allow you to set or clear this flag for all cells.
+Most dialogs that list cells can remove those from cell-libraries to keep the list simpler.
+<P>
+The check box "Use technology editor on this cell"
+indicates that this cell part of a technology editor library.
+Editing of cells in a technology editor library is done in a special mode (indicated with a yellow border in the window).
+See <A HREF="chap08-02.html#chap08-02">Section 8-2</A> for more information about technology editing.
+<P>
+The "Expand new instances" and "Unexpand new instances"
+buttons choose whether newly created instances of this cell are expanded
+(contents visible) or unexpanded (drawn with a black outline)
+See <A HREF="chap03-04.html#chap03-04">Section 3-4</A> for more on expansion.
+<P>
+The "Characteristic Spacing" is the spacing of this cell when arrayed
+(see <A HREF="chap06-04.html#chap06-04">Section 6-4</A>).
+<P>
+The lower part of the dialog contains options that will apply to all cells.
+The check box "Check Cell dates during creation"
+requests that date information be used to ensure a proper circuit building sequence.
+When this box is checked,
+warning messages will be issued when editing a cell that has more recent subcell instances.
+Electric tracks cell creation and revision dates,
+and this information can be displayed with the <B>Describe this Cell</B>
+command and others in the <B>Cells</B> menu.
+<P>
+The check box "Switch technology to match current cell"
+requests that the current technology automatically change whenever the current cell changes so that the two match.
+<P>
+The check box "Place Cell-Center in new cells"
+requests that all newly created cells have a Cell-Center node (named "Facet-Center" for historical reasons) placed at the origin
+(see <A HREF="chap03-03.html#chap03-03">Section 3-3</A> for more on Cell centers).
+<P>
+The check box "Tiny cells hashed out"
+requests that cells be displayed with a gray hash pattern when they are too tiny for their contents to be distinguished.
+Without this option, all geometry is drawn, which can take a long time.
+You can control the threshold of "tinyness" by setting the number of lambda units per pixel.
+Any view in which this many lambda units are shown in pixel will be too small to display fully.
+<P>
+<H3>The Cell Explorer</H3>
+The <B>Cell Explorer...</B> command of the <B>Cells</B> menu splits the current window,
+and shows a hierarchical "explorer" window in the left half.
+Another way to get the cell explorer is to click on the "tree" icon in the lower-left of the window.
+<P>
+The explorer window has 3 sections: the Hierarchical View, Contents View, and Errors View.
+<P>
+<!-- NEED 6in -->
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap03-16.png" ALT="Figure 3.16"></CENTER></TD><TD>
+The Hierarchical View of the cell explorer lists only the "top level" cells of each library
+(top level cells are those that are not used as instances in any other cells).
+By clicking on the box with the "+", the cell's contents are shown in a recursively indented manner.
+Each cell lists the number of times that it occurs in the higher-level cell.
+<P>
+The Contents View of the cell explorer lists every cell in every library.
+Inside of each cell is a list of arcs, exports, networks, and nodes.
+When editing technology-edit libraries, the Contents View breaks down the library according to layers, nodes, and arcs.
+<P>
+The third part of the Cell Explorer is the Errors View.
+This lists all errors that were generated by other tools (DRC, ERC, NCC, etc.)
+and which are normally presented with the "<" and ">" keys.
+</TD></TR></TABLE>
+<P>
+Any text shown in the Cell Explorer can be copied (and pasted to another document) by selecting a line and using the
+<B>Copy</B> command.
+In both the Contents and Hierarchical View, you can double-click on any object to see it in the other half of the window.
+Double-clicking on a cell shows that cell.
+Clicking a cell and typing the DELETE key deletes that cell.
+Double-clicking on a library name makes that library the current one.
+<P>
+In addition, the Cell Explorer uses a "context menu" that is accessed by right-clicking on an entry
+(use command-click on the Macintosh).
+The context menu offers special operations,
+for example the ability to recursively open or close all entries below the current one.
+<P>
+The line which separates the Cell Explorer from the edit window can be moved simply by clicking on it and dragging it
+(see <A HREF="chap04-03.html#chap04-03">Section 4-3</A> for more on window control).
+To make the Cell Explorer go away,
+delete that window partition, click on the tree icon again, or issue the <B>Cell Explorer...</B> command again.
+<P>
+The font size of text in the Cell Explorer can be set in the "Cell explorer text size"
+field of the <B>Cell Options...</B> dialog.
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-06.html#chap03-06"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-06.html#chap03-06">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap03-08.html#chap03-08">Next</A></TD>
+<TD><A HREF="chap03-08.html#chap03-08"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

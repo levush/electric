@@ -1,0 +1,96 @@
+<HTML><HEAD><TITLE>Using Electric 6-10: Outline Editing</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap06-10"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 6: ADVANCED EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap06-09.html#chap06-09"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>6-10: Outline Editing</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap06-11.html#chap06-11"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>What is an Outline?</H3>
+<P>
+For some primitive nodes, it is not enough to rotate, mirror, and scale.
+These primitives can to be augmented with an <I>outline</I>,
+which is a polygonal description.
+The <B>Outline Edit</B> subcommand of the <B>Special Function</B> command of the <B>Edit</B> menu is used to create,
+delete, and move individual points in a node's outline.
+<P>
+There are quite a few primitive nodes that make use of outline information.
+The MOS transistors use the outline to define the gate path in serpentine configurations
+(see <A HREF="chap07-04.html#chap07-04">Section 7-4</A>).
+The Artwork technology has nodes that use outline information:
+Opened-Solid-Polygon, Opened-Dotted-Polygon, Opened-Dashed-Polygon,
+Opened-Thicker-Polygon, Closed-Polygon, Filled-Polygon, and Spline
+(see <A HREF="chap07-07.html#chap07-07">Section 7-7</A>).
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap06-17.png" ALT="Figure 6.17"></CENTER></TD><TD>
+For arbitrary shapes on arbitrary layers,
+use the <I>pure-layer</I> nodes in the IC layout technologies.
+The pure-layer nodes are those in the <B>New Pure-Layer Node...</B> command of the <B>Edit</B> menu.
+For example,
+the node called "Metal-1-Node" in the CMOS technologies looks like a rectangle of the Metal-1,
+until you add outline information.
+With an outline, this node can take any shape.
+</TD></TR></TABLE>
+<P>
+<!-- NEED 3in -->
+<H3>Manipulating Outlines</H3>
+<P>
+<TABLE><TR><TD>
+To manipulate outline information on the currently highlighted node,
+use the <B>Outline Edit</B> subcommand of the <B>Special Function</B> command of the <B>Edit</B> menu.
+After issuing this command, the
+window is highlighted with a blue border.
+In this mode, the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I>
+button is used to select and move a point on the outline, and the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I>
+button adds a new point after the selected one.
+You can also use the left and right arrow keys to move around the outline.
+The <B>Erase</B> command of the <B>Edit</B> menu changes to <B>Erase Point</B>
+and deletes the highlighted outline point (so does the Delete key).
+The <B>Rotate</B> and <B>Mirror</B> commands change to <B>Rotate about Point</B>
+and <B>Mirror about Point</B> which allow the entire node to pivot about the currently selected point.
+Finally, the <B>Get Info</B> command of the <B>Info</B> menu changes to <B>Get Outline Info</B>
+and displays a dialog which allows precise manipulation of the data.
+</TD><TD><CENTER><IMG SRC="../images/chap06-09.png" ALT="Figure 6.9"></CENTER></TD></TR></TABLE>
+<P>
+When done editing the outline, use the <B>Exit Outline Edit</B> subcommand
+(in the same location as <B>Outline Edit</B> was in the <B>Special Function</B> command of the <B>Edit</B> menu).
+<P>
+<H3>Special Outline Generation</H3>
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap06-12.png" ALT="Figure 6.12"></CENTER></TD><TD>
+To generate a doughnut shaped outline, use the <B>Annular Ring</B>
+subcommand of the <B>New Special Object</B> command of the <B>Edit</B> menu.
+This dialog prompts for a layer to use and an inner and outer radius for the annulus.
+By default, it is made as a full circle (360 degrees), but this can also be changed.
+Finally, the number of line segments used in the construction can be set,
+allowing for smoother or coarser shapes.
+<P>
+<CENTER><IMG SRC="../images/chap06-16.png" ALT="Figure 6.16"></CENTER>
+</TD></TR></TABLE>
+<P>
+<TABLE><TR><TD>
+To generate text-shaped outline,
+use the <B>Text (layout)...</B> subcommand of the <B>New Special Object</B> command of the <B>Edit</B> menu.
+This dialog prompts for text and a layer to use as well as the size, scale, font, and style.
+A nonzero dot separation causes each pixel of the text to be placed separately (some design rules need this).
+<P>
+<CENTER><IMG SRC="../images/chap06-15.png" ALT="Figure 6.15"></CENTER>
+</TD><TD><CENTER><IMG SRC="../images/chap06-14.png" ALT="Figure 6.14"></CENTER></TD></TR></TABLE>
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap06-09.html#chap06-09"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap06-09.html#chap06-09">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap06-11.html#chap06-11">Next</A></TD>
+<TD><A HREF="chap06-11.html#chap06-11"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

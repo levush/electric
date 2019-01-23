@@ -1,0 +1,331 @@
+<HTML><HEAD><TITLE>Using Electric 12-1: The File Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<HR>
+
+<CENTER><H1><A NAME="chap12-01">Chapter 12: MENU SUMMARY</A></H1></CENTER>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap11-05.html#chap11-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-1: The File Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-02.html#chap12-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-01.png" ALT="Figure 12.1"></CENTER>
+<P>
+This menu allows you to manipulate libraries of cells, which are typically read and written at one time.
+Besides basic library manipulation, this menu permits the reading and writing of libraries in various formats including CIF
+ (Caltech Intermediate Format),
+GDS II (Calma's stream format), EDIF (the Electronic Design Interchange Format),
+and PostScript (a popular printer interface format).
+<P>
+<H3>New Library... <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command creates a new library with no cells.
+	It becomes the current library.
+	Use the <B>Edit Cell...</B> command from the <B>Cells</B> menu to create circuitry.
+<P>
+<H3>Open Library... <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command reads a library of cells from disk.
+	A dialog helps you select the file.
+	Multiple libraries may be in memory at one time.
+<P>
+<!-- NEED 4in -->
+<H3>Import <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	These commands allows a library to be read in a foreign interchange format.
+	The possible file formats are shown in the submenu.
+	For CIF, GDS II, and DXF,
+	design-rule checking is disabled in order to avoid the inevitable errors that exist in the unconnected geometry.
+	<CENTER><IMG SRC="../images/chap12-11.png" ALT="Figure 12.11"></CENTER>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>CIF</B></TD><TD>
+		This command reads a Caltech Intermediate Format (CIF)
+		file from disk and creates a new library to contain the circuitry.
+		Note that CIF contains no connectivity information,
+		so the new library will have only polygonal information and no topology.
+		To determine the CIF layer names that will correspond to those in the current technology,
+		use the <B>CIF Options...</B> subcommand of the <B>IO Options</B> command.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>GDS II</B></TD><TD>
+		This command reads a Stream (GDS II) file from disk and creates a new library to contain the circuitry.
+		On Windows, you can select multiple GDS files, and they will all be read into the current library.
+		Note that GDS contains no connectivity information,
+		so the new library will have only polygonal information and no topology.
+		To determine the GDS layer numbers that will correspond to those in the current technology,
+		use the <B>GDS Options...</B> subcommand of the <B>IO Options</B> command.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>EDIF</B></TD><TD>
+		This command reads an Electronic Design Interchange Format (EDIF)
+		file from disk and creates a new library to contain the circuitry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>VHDL</B></TD><TD>
+		This command reads a VHDL file from disk and creates a new library to contain the circuitry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>LEF</B></TD><TD>
+		This command reads a Library Exchange Format (LEF)
+		file from disk and creates a new library to contain the circuitry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>DEF</B></TD><TD>
+		This command reads a Design Exchange Format (DEF)
+		file from disk and creates a new library to contain the circuitry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>DXF</B></TD><TD>
+		This command reads an AutoCAD DXF file from disk and creates a new library to contain the layout.
+		Note that DXF contains no connectivity information,
+		so the new library will have only polygonal information and no topology.
+		You must switch to the "Artwork" technology before reading DXF,
+		and should use the <B>DXF Options...</B> subcommand of the <B>IO Options</B> command to set layer associations.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>SDF</B></TD><TD>
+		This command reads a Standard Delay Format (SDF)
+		file from disk and annotates the current library with the test vector information.
+		Before this data can be used by the simulator, one of the three sets
+		(<B>Typical</B>, <B>Minimum</B>, or <B>Maximum</B>)
+		must be selected with the <B>Annotate Delay Data (ALS)</B> subcommand of the <B>Simulate</B>
+		command of the <B>Tools</B> menu.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>SUE</B></TD><TD>
+		This command reads a Schematic User Environment (SUE)
+		file from disk and adds the circuitry to the current library.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Readable Dump</B></TD><TD>
+		Readable Dump files contain all of the information in an Electric library,
+		except that they are ASCII (readable).
+		This command reads such a file, allowing libraries to easily transport from other computers.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>IO Options <A HREF="chap03-09.html#chap03-09">[3-9]</A>, <A HREF="chap07-03.html#chap07-03">[7-3]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command allows you to control the way that libraries are written, and also
+	controls external formats such as CIF, GDS II, EDIF, DEF, CDL, DXF, and SUE.
+	</TD><TD><CENTER><IMG SRC="../images/chap12-20.png" ALT="Figure 12.20"></CENTER></TD></TR></TABLE>
+	<!-- NEED 4in -->
+	<TABLE><TR>
+	  <TD><CENTER><IMG SRC="../images/chap03-19.png" ALT="Figure 3.19"></CENTER></TD>
+	  <TD VALIGN=TOP>
+		The <B>Library Options...</B> command allows you to control whether backups are kept when libraries are saved.
+		You can choose to backup the last library
+		(which renames it so that it has a "~" at the end) or to backup a history of library files
+		(which renames the former library file so that it has its creation date as part of its name).
+		You can also request that the database be checked for consistency at write time.
+	  </TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD VALIGN=TOP>
+		The <B>Copyright Options...</B> command allows you to place personalized copyright information into
+		the files generated by Electric.
+		The disk file with the copyright information should not contain any "comment" characters because
+		they vary with each generated file format.
+		Instead, Electric adds the proper comment characters for each output file format.
+	  </TD>
+	  <TD><CENTER><IMG SRC="../images/chap03-13.png" ALT="Figure 3.13"></CENTER></TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD><CENTER><IMG SRC="../images/chap07-10.png" ALT="Figure 7.10"></CENTER></TD>
+	  <TD VALIGN=TOP>
+		The <B>CIF Options...</B> command allows you to control CIF layer associations,
+		and many other aspects of reading and writing CIF.
+	  </TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD VALIGN=TOP>
+		The <B>GDS Options...</B> command allows you to control GDS layer associations,
+		and many other aspects of reading and writing GDS.
+	  </TD>
+	  <TD><CENTER><IMG SRC="../images/chap07-12.png" ALT="Figure 7.12"></CENTER></TD>
+	</TR></TABLE>
+	<!-- NEED 4in -->
+	<TABLE><TR>
+	  <TD><CENTER><IMG SRC="../images/chap07-13.png" ALT="Figure 7.13"></CENTER></TD>
+	  <TD VALIGN=TOP>
+		The <B>EDIF Options...</B> command allows you to control whether EDIF output writes the schematic or netlist view.
+		It also controls the scale of EDIF input.
+	  </TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD VALIGN=TOP>
+		The <B>DEF Options...</B> command allows you to control which type of interconnect is written to the DEF file.
+	  </TD>
+	  <TD><CENTER><IMG SRC="../images/chap07-17.png" ALT="Figure 7.17"></CENTER></TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD><CENTER><IMG SRC="../images/chap07-21.png" ALT="Figure 7.21"></CENTER></TD>
+	  <TD VALIGN=TOP>
+		The <B>CDL Options...</B> command controls CDL output by providing library information and conversion options.
+	  </TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD VALIGN=TOP>
+		The <B>DXF Options...</B> command allows you to control DXF layer associations,
+		and whether DXF input has its hierarchy preserved or flattened, whether all layers are read,
+		and the scale factor to use during input.
+	  </TD>
+	  <TD><CENTER><IMG SRC="../images/chap07-11.png" ALT="Figure 7.11"></CENTER></TD>
+	</TR></TABLE>
+	<TABLE><TR>
+	  <TD><CENTER><IMG SRC="../images/chap07-23.png" ALT="Figure 7.23"></CENTER></TD>
+	  <TD VALIGN=TOP>
+		The <B>SUE Options...</B> command controls transistor conversion during SUE input.
+	  </TD>
+	</TR></TABLE>
+<HR><BR>
+<P>
+<P>
+<H3>Close Library <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command deletes the current library.
+	Because there must always be a library, this operation will not work if only one exists.
+<P>
+<H3>Save Library <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command writes the current library to disk.
+	Changes become permanent at this point.
+<P>
+<H3>Save Library As... <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command allows the current library to be renamed before being written to disk.
+	Both the library and the disk file are renamed.
+<H3>Save All Libraries <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command writes all changed libraries to disk.
+	Changes become permanent at this point.
+<P>
+<H3>Export <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	These commands write all or part of the current library to disk in a foreign interchange format.
+	The possible formats are shown in the submenu.
+	</TD><TD><CENTER><IMG SRC="../images/chap12-12.png" ALT="Figure 12.12"></CENTER></TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>CIF</B></TD><TD>
+		This command writes a CIF (Caltech Intermediate Format) description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		To determine the CIF layer names that will be used,
+		use the <B>CIF Options...</B> subcommand of the <B>IO Options</B> command.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>GDS II</B></TD><TD>
+		This command writes a Calma GDS II description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		To determine the GDS layer numbers that will be used,
+		use the <B>GDS Options...</B> subcommand of the <B>IO Options</B> command.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>EDIF</B></TD><TD>
+		This command writes an EDIF (Electronic Design Interchange Format)
+		description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains connectivity only, and no layout.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>LEF</B></TD><TD>
+		This command writes a LEF (Library Exchange Format) description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains connectivity only, and no layout.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>CDL</B></TD><TD>
+		This command writes a CDL (a Cadence netlist format) description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains connectivity only, and no layout.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>EAGLE</B></TD><TD>
+		This command writes an EAGLE description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains connectivity only, and no layout.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>ECAD</B></TD><TD>
+		This command writes an ECAD description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains connectivity only, and no layout.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>PADS</B></TD><TD>
+		This command writes a PADS description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains connectivity only, and no layout.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>DXF</B></TD><TD>
+		This command writes an AutoCAD DXF description of the current cell to disk.
+		The description includes everything below it in the hierarchy.
+		It contains geometry only, and no connectivity.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>L</B></TD><TD>
+		This command writes a description of the current cell in the "L" language,
+		readable by GDT design tools.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>PostScript</B></TD><TD>
+		This command writes a description of the current cell in the "PostScript" language,
+		a graphics format usable by many printers
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>HPGL</B></TD><TD>
+		This command writes a description of the current cell in the "HPGL" language,
+		a graphics format usable by many printers.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Readable Dump</B></TD><TD>
+		This command writes the current library in an ASCII format that can be ported to other computers and still read into Electric.
+	</TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Change Current Library... <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command selects an existing library as the current one.
+	It must have been read from disk.
+<P>
+<H3>List Libraries <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command lists all libraries currently read in,
+	and all dependencies between them.
+<P>
+<H3>Rename Library...  <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command allows you to rename a library.
+<P>
+<H3>Mark All Libraries for Saving <A HREF="chap03-09.html#chap03-09">[3-9]</A></H3>
+<P>
+	This command requests that all libraries be saved to disk when the next <B>Save All Libraries</B> is done.
+<P>
+<HR><BR>
+<P>
+<H3>Print... <A HREF="chap04-09.html#chap04-09">[4-9]</A></H3>
+<P>
+	This command causes the current cell to be printed.
+	On UNIX systems, a temporary PostScript file is created and spooled to the printer.
+	Another way to print is to use the <B>Write PostScript</B> and <B>Write HPGL</B>
+	options of the <B>Export</B> command above.
+<P>
+<H3>Print Options... <A HREF="chap04-09.html#chap04-09">[4-9]</A></H3>
+<P>
+	<TABLE><TR><TD>
+	This command provides a number of options for printing,
+	including a choice of what part of the circuit gets printed,
+	whether the date is included,
+	and which printer to use (UNIX only).
+	For PostScript output, you can control encapsulation, color,
+	paper size, and image rotation.
+	PostScript output also allows you to set parameters for each cell:
+	synchronization to a file and EPS scale.
+	For HPGL output, you can control scale setting and HPGL version.
+	</TD><TD><CENTER><IMG SRC="../images/chap04-05.png" ALT="Figure 4.5"></CENTER></TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Quit</H3>
+<P>
+	This command exits Electric.
+	If libraries have been changed but not written to disk,
+	you will be prompted to make sure that you want to exit the program.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap11-05.html#chap11-05"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap11-05.html#chap11-05">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-02.html#chap12-02">Next</A></TD>
+<TD><A HREF="chap12-02.html#chap12-02"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

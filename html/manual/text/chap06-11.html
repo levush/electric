@@ -1,0 +1,129 @@
+<HTML><HEAD><TITLE>Using Electric 6-11: Project Management</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap06-11"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 6: ADVANCED EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap06-10.html#chap06-10"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>6-11: Project Management</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap06-12.html#chap06-12"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+The project management system in Electric allows multiple users to work together on the design of a circuit.
+This is accomplished by having a <I>master library</I> in a shared location,
+and copies of that library on each user's local disk area.
+Users work on views of cells by checking them out of the master library,
+making changes, and then checking them back in.
+The project management system ensures that only one user can access a cell view at a time.
+In addition,
+it also applies its understanding of the circuit hierarchy to inform users of potential inconsistencies that may arise.
+<P>
+The project management system uses the full power of cells to accomplish its task.
+The project management system handles design history by creating a new version of a cell view each time it is checked out of the master library.
+The user's copy of the library contains only the most recent version of each cell view,
+taken from the master library.
+When a user updates their library from the master library, newer versions are brought in
+and substituted for older versions.
+Unless the user specifically asks for an older version, it is removed from the local library.
+<P>
+Because the project management system uses versions to manage design progress,
+users work with "cell views", rather than "cells".
+The terms are nearly equivalent,
+with the restriction that a "cell view" is the cell that is the most recent version.
+Throughout the manual, and even in this section, the term "cell" is used.
+But be aware that when you use the project management system,
+the term "cell" implies the most recent version only.
+Users should not make explicit use of older versions in their own design.
+For example, it is not appropriate for a user to use two different versions of a cell view explicitly,
+because they are considered to be part of a single cell view's history.
+<P>
+All commands to the project management system can be found under the <B>Project Management</B>
+command of the <B>Cells</B> menu.
+Subcommands exist there for checking cells in and out,
+updating local libraries from the master library, and controlling individual users.
+<P>
+<H3>Creating a new Project</H3>
+<P>
+The first step needed to use the project management system is to take a library file and convert it into a master library.
+The library disk file must already be located in a shared location which must be readable and writable by all users of the system.
+The library must then be read into Electric, and the <B>Build Project</B> subcommand used.
+This creates additional files in the shared location,
+specifically a project status file and a folder of individual cell libraries that mimics the hierarchical structure of the master library.
+At this point, the master library should be saved to that shared location.
+<P>
+Individual users can now begin to work on the library.
+They do this by copying the shared master library to their local space.
+All cells of this library are checked-in, and no work may be done until a cell is checked-out.
+<P>
+If the users have not already done so, they must create accounts in the project management system.
+The <B>Set User...</B> subcommand allows user name setting, and creation of new users.
+Each user must give a password.
+Note that the user database is kept in the library directory, which should also be in a shared location.
+Use the <B>Set Paths...</B> command of the <B>Info</B> menu to see where this directory resides.
+<P>
+<H3>Checking Cells In and Out</H3>
+<P>
+When a cell is not checked out, you cannot make changes to it.
+Any change is immediately undone by the project management system.
+This means that a change which affects unchecked-out cells,
+higher up the hierarchy, will also be disallowed.
+<P>
+To check-out the current cell, use the <B>Check Out This Cell</B>
+subcommand.
+You may be prompted for your user name and password if you haven't already given it.
+You can give a check-out message to help document the intended change.
+If there are related cells (hierarchically above or below this)
+that are already checked-out to other users, you will be given warnings about potential conflicts that may arise.
+<P>
+To check the current cell back in, use the <B>Check In This Cell</B> subcommand.
+You will again be prompted for a documentation message about the change.
+No further changes will be allowed to the cell.
+<P>
+To update your library so that it contains the most recent versions of every cell,
+use the <B>Update</B> subcommand.
+You will be given a list of cells that were replaced.
+<P>
+<TABLE><TR><TD>
+Note that the check-out, check-in, and update functions are all combined into one subcommand,
+<B>Check In and Out</B>, which presents a dialog showing the state of all cells,
+and allows full control over the library.
+</TD><TD><CENTER><IMG SRC="../images/chap06-10.png" ALT="Figure 6.10"></CENTER></TD></TR></TABLE>
+<P>
+If, in the course of design, a new cell is created,
+it must be added to the project management system so that others can share it.
+Use the <B>Add This Cell</B> subcommand to include the cell in the database.
+Conversely, if a cell is deleted,
+and should be removed from the project management system, use the <B>Delete This Cell</B> subcommand.
+<P>
+<!-- NEED 2in -->
+<H3>Under the Hood</H3>
+<P>
+The project management system makes use of version information on all cells to control cell changes.
+When a cell is checked-out, a new version is made in your local library,
+and the old version is deleted.
+All instances of the old version are switched to the new version.
+The old version remains in the master library.
+When the cell is checked-in, that new version also goes into the master library.
+When updates are done, newer versions are obtained from the master library,
+and appropriate substitutions are performed.
+<P>
+One feature of this scheme is that you can get old versions of a cell, if you want to back-out of any changes.
+The subcommand <B>Old Version of This Cell</B> pulls an older version of the current cell into the library.
+This old version is available for editing and display.
+When done, the old version can be deleted.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap06-10.html#chap06-10"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap06-10.html#chap06-10">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap06-12.html#chap06-12">Next</A></TD>
+<TD><A HREF="chap06-12.html#chap06-12"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,117 @@
+<HTML><HEAD><TITLE>Using Electric 3-12: Automatic View Generation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-12"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-11.html#chap03-11"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-12: Automatic View Generation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap04-01.html#chap04-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Electric has facilities for automatically converting from one view to another.
+When converting the current cell, the newly generated cell is shown in a new window.
+<P>
+<H3>Conversion between Layout and Schematic</H3>
+<P>
+To convert from IC layout to a schematic,
+use the <B>Make Schematic View</B> command of the <B>View</B> menu.
+This builds a new cell using analog schematic parts that are equivalent to the IC components in the current cell.
+If there is already a schematic view of the current cell,
+a new version of that view is created.
+<P>
+To convert between different IC layout technologies or from schematics to layout,
+use the <B>Make Layout View...</B> command of the <B>View</B> menu.
+You will be prompted for the technology to use for the new cell.
+If both the current and the new cell are of the Layout view,
+the new cell becomes a newer version.
+Conversion between layout technologies is useful when the fabrication process or design rules have changed,
+but it can only be done within a similar family of technologies, i.e. between CMOS technologies.
+When converting from schematics to layout, all wires appear as Universal Arcs from the Generic technology.
+These must be converted to layout manually.
+<P>
+<H3>Skeletonization</H3>
+<P>
+The <B>Make Skeleton View</B> command of the <B>View</B> menu converts the current cell into a new, skeleton view.
+Skeleton cells contain only the important parts
+(the nodes with exports and a few others that define the boundary).
+When skeletonizing, the new cell has information stored on it that points to its original cell,
+so that it can be restored to its complete geometry later.
+(At this time, no automatic facilities exist for restoring skeleton cells.
+Use the <B>Change...</B> command of the <B>Edit</B> menu and select the nonskeleton cell.)
+Skeletonizing is useful when libraries get to be very large,
+for they allow entire levels of hierarchy to be abstracted,
+with their actual contents kept in another library.
+<P>
+<H3>Icons</H3>
+<P>
+A particularly useful view type is icon.
+The icon cell is used for instances of an associated <I>contents</I> cell,
+which contains schematics.
+For example, you may have a cell called "adder{sch}" which contains a schematic.
+You may then create a cell called "adder{ic}" that contains a circle with a plus sign inside
+(these are nodes in the Artwork technology).
+This is then the icon for the layout cell "adder{sch}".
+Now, if you create an instance of the schematic cell,
+the icon cell will actually be placed, because it is the symbol that gets used for instances.
+<P>
+To generate an icon cell automatically, use the <B>Make Icon View</B> command of the <B>View</B> menu.
+Be sure to create all relevant exports before issuing this command,
+so that the proper icon can be constructed.
+Note that any export that has its "Body only" attribute checked will be omitted from the icon.
+<P>
+To control the look of the icons, use the <B>Icon Options...</B> command of the <B>View</B> menu.
+This command lets you place each of the different export types on any of the four sides of the icon.
+<P>
+<TABLE><TR><TD>
+You can choose the location of the exports (at the end of the leads,
+in the middle of the leads, or on the body).
+You can choose the style of the export text (whether it grows inward, outward).
+You can choose the technology of the exports
+("Universal" uses nodes from the Generic technology which can connect to any arc;
+"Schematic" uses nodes from the Schematic technology and can connect only to other Schematic arcs).
+</TD><TD><CENTER><IMG SRC="../images/chap03-18.png" ALT="Figure 3.18"></CENTER></TD></TR></TABLE>
+<P>
+You can choose whether or not to draw the leads and the body of the icon.
+You can set the size and spacing of the leads.
+Exports are arranged alphabetically around the icon,
+and you can choose to reverse the alphabetical order.
+Finally, you can choose the location of the icon instance in the original schematic
+(when you use the <B>Make Icon View</B> command,
+it generates the icon and places an instance of that icon in the schematic).
+<P>
+The icon cell is correctly tied to its contents in most respects.
+If you descend into it (with the <B>Down Hierarchy</B> command of the <B>Cells</B> menu),
+then you actually find yourself editing the associated contents cell.
+The <B>Up Hierarchy</B> command properly returns you to the location of the icon instance.
+Also, the network consistency checker and the simulators correctly substitute the contents whenever an icon appears.
+In order for this to work, however,
+all exports in the contents cell must exist with the same name in the icon cell
+(with the exception of those that are marked "Body Only").
+<P>
+<H3>VHDL</H3>
+<P>
+The <B>Make VHDL View</B> command of the <B>View</B> menu converts the current cell into a VHDL textual description.
+All subcells used in the current one are also converted.
+By default, the VHDL is placed in cells with the "vhdl" view.
+However, by unchecking the "VHDL stored in cell" item of the <B>VHDL Options...</B> dialog
+(in the <B>VHDL Compiler</B> subcommand of the <B>Tools</B> menu),
+the VHDL will be placed in individual disk files.
+Recheck the entry to place VHDL in cells again.
+See <A HREF="chap09-10.html#chap09-10">Section 9-10</A> for more on Electric's VHDL facility.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-11.html#chap03-11"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-11.html#chap03-11">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap04-01.html#chap04-01">Next</A></TD>
+<TD><A HREF="chap04-01.html#chap04-01"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

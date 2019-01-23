@@ -1,0 +1,64 @@
+<HTML><HEAD><TITLE>Using Electric 10-5: Simulation Concepts (ALS)</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap10-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 10: SIMULATION</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap10-04.html#chap10-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>10-5: Simulation Concepts (ALS)</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap10-06.html#chap10-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+The internal simulation database is composed of <I>simulation nodes</I>.
+A simulation node is a connection point which may have one or more <I>signals</I> associated with it.
+<P>
+A simulation node can have 3 values (L, H, or X)
+and can have 4 strengths (off, node, gate, and VDD, in order of increasing strength).
+It is thus a 12-state simulator.
+In deciding the state of a simulation node at a particular time of the simulation,
+the simulator considers the states and strengths of all inputs driving the node.
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap10-04.png" ALT="Figure 10.4"></CENTER></TD><TD>
+Driving inputs may be from other simulation nodes, in which case the driving strength is "gate"
+(i.e. H(gate) indicates a logic HIGH state with gate driving strength),
+from a power or ground supply ("VDD" strength) or from the user (any strength).
+If no user vector has been input at the current simulation time, then the input defaults to the "off" strength.
+</TD></TR></TABLE>
+<P>
+In the above example,
+the combination of a high and a low driving input at the same strength from the signals "out" and "in2"
+result in the simulation algorithm assigning the X (undefined) state to the output signal represented by "q".
+This example also shows the behavior of part of the simulation engine's <I>arbitration algorithm</I>,
+which dictates that an undefined state exists if a simulator node is being driven by signals with the same strength but different states,
+providing that the strength of the driving signals in conflict is the highest state driving the node.
+<P>
+Another important concept for the user to remember is that the simulator is an <I>event-driven</I> simulator.
+When a simulation node changes state,
+the simulation engine looks through the netlist for other nodes that could potentially change state.
+Obviously, only simulation nodes joined by model, gate or function entities can potentially change state.
+If a state change, or event, is required
+(based on the definition of the inter-nodal behavior as given by the model, gate or function definition),
+the event is added to the list of events scheduled to occur later in the simulation.
+When the event time is reached and the event is fired,
+the simulator must again search the database for other simulation nodes which may potentially change state.
+This process continues until it has propagated across all possible nodes and events.
+<P>
+The number of events in a simulation is limited to 10,000 events.
+If you have a more complex simulation that demands more events,
+change the Maximum Events field in the <B>Simulation Options...</B>
+subcommand of the <B>Simulation (Built-in)</B> command of the <B>Tools</B> menu.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap10-04.html#chap10-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap10-04.html#chap10-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap10-06.html#chap10-06">Next</A></TD>
+<TD><A HREF="chap10-06.html#chap10-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

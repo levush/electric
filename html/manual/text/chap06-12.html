@@ -1,0 +1,73 @@
+<HTML><HEAD><TITLE>Using Electric 6-12: Emergencies</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap06-12"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 6: ADVANCED EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap06-11.html#chap06-11"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>6-12: Emergencies</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap07-01.html#chap07-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+<H3>Database Corruption</H3>
+<P>
+Electric is a vast system with many facilities.
+Although the individual pieces work correctly,
+it is possible, through improper usage or system fault, for the database to become corrupted.
+If Electric acts strangely,
+try the <B>Redo Network Numbering</B> subcommand of the <B>Network</B> command of the <B>Tools</B>
+menu to regenerate network information.
+<P>
+A more thorough check may be done with the <B>Check and Repair Libraries</B> command of the <B>Info</B> menu.
+Note that this command clears the history list so no undo can be made after the check.
+When in doubt, save your work first.
+<P>
+
+<H3>Running out of Memory</H3>
+<P>
+Another problem that can arise, particularly on a pre-System-10 Macintosh, is that Electric may run out of memory.
+As this situation approaches, you will be given warning messages,
+and finally you will be unable to work on new circuitry.
+Sadly, it is not generally possible to recover memory by deleting unwanted circuitry.
+The wise move is to save your library and exit Electric.
+Then make more memory available and run it again.
+
+<H3>Crash Recovery</H3>
+<P>
+On some operating systems (Windows and UNIX/X11) Electric keeps a log of every keystroke and mouse action.
+If a crash occurs, you can replay the log and recreate the lost work.
+<P>
+The log file is called "electric.log" (on UNIX, it is called ".electric.log").
+When Electric exits, it renames the file to "electriclast.log".
+If Electric starts up and finds a file called "electric.log",
+it presumes that this file is from a crash, and offers to replay it.
+You can force a log file to be replayed by using the <B>Playback Log File...</B>
+subcommand of the <B>User Interface</B> command of the <B>Info</B> menu.
+<P>
+When playing back a log file, cursor motion is used to advance the playback.
+Therefore, to playback the entire file, simply keep moving the cursor back and forth.
+At any time, you can abort the playback by clicking the mouse.
+<P>
+Be warned that the new log file that is created as a result of playing back an old log file is not necessarily correct.
+<P>
+Note also that in order to make a replayable log file, you cannot partially save your work.
+If, for example, you are editing two libraries and you save only one of them,
+then the state of the world cannot be recreated after a crash.
+Also, if you have changed options, then when you save your libraries, you should also save the options.
+Electric will prompt you to save any unsaved information in order to keep the session logging current.
+If you choose to make only a partial save, session logging will be disabled.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap06-11.html#chap06-11"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap06-11.html#chap06-11">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap07-01.html#chap07-01">Next</A></TD>
+<TD><A HREF="chap07-01.html#chap07-01"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

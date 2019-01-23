@@ -1,0 +1,859 @@
+Maximum text width to fit in dialog:
+=================================================================
+
+!3D Display
+
+You can view a circuit in 3D, to see the interaction of the
+different layers, with WINDOWS/3D Display/View in 3 Dimensions.
+Once in 3D view, the letters "r", "z", "t", and "p" switch to
+rotate, zoom, twist, and pan mode (the cursor then makes changes).
+
+The command WINDOWS/3D Display/3D Options allows you
+to edit the layer height and thickness.
+
+!Arc Properties
+
+Arc constraints determine how the circuit will be affected when
+changes are made. Three constraints are used: Rigid,
+Fixed-angle, and Slidable.  Rigid arcs cannot change in length
+or orientation relative to their connected nodes.  Fixed-angle
+arcs must remain at a constant angle.  Slidable arcs can move
+within their ports (when the ports have nonzero area).  Also,
+rigidity can be set temporarily to affect the next change only.
+
+In addition to constraints, there are other arc properties that
+are purely graphical.  Negated arcs have a negating bubble on
+one end (used in schematics).  Directional arcs have an arrow
+indicating circuit flow (for documentation only).  End extension
+causes an arc to extend past its endpoint by half of its width
+(this is the default state).  Any of these properties can be
+applied to only one end of the arc if necessary.  Finally, an
+arc can be reversed to allow the graphical property to appear on
+the other end.
+
+Properties can be controlled for the highlighted arcs using
+specific ARC menu commands or INFO/Get Info.  Default constraints
+for new arcs can be controlled with ARC/New Arc Options.
+
+Special arcs (from the "rcmos" (round CMOS) and "artwork"
+technologies) can be curved to pass through the cursor location
+(with ARC/Curve Through Cursor) or to use the cursor location as
+the center of curvature (with ARC/Curve About Cursor) or to be
+straight again (with ARC/Remove Curvature).
+
+!Buttons [Macintosh]
+
+These are the mouse buttons on the Macintosh:
+
+Command                              Mouse Button        
+-----------------------------  ------------------------
+Selection                                         Click
+Toggle Select                  Shift-             Click
+Select Another                       Ctrl-        Click
+Toggle Select Another          Shift-Ctrl-        Click
+Special Select                                Opt-Click
+Toggle Special Select          Shift-         Opt-Click
+Special Select Another               Ctrl-    Opt-Click
+Toggle Special Select Another  Shift-Ctrl-    Opt-Click
+Info                           --Double--         Click
+Creation/Technology Edit                  Cmd-    Click
+Rectangle Select                          Cmd-Opt-Click
+Rectangle Zoom                 Shift-     Cmd-Opt-Click
+Wire                           Shift-     Cmd-    Click
+
+!Buttons [MacintoshX]
+
+These are the mouse buttons on the Macintosh:
+
+Command                              Mouse Button        
+-----------------------------  ------------------------
+Selection                                         Click
+Toggle Select                  Shift-             Click
+Select Another                       Ctrl-        Click
+Toggle Select Another          Shift-Ctrl-        Click
+Special Select                                Opt-Click
+Toggle Special Select          Shift-         Opt-Click
+Special Select Another               Ctrl-    Opt-Click
+Toggle Special Select Another  Shift-Ctrl-    Opt-Click
+Info                           --Double--         Click
+Creation/Technology Edit                  Cmd-    Click
+Rectangle Select                          Cmd-Opt-Click
+Rectangle Zoom                 Shift-     Cmd-Opt-Click
+Wire                           Shift-     Cmd-    Click
+
+!Buttons [UNIX]
+
+These are the mouse buttons on UNIX:
+
+Command                            Mouse Button        
+-----------------------------  ---------------------
+Selection                                      Left
+Toggle Select                  Shift-          Left
+Select Another                       Ctrl-     Left
+Toggle Select Another          Shift-Ctrl-     Left
+Special Select                            Meta-Left
+Toggle Special Select          Shift-     Meta-Left
+Special Select Another               Ctrl-Meta-Left
+Toggle Special Select Another  Shift-Ctrl-Meta-Left
+Info                           --Double--      Left
+Creation/Technology Edit                       Right
+Rectangle Select                          Meta-Right
+Rectangle Zoom                 Shift-     Meta-Right
+Wire                           Shift-          Right
+
+!Buttons [Windows]
+
+These are the mouse buttons on Windows:
+
+Command                           Mouse Button        
+-----------------------------  --------------------
+Selection                                     Left
+Toggle Select                  Shift-         Left
+Select Another                       Ctrl-    Left
+Toggle Select Another          Shift-Ctrl-    Left
+Special Select                            Alt-Left
+Toggle Special Select          Shift-     Alt-Left
+Special Select Another               Ctrl-Alt-Left
+Toggle Special Select Another  Shift-Ctrl-Alt-Left
+Info                           --Double--     Left
+Creation                                      Right
+Rectangle Select                          Alt-Right
+Rectangle Zoom                 Shift-     Alt-Right
+Wire/Technology Edit           Shift-         Right
+
+!Compaction
+
+Compaction is done only in the X and Y axes.  Use
+TOOLS/Compaction/Do Compaction.
+
+Other items in the TOOLS/Compaction submenu allow compaction
+to be requested in a single axis at a time.
+
+To allow circuitry that is too close to be spread apart,
+use TOOLS/Compaction/Compaction Options
+
+!Circuit Modification
+
+The mouse button is used to select and move circuitry.  When
+there is more than one mouse button, use the left one.
+Clicking over an object highlights that object and allows you to
+drag it while the button remains pushed.  Use SHIFT-button to
+highlight multiple objects or to deselect highlighted objects.
+Clicking away from any objects allows you to stretch a selection
+box over multiple objects and highlight all of them.
+
+The EDIT/Rotate, EDIT/Mirror, and EDIT/Size menus offer commands
+to alter the currently highlighted node (Size also works on arcs),
+and the EDIT/Erase command deletes the highlighted circuitry.
+
+EDIT/Erase Geometry removes all geometry in the selected area
+(shortening arcs if they cross into that area).
+
+EDIT/Insert Jog in Arc places two pins and an intermediate
+arc inside of the current arc.
+
+The EDIT/Move/Spread command moves all circuitry on one side of
+the highlighted node.  You will be prompted for the amount
+(which can be negative to compact) and a direction to spread.
+
+The EDIT/Duplicate command copies the currently selected
+circuitry.  You can also use EDIT/Copy, Edit/Cut, and Edit/Paste
+to manipulate circuitry.  The EDIT/Array command makes multiple
+copies of the currently selected objects.
+
+EDIT/Undo reverses the last command, and EDIT/Redo restores.
+Multiple undos and redos work as expected.
+
+EDIT/Change allows the currently highlighted node or arc to be
+replaced with another type.
+
+Many special operations exist in the EDIT/Cleanup Cell submenu
+for adjusting circuitry.
+
+!Components
+
+To place a component (node) in the current cell, simply select
+its icon from the menu on the left, and then click in the window
+where the node is to be placed.
+
+Special nodes, not found in the menu, can be placed with:
+  EDIT/New Cell Instance (to place instances of other cells)
+  EDIT/New Analog Part (places analog schematic components)
+  EDIT/New Spice Part (places components used in SPICE)
+  EDIT/New Pure-Layer Node (places single-layer geometry
+    that can take on any shape by using
+    EDIT/Special Function/Outline Edit once created)
+  EDIT/New Special Object (miscellaneous special-purpose
+    components)
+
+Defaults for newly created nodes can be set with
+EDIT/New Node Options.  Factors that can be changed include
+primitive size and the orientation of all nodes.
+
+To change the components menu on the left, switch technologies
+with TECHNOLOGY/Change Current Technology.
+
+!Crashing
+
+Of course, Electric never crashes.
+
+If it does, a log file of the current session will be found
+the next time you run Electric.  You can replay this log to
+reconstruct the lost work.  If you wish to replay a log of
+the last Electric session, use INFO/User Interface/Playback
+Log File.
+
+If the system acts strangely, the database can be checked for
+consistency problems and repaired with INFO/Check and Repair
+Libraries.
+
+Network problems can be fixed by rebuilding the information.
+Use TOOLS/Network/Redo Network Numbering.
+
+!Design-Rule Checking
+
+An incremental design-rule checker examines all changes to the
+circuitry and displays errors when violations are detected.  To
+disable this checker, use TOOLS/DRC/DRC Options.  To edit the
+design rules, use TOOLS/DRC/DRC Rules.  To recheck the current
+cell, use TOOLS/DRC/Check this Level Only.
+
+The incremental checker does not use hierarchy (i.e. it does
+not examine the contents of cell instances).  To do a more
+thorough check, use TOOLS/DRC/Check Hierarchically.  After this
+has run, you can view the errors by typing ">" (for the next
+error) and "<" for the previous error.
+
+To produce an input deck for the Dracula checker, use
+TOOLS/DRC/Write Dracula Deck.  The Dracula design rules can
+be edited in the TOOLS/DRC/DRC Options dialog.  Since only the
+"mocmos" (MOSIS CMOS) technology has Dracula rules at this time,
+you can make rule sets for other technologies by using the text
+editing facility to copy and edit the "mocmos" rules.
+
+!Electrical Rules Checking
+
+The Electrical Rules Checker has two functions.  It can examine
+the CMOS circuit and make sure that the well areas are properly
+placed and connected (with TOOLS/Electrical Rules/Analyze Wells).
+
+It can also examine the layout for antenna rules violations
+(with TOOLS/Electrical Rules/Antenna-Rules Check).
+
+Options are available for both functions.
+
+After ERC has run, you can view the errors by typing ">" (for the
+next error) and "<" for the previous error.
+
+!Cells
+
+A cell is a collection of components that describes one version
+and view of a cell.  For example, the cell "inv;1{lay}" is
+version 1 of the layout view of cell "inv".  If no version
+number is given, the most recent is assumed.
+
+To edit an existing cell, use CELLS/Edit Cell.  To create a
+new cell, click on the "New Cell" button in this dialog.
+To delete cells, use CELLS/Delete Cells.
+
+More advanced cell operations are also available.  You can copy
+cells from one library to another with CELLS/Cross-Library Copy;
+create a new cell that is a copy of the current one with
+CELLS/Duplicate Current Cell; create a new version of the current
+cell with CELLS/New Version of Current Cell;
+and delete all old versions that are not being used
+as instances elsewhere, with CELLS/Delete Unused Old Versions.
+
+When a cell instance is highlighted, its definition can be
+edited with CELLS/Down Hierarchy.  To return to the higher-level
+cell, use CELLS/Up Hierarchy.  Use CELLS/Down Hierarchy in Place
+to see the upper level while editing the lower level.
+
+To see the contents of a cell instance, use CELLS/Expand Cell
+Instances for permanent display or CELLS/Look Inside Highlighted
+for temporary display.  Use CELLS/Unexpand Cell Instances to
+undo permanent contents display.
+
+To create a new cell with the highlighted circuitry, use
+CELLS/Package into Cell.  To replace a cell instance with its
+actual contents, use CELLS/Extract Cell Instance.
+
+To get information about cells, use the subcommands from the
+CELLS/Special Cell Lists menu or use the CELLS/General Cell
+Lists dialog.  The CELLS/Cell Explorer command displays a
+structured list of cells and lets you see them and edit them
+by clicking on their names.
+
+!Generators
+
+nMOS PLAs can be produced with TOOLS/Generation/nMOS PLA, which
+prompts for a personality table and generates nMOS layout,
+complete with power and clocking.
+
+Another, more flexible PLA generator, works from a library of
+standard cells (which is defined for MOSIS CMOS).  It prompts for
+two personality tables: the AND and the OR tables.  It also
+offers options about the location of inputs and outputs.
+Use TOOLS/Generation/MOSIS CMOS PLA.
+
+A ring of pads can be placed around a circuit with the pad frame
+generator.  This is done by creating a pad frame definition file,
+combined with a library of pads. Use TOOLS/Generation/Pad Frame.
+
+!Grid
+
+A grid can be displayed with WINDOWS/Toggle Grid.  The size and
+alignment to that grid can be set with WINDOWS/Grid Options.
+
+Placement of components typically aligns to the grid, but you can
+control this alignment with WINDOWS/Alignment Options.
+
+You can force all objects to be realigned to the grid with
+the EDIT/Move/Align to Grid command.
+
+!Hardcopy [Macintosh]
+
+The FILE/Print command prints the current cell.  Use
+FILE/Print Options to control whether the entire cell is
+printed or just the highlighted area.
+
+The EDIT/Copy command places the highlighted circuitry in the
+clipboard for insertion in other documents.
+
+PostScript output can be produced for printing or insertion in other
+documents with FILE/Export/PostScript.  HPGL can also be produced
+with FILE/Export/HPGL.  Use FILE/Print Options to control
+generation of these files.
+
+!Hardcopy [UNIX]
+
+The FILE/Print command creates a PostScript file for the current
+cell and sends it to the printer.  Use FILE/Print Options to
+control many PostScript options.
+
+PostScript output can also be produced with FILE/Export/PostScript.
+HPGL can be produced with FILE/Export/HPGL.  Use FILE/Print Options
+to control generation of these files.
+
+!Hardcopy [Windows]
+
+The FILE/Print command prints the current cell.  Use
+FILE/Print Options to control whether the entire cell is
+printed or just the highlighted area.
+
+PostScript output can be produced for printing or insertion in other
+documents with FILE/Export/PostScript.  HPGL can also be produced
+with FILE/Export/HPGL.  Use FILE/Print Options to control
+generation of these files.
+
+!Hierarchy
+
+Hierarchy is implemented by placing an instance of a cell
+inside of another cell.  The instance is treated as a node in
+all respects and can be wired, modified, etc.
+
+Use EDIT/New Cell Instance to create the instance.  You will be
+prompted for the cell, and then allowed to interactively select
+the location of the new instance.
+
+To create a connection point in a cell that will be available
+for wiring on instances of that cell, use the EXPORT/Create Export
+command.
+
+When a cell instance is highlighted, its contents can be edited
+by using CELLS/Down Hierarchy.  Use CELLS/Up Hierarchy to
+return to the cell instance level.
+
+To create a new level of hierarchy, use CELLS/Package into
+Cell.  This command takes the currently highlighted circuitry
+and places it in a new cell.  To delete a level of hierarchy,
+use CELLS/Extract Cell Instance, which takes the currently
+highlighted cell instance and replaces it with its contents.
+
+!Interchange Formats
+
+Electric can write a number of different formats of circuitry.
+Use the FILE/Export commands to generate:
+   CDL (Circuit Design Language)
+   CIF (Caltech Intermediate Format)
+   DXF (AutoCAD format)
+   EAGLE (Schematic Capture Package)
+   EDIF (Electronic Design Interchange Format)
+   GDS II (Calma's Stream format)
+   HPGL (HP printer Format)
+   L (the GDT language)
+   LEF (Library Exchange Format)
+   ECAD (Schematic Capture Package)
+   PADS (Schematic Capture Package)
+   PostScript (printer Format)
+   Readable Dump (Electric's textual library format)
+
+Electric can read a number of different formats of circuitry.
+Use the FILE/Import commands to read:
+   CIF (Caltech Intermediate Format)
+   DEF (Design Exchange Format)
+   DXF (AutoCAD format)
+   EDIF (Electronic Design Interchange Format)
+   GDS II (Calma's Stream format)
+   LEF (Library Exchange Format)
+   Readable Dump (Electric's textual library format)
+   SDF (Standard Delay Format)
+   SUE (Schematic User Environment)
+   VHDL (Hardware Description Language)
+
+Use FILE/IO Options to set conversion information.
+
+Generally, interchange formats that contain no connectivity
+(CIF, GDS II) will be read into Electric with only geometric
+information.
+
+There are many simulators interfaces that write specific netlist
+formats.  See the TOOLS/Simulation (Others) menu.
+
+!Interpretive Languages
+
+Electric supports a number of interpretive languages.  Currently,
+LISP (a Scheme dialect called ELK), TCL, and JAVA are available.
+
+To communicate with these interpreters, use the TOOLS/Language
+Interpreter subcommands.  While conversing with these languages,
+special constructs are available for interfacing with the
+Electric database.  This means that you can write code to:
+   (1) generate custom circuitry
+   (2) examine the database and generate interface files
+   (3) control the user interface
+
+!Libraries
+
+Electric reads and writes entire libraries of cells at one time.
+Multiple libraries can be in use, but only one library is the
+"current" one.
+
+Use FILE/New Library to create a new, empty library in memory,
+FILE/Open Library to read a new library from disk,
+FILE/Close Library to delete the library in memory,
+FILE/Save Library to write the current library to disk,
+FILE/Save All Libraries to write all changed libraries to disk,
+FILE/Save Library As to rename the current library and save it, and
+FILE/Change Current Library to switch the current library to another one.
+
+!Logical Effort
+
+The Logical Effort tool analyzes a schematic circuit and computes
+optimum pullup/pulldown ratios.  You can analyze an entire cell
+with TOOLS/Logical Effort/Analyze Cell, and you can analyze a
+single path between two selected points with TOOLS/Logical Effort/
+Analyze Path.
+
+!Messages Window
+
+The Messages window is a scrolling window that contains textual
+information pertinent to the operation of Electric.  You can
+control this window with the subcommands of WINDOWS/Messages Window.
+
+When communicating with interpretive languages, all textual
+interaction occurs in the messages window.
+
+!Networks
+
+A network is a collection of electrically connected arcs.  When
+an export is created (with EXPORT/Create Export) that name is used
+to name the network.  When an arc is named (with INFO/Get Info)
+that name is used to name the network.
+
+When a single network is given multiple names, then all names
+apply to that network.
+
+When two otherwise unconnected networks are given the same name
+in a schematic, they are implicitly connected.  When this happens
+in IC layout, they are not connected.  To make implicit naming
+connections in all layouts, use TOOLS/Network/Network Options.
+
+In schematics, all power and ground signals are implicitly
+connected; in IC layouts, they are not.  To implicitly connect
+power and ground in all layouts, use TOOLS/Network/Network Options.
+
+The Bus arc of the Schematic technology can accomodate multiple
+signals.  Use network names of the form "A[0:3]" (defines 4
+signals), or "A,C[0:1][4:1]" (defines 9 signals), or "M[on,off]"
+(defines 2 signals).  Do not use commas or square brackets in
+non-bus network names.  You can extract individual singals from
+a bus with TOOLS/Network/Rip Bus Signals.
+
+!Network Comparison
+
+To compare two networks, use TOOLS/Network/NCC Control and Options.
+If errors are found in the comparison, you can see them by
+typing ">" (for the next error) and "<" for the previous error.
+
+Once comparison has succeeded, use TOOLS/Network/Show Network
+to identify equivalent objects in the other cell.
+
+!Options
+
+All of the commands that have the word "options" in their name
+set permanent parameters that are saved between Electric sessions.
+
+It is possible to request that some of these options be saved
+with a library, thus overriding existing settings when that
+library is read in.
+
+To control options, use the commands in INFO/Option Control.
+
+!Outline Editing
+
+The EDIT/Special Function/Outline Edit command allows arbitrary
+boundary information to be stored on the highlighted node.
+Only certain nodes can contain such information, notably the
+"Pure Layer" nodes, MOS transistors, and some Artwork components.
+
+Once this command is issued, outline editing is enabled: the
+mouse button which used to select nodes and arcs now only selects
+and moves a point on the outline.  The Erase, Rotate, and Mirror
+commands of the EDIT menu and the Get Info command of the INFO menu
+change their meaning during outline edit.
+
+To exit this mode, use the EDIT/Special Function/Exit Outline
+Edit command.
+
+The EDIT/New Special Object/Text (layout) and the EDIT/New
+Special Object/Annular Ring commands store complex outlines on
+pure-layer nodes.
+
+!Ports and Exports
+
+Ports are sites on nodes where arcs may connect.  All primitive
+nodes have predefined ports, and these ports may be used to
+create exports in a cell that define ports on instances of the
+cell.
+
+Use EXPORT/Create Export to make the highlighted port on the
+highlighted node into an export.  To remove an export, use
+EXPORT/Delete Export (beware of arcs connected to that port on
+instances of the cell: they will be deleted).  Use EXPORT/
+Move Export to move an export from one node/port to another in
+the cell.
+
+Exports can have characteristics such as their directionality,
+power, and clocking.  Select the export text and use INFO/Get Info.
+The display of export names is controlled with EXPORT/Port and
+Export Options.
+
+Multiple exporting can be accomplished with EXPORT/Re-Export
+Everything which creates exports for every unexported and
+unconnected port on cell instances.  This operation can be
+done more selectively with EXPORT/Re-Export Highlighted.
+
+To see all exports in the current cell, use EXPORT/List Exports
+or EXPORT/Show Exports.  To see what exports exist on the
+currently selected network, use INFO/List Exports on Network.
+
+!Project Management
+
+To enable multiple designers to work together, the project
+management system controls access to cells in the library.
+Once a library has been entered into the system (with
+CELLS/Project Management/Build Project), users must check-out
+cells before editing them, and must check them in before
+others can edit them.  Use CELLS/Project Management/Check In
+and Out to do this.
+
+Special commands in the CELLS/Project Management submenu allow
+you to add new cells, remove cells, and obtain older versions.
+
+Each designer must be registered with the system using
+CELLS/Project Management/Set User.
+
+!Routing
+
+To automatically place arcs when the layout of two nodes causes
+an implicit connection, use TOOLS/Routing/Enable Auto-Stitching.
+To do this only once in the highlighted area, use
+TOOLS/Routing/Auto-Stitch Highlighted Now.
+
+To have the router watch your hand-wiring operations and repeat
+it elsewhere in the circuit, use TOOLS/Routing/Enable Mimic-Stitching.
+This can be done once with TOOLS/Routing/Mimic-Stitch Now.
+
+To replace unrouted wires with real geometry (using a maze-router),
+use TOOLS/Routing/Maze-Route Cell.  To do this only in the
+highlighted area, use TOOLS/Routing/Maze-Route Selected.
+
+To replace unrouted wires with real geometry in a river-routing
+fashion, use TOOLS/Routing/River-Route.
+
+To create the unrouted wire, use TOOLS/Routing/Get Unrouted Wire
+and place a wire, or use TOOLS/Routing/Unroute to convert real
+geometry to this type of arc.
+
+To set options for these routing tools, use
+TOOLS/Routing/Routing Options.
+
+!Silicon Compilation
+
+The Silicon Compiler can place and route standard cell libraries
+from a structural VHDL description.  The current cell is used
+to direct the compiler (if it is not a VHDL description, it is
+converted to one).
+
+Use commands from TOOLS/Silicon Compiler to do the placement and
+routing.  It is best to sequence through the following commands
+in order.
+(1) Use Read MOSIS CMOS Library to specify the standard
+    cell library.
+(2) Use Silicon Compiler Options to select parameters for
+    compilation.
+(3) Use Get Network for Current Cell to convert the current
+    cell into VHDL (if it isn't already) and compile that VHDL
+    for placement and routing.
+(4) Use Do Placement to place.
+(5) Use Do Routing to route.
+(6) Use Make Electric Layout to create the circuitry.
+
+!Simulation
+
+A built-in switch level simulator can be invoked with the
+TOOLS/Simulation (Built-in)/Simulate command.  It creates a new
+window to show a waveform for each export in the
+current cell.  When you go down and up the hierarchy, the
+waveform window changes to show the signals at that level.
+
+The simulation window can be zoomed and panned with the standard
+window controls.  Signal names can be selected in either the
+waveform window or the original design, and the selected signal
+can be set high/low/undefined at the current time by typing
+"h", "l", or "x".  The current time can be modified by dragging
+the main cursor (vertical line) in the waveform window.  Type "?"
+in the waveform window for more simulation options.
+
+Test vectors can be saved and restored with
+TOOLS/Simulation (Built-in)/Read Vectors from Disk and
+TOOLS/Simulation (Built-in)/Save Vectors to Disk.
+
+The ALS simulator converts the current cell into VHDL, compiles that
+to a netlist, and then reads the netlist into the simulator.  If
+the current cell is VHDL, then it is compiled into a netlist and
+run.  If the current cell is a netlist, it is run directly.
+A library of behavioral netlists to be used during VHDL
+compilation can be selected with TOOLS/VHDL Compiler/Select
+Behavioral Library.
+
+The IRSIM simulator can be installed in Electric and works in
+the same way.
+
+The waveform window can also be used to view the results of SPICE
+and Verilog simulation.
+
+!Simulation Interface
+
+Many different simulation decks can be produced with the
+TOOLS/Simulation (SPICE), TOOLS/Simulation (Verilog), and
+TOOLS/Simulation (Others) commands:
+   COSMOS (switch-level)
+   ESIM (switch-level)
+   FastHenry (inductance analyzer)
+   IRSIM (switch-level)
+   Maxwell (circuit-level)
+   MOSSIM (switch-level)
+   PAL (special array generator)
+   RNL (switch-level)
+   RSIM (switch-level)
+   SILOS (functional)
+   SPICE (circuit-level)
+   TEGAS (functional)
+   VERILOG (functional)
+
+Additional formats may appear in the FILE/Export submenu.
+Some of these deck generators have additional options available
+to control output.
+
+SPICE can even read the results back into a waveform window with
+TOOLS/Simulation (SPICE)/Plot SPICE Listing.  Special components
+from the EDIT/New SPICE Part submenu help design the SPICE deck
+graphically.
+
+!Technologies
+
+Technologies are collections of primitive nodes and arcs that
+can be used in cells.  The current technology can be changed
+with TECHNOLOGY/Change Current Technology.  Certain technologies
+can be modified with TECHNOLOGY/Technology Options.
+Correspondences can be made between the layers in the current
+technology and various interchange formats with FILE/IO Options.
+The size of the internal design unit and the size of the display
+units can be modified with TECHNOLOGY/Change Units.  To see a
+printed description of a technology, use TECHNOLOGY/Document
+Technology.
+
+It is possible to edit an existing technology to update sizes,
+design rules, etc.  The process consists of converting a
+technology to a library, editing the library, and then
+converting it back to a technology.  Use TECHNOLOGY/Convert and
+Edit Technology to begin the process.
+
+Once a technology is being edited, use TECHNOLOGY/Edit Layer,
+TECHNOLOGY/Edit Primitive Node and TECHNOLOGY/Edit Primitive Arc
+to update the basic elements of the technology.  Use the
+TECHNOLOGY/New Primitive submenu to create new nodes, arcs, and
+layers.  Use TECHNOLOGY/Delete This Primitive to delete the
+current element.  Primitive orderings can be set with the
+TECHNOLOGY/Reorder Primitives submenu.
+
+While editing a primitive node or arc, use TECHNOLOGY/Identify
+Primitive Layers to see what is there.  While editing a node,
+use TECHNOLOGY/Identify Ports to see what has been declared.
+
+Use TECHNOLOGY/Edit Colors, TECHNOLOGY/Edit Design Rules,
+TECHNOLOGY/Edit Variables, and TECHNOLOGY/Edit Miscellaneous
+Information to affect other aspects of the technology.  Use
+TECHNOLOGY/Edit Library Dependencies to link other technology-
+libraries with this one so that the technology can be
+hierarchically defined.
+
+When editing is done, convert the library to a new technology
+with TECHNOLOGY/Convert Library to Technology.
+
+An existing technology library can be read with
+TECHNOLOGY/Load Technology Library.  An existing technology can
+be deleted with TECHNOLOGY/Delete Technology.
+
+!Text
+
+Text can appear in many forms.  Nodes and arcs can be given
+names with the INFO/Get Info command.  Exports have
+names (EXPORT/Create Export).  A special text node is available
+with EDIT/New Special Object/Text (nonlayout).  Instances of
+cells have names that appear when the instance is viewed in
+its unexpanded form.  Note that arc and export names are the names
+of networks in the circuit, so identical names cause electrical
+unification.
+
+All of these pieces of text can be selected, moved, and edited.
+Click and drag on the text to move it; double-click on the text
+to edit it.  Some text is "hard to select", and can only be
+clicked-on with the "Special Select" button (see the help section
+on Buttons).
+
+!Text Editing
+
+When large amounts of text are to be edited, a special text-
+editing window is created.  Editing textual cells (documentation,
+VHDL, Verilog, or Netlist views) is done in such a window.  So
+is the editing of SPICE headers, and Dracula decks.
+
+The default editor is a point-and-click editor.  An EMACS-like
+editor is also available with the WINDOWS/Text Options command.
+
+Text can be edited with the EDIT/Cut, EDIT/Copy, and EDIT/Paste
+commands.  You can search for text with EDIT/Special Function/Find
+Text.
+
+When a text editing window is present, its contents can be saved
+to disk with CELLS/Write Text Cell and restored from disk with
+CELLS/Read Text Cell.
+
+!Text Editing (EMACS)
+
+When the text editor is EMACS, these commands are available:
+  ^A    cursor to start-of-line
+  ^B    backup one character
+  ^D    delete the next character
+  ^E    cursor to end-of-line
+  ^F    forward one character
+  ^G    flush state (and force evaluation of changed line)
+  ^H    delete previous character
+  ^K    delete to end-of-line (or kill line if on a null line)
+  ^L    redraw screen
+ RETURN insert new line
+  ^N    next line
+  ^O    insert new line
+  ^P    previous line
+  ^R    reverse search
+  ^S    forward search
+  ^V    shift screen up one page
+  ^X^V  read text from a file (you are prompted for the file)
+  ^X^W  write text to a file (you are prompted for the file)
+  ^Y    restore line deleted with ^K
+  ^Z    shift screen up one line
+  DEL   delete previous character
+ M(B)   backup one word
+ M(D)   delete the next word
+ M(F)   forward one word
+ M(H)   delete the previous word
+ M(V)   shift screen down one page
+ M(Z)   shift screen down one line
+ M(<)   cursor to beginning of file
+ M(>)   cursor to end of file
+ M(=)   show graphic equivalent to this line (nonEMACS)
+ M(DEL) delete the previous word
+
+To enable this editor, use WINDOWS/Text Options.
+
+!Views
+
+Each cell has a view type associated with it.  The default view
+type is "unknown", but the possibilities include "layout",
+"schematic", "icon", "skeleton", "simulation-output",
+"documentation", "VHDL", "Verilog", "netlist", etc.  A multi-page
+schematic view allows an arbitrary number of schematic pages to
+be linked together.  The view type of the current cell can be
+altered with VIEW/Change Cell's View.  Text-only views
+("documentation", "vhdl", "verilog", and "netlist") are edited
+with text windows.
+
+New view types can be defined with VIEW/New View Type
+(and deleted with VIEW/Delete View Type).
+
+To see (or create) an alternate view of the current cell,
+use VIEW/Edit Layout View, VIEW/Edit Schematic View,
+VIEW/Edit Multi-Page Schematic View, VIEW/Edit Icon View,
+VIEW/Edit VHDL View, VIEW/Edit Documentation View, VIEW/Edit
+Skeleton View, or VIEW/Edit Other View.
+
+It is possible to convert between views in special cases.
+Use VIEW/Make Icon View to create an icon view of the current
+cell (use VIEW/Icon Options to control this process).  Use
+VIEW/Make Skeleton View to create a skeleton view of the current
+cell. Use VIEW/Make Layout View to create a new version of
+the layout view in a different technology.  Use VIEW/Make
+Schematic View to create a schematic view from the current layout
+cell.  Use VIEW/Make VHDL View to create a structural VHDL
+description of the current cell.
+
+!Windows
+
+The display of the cell contents can be controlled with commands
+from the WINDOWS menu.  Use:
+  WINDOWS/Fill Window to make the entire cell be visible
+  WINDOWS/Zoom In and WINDOWS/Zoom Out to change the scale
+  WINDOWS/Special Zoom/Focus on Highlighted to make the
+    highlighted circuitry fill the window
+  WINDOWS/Special Zoom/Match Other Window to rescale to a
+    neighboring window
+
+Sliders on the side of the window control position.
+
+A grid can be displayed with WINDOWS/Toggle Grid.  The size and
+alignment to that grid can be set with WINDOWS/Grid Options.
+
+Multiple windows can be created by using WINDOWS/New Window or
+by checking the appropriate box in the CELLS/Edit Window command.
+When there are multiple windows on the screen, they can be
+organized with the commands in the WINDOWS/Adjust Position
+submenu.
+
+The editing window can be split into two halves, each of which
+can edit a different cell (or a different location in the same
+cell).  Each half can be split again and again.  Use
+WINDOWS/Window Partitions/Split to split, WINDOWS/Window
+Partitions/Delete to merge, and WINDOWS/Window Partitions/Make
+1 Window to return to an undivided editing window.
+When there are multiple windows displayed, only one is the
+current window, with a highlighted border.
+
+The visibility of the different layers can be controlled with
+WINDOWS/Layer Visibility. The appearance of layers is controlled
+with the commands in the WINDOWS/Color Options submenu.  The
+appearance of exports is controlled with the EXPORT/Port and Export
+Options command.  The location and size of the components menu
+(initially on the left) is controlled with WINDOWS/Component Menu.

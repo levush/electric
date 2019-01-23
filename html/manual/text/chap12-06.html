@@ -1,0 +1,182 @@
+<HTML><HEAD><TITLE>Using Electric 12-6: The View Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-06"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-05.html#chap12-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-6: The View Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-07.html#chap12-07"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-06.png" ALT="Figure 12.6"></CENTER>
+<P>
+Each cell has a view associated with it.
+Although Electric defines a standard set of view types (layout, schematic, icon,
+skeleton, simulation-output, VHDL, document, and many netlist formats)
+it is possible to define new view types (for example, "fast layout") and to assign these views to cells.
+Special commands switch between the different views of a cell.
+This menu also controls the display of schematic frames.
+Finally, there are commands that automatically generate new cells of a different view type.
+<P>
+<!-- NEED 3in -->
+<H3>New View Type... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command creates a new type of view for cells.
+	You will be prompted for the name of the view and an abbreviation to use in cell names.
+	The abbreviation appears in curly brackets after the cell name, for example MyAdder{fast}.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-07.png" ALT="Figure 3.7"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Delete View Type... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	This command deletes a view type.
+	There cannot be any existing cells with this view.
+	Also, it is not possible to delete the basic view types that are defined by Electric.
+<P>
+<H3>Change Cell's View... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	This command changes the view type of the current cell.
+	The cell name remains the same, but the view changes.
+	You will be prompted for the new view.
+	Note that this is one of the few commands in Electric that is NOT undoable.
+	<P>
+<HR><BR>
+<H3>Frame Options... <A HREF="chap07-06.html#chap07-06">[7-6]</A></H3>
+<P>
+	This command allows you to control the drawing of a frame in the current cell.
+	You can choose among 6 frame sizes ("Half-A", "A", "B", "C", "D", or "E")
+	and also whether they are wider (landscape) or taller (portrait).
+	<TABLE><TR><TD VALIGN=TOP>
+	In addition, you can provide information that will be displayed in the corner of the frame
+	(currently, only the company name, project name, and designer name).
+	</TD><TD><CENTER><IMG SRC="../images/chap07-20.png" ALT="Figure 07-20"></CENTER></TD></TR></TABLE>
+<P>
+<!-- NEED 3in -->
+<H3>Icon Options... <A HREF="chap03-12.html#chap03-12">[3-12]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This dialog controls how icons are created from schematics.
+	For each type of port in the schematic, you can control on which of the four sides of the icon the port will appear.
+	You can also control the location and order of ports and the style of their text.
+	You can control whether the icon has a body or leads for each port,
+	the size and spacing of the leads, and which technology to use for the export connections.
+	Finally, you can control where the newly created icon's instance will appear in the schematic.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-18.png" ALT="Figure 3.18"></CENTER></TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Edit Layout View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated layout view,
+	a new window is created to display that view.
+<P>
+<H3>Edit Schematic View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated schematic view,
+	a new window is created to display that view.
+<P>
+<H3>Edit Multi-Page Schematic View... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated multi-page schematic view,
+	a new window is created to display that view.
+	You will be prompted for the page number.
+	Multi-page schematics are described with the "pN" view type, where "N" is the page number.
+	For example, to edit page 6 of cell "happy", look for the cell called "happy{p6}".
+<P>
+<H3>Edit Icon View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated icon view,
+	a new window is created to display that view.
+<P>
+<H3>Edit VHDL View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated VHDL view,
+	a new window is created to display that view.
+	Note that the VHDL view is a textual view, so you will now be using a text editor.
+	See <A HREF="chap04-10.html#chap04-10">Section 4-10</A> for more on text editing.
+<P>
+<H3>Edit Documentation View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated documentation view,
+	a new window is created to display that view.
+	Note that the documentation view is a textual view, so you will now be using a text editor.
+	See <A HREF="chap04-10.html#chap04-10">Section 4-10</A> for more on text editing.
+<P>
+<H3>Edit Skeleton View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated skeleton view,
+	a new window is created to display that view.
+<P>
+<H3>Edit Other View... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	If the current cell has an associated other view,
+	a new window is created to display that view.
+	You will be prompted for the view type that you wish to edit.
+<P>
+<HR><BR>
+<P>
+<H3>Make Layout View... <A HREF="chap03-12.html#chap03-12">[3-12]</A></H3>
+<P>
+	This command creates a new layout cell of the cell in the current editing window
+	(or a new version of the layout view if one already exists).
+	It is presumed that the current cell is a layout or schematic view and that the new cell is layout in a different but similar technology.
+	You will be prompted for the new technology.
+<P>
+<H3>Make Schematic View <A HREF="chap03-12.html#chap03-12">[3-12]</A></H3>
+<P>
+	This command creates a new schematic cell of the cell in the current editing window.
+	It is presumed that the current cell is a layout view.
+	If there is already a schematic view of this cell, a new version of the schematic is created.
+<P>
+<H3>Make Multi-Page Schematic View... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	This command creates a new page of a multi-page schematic cell of the cell in the current editing window.
+	You will be prompted for the page number.
+	Multi-page schematics are described with the "pN" view type, where "N" is the page number.
+	For example, to edit page 6 of cell "happy", look for the cell called "happy{p6}".
+	If there is already a multi-page schematic view of this cell with the requested page number,
+	a new version of that page's cell is created.
+<P>
+<H3>Make Icon View <A HREF="chap03-12.html#chap03-12">[3-12]</A></H3>
+<P>
+	This command creates a new icon cell of the cell in the current editing window.
+	The new cell has the same ports but a black-box look with input ports on the left,
+	outputs on the right, power and ground on the top, and clock lines on the bottom.
+	The <B>Icon Options</B> command controls the generation of icons.
+<P>
+<H3>Make VHDL View <A HREF="chap03-12.html#chap03-12">[3-12]</A></H3>
+<P>
+	This command creates a new VHDL cell (a textual view) of the cell in the current editing window.
+	All subcells of the current cell are also translated to VHDL,
+	and their descriptions are stored in views of the subcell.
+	If "VHDL stored in cell" is unchecked (in the <B>VHDL Options...</B> subcommand of the <B>VHDL Compiler</B> command of
+	the <B>Tools</B> menu), all VHDL will be written to disk.
+<P>
+<H3>Make Documentation View <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	This command creates a new Documentation cell (a textual view) of the cell in the current editing window.
+<P>
+<H3>Make Skeleton View <A HREF="chap03-12.html#chap03-12">[3-12]</A></H3>
+<P>
+	This command creates a new skeleton cell of the cell in the current editing window.
+	The new cell has the same size and ports, but none of the internal layout.
+<P>
+<H3>Make Other View... <A HREF="chap03-11.html#chap03-11">[3-11]</A></H3>
+<P>
+	This command creates a new cell of the cell in the current editing window.
+	You will be prompted for the view type of the new cell.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-05.html#chap12-05"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-05.html#chap12-05">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-07.html#chap12-07">Next</A></TD>
+<TD><A HREF="chap12-07.html#chap12-07"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

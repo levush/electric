@@ -1,0 +1,158 @@
+<HTML><HEAD><TITLE>Using Electric 9-7: PLA and ROM Generation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap09-07"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 9: TOOLS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap09-06.html#chap09-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>9-7: PLA and ROM Generation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap09-08.html#chap09-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Introduction to PLAs</H3>
+<P>
+PLA generation is a process by which a set of input signals combines,
+through a logical sum of products, to form a set of output signals.
+For example, there may be two outputs: <I>f</I> and <I>g</I>, which are defined as follows:
+<P>
+<CENTER><TABLE WIDTH="80%">
+<TR><TD>
+<I>f</I> = (<I>a</I> <B>and</B> <I>b</I> <B>and</B> (<B>not</B> <I>c</I>)) <B>or</B> ((<B>not</B> <I>b</I>) <B>and</B> (<B>not</B> <I>a</I>))
+</TD></TR>
+<TR><TD>
+<I>g</I> = (<I>a</I> <B>and</B> <I>c</I>) <B>or</B> ((<B>not</B> <I>a</I>) <B>and</B> (<B>not</B> <I>c</I>))
+</TD></TR>
+</TABLE></CENTER>
+<P>
+This is a logical sum (<B>or</B>) of products (<B>and</B>), and the input terms may be negated (<B>not</B>).
+PLA generators require this information in the form of two personality tables:
+an AND table and an OR table.
+The AND table is as wide as there are inputs (3 in this case),
+and the OR table is as wide as there are outputs (2 in this case).
+The height of the tables is determined by the number of "product terms,"
+which are the number of intermediate results required to define the logic (4 in this case).
+The AND table for the above equations is:
+<P>
+<CENTER><TABLE WIDTH="80%">
+<TR><TD><I>a&nbsp;&nbsp;</I></TD><TD><I>b&nbsp;&nbsp;</I></TD><TD><I>c&nbsp;&nbsp;</I>&nbsp;</TD></TR>
+<TR><TD>1</TD><TD>1</TD><TD>0</TD><TD><I>a</I> <B>and</B> <I>b</I> <B>and</B> (<B>not</B> <I>c</I>)</TD></TR>
+<TR><TD>0</TD><TD>0</TD><TD>X</TD><TD>(<B>not</B> <I>b</I>) <B>and</B> (<B>not</B> <I>a</I>)</TD></TR>
+<TR><TD>1</TD><TD>X</TD><TD>1</TD><TD>(<I>a</I> <B>and</B> <I>c</I>)</TD></TR>
+<TR><TD>0</TD><TD>X</TD><TD>0</TD><TD>(<B>not</B> <I>a</I>) <B>and</B> (<B>not</B> <I>c</I>)</TD></TR>
+</TABLE></CENTER>
+<P>
+Notice that there is a "1" where the input term is in a positive form,
+a "0" where the input term is in a negated form, and an "X" where the input term does not apply.
+The OR table for the above equations then combines the four product terms into the two output terms as follows:
+<P>
+<CENTER><TABLE WIDTH="80%">
+<TR><TD><I>f&nbsp;&nbsp;</I></TD><TD><I>g&nbsp;&nbsp;</I>&nbsp;</TD></TR>
+<TR><TD>1</TD><TD>0</TD><TD><I>f</I>: <I>a</I> <B>and</B> <I>b</I> <B>and</B> (<B>not</B> <I>c</I>)</TD></TR>
+<TR><TD>1</TD><TD>0</TD><TD><I>f</I>: (<B>not</B> <I>b</I>) <B>and</B> (<B>not</B> <I>a</I>)</TD></TR>
+<TR><TD>0</TD><TD>1</TD><TD><I>g</I>: (<I>a</I> <B>and</B> <I>c</I>)</TD></TR>
+<TR><TD>0</TD><TD>1</TD><TD><I>g</I>: (<B>not</B> <I>a</I>) <B>and</B> (<B>not</B> <I>c</I>)</TD></TR>
+</TABLE></CENTER>
+<P>
+Electric's PLA generator tool consists of two different generators:
+an nMOS generator and a CMOS generator.
+Both use personality tables to specify which taps in the programming array are set.
+Both produce a hierarchical array specification made up of AND tables,
+OR tables, drivers, and all necessary power and ground wires.
+<P>
+<!-- NEED 3in -->
+<H3>The nMOS PLA Generator</H3>
+<P>
+The nMOS generator produces a circuit in the "nmos" technology.
+The PLA is generated with the <B>Make nMOS PLA</B> subcommand of the <B>PLA Generator</B>
+command of the <B>Tools</B> menu.
+You will be prompted for the file name that describes the PLA.
+<P>
+Below is a sample file which defines the above logic as an nMOS PLA
+(this file can be found in the <B>PLA-ROM</B> subdirectory of the <B>examples</B> directory).
+Note that comments can be inserted after a semicolon.
+The number of inputs, outputs,
+and product terms must be provided so that the array of values between the "begin" and "end" can be properly parsed.
+The other parameters are optional.
+These include the power and ground widths (default is 4 lambda);
+whether to use butting-contacts or buried contacts (default is to use butting contacts);
+whether the outputs are on the same side as the inputs (default is to place on the opposite side);
+what constraints will be placed on the arcs in the PLA
+(default is nonrigid fixed-angle); and a name for the newly created PLA cell
+(default is "nmosXXX" where "XXX" is the PLA size).
+<PRE>
+set inputs = 3                  ; sum of input and output is
+set outputs = 2                 ;   number of columns
+set pterms = 4                  ; 4 product terms (number of rows)
+set vddwidth = 6                ; 6 lambda-wide supply rails
+set groundwidth = 6
+set buttingcontact = off        ; use buried contacts instead
+set samesideoutput = on         ; outputs on same side as inputs
+set flexible = on               ; use nonrigid arcs
+set fixedangle = on             ; use fixed-angle arcs
+set name = Sample               ; name to use for top-level cell
+begin ;  Input     Output
+    ;   1  2  3     1  2
+        1  1  0     1  0    ; product term 1
+        0  0  X     1  0    ; product term 2
+        1  X  1     0  1    ; product term 3
+        0  X  0     0  1    ; product term 4
+end
+</PRE>
+<P>
+<H3>The CMOS PLA Generator</H3>
+<P>
+The CMOS PLA generator is somewhat more flexible than the nMOS version because it reads a library of support cells and uses them to produce the array.
+This means that it can handle any technology
+(although the only library that comes with Electric is for the MOSIS CMOS technology).
+For those who wish to construct their own library in another technology,
+note that it must contain the cells "decoder_inv1",
+"io-inv-4", "nmos_one", "pmos_one" and "pullups".
+Look at the library "pla_mocmos" (in the <B>lib</B> directory) for more information.
+<P>
+The CMOS PLA generator is run with the <B>Make MOSIS CMOS PLA</B>
+subcommand of the <B>PLA Generator</B> command of the <B>Tools</B> menu.
+You are then prompted for two files: the AND table file and the OR table file.
+These files are much simpler in format than the nMOS PLA input file.
+They have only two numbers on the first line to define the size of the array,
+and the values of the array on subsequent lines.
+Both the AND file and the OR file are similar.
+Example files can be found in the <B>PLA-ROM</B> subdirectory of the <B>examples</B> directory.
+Here is the AND file for the above logic:
+<PRE>
+    4    3
+    1    1    0
+    0    0    X
+    1    X    1
+    0    X    0
+</PRE>
+<P>
+<H3>The ROM Generator</H3>
+<P>
+The ROM generator reads a single personality table and builds a ROM.
+Since the generator is written in Java, you must have Java installed in Electric in order for this to run.
+<TABLE><TR><TD>
+The first line of the ROM personality table lists the degree of folding.
+For example, a 256-word x 10-bit ROM with a folding degree of 4 will
+be implemented as a 64 x 40 array with 4:1 column multiplexers
+to return 10 bits of data while occupying more of a square form
+factor.
+The number of words and degree of folding should be powers of 2.
+The remaining lines of the file list the contents of each word.
+The parser is pretty picky.
+There should be a carriage return after the list word, but no other blank lines in the file.
+</TD><TD><IMG SRC="../images/chap09-02.png" ALT="Figure 9.2" BORDER=0></TD></TR></TABLE>
+<P>
+For an example of a ROM personality table, see the file <B>rom.txt</B> in the <B>PLA-ROM</B> subdirectory of the <B>examples</B> directory.
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap09-06.html#chap09-06"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap09-06.html#chap09-06">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap09-08.html#chap09-08">Next</A></TD>
+<TD><A HREF="chap09-08.html#chap09-08"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,188 @@
+echo "loading tutorial, please wait..."
+
+macbegin setlesson no-execute
+var set L %1
+var set P %2
+var set N %3
+macend
+
+macbegin lesson1 no-execute
+echo "--------------------------- LESSON 1 ---------------------------"
+echo "The beginning user should follow this scenario to get acquainted"
+echo "with Electric.  Since this tutorial is simply a script, any deviation"
+echo "from its instructions may cause inconsistencies in what it teaches."
+echo "---------------------------"
+echo "First create a cell in which to edit. Create it by selecting the EDIT"
+echo "CELL command in the CELLS menu, click 'New Cell', type a name,"
+echo "and click OK."
+echo "---------------------------"
+echo "Please move on to the next lesson."
+setlesson lesson1 lesson1 lesson2
+macend
+
+macbegin lesson2 no-execute
+echo "--------------------------- LESSON 2 ---------------------------"
+echo "To create electrical objects, click over the picture of one in the"
+echo "menu on the left, and then click again inside of the circuit to place"
+echo "the object.  For this example use the Metal-1-Polysilicon-1 contact (the"
+echo "sixth entry from the bottom on the right)."
+setlesson lesson1 lesson2 lesson3
+macend
+
+macbegin lesson3 no-execute
+echo "--------------------------- LESSON 3 ---------------------------"
+echo "Use the same sequence to create a transistor (sixth or seventh from"
+echo "the top on the right) somewhere else in the circuit."
+echo "---------------------------"
+echo "Note: if you have no room to work, you can shift the screen by using"
+echo "the LEFT/RIGHT/UP/DOWN commands in the WINDOWS menu or by using the"
+echo "scroll bars on the bottom and right."
+setlesson lesson2 lesson3 lesson4
+macend
+
+macbegin lesson4 no-execute
+echo "--------------------------- LESSON 4 ---------------------------"
+echo "Any object can be selected simply by clicking the %F over it."
+echo "Try this with both nodes."
+echo "---------------------------"
+echo "Note also that a port is highlighted on the selected node."
+echo "On the contact, the port is a smaller box inside the node,"
+echo "and on the transistor, the ports are marked on the four tabs."
+echo "---------------------------"
+echo "Ports are the sites of arc (wire) connections.  The closest"
+echo "port to the cursor is selected when a node is highlighted."
+setlesson lesson3 lesson4 lesson5
+macend
+
+macbegin lesson5 no-execute
+echo "--------------------------- LESSON 5 ---------------------------"
+echo "Wires can be drawn from an object by using the %G and drawing."
+echo "When the button is released, a new wire will be drawn to that"
+echo "location.  Each bend requires another click."
+echo "---------------------------"
+echo "If the wire is drawn into another object, it will be connected."
+echo "---------------------------"
+echo "If the wrong port is selected or the wrong type of wire is drawn,"
+echo "use UNDO from the EDIT menu and try again.  The proper wire can"
+echo "be selected from the menu on the lower-left."
+setlesson lesson4 lesson5 lesson6
+macend
+
+macbegin lesson6 no-execute
+echo "--------------------------- LESSON 6 ---------------------------"
+echo "Any object can be moved by selecting it and continuing to hold the"
+echo "button while moving it.  Multiple objects can be selected by"
+echo "holding the SHIFT key while selecting an additional object."
+echo "---------------------------"
+echo "If the cursor is not over any object, you can stretch an enclosing"
+echo "box while the button remains down to select every object in that"
+echo "box."
+setlesson lesson5 lesson6 lesson7
+macend
+
+macbegin lesson7 no-execute
+echo "--------------------------- LESSON 7 ---------------------------"
+echo "Notice the effect of moving components that are connected by"
+echo "wires.  Since these wires are Fixed-angle, they cannot change"
+echo "their angle, but they stretch as necessary."
+echo "---------------------------"
+echo "Select an arc and make it rigid with the RIGID command in"
+echo "the ARC menu."
+echo "---------------------------"
+echo "Now move connected components and note the effects of making an"
+echo "arc rigid."
+setlesson lesson6 lesson7 lesson8
+macend
+
+macbegin lesson8 no-execute
+echo "--------------------------- LESSON 8 ---------------------------"
+echo "Find another arc and make it not fixed-angle with the"
+echo "NOT FIXED-ANGLE command in the ARC menu."
+echo "---------------------------"
+echo "Note the effects of moving a component when connected to a"
+echo "non-fixed-angle arc."
+setlesson lesson7 lesson8 lesson9
+macend
+
+macbegin lesson9 no-execute
+echo "--------------------------- LESSON 9 ---------------------------"
+echo "Make all arcs rigid and rotate the Transistor (one of the ROTATE"
+echo "commands in the EDIT menu)."
+echo "---------------------------"
+echo "Note that rigid arcs force their nodes to remain in the same"
+echo "relationship."
+echo "---------------------------"
+echo "If the objects do not fit on the display, use the FILL WINDOW"
+echo "command in the WINDOWS menu."
+setlesson lesson8 lesson9 lesson10
+macend
+
+macbegin lesson10 no-execute
+echo "--------------------------- LESSON 10 ---------------------------"
+echo "To see how hierarchy works, first create a new window so that two"
+echo "hierarchical levels can be viewed.  Use EDIT CELL from the CELLS"
+echo "menu and create a new cell in a new window.  Resize the windows"
+echo "so you can see both."
+setlesson lesson9 lesson10 lesson11
+macend
+
+macbegin lesson11 no-execute
+echo "--------------------------- LESSON 11 ---------------------------"
+echo "To place an instance of the other cell, use the NEW CELL INSTANCE"
+echo "command in the EDIT menu.  Select the other cell's name, then click"
+echo "in the empty window to place the instance."
+setlesson lesson10 lesson11 lesson12
+macend
+
+macbegin lesson12 no-execute
+echo "--------------------------- LESSON 12 ---------------------------"
+echo "To see what is in this cell instance, select it and use the ONE"
+echo "LEVEL DOWN subcommand of the EXPAND CELL INSTANCES command in the"
+echo "CELLS menu."
+echo "---------------------------"
+echo "To return to black box form, use ONE LEVEL UP subcommand of the"
+echo "UNEXPAND CELL INSTANCES command."
+setlesson lesson11 lesson12 lesson13
+macend
+
+macbegin lesson13 no-execute
+echo "--------------------------- LESSON 13 ---------------------------"
+echo "Select the Contact in the lower-level cell and export its port with"
+echo "the CREATE EXPORT... command of the EXPORT menu.  You will be prompted"
+echo "for an export name."
+echo "---------------------------"
+echo "This takes a port on the current node (the Contact) and makes it an"
+echo "export on the outside node (the instance)."
+echo "---------------------------"
+echo "Since ports are the sites of arc connections, exports define ports"
+echo "at the higher-level that can connect to the cell instance."
+setlesson lesson12 lesson13 lesson14
+macend
+
+macbegin lesson14 no-execute
+echo "--------------------------- LESSON 14 ---------------------------"
+echo "To further illustrate how exports work, create a new component"
+echo "near the instance and connect it to the instance."
+echo "---------------------------"
+echo "Notice how the instance acts as a node in all respects."
+setlesson lesson13 lesson14 lesson15
+macend
+
+macbegin lesson15 no-execute
+echo "--------------------------- LESSON 15 ---------------------------"
+echo "That is the end of the tutorial."
+setlesson lesson14 lesson15 lesson15
+macend
+
+var set L lesson1
+var set N lesson1
+var set P lesson1
+
+bind set key b telltool user ^%L
+bind set key a telltool user ^%P
+bind set key " " telltool user ^%N
+
+echo "This is a tutorial of Electric."
+echo "Type space to advance to the next lesson."
+echo "Type  'a'  to see the same lesson again."
+echo "Type  'b'  to backup to the previous lesson."

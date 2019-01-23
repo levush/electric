@@ -1,0 +1,130 @@
+<HTML><HEAD><TITLE>Using Electric 7-2: Units</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap07-02"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 7: DESIGN ENVIRONMENTS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap07-01.html#chap07-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>7-2: Units</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap07-03.html#chap07-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+<P>
+Electric stores all geometry in terms of an <I>internal unit</I> of distance,
+but displays all distances in terms of a <I>display unit</I>.
+In addition, Electric uses a basic grid unit called <I>lambda</I>,
+which provides for scalable design.
+<P>
+To change the value of the internal unit, the display units, or the value of lambda,
+use the <B>Change Units...</B> command of the <B>Technology</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-01.png" ALT="Figure 7.1"></CENTER>
+<P>
+The rest of this section describes the use of this dialog.
+<P>
+<H3>Lambda</H3>
+<P>
+The right side of the <B>Change Units...</B> is used to manipulate the value of Lambda.
+Lambda is the basic unit of design, expressed in internal units.
+For example, the MOSIS CMOS technology has transistors that are 2x3 lambda units in size,
+and a value of lambda that is 400.
+Because the internal unit is the half-nanometer (the half millimicron),
+400 internal units is 0.2 microns,
+and the transistor is 0.4 by 0.6 microns in size.
+Note that the value of lambda is shown in the status area.
+<P>
+Each library has a list of lambda values for each technology.
+This means that two libraries can have different lambda values for the same technology,
+and this can cause trouble if the libraries reference each other.
+Because of this, when a library is read in with lambda values that are different from existing libraries,
+you are presented with a dialog to help resolve these differences.
+<P>
+<CENTER><IMG SRC="../images/chap07-19.png" ALT="Figure 7.19"></CENTER>
+<P>
+You can choose to scale the new library or the existing libraries so that they match.
+You can also choose to ignore the problem if you know that the inconsistent lambda values will not cause trouble.
+<P>
+If you use the <B>Change Units...</B> command and change the value of lambda,
+you have three choices for how to adjust the existing circuitry:
+<UL>
+<LI>"Change no libraries" causes the technology to scale, but existing objects are left alone.
+This may cause existing objects to change their aspect ratio, even if they don't change their physical size.
+<LI>"Change current library" causes the technology and all objects in the current library to scale.
+The objects and their cells will now be at a different size, but will appear the same as before.
+<LI>"Change all libraries" causes the technology and all objects in all libraries to scale.
+The objects and their cells will now be at a different size, but will appear the same as before.
+</UL>
+For example, if you change lambda for the "mocmossub" technology from 400 to 800,
+and you scale the libraries, then the existing 2x3 lambda transistor will be affected.
+Its area area will now be 0.8 by 1.2 microns in size.
+Thus, lambda-based designs are scalable to the desired process.
+<P>
+<!-- NEED 5in -->
+<H3>Display Units</H3>
+<P>
+The upper-left side of the dialog is concerned with display units.
+Distance can be expressed in Lambda units (a scalable unit) or
+you can switch the display unit to a real distance.
+Changing the display units affects only how numbers are presented,
+not their internal storage.
+For example,
+selecting the "Microns" display unit causes Electric to describe distances in microns,
+rather than lambda units.
+When a real display unit is used, appropriate notation is used to express distances
+(i.e. a 3 micron wire is "3u" wide).
+<P>
+When you type a distance value in Electric,
+that value is presumed to be in the current display unit.
+However, if you add a specific unit symbol to the end of the value,
+those units are used.
+These unit symbols are recognized:
+<P>
+<CENTER><TABLE BORDER=0>
+<TR>
+  <TD><U>Unit</U></TD>
+  <TD ALIGN=CENTER><U>Unit&nbsp;Symbol</U>&nbsp;&nbsp;&nbsp;</TD>
+  <TD ALIGN=CENTER><U>Example</U></TD>
+</TR>
+<TR><TD>Inches</TD>      <TD ALIGN=CENTER>"</TD>  <TD ALIGN=CENTER>3"</TD></TR>
+<TR><TD>Centimeters</TD> <TD ALIGN=CENTER>cm</TD> <TD ALIGN=CENTER>7cm</TD></TR>
+<TR><TD>Millimeters</TD> <TD ALIGN=CENTER>mm</TD> <TD ALIGN=CENTER>12mm</TD></TR>
+<TR><TD>Mils</TD>        <TD ALIGN=CENTER>mil</TD><TD ALIGN=CENTER>4.5mil</TD></TR>
+<TR><TD>Microns</TD>     <TD ALIGN=CENTER>u</TD>  <TD ALIGN=CENTER>-90u</TD></TR>
+<TR><TD>Centimicrons</TD><TD ALIGN=CENTER>cu</TD> <TD ALIGN=CENTER>100cu</TD></TR>
+<TR><TD>Nanometers</TD>  <TD ALIGN=CENTER>nm</TD> <TD ALIGN=CENTER>1nm</TD></TR>
+</TABLE></CENTER>
+<P>
+Besides distance units, you can also change the way that various other electrical units are displayed.
+Once again, changing these values does not affect the database in any way, only how the numbers are printed.
+<P>
+<H3>Internal Units</H3>
+<P>
+The lower-left side of the dialog is concerned with Electric's internal units.
+Electric has a choice of two different internal units.
+For IC design,
+the half-nanometer (half millimicron) is appropriate because it is small enough to represent chip geometries.
+However, because Electric uses 32-bit integers for storage,
+the half-nanometer can only express values from about -42 inches to +42 inches.
+If you are using Electric for larger designs
+(printed circuit boards or other large physical items) then this is too restrictive.
+<P>
+You can choose to switch the internal unit to the half-decimicron (50 nanometers),
+which is 100 times larger, and gives a much wider range of real distance.
+However, when you change the internal unit, all database units are scaled to keep their size constant.
+This means that if you switch to the half-decimicron, very tiny distances may get truncated.
+In general, the internal unit should not be modified unless you are sure you know what you are doing.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap07-01.html#chap07-01"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap07-01.html#chap07-01">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap07-03.html#chap07-03">Next</A></TD>
+<TD><A HREF="chap07-03.html#chap07-03"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

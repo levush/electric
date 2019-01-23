@@ -1,0 +1,683 @@
+<HTML><HEAD><TITLE>Using Electric 11-4: The Java Interface</TITLE></HEAD>
+<BODY bgColor=#ffffff>
+<!-- PAGE BREAK --><A 
+name=chap11-04></A><BR>
+<CENTER><FONT size=6><B>Chapter 11: INTERPRETERS</B></FONT></CENTER><BR>
+<CENTER>
+<TABLE width="90%" border=0>
+  <TR>
+    <TD>
+      <CENTER><A href="chap11-03.html#chap11-03" ><IMG alt=plug src="../images/iconplug.png" border=0 ></A></CENTER></TD>
+    <TD>
+      <CENTER>
+      <H2>11-4: The Java Interface</H2></CENTER></TD>
+    <TD>
+      <CENTER><A href="chap11-05.html#chap11-05" ><IMG alt=plug src="../images/iconplug.png" border=0 ></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>This section explains the Java interpretive language 
+interface in the Electric VLSI design system. 
+<P>This section assumes that the reader is very familiar 
+with the use of Electric, and somewhat familiar with the internals of the 
+system. The Internals Manual (a document that is available from <A 
+href="http://www.staticfreesoft.com">Static Free 
+Software</A>) provides a broad, C-oriented view of the information described 
+here. For users of Java, however, this section summarizes the relevant aspects 
+of the Internals Manual. In general, the best way to understand this section is 
+to try each command as it is explained. 
+<P>Throughout this section, examples of Java code will 
+appear <U>underlined</U>. For example, the "getArcProto" 
+function takes the name of an arc prototype and returns a pointer to that 
+object. This is coded as <U>Electric.getArcProto("Metal-1")</U> which evaluates to the 
+pointer of the form <U>ArcInst(21726672)</U>. 
+<H3>Session Control</H3>
+<P>To invoke the Java interpreter, use the <B>JAVA...</B> subcommand of the <B>Language Interpreter</B> command of the <B>Tools</B> menu. On some systems it may be necessary to move 
+the cursor into the messages window (the text window) in order for the 
+interpreter to "hear" you. 
+<P>If you have installed the Bean Shell (see the 
+installation instructions) then the Java interpreter will be able to handle any 
+Java expression. The Bean Shell also allows you to use "E" instead of "Electric" 
+in any expression. 
+<P>If you do not have the Bean Shell installed, then the 
+interpreter can accept only one type of command: <U>CLASS.METHOD</U> which invokes a method in a class. The 
+method must be static and take no parameters. 
+<P>Electric has its own private area for Java classes, 
+which it adds to the list of places that Java will search. This path is the 
+"java" subdirectory of Electric's library directory. It is best to place your 
+Java code there, and to add this <U>import</U> line at the 
+start: <BR>&nbsp;&nbsp;<U>import 
+COM.staticfreesoft.*;</U> 
+<P>To get back to Electric from Java, type ^D (hold the 
+Control key and type a "D"). On Windows, you must type the ESC key instead. 
+<H3>Java used in Parameters</H3>
+<P>An important use of Java is in attributes and 
+parameters. For example, the "width" attribute of a schematic transistor can be 
+set to be code. Such code takes the form of an expression such as <U>2+2</U> or <U>Math.Sqrt(7.5)</U>. 
+<P>Commonly, the expression needs to make use of a 
+parameter value (see <A href="chap06-08.html#chap06-08" >Section 6-8</A> for more on creating 
+cell parameters). To get an parameter value from an instance above this in the 
+hierarchy, use: <BR>&nbsp;&nbsp;<U>Electric.getParentVal("name", default, height)</U><BR>where <U>"name"</U> is the attribute 
+name, <U>default</U> is the default value to return if the 
+attribute is not found, and <U>height</U> is the number of 
+levels of hierarchy to climb when looking for the attribute (0 for infinite). As 
+a shortcut for finding parameter values, the Bean Shell adds five macros which 
+use this routine: 
+<UL>
+  <LI><U>P("xx")</U> obtains the value 
+  of parameter <U>xx</U> from the parent instance in the 
+  hierarchy. 
+  <LI><U>@xx</U> is a shortcut for <U 
+  >P("xx")</U>. 
+  <LI><U>PD("xx", def)</U> obtains the 
+  value of parameter <U>xx</U> from the parent instance in 
+  the hierarchy and uses the value <U>def</U> if the 
+  parameter cannot be found. 
+  <LI><U>PAR("xx")</U> obtains the 
+  value of parameter <U>xx</U> from any higher instance, 
+  anywhere in the hierarchy. 
+  <LI><U>PARD("xx", def)</U> obtains 
+  the value of parameter <U>xx</U> from any higher 
+  instance, anywhere in the hierarchy and uses the value <U 
+  >def</U> if the parameter cannot be found. </LI></UL>So, if 
+the transistor is in a cell with a parameter called "strength", and it should 
+be half that value wide, use the expression <U>@strength/2</U>. 
+<H3>Database Structure</H3>
+<P>The entire Electric database is a collection of objects, 
+each of which has an arbitrary number of attributes. This section briefly 
+outlines the object types and shows how they are related. Further detail can be 
+found in the Internals Manual. See <A href="chap11-05.html#chap11-05" >Section 11-5</A> 
+for a list of attributes on these objects. 
+<P>Individual components inside of circuits are described 
+with <U>NodeInst</U> objects (instances of nodes), and 
+individual wires are described with <U>ArcInst</U> objects 
+(instances of arcs). Connections between components and wires are described with 
+<U>PortArcInst</U> objects (instances of ports that connect 
+to arcs). Because both components and wires have geometry, each one also has an 
+associated <U>Geom</U> object, and all of the <U>Geom</U> objects in a cell are organized spatially into an 
+R-tree with a collection of&nbsp; <U>RTNode</U> objects. 
+<P>Class objects also exist to describe all individuals of 
+a given type. The&nbsp; <U>NodeProto</U> object describes 
+the prototypical component, which may have many individual <U>NodeInst</U> objects associated with it. For example, the 
+CMOS P-Transistor is described with a single <U>NodeProto</U> object, and many&nbsp;<U>NodeInst</U> objects for each instance of such a transistor 
+in any circuit. Hierarchy is implemented by having complex components, better 
+known as cells, represented in the same way as the primitive components such as 
+transistors. For example, the ALU circuit is described with a single <U>NodeProto</U> object, and each instance of that circuit 
+higher up the hierarchy is described with a&nbsp;<U>NodeInst</U> object. 
+<P>The <U>Cell</U> object aggregates 
+different views and versions of a circuit. Each of these is called a "cell" 
+(represented with a <U>NodeProto</U> object) and a cell 
+has both a <U>View</U> pointer and a version number. 
+<P>In addition to component prototypes, the <U>ArcProto</U> describes classes of wires and the&nbsp;<U>PortProto</U> describes classes of component-wire 
+connections. An additional object, the <U>PortExpInst</U>, 
+exists for exports. The <U>Network</U> object describes 
+electrically connected&nbsp;<U>ArcInst</U> and&nbsp;<U>PortProto</U> objects within a cell. 
+<P>As a further aggregation of objects, the&nbsp;Library is 
+a collection of cells and cells. The <U>Technology</U> is 
+a collection of primitive components (<U>NodeProto</U>s) 
+and all wire classes (<U>ArcProto</U>s). 
+<P>In addition to the above object pointers, there are some 
+standard types of values that can be accessed through <U>getval</U>: 
+<CENTER>
+<TABLE border=1>
+  <TR>
+    <TD><U>Integer</U></TD>
+    <TD>32-bit integer</TD></TR>
+  <TR>
+    <TD><U>String</U></TD>
+    <TD>null-terminated string of bytes</TD></TR>
+  <TR>
+    <TD><U>Float</U></TD>
+    <TD>32-bit floating point number</TD></TR>
+  <TR>
+    <TD><U>WindowPart</U></TD>
+    <TD>window partition object</TD></TR>
+  <TR>
+    <TD><U>WindowFrame</U></TD>
+    <TD>display window object</TD></TR>
+  <TR>
+    <TD><U>Constraint</U></TD>
+    <TD>constraint system object</TD></TR>
+  <TR>
+    <TD><U>Graphics</U></TD>
+    <TD>graphical attributes object</TD></TR>
+  <TR>
+    <TD><U>Polygon</U></TD>
+    <TD>graphical shape object</TD></TR>
+  <TR>
+    <TD><U>XArray</U></TD>
+    <TD>transformation 
+object</TD></TR></TABLE></CENTER>
+<P>Also, there is the ability to have displayable variables 
+(those whose values appear on the object) with the keyword: <U>vdisplay</U>. 
+<P>Any Java object that represents an Electric object is 
+actually an object with a single field in it: the address of that object in 
+Electric. You can get that field with <U>getAddress</U> and 
+you can set that field (a dangerous operation) with <U>setAddress</U>. You can test to see if that field points to 
+a null pointer with the <U>isNull</U> method. Finally, you 
+can see whether two fields are equal with <U>isEqual</U> 
+(remember that the Java objects may be different, but if their Electric 
+addresses are the same, then these are the same Electric object). 
+<P>
+<H3>Database Examination</H3>
+<P>To begin a search through the database, it is important 
+to know the current library. This is done with: <BR>&nbsp;&nbsp;<U>Electric.curLib()</U><BR>which returns 
+a pointer to a <U>Library</U> object (for example <U>Library 15464800</U>). From here, the current cell can be 
+obtained with: <BR>&nbsp;&nbsp;<U>Electric.getVal(Electric.curLib(), "firstnodeproto")</U><BR>
+<P>Essentially, any attribute can be examined with <U>getVal</U>, and new attributes can be created with <U>setVal</U>. <U>getVal</U> has the 
+following format: <BR>&nbsp;&nbsp;<U>Electric.getVal(object, attribute)</U><BR>where <U>object</U> is the object 
+being accessed and <U>attribute</U> is the attribute being 
+requested. A list of all existing attributes on the Electric objects is given at 
+the end of this document. 
+<P>New attributes can be created on any object with <U>setVal</U>. In general, many of the existing attributes 
+that are described at the end of this document cannot be set with <U>setVal</U>, but rather are controlled with special database 
+modification methods. The format for <U>setVal</U> is: <BR>&nbsp;&nbsp;<U>Electric.setVal(object, 
+attribute, value, options)</U><BR>Where the <U>options</U> are either <U>0</U> or <U>vdisplay</U> to show this attribute when displaying the 
+object. For example, to add a new attribute called "power-consumption" to the 
+transistor component "t1", and give it the value 75, use: <BR>&nbsp;&nbsp;<U>Electric.setVal(t1, 
+"power-consumption", 75, 0);</U><BR>To add a displayed name 
+to node "t1", use: <BR>&nbsp;&nbsp;<U>Electric.setVal(t1, "NODE_name", "Q1", 
+Electric.vdisplay);</U><BR>You can set arrays of values as 
+well. For example, to set the shape of pure-layer node "metal" to be a diamond, 
+use: <BR>&nbsp;&nbsp;<U>Integer[] 
+outline = new Integer[8];</U><BR>&nbsp;&nbsp;<U>outline[0] = -1000; outline[1] = 0;</U><BR>&nbsp;&nbsp;<U>outline[2] = 0; 
+outline[3] = 1000;</U><BR>&nbsp;&nbsp;<U>outline[4] = 1000; outline[5] = 0;</U><BR>&nbsp;&nbsp;<U>outline[6] = 0; 
+outline[7] = -1000;</U><BR>&nbsp;&nbsp;<U>Electric.setVal(metal, "trace", outline, 0);</U><BR>
+<P>Single entries in array attributes can be set, with: <BR>&nbsp;&nbsp;<U>Electric.setInd(object, 
+attribute, index, value)</U><BR>where <U>index</U> is the 0-based entry in the array. 
+<P>Finally, attributes can be deleted with: <BR>&nbsp;&nbsp;<U>Electric.delVal(object, 
+attribute)</U><BR>However, only those attributes that have 
+been created with <U>setVal</U> can be deleted in this way. 
+The other attributes are protected. 
+<H3>Basic Synthesis</H3>
+<P>To create a new cell in the current library, use: <BR>&nbsp;&nbsp;<U>Electric.newNodeProto(cellName, Electric.curLib())</U><BR>which returns a&nbsp;<U>NodeProto</U> 
+pointer that can be used in subsequent calls which place components and wires in 
+that cell. 
+<P>To get the address of an existing <U>NodeProto</U>, use: <BR>&nbsp;&nbsp;<U>Electric.getNodeProto(cellName)</U><BR>which returns the same type of value as <U>newNodeProto</U>. Thus, the code: <BR>&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> mycell = Electric.newNodeProto("adder{lay}", 
+Electric.curLib());</U><BR>is the same as the code: <BR>&nbsp;&nbsp;<U>Electric.newNodeProto("adder{lay}", 
+Electric.curLib());</U><BR>&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> mycell = 
+Electric.getNodeProto("adder{lay}");</U><BR>and both deal 
+with the "layout" view of the cell called "adder". 
+<P>As an aside, the method <U>getCell</U> can be used to get a&nbsp;<U>Cell</U> object, such that: <BR>&nbsp;&nbsp;<U>Electric.getCell("adder")</U><BR>returns the same thing as: <BR>&nbsp;&nbsp;<U>Electric.getVal(mycell, "cell")</U><BR>
+<P>To create a component in a cell, use: <BR>&nbsp;&nbsp;<U>Electric.newNodeInst(proto, lowX, highX, lowY, highY, 
+transpose, angle, cell)</U><BR>where <U>proto</U> is a&nbsp;<U>NodeProto</U> 
+of the component that is to be created, <U>lowX</U>, <U>highX</U>, <U>lowY</U>, and <U>highY</U> are the bounds of the component, <U>angle</U> is the number of tenth-degrees of rotation for 
+the component, <U>transpose</U> is nonzero to transpose the 
+component's orientation (after rotation), and <U>cell</U> 
+is the&nbsp;<U>NodeProto</U> in which to place the 
+component. 
+<P>The four bounds values are somewhat confusing to 
+compute. For primitive components (such as Transistors), any value is acceptable 
+and the component will scale. However, it is still nice to know the default 
+value, which can be obtained from the&nbsp;<U>NodeProto</U> 
+with <U>getVal</U> as follows: <BR>&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> tran = 
+Electric.getNodeProto("P-Transistor");</U><BR>&nbsp;&nbsp;<U>int lowx = 
+((Integer)Electric.getVal(tran, "lowx")).intValue();</U><BR>&nbsp;&nbsp;<U>int highx = 
+((Integer)Electric.getVal(tran, "highx")).intValue();</U><BR>&nbsp;&nbsp;<U>int lowy = 
+((Integer)Electric.getVal(tran, "lowy")).intValue();</U><BR>&nbsp;&nbsp;<U>int highy = 
+((Integer)Electric.getVal(tran, "highy")).intValue();</U><BR>When complex components (cells) are placed, the bounds 
+MUST be exactly the same as the bounding box of the cell's contents. This 
+information is available in the above manner. As an example of <U>newNodeInst</U>, and given the above bounds calculations, a 
+default size P-Transistor is created in cell "adder" with: <BR>&nbsp;&nbsp;<U>Electric.<U>NodeInst</U> t1 = Electric.newNodeInst(tran, lowx, highx, 
+lowy, highy, 0, 0, mycell);</U><BR>The returned pointer to 
+the transistor component will be used later when wiring.
+
+<P>To wire two components, it is necessary to know these 
+four things: 
+<UL>
+  <LI>The component objects on the two ends, returned by <U 
+  >newNodeInst</U> 
+  <LI>The&nbsp;<U>PortProto</U> values 
+  of the connection sites on the components 
+  <LI>The X and Y coordinates of the connection sites 
+  <LI>The type, width, and other characteristics of the 
+  wire being created </LI></UL>Connection sites are called <U>PortProto</U>s and are associated with <U>NodeProto</U>s. To get the address, use: <BR>&nbsp;&nbsp;<U>Electric.getPortProto(nodeProto, portName)</U><BR>For example, to get the polysilicon port on the left side 
+of the MOSIS CMOS P-Transistor, use: <BR>&nbsp;&nbsp;<U>Electric.<U>PortProto</U> polyleft = 
+Electric.getPortProto(tran, "p-trans-poly-left");</U><BR>Unfortunately, there is no good way to get a list of port 
+names on the primitive components. There are, however, some simplifications. For 
+example, if there is only one port (as is the case with most contacts and pins) 
+then its name is not necessary: <BR>&nbsp;&nbsp;<U>Electric.<U>PortProto</U> port = 
+(Electric.<U>PortProto</U>)Electric.getVal(tran, 
+"firstportproto");</U><BR>This will obtain the first port 
+on the P-Transistor component. To obtain the coordinates of a port for wiring, 
+use <BR>&nbsp;&nbsp;<U>Electric.portPosition(node, port)</U><BR>This returns an array with the coordinates. For example: 
+<BR>&nbsp;&nbsp;<U>Integer[] portpos = 
+Electric.portPosition(t1, polyleft);</U><BR>will obtain the 
+coordinate of the "p-trans-poly-left" port on the newly created P-Transistor, 
+t1. The X value will be <U>portpos[0].intValue()</U> and 
+the Y value will be <U>portpos[1].intValue()</U>. 
+<P>The final piece of information necessary is the type of 
+arc and the width of the arc. Given an arc name, the type can be obtained with: 
+<BR>&nbsp;&nbsp;<U>Electric.getArcProto(arcName)</U><BR>Given an <U>ArcProto</U>, its default 
+width can be obtained with: <BR>&nbsp;&nbsp;<U>Electric.getVal(arc, "nominalwidth")</U><BR>When all of the information is ready, the call: <BR>&nbsp;&nbsp;<U>Electric.newArcInst(arcType, width, bits, nodeA, portA, xA, 
+yA, nodeB, portB, xB, yB, cell)</U><BR>places the wire. 
+You can ignore the value of <U>bits</U> and set it to zero. 
+
+<P>
+The size used to create a node or arc is not necessarily the size of the object.
+This is because the size given to <U>newNodeInst</U> is the outer bounds of the object which may include implant layers.
+To get the difference between the "nominal size" and the <U>newNodeInst</U> size, use:
+<BR>&nbsp;&nbsp;<U>Electric.nodeProtoSizeOffset(primitiveNodeProto)</U><BR>
+which returns an array of 4 Integers with the low X, high X, low Y and high Y offsets.
+The routine:
+<BR>&nbsp;&nbsp;<U>Electric.arcProtoWidthOffset(arcProto)</U><BR>
+returns the difference between the "nominal width" and the actual width used in <U>newArcInst</U>.
+
+<P>Here is a complete example of placing a transistor, a 
+contact, and running a wire between them (the result is shown at the bottom). 
+<P>&nbsp;&nbsp;<U>/* create a cell 
+called "tran-contact" in the current library */</U><BR>&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> mycell = 
+Electric.newNodeProto("tran-contact", Electric.curLib());</U><BR><BR>&nbsp;&nbsp;<U>/* get pointers to primitives */</U><BR>&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> tran = 
+Electric.getNodeProto("P-Transistor");</U><BR>&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> contact = 
+Electric.getNodeProto("Metal-1-Polysilicon-1-Con");</U><BR><BR>&nbsp;&nbsp;<U>/* get default sizes of these primitives */</U><BR>&nbsp;&nbsp;<U>int tlowx = 
+((Integer)Electric.getVal(tran, "lowx")).intValue();</U><BR>&nbsp;&nbsp;<U>int thighx = 
+((Integer)Electric.getVal(tran, "highx")).intValue();</U><BR>&nbsp;&nbsp;<U>int tlowy = 
+((Integer)Electric.getVal(tran, "lowy")).intValue();</U><BR>&nbsp;&nbsp;<U>int thighy = 
+((Integer)Electric.getVal(tran, "highy")).intValue();</U><BR>&nbsp;&nbsp;<U>int clowx = 
+((Integer)Electric.getVal(contact, "lowx")).intValue();</U><BR>&nbsp;&nbsp;<U>int chighx = 
+((Integer)Electric.getVal(contact, "highx")).intValue();</U><BR>&nbsp;&nbsp;<U>int clowy = 
+((Integer)Electric.getVal(contact, "lowy")).intValue();</U><BR>&nbsp;&nbsp;<U>int chighy = 
+((Integer)Electric.getVal(contact, "highy")).intValue();</U><BR><BR>&nbsp;&nbsp;<U>/* get pointer to Polysilicon arc and its default width 
+*/</U><BR>&nbsp;&nbsp;<U>Electric.<U>ArcProto</U> arctype = 
+Electric.getArcProto("Polysilicon-1");</U><BR>&nbsp;&nbsp;<U>int width = 
+((Integer)Electric.getVal(arctype, "nominalwidth")).intValue();</U><BR><BR>&nbsp;&nbsp;<U>/* create the transistor and the contact to its left 
+*/</U><BR>&nbsp;&nbsp;<U>Electric.<U>NodeInst</U> c1 = Electric.newNodeInst(contact, clowx, 
+chighx, clowy, chighy,</U><BR>&nbsp;&nbsp;&nbsp;<U>0, 0, mycell);</U><BR>&nbsp;&nbsp;<U>Electric.<U>NodeInst</U> t1 = 
+Electric.newNodeInst(tran, tlowx+8000, thighx+8000,</U><BR>&nbsp;&nbsp;&nbsp;<U>tlowy, thighy, 0, 
+0, mycell);</U><BR><BR>&nbsp;&nbsp;<U>/* get the transistor's left port coordinates */</U><BR>&nbsp;&nbsp;<U>Electric.<U>PortProto</U> tport = Electric.getPortProto(tran, 
+"p-trans-poly-left");</U><BR>&nbsp;&nbsp;<U>Integer[] tpos = Electric.portPosition(t1, tport);</U><BR><BR>&nbsp;&nbsp;<U>/* get the contacts's only port coordinates */</U><BR>&nbsp;&nbsp;<U>Electric.<U>PortProto</U> cport = (Electric.<U>PortProto</U>)Electric.getVal(contact, 
+"firstportproto");</U><BR>&nbsp;&nbsp;<U>Integer[] cpos = Electric.portPosition(c1, cport);</U><BR><BR>&nbsp;&nbsp;<U>/* run a wire between the primitives */</U><BR>&nbsp;&nbsp;<U>Electric.newArcInst(arctype, width, 0,</U><BR>&nbsp;&nbsp;&nbsp;<U>t1, tport, 
+tpos[0].intValue(), tpos[1].intValue(),</U><BR>&nbsp;&nbsp;&nbsp;<U>c1, cport, 
+cpos[0].intValue(), cpos[1].intValue(), mycell);</U><BR>
+<P>
+<CENTER><IMG alt="Figure 11.1" src="../images/chap11-01.png" ></CENTER>
+<H3>Hierarchy</H3>
+<P>Cells, as created by <U>newNodeProto</U>, can be placed in other cells with <U>newNodeInst</U>. The instances simply use complex&nbsp;<U>NodeProto</U> fields rather than primitive <U>NodeProto</U>s as in the above example. For example, the 
+following code creates a new cell called "two-trans" and places two instances 
+of the above "tran-contact" cell, one above the other. 
+<TABLE>
+  <TR>
+    <TD>
+      <P>&nbsp;&nbsp;<U>/* create a 
+      cell called "two-trans" */</U><BR>&nbsp;&nbsp;<U 
+      >Electric.<U>NodeProto</U> 
+      highercell =</U><BR>&nbsp;&nbsp;&nbsp;<U 
+      >Electric.newNodeProto("two-trans",</U><BR 
+      >&nbsp;&nbsp;&nbsp;&nbsp;<U 
+      >Electric.curLib());</U><BR><BR 
+      >&nbsp;&nbsp;<U>/* get pointer to 
+      the "tran-contact" cell */</U><BR>&nbsp;&nbsp;<U 
+      >Electric.<U>NodeProto</U> tc 
+      =</U><BR>&nbsp;&nbsp;&nbsp;<U 
+      >Electric.getNodeProto("tran-contact");</U><BR 
+      ><BR>&nbsp;&nbsp;<U 
+      >/* get size of this cell */</U><BR 
+      >&nbsp;&nbsp;<U>int lowx = 
+      ((Integer)Electric.getVal(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >"lowx")).intValue();</U><BR 
+      >&nbsp;&nbsp;<U>int highx = 
+      ((Integer)Electric.getVal(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >"highx")).intValue();</U><BR 
+      >&nbsp;&nbsp;<U>int lowy = 
+      ((Integer)Electric.getVal(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >"lowy")).intValue();</U><BR 
+      >&nbsp;&nbsp;<U>int highy = 
+      ((Integer)Electric.getVal(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >"highy")).intValue();</U><BR><BR 
+      >&nbsp;&nbsp;<U>/* create two 
+      cell instances, one above the other */</U><BR 
+      >&nbsp;&nbsp;<U>Electric.<U 
+      >NodeInst</U> o1 = Electric.newNodeInst(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U>lowx, 
+      highx, lowy, highy, 0, 0, highercell);</U><BR 
+      >&nbsp;&nbsp;<U>Electric.<U 
+      >NodeInst</U> o2 = Electric.newNodeInst(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U>lowx, 
+      highx, lowy+10000, highy+10000,</U><BR 
+      >&nbsp;&nbsp;&nbsp;&nbsp;<U>0, 0, 
+      highercell);</U><BR></P></TD>
+    <TD>
+      <CENTER><IMG alt="Figure 11.2" src="../images/chap11-02.png" ></CENTER></TD></TR></TABLE>
+<P>Another necessary feature, when making hierarchy, is the 
+ability to place wires between connection sites on cell instances. To do this, 
+it is necessary to create exports. This takes a port on a primitive component 
+(for example, the transistor or contact in the "tran-contact" cell) and makes 
+it into an export on the current cell. This is done with: <BR>&nbsp;&nbsp;<U>Electric.newPortProto(cell, nodeInCell, portOnNode, 
+portName)</U><BR>where <U>cell</U> is 
+the cell containing the component whose port is being exported, <U>nodeInCell</U> is that component, and <U>portOnNode</U> is the particular port on that node being 
+exported. For example, to export the top and bottom diffusion ports in the 
+"tran-contact" cell (as shown here), the following code can be added: 
+<TABLE>
+  <TR>
+    <TD><BR>&nbsp;&nbsp;<U 
+      >Electric.newPortProto(mycell, t1,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >Electric.getPortProto(tran, 
+      "p-trans-diff-top"),</U><BR 
+      >&nbsp;&nbsp;&nbsp;&nbsp;<U 
+      >"topdiff");</U><BR 
+      >&nbsp;&nbsp;<U 
+      >Electric.newPortProto(mycell, t1,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >Electric.getPortProto(tran, 
+      "p-trans-diff-bottom"),</U><BR 
+      >&nbsp;&nbsp;&nbsp;&nbsp;<U 
+      >"botdiff");</U><BR></TD>
+    <TD>
+      <CENTER><IMG alt="Figure 11.3" src="../images/chap11-03.png" ></CENTER></TD></TR></TABLE>
+<P>And then, the components "o1" and "o2" in the cell 
+"two-trans" can be wired, using the ports called "topdiff" and "botdiff": 
+<TABLE>
+  <TR>
+    <TD>
+      <P>&nbsp;&nbsp;<U>/* get pointer 
+      to P-Active arc and its default width */</U><BR 
+      >&nbsp;&nbsp;<U>Electric.<U 
+      >ArcProto</U> darctype =</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >Electric.getArcProto("P-Active");</U><BR 
+      >&nbsp;&nbsp;<U>int dwidth = 
+      ((Integer)Electric.getVal(darctype,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >"nominalwidth")).intValue();</U><BR 
+      ><BR>&nbsp;&nbsp;<U 
+      >/* get the bottom cell's top port */</U><BR 
+      >&nbsp;&nbsp;<U>Electric.<U 
+      >PortProto</U> lowport = 
+      Electric.getPortProto(tc,</U><BR>&nbsp;&nbsp;&nbsp;<U 
+      >"topdiff");</U><BR 
+      >&nbsp;&nbsp;<U>Integer[] lowpos 
+      = Electric.portPosition(o1,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >lowport);</U><BR><BR 
+      >&nbsp;&nbsp;<U>/* get the top 
+      cell's bottom port */</U><BR>&nbsp;&nbsp;<U 
+      >Electric.<U>PortProto</U> 
+      highport = Electric.getPortProto(tc,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >"botdiff");</U><BR 
+      >&nbsp;&nbsp;<U>Integer[] highpos 
+      = Electric.portPosition(o2,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U 
+      >highport);</U><BR><BR 
+      >&nbsp;&nbsp;<U>/* run a wire 
+      between the primitives */</U><BR>&nbsp;&nbsp;<U 
+      >Electric.newArcInst(darctype, dwidth, 0,</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U>o1, 
+      lowport, lowpos[0].intValue(),</U><BR 
+      >&nbsp;&nbsp;&nbsp;&nbsp;<U 
+      >lowpos[1].intValue(),</U><BR 
+      >&nbsp;&nbsp;&nbsp;<U>o2, 
+      highport, highpos[0].intValue(),</U><BR 
+      >&nbsp;&nbsp;&nbsp;&nbsp;<U 
+      >highpos[1].intValue(), highercell);</U><BR 
+      ></P></TD>
+    <TD>
+      <CENTER><IMG alt="Figure 11.4" src="../images/chap11-04.png" ></CENTER></TD></TR></TABLE>
+<P>
+Another set of routines exists for hierarchy traversal.
+When generating a netlist from a circuit, the hierarchy is typically traversed down to the bottom.
+Cell parameters are evaluated based on the traversal path to the particular cell with the parameter.
+To inform the system of the traversal path, it is necessary to call special routines during traversal.
+<P>
+At the start of traversal, call <BR>&nbsp;&nbsp;<U>Electric.beginTraverseHierarchy()</U><BR>
+Before descending into a cell instance, call <BR>&nbsp;&nbsp;<U>Electric.downHierarchy(node, index)</U><BR>
+where <U>node</U> is the cell instance node, and <U>index</U> is the index of which node (if it is arrayed).<BR>
+After returning from the examination of the cell instance, call <BR>&nbsp;&nbsp;<U>Electric.upHierarchy()</U><BR>
+Finally, after completing hierarchy traversal, call <BR>&nbsp;&nbsp;<U>Electric.endTraverseHierarchy()</U><BR>
+<P>
+To find out your location in the hierarchy (if this object is being viewed inside another) use:
+<BR>&nbsp;&nbsp;<U>Electric.getTraversalPath()</U><BR>
+which returns an array of <U>NodeInst</U>s, terminated by a null one.
+Each entry is the instance, higher up the hierarchy, that contains the former level.
+<P>
+
+<H3>Modification</H3>
+<P>Two types of modification can be done to existing 
+objects: deletion and change. To delete a cell, use: <BR>&nbsp;&nbsp;<U>Electric.killNodeProto(cell)</U><BR>
+<P>To make a copy of a cell (within the same library or 
+from one library to another), use: <BR>&nbsp;&nbsp;<U>Electric.copyNodeProto(fromCell, toLibrary, 
+toCellName)</U><BR>where <U>fromCell</U> is the original cell (<U>NodeProto</U>) and <U>toLibrary</U> is 
+the destination library. Use <U>curLib</U> to copy to the 
+same library. The new cell name is the last parameter. The method returns the 
+address of the new cell (<U>NodeProto</U>). 
+<P>To delete a component, use: <BR>&nbsp;&nbsp;<U>Electric.killNodeInst(node)</U><BR>Before a component can be deleted, all wires and exports 
+must be removed. 
+<P>To change the size or orientation of a component, use: 
+<BR>&nbsp;&nbsp;<U>Electric.modifyNodeInst(node, dLowX, dLowY, dHighX, dHighY, 
+dRotation, dTrans)</U><BR>where <U>dLowX</U>, <U>dLowY</U>, <U>dHighX</U>, and <U>dHighY</U> are the 
+changes to position and size. <U>dRotation</U> and <U>dTrans</U> are changes to the orientation. 
+<P>To change the prototype of a component, use: <BR>&nbsp;&nbsp;<U>Electric.replaceNodeInst(oldNode, newPrototype)</U><BR>where the old component is <U>oldNode</U>, and the new&nbsp;<U>NodeProto</U> that should be in its place is <U>newPrototype</U>. This new prototype must be able to 
+connect to all existing arcs. The method returns the address of the new 
+component. 
+<P>To delete a wire, use: <BR>&nbsp;&nbsp;<U>Electric.killArcInst(arc)</U><BR>
+<P>To change the width or position of a wire, use: <BR>&nbsp;&nbsp;<U>Electric.modifyArcInst(arc, dWidth, dX1, dY1, dX2, 
+dY2)</U><BR>where <U>dWidth</U>, <U>dX1</U>, <U>dY1</U>, <U>dX2</U>, and <U>dY2</U> are the 
+changes to the width, X/Y position of end 1, and X/Y position of end 2. Note 
+that position changes cannot cause the connecting nodes to move, so the changes 
+may only be small ones that work within the ports. 
+<P>To change the prototype of a wire, use: <BR>&nbsp;&nbsp;<U>Electric.replaceArcInst(oldArc, newPrototype)</U><BR>where <U>oldArc</U> is the former wire 
+and <U>newPrototype</U> is the new&nbsp;<U>ArcProto</U> to use. The nodes on either end must be able 
+to accept this new type of wire. The method returns the address of the new wire. 
+
+<P>To delete an export, use: <BR>&nbsp;&nbsp;<U>Electric.killPortProto(cell, port)</U><BR>which will remove port <U>port</U> on 
+cell <U>cell</U>. 
+<P>To move an export from one component to another (keeping 
+connected wires), use: <BR>&nbsp;&nbsp;<U>Electric.movePortProto(cell, oldPort, newNode, 
+portOnNewNode)</U><BR>where the old port is <U>oldPort</U> in cell <U>cell</U>, and 
+it is now moved to component <U>newNode</U> (which is also 
+in cell <U>cell</U>), port <U>portOnNewNode</U> of that component. 
+<H3>Search</H3>
+<P>A common operation is a search of all components in a 
+cell. The following code prints the name of all components in the cell 
+"mycell": 
+<P>&nbsp;&nbsp;<U>Electric.<U>NodeInst</U> node;</U><BR>&nbsp;&nbsp;<U>for(node = (Electric.<U>NodeInst</U>)Electric.getVal(mycell, 
+"firstnodeinst");</U><BR>&nbsp;&nbsp;&nbsp;<U>!node.isNull();</U><BR>&nbsp;&nbsp;&nbsp;<U>node = 
+(Electric.<U>NodeInst</U>)Electric.getVal(node, 
+"nextnodeinst"))</U><BR>&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;<U>System.out.println("Found " + describeNode(node) + " 
+node");</U><BR>&nbsp;&nbsp;<U>}</U><BR>
+<P>Where <U>describeNode</U> is 
+defined as follows (the name of a node is found in different places depending on 
+whether it is a primitive or complex <U>NodeProto</U>): 
+<P>&nbsp;&nbsp;<U>public static String 
+describeNode(Electric.<U>NodeInst</U> node)</U><BR>&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;<U>Electric.<U>NodeProto</U> proto = (Electric.<U>NodeProto</U>)Electric.getVal(node, "proto");</U><BR>&nbsp;&nbsp;&nbsp;<U>if 
+(((Integer)Electric.getVal(proto, "primindex")).intValue() != 0)</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>return((String)Electric.getVal(proto, "primname"));</U><BR>&nbsp;&nbsp;&nbsp;<U>return((String)Electric.getVal((Electric.<U>Cell</U>)Electric.getVal(proto, "cell"), 
+"cellname"));</U><BR>&nbsp;&nbsp;<U>}</U><BR>
+<P>And the following code prints the name of all wires in 
+the cell "mycell": 
+<P>&nbsp;&nbsp;<U>Electric.<U>ArcInst</U> arc;</U><BR>&nbsp;&nbsp;<U>for(arc = (Electric.<U>ArcInst</U>)Electric.getVal(mycell, 
+"firstarcinst");</U><BR>&nbsp;&nbsp;&nbsp;<U>!arc.isNull();</U><BR>&nbsp;&nbsp;&nbsp;<U>arc = 
+(Electric.<U>ArcInst</U>)Electric.getVal(arc, 
+"nextarcinst"))</U><BR>&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;<U>String arcname = (String)Electric.getVal((Electric.<U>ArcProto</U>)Electric.getVal(arc, "proto"),</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>"protoname")</U><BR>&nbsp;&nbsp;&nbsp;<U>System.out.println("Found " + arcname + " arc");</U><BR>&nbsp;&nbsp;<U>}</U><BR>
+<P>To do a search of all nodes and arcs in a rectangular 
+area of a cell, first call: <BR>&nbsp;&nbsp;<U>Electric.initSearch(lowX, highX, lowY, highY, cell)</U><BR>where <U>lowX</U>, <U>highX</U>, <U>lowY</U>, and <U>highY</U> are the coordinates to search in cell <U>cell</U> (a <U>NodeProto</U>). This 
+method will return an integer search key that can then be passed repeatedly to: 
+<BR>&nbsp;&nbsp;<U>Electric.nextObject(searchKey)</U><BR>which will return&nbsp;<U>Geom</U> 
+objects of each node and arc in the search area. When this method returns a null 
+<U>Geom</U>, the search is complete.&nbsp;<U>Geom</U> objects can point to either nodes or arcs, 
+depending on their "entryisnode" attribute. Then, the "entryaddr" attribute will 
+point to the actual&nbsp;<U>NodeInst</U> or <U>ArcInst</U>. If you wish to terminate the search early, 
+call: <BR>&nbsp;&nbsp;<U>Electric.termSearch(searchKey)</U><BR>Here is an example of code that prints the names of all 
+nodes and arcs in the area (2000 &lt;= X &lt;= 10000, -3000 &lt; = Y &lt; = 
+3000). The selected area is shown as a black box here. 
+<P>
+<CENTER><IMG alt="Figure 11.5" src="../images/chap11-05.png" ></CENTER>
+<P>&nbsp;&nbsp;<U>int key = 
+Electric.initSearch(2000, 10000, -3000, 3000, mycell);</U><BR>&nbsp;&nbsp;<U>for(;;)</U><BR>&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;<U>Electric.<U>Geom</U> object = Electric.nextObject(key);</U><BR>&nbsp;&nbsp;&nbsp;<U>if 
+(object.isNull()) break;</U><BR>&nbsp;&nbsp;&nbsp;<U>int isnode= ((Integer)Electric.getVal(object, 
+"entryisnode")).intValue();</U><BR>&nbsp;&nbsp;&nbsp;<U>if (isnode != 0)</U><BR>&nbsp;&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>Electric.<U>NodeInst</U> ni = (Electric.<U>NodeInst</U>)Electric.getVal(object, "entryaddr");</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>System.out.println("Found node " + 
+describenode(ni));</U><BR>&nbsp;&nbsp;&nbsp;<U>} else</U><BR>&nbsp;&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>Electric.<U>ArcInst</U> ai = 
+(Electric.<U>ArcInst</U>)Electric.getVal(object, 
+"entryaddr");</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>String arcname = (String)Electric.getVal((Electric.<U>ArcProto</U>)Electric.getVal(ai, "proto"),</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>"protoname");</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>System.out.println("Found arc " + arcname);</U><BR>&nbsp;&nbsp;&nbsp;<U>}</U><BR>&nbsp;&nbsp;<U>}</U><BR>
+<H3>Layers and Polygons</H3>
+<P>Nodes and arcs are built out of layers, and layers are 
+described with objects of type <U>Polygon</U>: To get all 
+of the layers in a node, first call:<BR>&nbsp;&nbsp;<U>Electric.nodePolys(node)</U><BR>to get 
+the number of polygons on the node, and then make repeated calls to:<BR>&nbsp;&nbsp;<U>Electric.shapeNodePoly(node, index)</U><BR>to get the polygons. 
+<P>If you wish to get the electrical layers (a larger set 
+that breaks layers where they cross an electrical boundary), use <U>nodeEPolys</U> and <U>shapeENodePoly</U>. To get all of the layers in an arc, 
+first call <U>arcPolys</U> to get the number of polygons on 
+the arc, and then make repeated calls to <U>shapeArcPoly</U> to get the polygons. 
+<P>Because polygon objects are created dynamically, they 
+must be freed when you are done with them. Call:<BR>&nbsp;&nbsp;<U>Electric.freePolygon(poly)</U><BR>to 
+deallocate a <U>Polygon</U>. <BR>
+<P>To get information about a particular layer in a 
+technology, call <BR>&nbsp;&nbsp;<U>Electric.layerName(tech, layer)</U><BR>to get its name or <BR>&nbsp;&nbsp;<U>Electric.layerFunction(tech, layer)</U><BR>to get its behavior (as described in the module 
+"efunction.h"). 
+<P>The following example finds all polygons on a node and 
+prints their layer names: 
+<P>&nbsp;&nbsp;<U>for(node = 
+(Electric.<U>NodeInst</U>)Electric.getVal(myCell, 
+"firstnodeinst");</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>!node.isNull();</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>node = 
+(Electric.<U>NodeInst</U>)Electric.getVal(node, 
+"nextnodeinst"))</U><BR>&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>int polys = Electric.nodePolys(node);</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>for(int i = 
+0; i &lt; polys; i++)</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>{</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>Electric.<U>Polygon</U> poly = 
+Electric.shapeNodePoly(node, i);</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>Electric.<U>Technology</U> tech = 
+(Electric.<U>Technology</U>)Electric.getVal(poly, 
+"tech");</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>int layer = ((Integer)Electric.getVal(poly, 
+"layer")).intValue();</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>int count = ((Integer)Electric.getVal(poly, 
+"count")).intValue();</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>String layerName = Electric.layerName(tech, layer);</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>System.out.println("Polygon on layer " + layerName + " has 
+" + count + " points");</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>Electric.freePolygon(poly);</U><BR>&nbsp;&nbsp;&nbsp;&nbsp;<U>}</U><BR>&nbsp;&nbsp;<U>}</U><BR>
+<P>There are three routines available to get design rules 
+for layers. <BR>&nbsp;&nbsp;<U>Electric.maxDRCSurround(tech, library, layer)</U><BR>returns the maximum distance around the layer (in the 
+specified technology and library) that any design rule can be. The routine: <BR>&nbsp;&nbsp;<U>Electric.DRCMinDistance(tech, library, layer1, 
+layer2)</U><BR>returns the minimum distance between the 
+layers (in the specified technology and library). The routine: <BR>&nbsp;&nbsp;<U>Electric.DRCMinWidth(tech, library, layer)</U><BR>returns the minimum feature size of the layer (in the 
+specified technology and library). 
+<P>Because nodes may be rotated, it is necessary to apply 
+the node's transformation to all polygons before using the coordinate values. To 
+create the transformation that accounts for a node's rotation, use: <BR>&nbsp;&nbsp;<U>Electric.makeRot(node)</U><BR>which 
+returns an&nbsp;<U>XArray</U> object. To create the 
+transformation that accounts for the node's position within its parent, use: <BR>&nbsp;&nbsp;<U>Electric.makeTrans(node)</U><BR>
+<P>To apply a transformation to a polygon, use: <BR>&nbsp;&nbsp;<U>Electric.xformPoly(poly, trans)</U><BR>
+<H3>Views</H3>
+<P>A view is an object that describes a cell. There are 
+many standard views: Layout, Schematic, Icon, Simulation-snapshot, Skeleton, 
+VHDL, Verilog, Document, Unknown, and many flavors of Netlist. In addition, new 
+views can be created with "newView": <BR>&nbsp;&nbsp;<U>Electric.newView(viewName, abbreviation)</U><BR>and views can be deleted with <U>killView</U> (the standard views cannot be deleted): <BR>&nbsp;&nbsp;<U>Electric.killView(view)</U><BR>To get 
+a view object, use <U>getView</U> on its name. 
+<P>To associate different views of a cell, the methods <U>iconView</U> and <U>contentsView</U> 
+obtain different cells. For example: <BR>&nbsp;&nbsp;<U>Electric.iconView(mycell)</U><BR>finds the associated icon cell of the cell in which 
+"mycell" resides. 
+<H3>Libraries</H3>
+<P>In the above examples, the current library was always 
+used. This is determined by calling: <BR>&nbsp;&nbsp;<U>Electric.curLib()</U><BR>However, 
+there can be other libraries. To get a specific named library, use: <BR>&nbsp;&nbsp;<U>Electric.getLibrary(libName)</U><BR>
+<P>To create a new library, use: <BR>&nbsp;&nbsp;<U>Electric.newLibrary(libraryName, libraryFile)</U><BR>where <U>libraryName</U> is the name 
+to use, and <U>libraryFile</U> is the path name where this 
+library will be saved. This method returns the address of a new library object 
+that can then be used when creating cells. 
+<P>Only one library is the current one, and to switch, you 
+must use: <BR>&nbsp;&nbsp;<U>Electric.selectLibrary(lib)</U><BR>
+<P>A library can be deleted with: <BR>&nbsp;&nbsp;<U>Electric.killLibrary(lib)</U><BR>
+<P>A library can be erased (its cells deleted, but not the 
+library) with: <BR>&nbsp;&nbsp;<U>Electric.eraseLibrary(lib)</U><BR>
+<H3>Technologies</H3>
+<P>A technology is an environment of design that includes 
+primitive components and wire prototypes. The current technology can be obtained 
+with: <BR>&nbsp;&nbsp;<U>Electric.curTech()</U><BR>
+<P>A specific technology can be obtained from its name 
+with: <BR>&nbsp;&nbsp;<U>Electric.getTechnology(techName)</U><BR>
+<P>All technologies can be found by traversing a linked 
+list, the head of which is a technology named "Generic". 
+<H3>Tools</H3>
+<P>A tool is a piece of synthesis or analysis code that can 
+operate upon the database. A particular tool object can be obtained with: <BR>&nbsp;&nbsp;<U>Electric.getAid(toolName)</U><BR>where 
+the possible names of tools are: 
+<CENTER>
+<TABLE border=1>
+  <TR>
+    <TD>"compaction"</TD>
+    <TD>circuit compaction</TD></TR>
+  <TR>
+    <TD>"compensation"</TD>
+    <TD>geometry compensation</TD></TR>
+  <TR>
+    <TD>"drc"</TD>
+    <TD>design-rule checking</TD></TR>
+  <TR>
+    <TD>"erc"</TD>
+    <TD>electrical-rule checking</TD></TR>
+  <TR>
+    <TD>"io"</TD>
+    <TD>input/output control</TD></TR>
+  <TR>
+    <TD>"logeffort"</TD>
+    <TD>logical effort analysis</TD></TR>
+  <TR>
+    <TD>"network"</TD>
+    <TD>network maintenance</TD></TR>
+  <TR>
+    <TD>"pla"</TD>
+    <TD>programmable logic array generator</TD></TR>
+  <TR>
+    <TD>"project"</TD>
+    <TD>project management</TD></TR>
+  <TR>
+    <TD>"routing"</TD>
+    <TD>automatic wire routing</TD></TR>
+  <TR>
+    <TD>"silicon-compiler"</TD>
+    <TD>netlist-to-layout silicon assembler</TD></TR>
+  <TR>
+    <TD>"simulation"</TD>
+    <TD>simulation</TD></TR>
+  <TR>
+    <TD>"user"</TD>
+    <TD>the user interface</TD></TR>
+  <TR>
+    <TD>"vhdl-compiler"</TD>
+    <TD>VHDL-to-netlist 
+compiler</TD></TR></TABLE></CENTER>The number of tools is available 
+with: <BR>&nbsp;&nbsp;<U>Electric.maxAid()</U><BR>And a 
+particular tool, indexed from 0 to <U>Electric.maxAid</U>()-1 can be obtained with: <BR>&nbsp;&nbsp;<U>Electric.indexAid(index)</U><BR>
+<P>A tool can be switched on with: <BR>&nbsp;&nbsp;<U>Electric.toolTurnOn(tool)</U><BR>where <U>tool</U> is a tool object. 
+<P>A tool can be turned off with: <BR>&nbsp;&nbsp;<U>Electric.toolTurnOff(tool)</U><BR>
+<P>A tool can be given a specific instruction with: <BR>&nbsp;&nbsp;<U>Electric.tellTool(tool, 
+count, parameters)</U><BR>where the <U>parameters</U> is an array of <U>count</U> strings. For example, to list all technologies, 
+use this code: <BR>&nbsp;&nbsp;<U>Electric.Tool user = Electric.getTool("user");</U><BR>&nbsp;&nbsp;<U>String[] message = new 
+String[2];</U><BR>&nbsp;&nbsp;<U>message[0] = "show";</U><BR>&nbsp;&nbsp;<U>message[1] = 
+"technologies";</U><BR>&nbsp;&nbsp;<U>Electric.tellTool(user, 2, message);</U><BR>The command "show technologies" and other commands are from 
+the low-level command interpreter, which is documented fully in the Internals 
+Manual. 
+<H3>Miscellaneous</H3>
+<P>To force display changes to be drawn on the screen, you 
+must use: <BR>&nbsp;&nbsp;<U>Electric.flushChanges()</U><BR>
+<P>Every change to the database is queued internally in a 
+"batch" which includes the change and any constrained side-effects of that 
+change. A new batch is created for each Java session with the interpreter (also 
+for each Electric command that is issued from the keyboard/mouse). To reverse 
+the last batch of changes, use: <BR>&nbsp;&nbsp;<U>Electric.undoABatch()</U><BR>
+<P>Multiple calls to this method in a single batch will 
+undo multiple batches. To erase the list of change batches, use: <BR>&nbsp;&nbsp;<U>Electric.noUndoAllowed()</U><BR>
+<P>If you are creating a wire that makes many bends, it is 
+necessary to create special nodes called "pins" at each bend. To find out what 
+kind of pin to use for a given wire type, use: <BR>&nbsp;&nbsp;<U>Electric.getPinProto(arc)</U><BR>where 
+<U>arc</U> is the wire type, and the method returns the 
+component type (<U>NodeProto</U>) of the pin. 
+<P>Network objects can be obtained by name with the method 
+<U>getNetwork</U> which takes a name and a cell in which 
+to search. For example, the code: <BR>&nbsp;&nbsp;<U>Electric.getNetwork("insig", mycell)</U><BR>obtains the address of the network called "insig" in cell 
+<U>mycell</U>. 
+<P>
+The generic function of a node instance can be determined with:
+<BR>&nbsp;&nbsp;<U>Electric.nodeFunction(node)</U><BR>
+which returns a value from the list of constants in the C header file "efunction.h".
+This value is essentially the same one as would be obtained by looking at the "userbits" field of the node's prototype.
+However, certain components that have generic prototypes will be made more specific by this method.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap11-03.html#chap11-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap11-03.html#chap11-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap11-05.html#chap11-05">Next</A></TD>
+<TD><A HREF="chap11-05.html#chap11-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY></HTML>

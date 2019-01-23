@@ -1,0 +1,138 @@
+<HTML><HEAD><TITLE>Using Electric 12-5: The Export Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-04.html#chap12-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-5: The Export Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-06.html#chap12-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-05.png" ALT="Figure 12.5"></CENTER>
+<P>
+Ports are the sites of arc connections on nodes.
+Primitive nodes have ports automatically defined, but cell instances (complex nodes) have no ports on them.
+The locations of arc connections on these instances must be defined by creating <I>exports</I>
+inside of the cell's definition.
+These are simply ports that have been "exported".
+<P>
+<H3>Create Export... <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command takes the currently highlighted port on the currently highlighted node and makes it an export of the current cell.
+	The export then becomes a port on instances of the cell, higher up the hierarchy.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-02.png" ALT="Figure 3.2"></CENTER></TD></TR></TABLE>
+	A dialog will be presented for the name and characteristics of the export.
+	The characteristics may be directional (input, output, bidirectional),
+	levels (power or ground), clocking (clock with optional phases 1 through 6), or
+	reference (with an associated reference export name).
+	<P>
+	The option "Always drawn" indicates that the export name will not be suppressed when the port is connected or otherwise in use.
+	The option "Body only" indicates that this export will not be included in an iconic view of the cell.
+<P>
+<HR><BR>
+<P>
+<H3>Re-Export Everything <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command automatically creates exports in the current cell,
+	wherever a port on a sub-cell instance is found to be unconnected and unexported.
+	All such ports on subcell instances are exported.
+	This is useful in array-based design where the edges of the array, which are not connected,
+	should be exported further up the hierarchy.
+<P>
+<H3>Re-Export Highlighted <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command does the same thing as <B>Re-Export Everything</B>,
+	except that it functions only on the currently highlighted nodes.
+<P>
+<H3>Re-Export Power and Ground <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command does the same thing as <B>Re-Export Everything</B>,
+	except that it functions only on Power and Ground exports.
+<P>
+<HR><BR>
+<P>
+<H3>Delete Export <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command removes the export on the currently highlighted node.
+<P>
+<H3>Delete All Exports on Highlighted <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command removes the all exports on all of the currently highlighted nodes.
+<P>
+<H3>Delete All Exports in Area <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command removes the all exports in the selected area.
+<P>
+<H3>Move Export <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command moves an export from one node to another.
+	The source port is selected in the standard fashion and the destination port is specified with the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> button.
+	Be sure that the correct port is highlighted on both the source and destination nodes.
+<P>
+<H3>Rename Export... <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command allows you to rename any of the exports in the current cell.
+<P>
+<HR><BR>
+<P>
+<H3>Summarize Exports <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command makes a condensed summary of the exports in the current cell.
+<P>
+<H3>List Exports <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command lists the exports in the current cell.
+<P>
+<H3>Show Exports <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command shows all exports in the current cell
+	(drawing a line from the export to the edge of the display).
+	The display of export location is temporary, and goes away when the cell is redrawn.
+<P>
+<H3>Port and Export Options... <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command affects the way that ports and exports are drawn in the current window.
+	"Full Port Names" causes the complete name to be drawn.
+	"Short Port Names" displays port names up to the first nonalphabetic character.
+	For example, the port names "In" and "In.17" will both display as "In".
+	"Ports as Crosses" causes "+" signs to be drawn. instead of text.
+	To remove port display completely, use the <B>Layer Visibility</B> command of the <B>Windows</B> menu.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-09.png" ALT="Figure 3.9"></CENTER></TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Show Ports on Node <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command shows all port locations on the currently selected nodes.
+	The display of port location is temporary, and goes away when the cell is redrawn.
+<P>
+<HR><BR>
+<P>
+<H3>Add Exports from Library... <A HREF="chap03-06.html#chap03-06">[3-6]</A></H3>
+<P>
+	This command copies exports from one library to another.
+	It prompts for another library and locates exports in that library that should be in the current one.
+	It does this by finding cells in the other library that have the same name as those in the current library.
+	New exports are then created in the current library to match the location of those in the other library.
+	<P>
+	This command is useful in managing standard cell libraries that are imported from other file formats.
+	Because some formats contain geometry and others contain connectivity,
+	this command is needed to put them together.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-04.html#chap12-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-04.html#chap12-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-06.html#chap12-06">Next</A></TD>
+<TD><A HREF="chap12-06.html#chap12-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

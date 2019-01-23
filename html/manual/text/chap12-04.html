@@ -1,0 +1,121 @@
+<HTML><HEAD><TITLE>Using Electric 12-4: The Arc Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-04"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-03.html#chap12-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-4: The Arc Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-05.html#chap12-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-04.png" ALT="Figure 12.4"></CENTER>
+<P>
+Arcs are the wires that connect components.
+Once they have been created, they may be modified to indicate constraints (rigid or fixed-angle),
+they may hold negating bubbles (only in schematics) and have other properties.
+<P>
+<H3>Rigid <A HREF="chap05-03.html#chap05-03">[5-3]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to become rigid,
+	which means that they remain at a fixed length and orientation relative to their connecting nodes.
+	Rigid arcs display the letter "R" when highlighted.
+<P>
+<H3>Non-Rigid <A HREF="chap05-03.html#chap05-03">[5-3]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to become nonrigid,
+	which means that they can stretch with their connecting nodes.
+<P>
+<H3>Fixed-angle <A HREF="chap05-03.html#chap05-03">[5-3]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to become angle-fixed,
+	which means that they remain at a constant angle through all node changes.
+	Thus, if a node on one end moves, the other end's node may also move to keep the arc from changing orientation.
+	Fixed-angle arcs display the letter "F" when highlighted.
+<P>
+<H3>Not Fixed-angle <A HREF="chap05-03.html#chap05-03">[5-3]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to become non-fixed-angle,
+	which means that they can slant arbitrarily to connect their two nodes.
+<P>
+<HR><BR>
+<P>
+<H3>Negated <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to have a bubble on one end.
+	If there is already a bubble, it is removed.
+	This command works only for wires in schematics.
+<P>
+<H3>Directional <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to have a directional arrow on one end.
+	If there is already a directional arrow, it is removed.
+	This arrow is for documentation purposes only.
+<P>
+<H3>Ends-extend <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes the currently highlighted arcs to stop extending by half of their width.
+	If they are already not extended, they revert to extending by half of their width.
+<P>
+<H3>Reverse <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	If the negating bubble or the directional arrow is on the wrong end of an arc,
+	this command reverses the location.
+<P>
+<H3>Skip Head <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes special directives to the head of the arc to be ignored.
+	If the arc is directional (with an arrow at the head), then the arrow is not drawn.
+	If the arc has had end-extension turned off, then the head of the arc is end-extended.
+<P>
+<H3>Skip Tail <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes special directives to the tail of the arc to be ignored.
+	If the arc is negated (with a bubble at the tail), then the bubble is not drawn.
+	If the arc has had end-extension turned off, then the tail of the arc is end-extended.
+<P>
+<HR><BR>
+<P>
+<!-- NEED 3in -->
+<H3>New Arc Options... <A HREF="chap05-05.html#chap05-05">[5-5]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command presents a dialog that allows default settings to be established for the creation of new arcs.
+	Specific arc types may be given default constraint settings, default widths, and default angle increments.
+	It is also possible to set an overriding constraint set for all new arcs.
+	</TD><TD><CENTER><IMG SRC="../images/chap05-04.png" ALT="Figure 5.4"></CENTER></TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Curve through Cursor <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes the currently highlighted arc to be curved,
+	such that it passes through the location of the cursor.
+	After issuing this command, click on the screen to specify the point through which the arc will pass.
+	This command works only for arcs in the RCMOS and Artwork technologies.
+<P>
+<H3>Curve about Cursor <A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes the currently highlighted arc to be curved,
+	such that it wraps around the location of the cursor.
+	After issuing this command, click on the screen to specify the point which will be the center of the arc's curvature.
+	This command works only for arcs in the RCMOS and Artwork technologies.
+<P>
+<H3>Remove Curvature<A HREF="chap05-04.html#chap05-04">[5-4]</A></H3>
+<P>
+	This command causes the currently highlighted curved arc to be straight again.
+	This command works only for arcs in the RCMOS and Artwork technologies.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-03.html#chap12-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-03.html#chap12-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-05.html#chap12-05">Next</A></TD>
+<TD><A HREF="chap12-05.html#chap12-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

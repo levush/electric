@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>Using Electric 2-5: Changing Size</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap02-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 2: BASIC EDITING</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap02-04.html#chap02-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>2-5: Changing Size</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap02-06.html#chap02-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Node Sizing</H3>
+<P>
+To change the size of a node, select it and use the <B>Interactively</B> subcommand of the <B>Size</B> command of the <B>Edit</B> menu.
+After you do that, your mouse movements will stretch the corner of the node that was closest to it.
+The opposite corner will remain fixed.
+Adjust the mouse to the desired position and click.
+To constrain sizing so that only one dimension changes, hold the Control key while moving the mouse.
+To abort this operation, type "a".
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap02-10.png" ALT="Figure 2.10"></CENTER></TD><TD>
+To change the size of more than one node at a time,
+select the nodes and use the <B>All Selected Nodes</B> subcommand.
+The dialog allows you to set the X and Y sizes of the selected nodes.
+If you leave one of these size fields empty, that coordinate is not changed.
+</TD></TR></TABLE>
+<!-- NEED 5in -->
+<P>
+<H3>Arc Sizing</H3>
+<P>
+To change the size of an arc, follow similar procedures.
+Select the arc and issue the <B>Interactively</B> subcommand.
+Note that the arc stretches about its center so that an edge is at the cursor location.
+Click a button to make the change.
+To change the size of more than one arc at a time, select the arcs and use the <B>All Selected Arcs</B> subcommand.
+<P>
+<TABLE><TR><TD>
+Another way to change size is to select the node or arc and use the <B>Get Info</B> command of the <B>Info</B> menu.
+Type new X and Y sizes into the dialog for nodes; type a new Width into the dialog for arcs.
+<P>
+The arc <B>Get Info</B> dialog also has an "Easy to Select" checkbox,
+and if you uncheck it,
+you will have to use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-left  Windows:alt-left  Mac:opt-click">special select</A></I>
+button to select the arc in the future.
+</TD><TD><CENTER><IMG SRC="../images/chap02-02.png" ALT="Figure 2.2"></CENTER></TD></TR></TABLE>
+<P>
+Note that when typing size amounts into a dialog, specify the size of the highlighted area.
+In a typical MOS transistor, the highlighted area
+(where active and polysilicon cross) is 2x3,
+even though the component is much larger if you include the four overlap regions sticking out.
+A CMOS active arc shows highlighting only on its active area,
+even though the complete arc has implant regions that are much larger.
+Also note that the X and Y sizes of a node will be swapped if the node is rotated onto its side.
+Finally, note that the default unit for typed values is <I>lambda</I>,
+unless another unit is explicitly mentioned (for more information on lambda,
+<A HREF="chap07-02.html#chap07-02">Section 7-2</A>).
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap02-04.html#chap02-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap02-04.html#chap02-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap02-06.html#chap02-06">Next</A></TD>
+<TD><A HREF="chap02-06.html#chap02-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

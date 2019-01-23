@@ -1,0 +1,778 @@
+<HTML><HEAD><TITLE>Using Electric 12-10: The Tools Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-10"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-09.html#chap12-09"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-10: The Tools Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="../index.html"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-10.png" ALT="Figure 12.10"></CENTER>
+<P>
+This menu is a collection of submenus that controls the different analysis and synthesis tools in Electric.
+For analysis, there are Design-Rule Checkers,
+a simulator, many simulation interfaces, and a network consistency checker.
+For synthesis, there are routers, PLA generators,
+a VHDL compiler, and a silicon compiler place-and-route system.
+<P>
+<H3>DRC <A HREF="chap09-02.html#chap09-02">[9-2]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-23.png" ALT="Figure 12.23"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls the design-rule checkers.
+	There is an incremental system which watches all design and displays warnings where appropriate.
+	There are also two hierarchical checkers and an interface to the Dracula DRC system.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD></TD><TD VALIGN=TOP><B>Check Hierarchically</B></TD><TD>
+		This checks the current cell hierarchically (all geometry is checked, all the way down the hierarchy).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Check Selection Area Hierarchically</B></TD><TD>
+		This checks the current cell hierarchically, but only in the selected area.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Check this Level Only</B></TD><TD>
+		This command checks the current cell nonhierarchically
+		(only geometry in the current cell is checked, not in any subcells).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>DRC Options...</B></TD><TD>
+		This command lets you control a number of DRC options,
+		including whether or not the incremental DRC is running,
+		options for Dracula, and more.
+		<CENTER><IMG SRC="../images/chap09-20.png" ALT="Figure 9.20"></CENTER>
+	</TD></TR>
+	<!-- NEED 5in -->
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>DRC Rules...</B></TD><TD>
+		This command provides a way to examine and modify the design rules
+		(by using the "For layer" and "To layer" areas).
+		<CENTER><IMG SRC="../images/chap09-09.png" ALT="Figure 9.9"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write Dracula Deck</B></TD><TD>
+		This command tells the design-rule checker to produce an input deck for the Dracula design-rule checker.
+		At the current time, only layout in the MOSIS CMOS (mocmos)
+		technology can be checked in this manner.
+		However, with the "Edit Dracula Deck" button of the <B>DRC Options...</B> dialog,
+		rule sets may be defined for any technology.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 4in -->
+<H3>Simulation (Built-in) <A HREF="chap10-01.html#chap10-01">[10-1]</A>&nbsp;&nbsp;
+<A HREF="chap10-02.html#chap10-02">[10-2]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-24.png" ALT="Figure 12.24"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls the gate-level simulator in Electric.
+	Electric comes with a simulator called ALS (Asynchronous Logic Simulator),
+	but you can also add an IRSIM engine.
+	In addition to controling live simulators, these commands can also be used to manipulate waveforms that
+	come from batch simulators such as SPICE and Verilog.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Simulate...</B></TD><TD>
+		This command causes the current cell to be simulated.
+		For ALS simulation, the cell is converted to VHDL, the VHDL is compiled into a netlist, and
+		the netlist is simulated.
+		For IRSIM, a netlist is generated and the simulator is invoked.
+		A waveform display is shown for viewing signal values.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Simulation Options...</B></TD><TD>
+		This command presents a dialog for control of simulation parameters.
+		The simulation engine can be selected (initially, Electric comes with only the ALS simulator,
+		but a built-in IRSIM engine is available from Static Free Software).
+		The "Resimulate each change"
+		item causes each change that is made to something being simulated to trigger resimulation and display of the results.
+		The "Auto advance time"
+		item tells the simulator to move the time cursor automatically when a new signal is added to the simulation.
+		The "Multistate display"
+		check tells the simulator to show signals in the layout or schematics window with texturing and color to indicate strength.
+		Without this, a simple on/off indication is drawn in the layout or schematics window.
+		The "Show waveform window"
+		check tells the simulator to create a separate window with waveform plots when simulation starts.
+		The waveform window can be cascaded (a separate overlapping window)
+		or tiled (placed in one half of the original circuit's window).
+		The radix of bus signals in the waveform window can be selected.
+		For ALS, the maximum number of events to simulate can be changed if you want to extend the simulator's range
+		(and memory usage).
+		For IRSIM, the level of parasitics and the file of parasitic information can be specified.
+		<CENTER><IMG SRC="../images/chap09-11.png" ALT="Figure 9.11"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Transistor Strength</B></TD><TD>
+		<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-37.png" ALT="Figure 12.37"></CENTER></TD><TD VALIGN=TOP>
+		This command lets you change the strength of the selected transistor.
+		</TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Annotate Delay Data (ALS)</B></TD><TD>
+		<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-35.png" ALT="Figure 12.35"></CENTER></TD><TD VALIGN=TOP>
+		This command lets you select which of the sets of stimulus data to use for the ALS simulator.
+		The stimulus data is acquired with the <B>SDF</B> subcommand of the <B>Import</B> command of the <B>File</B> menu.
+		</TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Restore Signal Display Order (ALS)</B></TD><TD>
+		This command restores the default set of signals in the waveform display,
+		which is useful if they have been rearranged or if some signals were deleted.
+		It only works for the ALS simulator.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Remove Signals Saved with Cells</B></TD><TD>
+		The waveform display remembers the signal names that are associated with each cell.
+		When the user rearranges signals, it is preserved for the next time that cell is simulated.
+		This command clears the saved list of signal names associated with every cell so that the waveform window
+		will use a default set.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Read Vectors from Disk</B></TD><TD>
+		This command causes a file of test vectors to be read from disk.
+		You will be prompted for the file name.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Save Vectors to Disk</B></TD><TD>
+		This command causes the current set of test vectors to be saved to disk.
+		You will be prompted for the file name.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Save Vectors as SPICE commands</B></TD><TD>
+		This command exports the current set of test vectors as a SPICE deck.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Clear All Vectors</B></TD><TD>
+		This command erases all test vectors from the simulation.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 3in -->
+<H3>Simulation (SPICE) <A HREF="chap09-04.html#chap09-04">[9-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-56.png" ALT="Figure 12.56"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls the SPICE simulator,
+	including deck generation and plotting SPICE output.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Write SPICE Deck</B></TD><TD>
+		This command generates an input deck for the SPICE circuit-level simulator.
+		Because SPICE is not an interactive system,
+		it is necessary to specify inputs and outputs in the circuit.
+		This is done by placing Source and Meter components
+		(from the <B>New Analog Component</B> submenu of the <B>Edit</B> menu),
+		parametrizing them with the actual SPICE message, and connecting them to the circuitry.
+		It is also necessary to specify Transient or DC analysis by placing an appropriate Source component in the cell.
+	</TD></TR>
+	<!-- NEED 7in -->
+	<TR><TD></TD><TD VALIGN=TOP><B>SPICE Options...</B></TD><TD>
+		This command allows many SPICE options to be controlled, for example,
+		the SPICE format (SPICE 2, SPICE 3, HSPICE, PSPICE, GnuCAP, or SmartSPICE);
+		control of parasitics in the deck;
+		control of SPICE execution (UNIX systems only);
+		control of header, trailer, and individual cell model cards;
+		and much more.
+		<CENTER><IMG SRC="../images/chap09-03.png" ALT="Figure 9.3"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Plot SPICE Listing...</B></TD><TD>
+		This command reads the output of a SPICE run and shows the signals in a waveform window.
+		You will be prompted for the name of the SPICE output file.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Plot SPICE for This Cell</B></TD><TD>
+		This command reads the output of a SPICE run and shows the signals in a waveform window.
+		This command presumes that the SPICE output file has the same name as the current cell
+		(with appropriate extensions).
+		For example, if you are editing cell "myclock{lay}", this command will look for file "myclock.spo".
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Add SPICE Card</B></TD><TD>
+		This command allows you to click in the design and type a SPICE card that will be inserted into the generated deck.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set SPICE Model...</B></TD><TD>
+		This command allows you to change the SPICE model of the currently selected node.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Add Multiplier</B></TD><TD>
+		This command places a multiplier factor on the currently selected node.
+		This factor is used to scale the transistor sizes.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set Generic SPICE Template</B></TD><TD>
+		This command allows you to create a SPICE template for the current cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set SPICE 2 Template</B></TD><TD>
+		This command allows you to create a template specifically for SPICE 2.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set SPICE 3 Template</B></TD><TD>
+		This command allows you to create a template specifically for SPICE 3.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set HSPICE Template</B></TD><TD>
+		This command allows you to create a template specifically for HSPICE.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set PSPICE Template</B></TD><TD>
+		This command allows you to create a template specifically for PSPICE.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set GnuCAP Template</B></TD><TD>
+		This command allows you to create a template specifically for GnuCAP.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set SmartSPICE Template</B></TD><TD>
+		This command allows you to create a template specifically for SmartSPICE.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Simulation (Verilog) <A HREF="chap09-04.html#chap09-04">[9-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-57.png" ALT="Figure 12.57"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls the generation of Verilog simulation netlists.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Write Verilog Deck</B></TD><TD>
+		This command generates an input deck for the Verilog simulator.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Verilog Options...</B></TD><TD>
+		This command generates displays a dialog for controlling Verilog deck generation.
+		<CENTER><IMG SRC="../images/chap09-07.png" ALT="Figure 9.7"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Plot Verilog VCD Dump</B></TD><TD>
+		This command reads a dump file (the output of Verilog simulation) and displays the result
+		in a waveform window.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Plot Verilog for This Cell</B></TD><TD>
+		This command reads the output of a Verilog run and shows the signals in a waveform window.
+		It presumes that the Verilog output file has the same name as the current cell
+		(with appropriate extensions).
+		For example, if you are editing cell "myclock{lay}", this command will look for file "myclock.dump".
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set Verilog Wire</B></TD><TD>
+		This command lets you set the type of Verilog wire that the current arc will produce
+		(either <B>Wire</B>, <B>Trireg</B>, or <B>Default</B>).
+		The <B>Default</B> option uses the setting from the <B>Verilog Options...</B> dialog.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Add Verilog Declaration</B></TD><TD>
+		This command allows you to click in the design and type Verilog declarations that will be inserted into the generated deck.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Add Verilog Code</B></TD><TD>
+		This command allows you to click in the design and type Verilog code that will be inserted into the generated deck.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set Verilog Template</B></TD><TD>
+		This command allows you to create a Verilog template when defining new primitives.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 4in -->
+<H3>Simulation (Others) <A HREF="chap09-04.html#chap09-04">[9-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-25.png" ALT="Figure 12.25"></CENTER></TD><TD VALIGN=TOP>
+	This submenu allows input decks to be written for many different simulators.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>FastHenry Arc Info...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command presents a dialog for including the currently selected arc in the FastHenry analysis,
+		and for setting options on that arc.
+		You can override the thickness, set the number of subdivisions,
+		set the analysis group, and even set a height for the two arc ends.
+		</TD><TD><CENTER><IMG SRC="../images/chap09-19.png" ALT="Figure 9.19"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write FastHenry Deck...</B></TD><TD>
+		This command generates a FastHenry deck from the current cell.
+	</TD></TR>
+	<!-- NEED 4in -->
+	<TR><TD></TD><TD VALIGN=TOP><B>FastHenry Options...</B></TD><TD>
+		This command presents a dialog of options for FastHenry deck generation.
+		The frequency and multipole options control flags that are placed in the deck.
+		The default thickness and subdivision fields provide values that are used when no overrides are specified for individual arcs.
+		<CENTER><IMG SRC="../images/chap09-18.png" ALT="Figure 9.18"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write IRSIM Deck</B></TD><TD>
+		This command generates an input deck for the IRSIM switch-level simulator.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write ESIM Deck</B></TD><TD>
+		This command generates an input deck for the ESIM switch-level simulator
+		(nMOS only, no timing).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write RSIM Deck</B></TD><TD>
+		This command generates an input deck for the RSIM switch-level simulator
+		(nMOS only).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write RNL Deck</B></TD><TD>
+		This command generates an input deck for the RNL switch-level simulator
+		(nMOS only, Lisp-like interface).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write COSMOS Deck</B></TD><TD>
+		This command generates an input deck for the COSMOS switch-level simulator
+		(MOS only).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write MOSSIM Deck</B></TD><TD>
+		This command generates an input deck for the MOSSIM switch-level simulator
+		(MOS only).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write TEGAS Deck</B></TD><TD>
+		This command generates an input deck for the TEGAS/TEXSIM gate-level simulator.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write SILOS Deck</B></TD><TD>
+		This command generates an input deck for the SILOS simulator.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write PAL Deck</B></TD><TD>
+		This command generates an input deck for the Abel PAL generator/simulator.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Write Maxwell Deck</B></TD><TD>
+		This command generates an input deck for the Maxwell simulator.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 3in -->
+<H3>Electrical Rules <A HREF="chap09-03.html#chap09-03">[9-3]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-26.png" ALT="Figure 12.26"></CENTER></TD><TD VALIGN=TOP>
+	These commands do static analysis of the circuit, which include well analysis and antenna rules. 
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Analyze Wells</B></TD><TD>
+		This command examines the current cell and checks all well areas for proper electrical rules.
+		The farthest distance from a well contact to the edge of its implant is shown.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Well Check Options...</B></TD><TD>
+		This presents a dialog with Well and Substrate Checking options.
+		You can choose to require one contact per area,
+		or only one contact anywhere on the chip.
+		You can also check for proper power and ground connections.
+		<CENTER><IMG SRC="../images/chap09-15.png" ALT="Figure 9.15"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Antenna-Rules Check</B></TD><TD>
+		This command examines the current cell and all below it for antenna rules violations.
+		Antenna rules ensure that there is no path from a large area of metal or poly to a small
+		number of transistor gates.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Antenna-Rules Options...</B></TD><TD>
+		This presents a dialog with Antenna rule ratio limits.
+		<CENTER><IMG SRC="../images/chap09-24.png" ALT="Figure 9.24"></CENTER>
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 3in -->
+<H3>Network <A HREF="chap06-09.html#chap06-09">[6-9]</A>&nbsp;&nbsp;
+<A HREF="chap09-06.html#chap09-06">[9-6]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-30.png" ALT="Figure 12.30"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls miscellaneous network functions,
+	including a Network Consistency Checking (NCC) facility.
+	Some systems call network consistency checking "LVS" (Layout vs. Schematic),
+	but Electric uses the term NCC because it can compare any two cells, not just layout vs. schematic.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Show Network</B></TD><TD>
+		This command shows the equivalent to the currently highlighted network in all other windows.
+		It also works for network names seleted in a text window.
+		If this cell has been run through the network consistency checker, that information will be used.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<!-- NEED 5in -->
+	<TR><TD></TD><TD VALIGN=TOP><B>NCC Control and Options...</B></TD><TD>
+		This presents a dialog for controlling the network consistency checker.
+		On top are the two cells whose networks are to be compared.
+		If there are two cells currently being displayed, they are loaded into these fields.
+		<P>
+		<CENTER><IMG SRC="../images/chap09-22.png" ALT="Figure 9.22"></CENTER>
+		<P>
+		The lower portion controls the NCC process.
+		On the left are the NCC controls,
+		and on the right half are per-cell overrides of some of these settings.
+		The bottom has buttons for running NCC or Preanalysis.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Create NCC Forced Association</B></TD><TD>
+		This command places an NCC-match tag on the currently select object.
+		By changing the name, and setting the same name on objects in different cells,
+		those objects are forced to match during NCC.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Node Extract <A HREF="chap07-03.html#chap07-03">[7-3]</A></B></TD><TD>
+		This command extracts connectivity from a cell that has only geometry (pure-layer nodes).
+		Such cells are the result of reading external format files, such as CIF and GDS.
+		The pure-layer nodes are removed and replaced with a connected network of nodes and arcs.
+		Unfortunately, the node extractor is only partially implemented and should not be counted-on to properly extract.
+		Also, it does not recognize transistors.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<!-- NEED 4in -->
+	<TR><TD></TD><TD VALIGN=TOP><B>Network Options...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This presents a dialog for controlling the network tool.
+		The top part has network numbering options including rules for unifying networks, and choices for handling resistors.
+		<P>
+		The lower part of the dialog controls how busses will be numbered when they are not explicitly defined.
+		You can choose to start them at 0 or 1, and can choose to order them ascending or descending.
+		</TD><TD><CENTER><IMG SRC="../images/chap09-12.png" ALT="Figure 9.12"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Show Power and Ground</B></TD><TD>
+		This command highlights all of the power and ground networks in the current cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Validate Power and Ground</B></TD><TD>
+		This command checks all power and ground networks in the circuit to be sure that they are named sensibly.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Rip Bus Signals <A HREF="chap07-06.html#chap07-06">[7-6]</A></B></TD><TD>
+		This command takes the currently selected bus wire and adds wire taps for each signal on the bus.
+		The wires run perpendicular to the bus and are labeled with their signal.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Redo Network Numbering <A HREF="chap06-12.html#chap06-12">[6-12]</A></B></TD><TD>
+		This command is not generally needed but may be useful if you suspect that the network information is incorrect.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 3in -->
+<H3>Logical Effort <A HREF="chap09-12.html#chap09-12">[9-12]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-19.png" ALT="Figure 12.19"></CENTER></TD><TD VALIGN=TOP>
+	This command does Logical Effort analysis,
+	which determines the transistor ratios to use in digital schematic components in order to get optimal circuit speed. 
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Analyze Cell</B></TD><TD>
+		This command examines the current cell and annotates all schematic gates with fanout information.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Analyze Path</B></TD><TD>
+		This command examines the circuitry between the two highlighted components and annotates the gates with fanout information.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>New Arc Load</B></TD><TD>
+		This command creates a special "load" symbol that has capacitance and can connect to the circuit
+		to declare a load there.
+		The capacitance value can be changed by double-clicking and typing a new value.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set Node Effort...</B></TD><TD>
+		This command allows you to set an overriding logical effort value on the currently selected node.
+		This value can be changed by double-clicking and typing a new value.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Logical Effort Options...</B></TD><TD>
+		This command provides options for controlling the Logical Effort tool.
+		<TABLE><TR><TD VALIGN=TOP>
+		The Maximum Stage Gain is used in the <B>Analyze Cell</B> command.
+		The "Display intermediate capacitances" enables the display of capacitance values on arcs in the circuit.
+		The "Highlight components" causes the tool to highlight the active components that it is analyzing.
+		</TD><TD><CENTER><IMG SRC="../images/chap09-14.png" ALT="Figure 9.14"></CENTER></TD></TR></TABLE>
+		Finally, the dialog lets you set the wire ratio for each arc (a value used in load computation).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Estimate Delays</B></TD><TD>
+		This command examines each network in the circuit and calculates load factors.
+		It is not generally useful, and applies to Logical Effort calculations.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Show Network Loads</B></TD><TD>
+		This command lists every network in the current cell, showing the wire length, load, and other information.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Analyze Network</B></TD><TD>
+		This command shows a detailed analysis of the currently selected network,
+		including the area and perimeter information for each layer, as well as load information.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<!-- NEED 4in -->
+<H3>Routing <A HREF="chap09-05.html#chap09-05">[9-5]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-31.png" ALT="Figure 12.31"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls a number of wire routing facilities.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Enable Auto-Stitching</B></TD><TD>
+		This command instructs the router to watch all subsequent layout activity and to place arcs wherever touching nodes create implicit connections.
+		It is useful to issue this command before generating arrays,
+		because the array may produce many implicit connections that this router will make explicit.
+		The menu entry changes to <B>Stop Auto-Stitching</B> to disable the function.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Auto-Stitch Highlighted Now</B></TD><TD>
+		This does auto-stitching only in the currently highlighted area.
+		The highlighted area is defined as the bounding rectangle of everything that is highlighted.
+		A more precise way of defining a highlighted area is to use the
+		<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I>
+		button to drag a rectangle on the screen.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Enable Mimic-Stitching</B></TD><TD>
+		This command instructs the router to watch all subsequent layout activity and to automatically create other arcs in similar locations whenever you create one by hand.
+		The menu entry changes to <B>Disable Mimic-Stitching</B> to disable this function.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Mimic-Stitching Now</B></TD><TD>
+		This command instructs the router to mimic the last arc that was created.
+		It is not necessary for the Mimic Stitcher to be enabled.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Mimic-Selected</B></TD><TD>
+		This command instructs the router to mimic the selected arc.
+		It is not necessary for the Mimic Stitcher to be enabled.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Maze-Route Selected</B></TD><TD>
+		This command runs the maze router in the selected area.
+		All occurrences of the Unrouted wire will be replaced with real geometry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Maze-Route Cell</B></TD><TD>
+		This command runs the maze router in the current cell.
+		All occurrences of the Unrouted wire will be replaced with real geometry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>River-Route</B></TD><TD>
+		This command runs the river-router in the current cell.
+		All occurrences of the Unrouted wire will be replaced with real geometry.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<!-- NEED 4in -->
+	<TR><TD></TD><TD VALIGN=TOP><B>Routing Options...</B></TD><TD>
+		This command provides a dialog for control of the stitching routers.
+		<TABLE><TR><TD VALIGN=TOP>
+		For the Auto-Stitcher, you can select the type of arc to use
+		(the default is to automatically determine the arc type to use from the ports).
+		</TD><TD><CENTER><IMG SRC="../images/chap09-05.png" ALT="Figure 9.5"></CENTER></TD></TR></TABLE>
+		For the Mimic-Stitcher, you can instruct it to mimic wire deletions as well as creations.
+		The Mimic-Stitcher can also be instructed to relax its rules for mimicing
+		(by default, arcs are mimiced if they run between the same ports on other nodes;
+		however you can request that mimicing happens between any other ports that are the same distance apart as the original arc).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Unroute</B></TD><TD>
+		This command takes the currently selected network(s) and converts them to unrouted wires.
+		After this command, you can maze-route or river-route the unrouted wires.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Get Unrouted Wire</B></TD><TD>
+		The Unrouted wire of the Generic technology is used to define routing requirements
+		(see <A HREF="chap07-09.html#chap07-09">Section 7-9</A>).
+		This command selects the Generic arc so that subsequent wiring commands will use it.
+		This is necessary in order to do maze and river-routing.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Copy Routing Topology</B></TD><TD>
+		This command remembers the network of connections in the current cell for subsequent creation in another cell
+		(specified with <B>Paste Routing Topology</B>).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Paste Routing Topology</B></TD><TD>
+		This command examines the current cell and compares its network to the one that was copied
+		(with <B>Copy Routing Topology</B>).
+		Where there are missing connections in this cell,
+		the command creates Unrouted arcs to connect them.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Generation</H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-27.png" ALT="Figure 12.27"></CENTER></TD><TD VALIGN=TOP>
+	This command provides a pad frame generator and two PLA generators.
+	All will run faster if the design-rule checker is turned off first.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Pad Frame <A HREF="chap09-08.html#chap09-08">[9-8]</A></B></TD><TD>
+		This command prompts for a disk file that describes the placement of pads around a core cell.
+		The file includes information about the library that contains the pads and also the connection between the pads and ports on the core cell.
+	</TD></TR>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>nMOS PLA <A HREF="chap09-07.html#chap09-07">[9-7]</A></B></TD><TD>
+		This command prompts for a personality table and generates nMOS layout,
+		complete with power and clocking.
+		See the description of the PLA generator for a sample personality table.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>MOSIS CMOS PLA <A HREF="chap09-07.html#chap09-07">[9-7]</A></B></TD><TD>
+		This command prompts for two personality tables:
+		the AND and the OR tables.
+		It also offers options about the location of inputs and outputs.
+		See the description of the PLA generator for a sample CMOS personality table.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>ROM... <A HREF="chap09-07.html#chap09-07">[9-7]</A></B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command prompts for a personality table and generates a ROM.
+		The code is implemented in Java, so this command is only active if you have installed Java into Electric.
+		</TD><TD><CENTER><IMG SRC="../images/chap09-02.png" ALT="Figure 9.2"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>VHDL Compiler <A HREF="chap09-10.html#chap09-10">[9-10]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-28.png" ALT="Figure 12.28"></CENTER></TD><TD VALIGN=TOP>
+	This submenu provides direct control of the VHDL compiler,
+	which translates VHDL textual descriptions into netlists.
+	Besides controlling which format netlist is generated,
+	it is also possible to determine whether the netlist of the VHDL is to be stored in memory
+	(in a cell) or on disk.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Compile for Silicon Compiler</B></TD><TD>
+		This command causes the VHDL in the current cell to be compiled into a netlist for the silicon compiler.
+		If the current cell is not a VHDL view, the VHDL view is used.
+		If VHDL disk files are being used instead of cells,
+		the file "XXX.vhdl" is read, where XXX is the cell name of the current cell.
+		If netlists are being written to disk, the file "XXX.sci" is written.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compile for Simulation</B></TD><TD>
+		This command causes the VHDL in the current cell to be compiled into a netlist for simulation.
+		If the current cell is not a VHDL view, the VHDL view is used.
+		If VHDL disk files are being used instead of cells,
+		the file "XXX.vhdl" is read, where XXX is the cell name of the current cell.
+		If netlists are being written to disk, the file "XXX.net" is written.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compile for RNL</B></TD><TD>
+		This command causes the VHDL in the current cell to be compiled into a RNL simulator netlist.
+		If the current cell is not a VHDL view, the VHDL view is used.
+		If VHDL disk files are being used instead of cells,
+		the file "XXX.vhdl" is read, where XXX is the cell name of the current cell.
+		If netlists are being written to disk, the file "XXX.net" is written.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compile for RSIM</B></TD><TD>
+		This command causes the VHDL in the current cell to be compiled into a RSIM simulator netlist.
+		If the current cell is not a VHDL view, the VHDL view is used.
+		If VHDL disk files are being used instead of cells,
+		the file "XXX.vhdl" is read, where XXX is the cell name of the current cell.
+		If netlists are being written to disk, the file "XXX.net" is written.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compile for SILOS</B></TD><TD>
+		This command causes the VHDL in the current cell to be compiled into a SILOS simulator netlist.
+		If the current cell is not a VHDL view, the VHDL view is used.
+		If VHDL disk files are being used instead of cells,
+		the file "XXX.vhdl" is read, where XXX is the cell name of the current cell.
+		If netlists are being written to disk, the file "XXX.sil" is written.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<!-- NEED 3in -->
+	<TR><TD></TD><TD VALIGN=TOP><B>VHDL Options...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command provides options for controlling whether the VHDL or the Netlist are stored in memory or on disk.
+		Besides the compile subcommands in this menu,
+		the state of these switches also affects the <B>Make VHDL View</B> command of the <B>View</B> menu,
+		the <B>Simulate...</B> subcommand of the <B>Simulation (Built-in)</B> command of the <B>Tools</B> menu,
+		and the <B>Get Network for Current Cell</B> subcommand of the <B>Silicon Compiler</B>
+		command of the <B>Tools</B> menu.
+		</TD><TD><CENTER><IMG SRC="../images/chap09-10.png" ALT="Figure 9.10"></CENTER></TD></TR></TABLE>
+		This command also controls the VHDL that is generated from schematics nodes.
+		Each schematics node is shown, along with its regular and negated VHDL symbol
+		(the use of "%d" is replaced by the number of inputs on the gate).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select Behavioral Library...</B></TD><TD>
+		When compiling for simulation, behavioral models will be included if they are found in the current library.
+		This command allows an alternate library to be searched for the models.
+		Note that each model can be found in the "netlist-als-format" view of an appropriately named cell.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Silicon Compiler <A HREF="chap09-09.html#chap09-09">[9-9]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-29.png" ALT="Figure 12.29"></CENTER></TD><TD VALIGN=TOP>
+	This submenu is an extensive system for placing and routing standard cell libraries from a structural VHDL description.
+	Simply run each command in sequence: select a library, set options,
+	obtain a netlist, place, route, and make Electric layout.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Read MOSIS CMOS Library</B></TD><TD>
+		This command requests that the MOSIS CMOS standard cell library be used.
+		This cell library is not guaranteed to be correct and exists only for illustration purposes.
+		See the "Silicon Compiler" section of Chapter 9 for a description of the cells in this library.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Silicon Compiler Options...</B></TD><TD>
+		This command presents a dialog that allows the setting of various parameters for the silicon compilation process.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Get Network for Current Cell</B></TD><TD>
+		This command gets a netlist for the current cell.
+		If the current cell is not a netlist, and the netlist associated with this cell is missing or out of date,
+		the VHDL Compiler will be used to create a netlist.
+		If the current cell is not VHDL, and the VHDL associated with this cell is missing or out of date,
+		the VHDL will be generated from a schematic.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Do Placement</B></TD><TD>
+		This command computes the placement of standard cells.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Do Routing</B></TD><TD>
+		This command computes the routing among the placed standard cells.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Make Electric Layout</B></TD><TD>
+		This command generates final circuitry from the computed placement and routing.
+		The design-rule checker is turned off during this step.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD>&nbsp;</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Issue Special Instructions...</B></TD><TD>
+		This command allows you to communicate directly with the Silicon Compiler.
+		Only those familiar with the system should do this
+		(the other commands in this submenu handle standard functions without the need to know how the compiler works).
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Compaction <A HREF="chap09-11.html#chap09-11">[9-11]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-39.png" ALT="Figure 12.39"></CENTER></TD><TD VALIGN=TOP>
+	This submenu controls the layout compactor.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Do Compaction</B></TD><TD>
+		This command compacts the layout in the current window to design-rule distances,
+		using single-axis compaction.
+		It alternates horizontal and vertical compaction until no additional space can be saved.
+		Compaction is done downward and to the left.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compact Horizontally</B></TD><TD>
+		This command instructs the compactor to compact the current cell one time in the horizontal direction.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compact Vertically</B></TD><TD>
+		This command instructs the compactor to compact the current cell one time in the vertical direction.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Compaction Options...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command presents a dialog that allows you to tell the compactor to spread the circuit where it is too close for the design rules.
+		You can also request information about the compaction process.
+		</TD><TD><CENTER><IMG SRC="../images/chap09-13.png" ALT="Figure 9.13"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	</TABLE>
+<HR>
+<H3>List Tools <A HREF="chap09-01.html#chap09-01">[9-1]</A></H3>
+<P>
+	This command lists all of the tools, showing which ones are active.
+<P>
+<H3>Language Interpreter <A HREF="chap11-01.html#chap11-01">[11-1]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-18.png" ALT="Figure 12.18"></CENTER></TD><TD VALIGN=TOP>
+	There are language interpreters in Electric:
+	TCL, LISP, and Java.
+	The interpreters can be activated with the subcommands here.
+	Once activated, you communicate with them in the messages window.
+	Note that, because of copyright restrictions,
+	the LISP interpreter is not part of the standard GNU distribution and must be obtained separately from
+	<A HREF="http://www.staticfreesoft.com">Static Free Software</A>.
+	The TCL and Java interpreters must also be obtained separately.
+	See the installation instructions for UNIX, <A HREF="chap01-03.html#chap01-03">Section 1-3</A>,
+	Macintosh, <A HREF="chap01-04.html#chap01-04">Section 1-4</A>, and
+	Windows, <A HREF="chap01-05.html#chap01-05">Section 1-5</A>.
+	</TD></TR></TABLE>
+<HR>
+<P>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-09.html#chap12-09"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-09.html#chap12-09">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html">Next</A></TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

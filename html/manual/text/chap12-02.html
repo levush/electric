@@ -1,0 +1,423 @@
+<HTML><HEAD><TITLE>Using Electric 12-2: The Edit Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-02"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-01.html#chap12-01"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-2: The Edit Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-03.html#chap12-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-02.png" ALT="Figure 12.2"></CENTER>
+<P>
+This menu provides all of the basic commands for creating, deleting,
+and modifying circuitry.
+Many special objects that do not appear in the component menu on the left can be created with these commands.
+<P>
+<H3>New Cell Instance... <A HREF="chap03-03.html#chap03-03">[3-3]</A></H3>
+<P>
+	This command allows the creation of an instance of a cell.
+	A dialog box will be presented to choose the desired cell,
+	after which you can click in the editing window to create the instance.
+<P>
+<!-- NEED 5in -->
+<H3>New Analog Part <A HREF="chap07-06.html#chap07-06">[7-6]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-13.png" ALT="Figure 12.13"></CENTER></TD><TD VALIGN=TOP>
+	This command creates a schematic component from the submenu list.
+	Many of these components use values which you will be asked to provide.
+	For example, if you choose the Resistor,
+	a dialog box will request a resistance value to display on that component.
+	</TD></TR></TABLE>
+<P>
+<H3>New SPICE Part <A HREF="chap09-04.html#chap09-04">[9-4]</A>&nbsp;&nbsp;
+<A HREF="chap07-06.html#chap07-06">[7-6]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-14.png" ALT="Figure 12.14"></CENTER></TD><TD VALIGN=TOP>
+	This command creates a SPICE simulation component from the submenu list.
+	Many of these components use SPICE deck fragments which you will be asked to provide.
+	</TD></TR></TABLE>
+<P>
+<!-- NEED 3in -->
+<H3>New Pure-Layer Node... <A HREF="chap06-10.html#chap06-10">[6-10]</A>&nbsp;&nbsp;
+<A HREF="chap07-01.html#chap07-01">[7-1]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command allows the creation of a piece of pure geometry.
+	Pure-layer nodes exist for the purpose of creating unusual layout geometries such as pads or analog circuits.
+	After choosing a node with this command, select a position in the editing window for the node.
+	Initially, pure-layer nodes are square.
+	Other rectangular geometries can be specified with the <B>Size</B> command below.
+	Nonrectangular geometries can be created by using the <B>Outline Edit</B> command below.
+	</TD><TD><CENTER><IMG SRC="../images/chap06-17.png" ALT="Figure 6.17"></CENTER></TD></TR></TABLE>
+<P>
+<H3>New Special Object</H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-15.png" ALT="Figure 12.15"></CENTER></TD><TD VALIGN=TOP>
+	This command allows the creation of certain special components.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Text (nonlayout) <A HREF="chap06-08.html#chap06-08">[6-8]</A></B></TD><TD>
+		is a free-floating piece of text that merely annotates the circuit.
+		It is not a part of fabrication output.
+		When you click, a piece of text is placed (it is initially the word "text" and is highlighted).
+	</TD></TR>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Text (layout)... <A HREF="chap06-10.html#chap06-10">[6-10]</A></B></TD><TD>
+		is way to create text that is actual layout.
+		The dialog allows you to specify the text, font, size, scale, and the layer to use
+		(to make the text visible in chip photomicrographs, choose the highest metal layer).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Cell Center <A HREF="chap03-03.html#chap03-03">[3-3]</A></B></TD><TD>
+		is a fiduciary mark that, when placed in a cell, defines the center of that cell.
+		This information is used by the editor when creating or moving instances of that cell.
+		Note that once placed, this object can be selected only by using the
+		<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-left  Windows:alt-left  Mac:opt-click">special select</A></I> button.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Essential Bounds marker </B></TD><TD>
+		is a fiduciary mark that, when two or more are placed in a cell, defines the essential area of that cell.
+		Note that once placed, this object can be selected only by using the
+		<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-left  Windows:alt-left  Mac:opt-click">special select</A></I> button.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Coverage Implants <A HREF="chap07-04.html#chap07-04">[7-4]</A></B></TD><TD>
+		This command generates pure-layer nodes that cover the implants in the current cell.
+		The nodes are left highlighted so that you can see what has been generated.
+		Previous pure-layer nodes are removed.
+		The new nodes are made "hard to select" to keep them from interfering with normal selection
+		(see <A HREF="chap02-01.html#chap02-01">Section 2-1</A>).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>DRC Exclusion <A HREF="chap09-02.html#chap09-02">[9-2]</A></B></TD><TD>
+		is a node that marks an area to be ignored by the design-rule checkers (Hierarchical and Dracula).
+		See the <B>DRC</B> command in the <B>Tools</B> menu for more on the Dracula interface.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Simulation Probe <A HREF="chap10-02.html#chap10-02">[10-2]</A></B></TD><TD>
+		is a node that marks an area to be tested by simulators.
+		See the <B>DRC</B> command in the <B>Tools</B> menu for more on the Dracula interface.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Annular Ring... <A HREF="chap06-10.html#chap06-10">[6-10]</A></B></TD><TD>
+		presents a dialog for the construction of ring shapes.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>New Node Options... <A HREF="chap06-02.html#chap06-02">[6-2]</A></H3>
+<P>
+	This command presents a dialog that allows default settings to be established for the creation of new nodes.
+	The top section of the dialog lets you set default size and orientation for each primitive node.
+	<P>
+	The middle section of the dialog contains options that apply to all nodes.
+	The check box "Disallow modification of locked primitives"
+	applies only to primitive node instances in "array" technologies and prevents fixed circuitry from being altered.
+	The check box "Move after Duplicate" allows duplicated objects to be interactively positioned.
+	The check box "Duplicate/Array/Extract copies exports"
+	causes all operations that copy nodes to copy their exports as well.
+	This includes the <B>Duplicate</B> and <B>Array</B> commands of the <B>Edit</B>
+	menu and the <B>Extract Cell Instance</B> command of the <B>Cells</B> menu.
+	Note that export names must be unique,
+	so the copied exports will have their names modified by either changing array indices or by adding
+	"_1", "_2", etc. to the end.
+	Finally, it is possible to set a default orientation of all new nodes.
+	<P>
+	The bottom section of the dialog allows you to specify node names to be used for the different types of nodes.
+	These names are used when automatically naming nodes during netlisting.
+	<CENTER><IMG SRC="../images/chap06-01.png" ALT="Figure 6.1"></CENTER>
+<P>
+<HR><BR>
+<P>
+<H3>Cut <A HREF="chap06-01.html#chap06-01">[6-1]</A>&nbsp;&nbsp;
+<A HREF="chap04-10.html#chap04-10">[4-10]</A></H3>
+<P>
+	This command copies the currently selected nodes and arcs to the scrap, and then deletes them from the circuit.
+	If you are editing a text window, the selected text is copied and removed.
+	If the Messages window is current, this command copies and removes text from there.
+<P>
+<H3>Copy <A HREF="chap06-01.html#chap06-01">[6-1]</A>&nbsp;&nbsp;
+<A HREF="chap04-10.html#chap04-10">[4-10]</A></H3>
+<P>
+	This command copies the currently selected nodes and arcs to the scrap.
+	If you are editing a text window, the selected text is copied.
+	If the Messages window is current, this command copies text from there.
+<P>
+<H3>Paste <A HREF="chap06-01.html#chap06-01">[6-1]</A>&nbsp;&nbsp;
+<A HREF="chap04-10.html#chap04-10">[4-10]</A></H3>
+<P>
+	This command copies the nodes and arcs in the scrap back to the currently selected window.
+	If there are nodes or arcs selected when this command is issued,
+	the copied objects are copied ONTO the selected objects, changing them.
+	If you are editing a text window, text from the text scrap is inserted.
+	If the Messages window is current, this command pastes text there.
+<P>
+<H3>Duplicate <A HREF="chap06-01.html#chap06-01">[6-1]</A></H3>
+<P>
+	This command creates a copy of the currently highlighted nodes and arcs.
+	An outline of the duplicated objects attaches to the cursor, and when you click,
+	the objects are placed at that location.
+	If you have disabled "Move after Duplicate"
+	(in the <B>New Node Options...</B> command of the <B>Edit</B> menu)
+	then the duplicated objects are placed immediately without dragging.
+<P>
+<HR><BR>
+<P>
+<H3>Undo <A HREF="chap06-07.html#chap06-07">[6-7]</A></H3>
+<P>
+	This command reverses the last command made to Electric.
+	This will affect ANY command, not just those that change circuitry.
+	Repeated issuing of this command undoes farther back up to a limit of about 30 commands.
+<P>
+<H3>Redo <A HREF="chap06-07.html#chap06-07">[6-7]</A></H3>
+<P>
+	This command redoes changes that were undone by the <B>Undo</B> command.
+	Repeated issuing of this command redoes farther up to the last change made.
+<P>
+<HR><BR>
+<P>
+<H3>Rotate <A HREF="chap02-06.html#chap02-06">[2-6]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-33.png" ALT="Figure 12.33"></CENTER></TD><TD VALIGN=TOP>
+	This command rotates the currently highlighted component.
+	A submenu allows you to rotate in any of the Manhattan orientations, or provide an arbitrary rotation amount.
+	</TD></TR></TABLE>
+<P>
+<H3>Mirror <A HREF="chap02-06.html#chap02-06">[2-6]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-32.png" ALT="Figure 12.32"></CENTER></TD><TD VALIGN=TOP>
+	This command flips the currently highlighted components about their horizontal or vertical centerline,
+	according to the submenu.
+	</TD></TR></TABLE>
+<P>
+<H3>Size <A HREF="chap02-05.html#chap02-05">[2-5]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-42.png" ALT="Figure 12.42"></CENTER></TD><TD VALIGN=TOP>
+	This command alters the size of the currently highlighted components, according to the submenu.
+	The <B>Interactively</B> option allows graphical adjustment of the currently selected node or arc
+	(the corner farthest from the cursor is anchored and the corner closest to the cursor is pulled to the location of the cursor).
+	The <B>All Selected Nodes</B> and <B>All Selected Arcs</B> options present a dialog for
+	changing the size of the selected nodes or arcs.
+	</TD></TR></TABLE>
+<P>
+<H3>Move <A HREF="chap02-04.html#chap02-04">[2-4]</A> <A HREF="chap04-07.html#chap04-07">[4-7]</A> <A HREF="chap06-05.html#chap06-05">[6-5]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-54.png" ALT="Figure 12.54"></CENTER></TD><TD VALIGN=TOP>
+	The subcommands here affect object movement.
+	You can spread a circuit to make room, move objects by specified amounts, align objects to the grid or to each other,
+	and control the amount of movement that arrow keys use.
+	</TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Erase <A HREF="chap02-03.html#chap02-03">[2-3]</A></H3>
+<P>
+	This command deletes the currently highlighted objects.
+	Use <B>Undo</B> to restore deleted objects.
+	Note that when a node is erased, all connecting arcs and exports are also erased.
+	However, if a node is deleted that has exactly two arcs,
+	connected as though the node were in the middle of a single arc,
+	then the node and two arcs are replaced with a single arc.
+<P>
+<H3>Erase Geometry <A HREF="chap02-03.html#chap02-03">[2-3]</A></H3>
+<P>
+	This command deletes all geometry in the currently highlighted area.
+	Arcs that cross into the area will be truncated at the edge of the area.
+	Note that the area is adjusted by the current alignment values
+	(see <A HREF="chap04-07.html#chap04-07">Section 4-7</A>).
+<P>
+<HR><BR>
+<P>
+<!-- NEED 4in -->
+<H3>Array... <A HREF="chap06-04.html#chap06-04">[6-4]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command creates multiple copies of the currently highlighted components.
+	A dialog is presented in which the X and Y repeat factors can be specified.
+	Also, alternate rows and columns can be flipped or staggered,
+	and spacing can be specified in many different ways.
+	If array indices are requested, they appear on each copy.
+	</TD><TD><CENTER><IMG SRC="../images/chap06-02.png" ALT="Figure 6.2"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Insert Jog in Arc <A HREF="chap02-02.html#chap02-02">[2-2]</A></H3>
+<P>
+	This command causes the currently selected arc to have a jog inserted.
+	Press the button and move the cursor to see where the jog will be inserted.
+	Release the button to insert at that location.
+	A jog consists of two pin-nodes, one connected to each half of the arc,
+	and another arc connecting them that runs perpendicular to the original arc.
+	Thus, the jog point allows either half of the wire to be moved laterally,
+	while keeping the parts connected.
+	Inserting two jogs allows an arc to form a "U".
+<P>
+<!-- NEED 3in -->
+<H3>Change... <A HREF="chap06-06.html#chap06-06">[6-6]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command causes the selected nodes or arcs to be changed to a different type.
+	<P>
+	A dialog is presented that allows selection of the new type, the scope of the change, and control over how the change is done.
+	</TD><TD><CENTER><IMG SRC="../images/chap06-04.png" ALT="Figure 6.4"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Cleanup Cell</H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-41.png" ALT="Figure 12.41"></CENTER></TD><TD VALIGN=TOP>
+	These commands adjust the current cell so that it is easier to edit.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Cleanup Pins <A HREF="chap02-02.html#chap02-02">[2-2]</A></B></TD><TD>
+		This command examines the current cell and removes isolated and irrelevant pins.
+		It also highlights zero-size nodes.
+	</TD></TR>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Cleanup Pins Everywhere <A HREF="chap02-02.html#chap02-02">[2-2]</A></B></TD><TD>
+		This command examines all cells in the current library and removes isolated and irrelevant pins.
+		It also reports zero-size nodes.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Show Nonmanhattan <A HREF="chap05-02.html#chap05-02">[5-2]</A></B></TD><TD>
+		This command identifies all nonmanhattan geometry in the current cell
+		(nonmanhattan geometry is that which is not at right angles with the coordinate axes).
+		In addition, it tells you of other nonmanhattan geometry elsewhere in the database.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Shorten Selected Arcs <A HREF="chap05-02.html#chap05-02">[5-2]</A></B></TD><TD>
+		This command reduces the length of all selected arcs to their minimum, without moving the attached nodes.
+		This works only on arcs that are connected to large ports, and have room to move inside of the port.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Selection</H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-45.png" ALT="Figure 12.45"></CENTER></TD><TD VALIGN=TOP>
+	These commands control selection of objects.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Select All <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command highlights every node and arc in the current cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select All Like This <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command highlights every node and arc in the current cell that is the same as the currently selected node or arc.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select All Easy <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command highlights every node and arc in the current cell that is marked as easy-to-select.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select All Hard <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command highlights every node and arc in the current cell that is not marked easy-to-select.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select Nothing <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command removes all selection in the current cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select Export... <A HREF="chap03-06.html#chap03-06">[3-6]</A></B></TD><TD>
+		This command presents a list of ports in the current cell and highlights one.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select Node... <A HREF="chap02-04.html#chap02-04">[2-4]</A></B></TD><TD>
+		This command presents a list of nodes in the current cell and highlights one.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select Arc... <A HREF="chap02-04.html#chap02-04">[2-4]</A></B></TD><TD>
+		This command presents a list of arcs in the current cell and highlights one.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Select Network... <A HREF="chap06-09.html#chap06-09">[6-9]</A></B></TD><TD>
+		This command presents a list of networks in the current cell and highlights one.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Deselect All Arcs <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command causes all selected arcs to be deselected.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Make Selected Easy <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command changes all selected objects to be easy-to-select.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Make Selected Hard <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command changes all selected objects so that they are not easy-to-select.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Push Selection <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command saves the currently selected objects on a stack.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Pop Selection <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command restores the previously pushed objects on a stack.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Enclosed Objects <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		This command changes an area selection into an actual selection of nodes and arcs.
+		If you have used the
+		<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I>
+		button to define an arbitrary rectangular area on the screen,
+		this command replaces that selection with the actual nodes and arcs in that area.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Selection Options... <A HREF="chap02-01.html#chap02-01">[2-1]</A></B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command controls selection options, including the setting of "hard-to-select" status,
+		the use of node centers instead of their lower-left corner,
+		and how area selection is done.
+		</TD><TD><CENTER><IMG SRC="../images/chap02-09.png" ALT="Figure 2.9"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Special Function</H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-43.png" ALT="Figure 12.43"></CENTER></TD><TD VALIGN=TOP>
+	These commands offers special operations on specific objects.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Outline Edit <A HREF="chap06-10.html#chap06-10">[6-10]</A></B></TD><TD>
+		This command allows the currently highlighted node to have its outline manipulated.
+		It works only on certain nodes for which the outline information has meaning.
+		MOS transistors use this information as the centerline of the gate in a serpentine description.
+		Pure-layer nodes use this information to describe their shape.
+		Finally, some primitives from the Artwork technology can use this information to describe their shape.
+		Once this command is issued, the buttons are redefined to apply specifically to outline editing.
+		The <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I>
+		button selects and moves a point on the outline,
+		and the <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:right  Windows:right  Mac:cmd-click">creation</A></I>
+		button creates a new point.
+		Also, the <B>Erase</B>, <B>Rotate</B>, and <B>Mirror</B> commands of this menu change meaning when editing outlines.
+		Use the <B>Get Outline Info</B> command of the <B>Info</B> menu to see outline coordinates.
+		To terminate outline editing, this menu entry changes to <B>Exit Outline Edit</B> which,
+		when reissued, restores the commands and mouse buttons.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Artwork Color... <A HREF="chap07-07.html#chap07-07">[7-7]</A></B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command causes the highlighted node or arc to be given a specific color and/or pattern.
+		You can set individual bits in the pattern or choose from a set of predefined patterns along the top.
+		</TD><TD><CENTER><IMG SRC="../images/chap07-06.png" ALT="Figure 7.6"></CENTER></TD></TR></TABLE>
+		The object must be a primitive from the Artwork technology for this command to work.
+		Another way to examine the color of the currently highlighted node or arc is to use the <B>Get Info</B>
+		command of the <B>Info</B> menu.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Find Text... <A HREF="chap04-10.html#chap04-10">[4-10]</A></B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command presents a dialog for search and replacement of text.
+		It works both in text cells and in circuits.
+		</TD><TD><CENTER><IMG SRC="../images/chap04-13.png" ALT="Figure 4.13"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Change Text Size... <A HREF="chap06-08.html#chap06-08">[6-8]</A></B></TD><TD>
+		This command presents a dialog for changing the size of text objects.
+		<TABLE><TR><TD VALIGN=TOP>
+		You can change as many different categories of text as you like,
+		and can change those types of text locally or globally.
+		</TD><TD><CENTER><IMG SRC="../images/chap04-14.png" ALT="Figure 4.14"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Name All In Cell <A HREF="chap02-04.html#chap02-04">[2-4]</A></B></TD><TD>
+		This command names every node and arc in the current cell.
+		The names do not appear, but are present for netlisters and debugging.
+		(Note that netlisters that need names do this automatically.)
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Name All In Library <A HREF="chap02-04.html#chap02-04">[2-4]</A></B></TD><TD>
+		This command names every node and arc in the current library.
+		The names do not appear, but are present for netlisters and debugging.
+		(Note that netlisters that need names do this automatically.)
+	</TD></TR>
+	</TABLE>
+<P>
+
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-01.html#chap12-01"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-01.html#chap12-01">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-03.html#chap12-03">Next</A></TD>
+<TD><A HREF="chap12-03.html#chap12-03"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

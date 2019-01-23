@@ -1,0 +1,130 @@
+<HTML><HEAD><TITLE>Using Electric 4-7: Grids and Alignment</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap04-07"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 4: THE DISPLAY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap04-06.html#chap04-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>4-7: Grids and Alignment</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap04-08.html#chap04-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Drawing a Grid</H3>
+<P>
+The <B>Toggle Grid</B> command of the <B>Windows</B> menu turns the grid display on and off.
+The grid consists of dots at every grid unit, and bolder dots every 10 units,
+but both of these distances are settable.
+<P>
+Initially, the grid dots are spaced 1 lambda unit apart.
+The term <I>lambda</I> indicates a generic spacing unit that can be scaled independently of the actual layout.
+For example, in the MOSIS CMOS technology, the value of lambda is 0.2 microns,
+as shown in the status area under the heading "LAMBDA".
+When the grid is displayed, the dots are therefore 0.2 microns apart.
+For more information on lambda,
+<A HREF="chap07-02.html#chap07-02">Section 7-2</A>.
+<P>
+Note that the grid display changes as you zoom in and out.
+When zoomed too far out to show all of the dots, only the bolder dots are shown.
+When zoomed too far out to show even the bolder dots, the grid is not displayed.
+However, the fact that the grid should be on is remembered,
+so it reappears when you zoom back in.
+<P>
+The location of the grid dots is always aligned with the "grab point" of the cell.
+Because this is normally the lower-left corner, the dots will always pass through that point.
+If, however, a Cell-Center node (named "Facet-Center" for historical reasons) is placed in the cell
+(with the <B>Cell Center</B> subcommand of the <B>New Special Object</B>
+command of the <B>Edit</B> menu) then the grid dots will always pass through that point.
+<P>
+<TABLE><TR><TD>
+The <B>Grid Options...</B> command presents a dialog in which grid spacing may be set.
+You can change the grid spacing for the current window,
+and also set a default grid spacing to be used in new windows.
+</TD><TD><CENTER><IMG SRC="../images/chap04-03.png" ALT="Figure 4.3"></CENTER></TD></TR></TABLE>
+<P>
+It is possible to change the horizontal and vertical grid dot spacings.
+You can also change number of grid dots between bold ones.
+Finally, you can choose whether or not to align the grid with the circuitry.
+When aligned, the dots are drawn so that they always fall on the "grab point"
+(normally the lower-left corner of the circuitry).
+When not aligned, the dots are drawn in the same location, regardless of the circuitry.
+<P>
+The grid spacing is used by arrow keys when they move objects
+(see <A HREF="chap02-04.html#chap02-04">Section 2-4</A> for more on arrow key motion).
+<P>
+<H3>Aligning to a Grid</H3>
+<P>
+When moving or creating circuitry,
+the cursor location is snapped to a grid so that editing is cleaner.
+This snapping is controlled by the alignment options
+(which are not necessarily the same as the grid options).
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap04-07.png" ALT="Figure 4.7"></CENTER></TD><TD>
+<P>
+The <B>Alignment Options...</B> command presents a dialog in which alignment values may be set.
+For example, if the grid spacing is 2x3, and the alignment is 0.5,
+then there are up to six different positions for placement inside a displayed grid rectangle.
+</TD></TR></TABLE>
+<P>
+A special grid setting is the alignment of edges, which initially is set to zero
+(no alignment).
+This alignment affects the edges of nodes and arcs
+(as opposed to their lower-left corner, where the grab-point resides).
+For example, if a 3 lambda wide wire is drawn into a 4x4 contact,
+the default will be to center that wire, which will
+place the edges of the wire on half-lambda grid locations.
+If, however, the edge alignment is set to 1 lambda,
+then that wire will be forced to one side of the contact so that its edges align.
+Note that it is not always possible to align edges properly,
+so you should always check your geometry if you insist on this feature.
+<P>
+The <B>Align to Grid</B> subcommand of the <B>Move</B> command of the <B>Edit</B>
+menu cleans up the selected objects by moving them to aligned coordinates.
+This is useful for circuitry that has been imported from external sources,
+and needs to be placed cleanly for further editing.
+<P>
+<H3>Aligning to Objects</H3>
+<P>
+It is often the case that a collection of objects should line-up uniformly.
+The subcommands of the <B>Move</B> command of the <B>Edit</B> menu offer six possible ways to do this.
+<P>
+The subcommand <B>Align Horizontally to Left</B> (and <B>Align Horizontally to Right</B>)
+moves all of the objects so that their left edge (or right edge) is moved to the leftmost (or rightmost)
+location of those objects.
+The subcommand <B>Align Horizontally to Center</B> moves all of the objects so that their X center
+is at the location of the X center coordinate of those objects.
+<P>
+The subcommand <B>Align Vertically to Top</B> (and <B>Align Vertically to Bottom</B>)
+moves all of the objects so that their top edge (or bottom edge) is moved to the topmost (or bottommost)
+location of those objects.
+The subcommand <B>Align Vertically to Center</B> moves all of the objects so that their Y center
+is at the location of the Y center coordinate of those objects.
+<P>
+<H3>Measuring</H3>
+<P>
+As an aid to precise alignment, the <B>Show Cursor Coordinates</B> command of the <B>Info</B>
+menu causes the X and Y cursor positions to be continuously displayed in the status area.
+This information appears where the Technology and Lambda used to be.
+To restore display of Technology and Lambda values,
+uncheck this menu entry.
+<P>
+If you wish to find the distance between any two points on the display,
+use the <B>Measure Distance</B> command of the <B>Info</B> menu.
+After this command is issued, click in the circuit to set the "starting point".
+Then click repeatedly in the circuit to define the "ending point" and see the measured distance.
+To end distance measurement, issue the command again.
+The measured distance can be used by the <B>Array...</B> command to specify spacing
+(see <A HREF="chap06-04.html#chap06-04">Section 6-4</A>).
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap04-06.html#chap04-06"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap04-06.html#chap04-06">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap04-08.html#chap04-08">Next</A></TD>
+<TD><A HREF="chap04-08.html#chap04-08"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

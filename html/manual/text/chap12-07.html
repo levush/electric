@@ -1,0 +1,361 @@
+<HTML><HEAD><TITLE>Using Electric 12-7: The Windows Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-07"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-06.html#chap12-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-7: The Windows Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-08.html#chap12-08"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-07.png" ALT="Figure 12.7"></CENTER>
+<P>
+These commands allow manipulation of the editing window.
+Arbitrary zooming and panning may be done.
+A grid can be displayed.
+The window can be split multiple times to show different cells or even different areas of the same cell.
+Colors, layers, and port labels can be manipulated.
+Even the menu of components on the left can be altered.
+<P>
+<H3>Fill Window <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to be shifted and scaled so that it fits inside of the window.
+<P>
+<H3>Redisplay Window <A HREF="chap04-01.html#chap04-01">[4-1]</A></H3>
+<P>
+	This command causes the cell in the current window to be redrawn.
+<P>
+<H3>Zoom Out <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to be halved in size so that more of it appears.
+<P>
+<H3>Zoom In <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to be doubled in size so that only the center area remains visible.
+<P>
+<H3>Special Zoom <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-46.png" ALT="Figure 12.46"></CENTER></TD><TD VALIGN=TOP>
+	These commands change the magnification of the display in special ways.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD></TD><TD VALIGN=TOP><B>Focus on Highlighted</B></TD><TD>
+		This command shifts and scales the cell in the current window so that the currently highlighted area fills the window.
+		The highlighted area is defined as the bounding rectangle of everything that is highlighted.
+		A more precise way of defining a highlighted area is to use the
+		<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I>
+		button to drag a rectangle on the screen.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Highlight then Focus</B></TD><TD>
+		This command waits for the user to drag an area on the screen.
+		After the area has been identified, the window is zoomed so that the area fills the screen.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Make Grid Just Visible</B></TD><TD>
+		This command zooms to the point where the grid is visible, but any further zoom-out would make it invisible.
+		The grid is displayed.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Match Other Window</B></TD><TD>
+		This command scales the cell in the current window so that its size matches that of the other window.
+		If there are more than two windows, you will be prompted for the window to match.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Left <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to shift left
+	(the window actually moves right).
+	Use the subcommands of the <B>Panning Distance</B> command to control the amount of the shift.
+<P>
+<H3>Right <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to shift right
+	(the window actually moves left).
+	Use the subcommands of the <B>Panning Distance</B> command to control the amount of the shift.
+<P>
+<H3>Up <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to shift up
+	(the window actually moves down).
+	Use the subcommands of the <B>Panning Distance</B> command to control the amount of the shift.
+<P>
+<H3>Down <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command causes the cell in the current window to shift down
+	(the window actually moves up).
+	Use the subcommands of the <B>Panning Distance</B> command to control the amount of the shift.
+<P>
+<H3>Panning Distance <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-53.png" ALT="Figure 12.53"></CENTER></TD><TD VALIGN=TOP>
+	These commands change the amount by which the panning commands move.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD></TD><TD VALIGN=TOP><B>Small</B></TD><TD>
+		This command causes panning commands to shift the screen by 0.15 of its size.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Medium</B></TD><TD>
+		This command causes panning commands to shift the screen by 0.3 of its size.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Large</B></TD><TD>
+		This command causes panning commands to shift the screen by 0.6 of its size.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Center <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-49.png" ALT="Figure 12.49"></CENTER></TD><TD VALIGN=TOP>
+	These commands causes the cell in the current window to be shifted so that the desired point is in the center of the window.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD></TD><TD VALIGN=TOP><B>Selection</B></TD><TD>
+		This command causes the cell in the current window to be shifted so that the currently highlighted objects are in the center of the window.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Cursor</B></TD><TD>
+		This command causes the cell in the current window to be shifted so that the current cursor location is in the center of the window.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Saved Views... <A HREF="chap04-04.html#chap04-04">[4-4]</A></H3>
+<P>
+	This command presents a dialog for saving and retrieving window views
+	(a zoom and pan amount).
+	Saved views are given names which can be used to restore them later.
+<P>
+<HR><BR>
+<P>
+<H3>Toggle Grid <A HREF="chap04-07.html#chap04-07">[4-7]</A></H3>
+<P>
+	This command turns on or off the display of the grid.
+<P>
+<H3>Grid Options... <A HREF="chap04-07.html#chap04-07">[4-7]</A></H3>
+<P>
+	This command presents a dialog that allows control of the grid spacing in the current window.
+	<TABLE><TR><TD VALIGN=TOP>
+	It also allows you to set the default grid spacing for new windows, the number of grid dots between bold ones,
+	and whether or not the grid is aligned with the circuitry.
+	</TD><TD><CENTER><IMG SRC="../images/chap04-03.png" ALT="Figure 4.3"></CENTER></TD></TR></TABLE>
+	The grid spacing is used by arrow keys when they move objects
+	(see <A HREF="chap02-04.html#chap02-04">Section 2-4</A> for more on arrow key motion).
+<P>
+<H3>Alignment Options... <A HREF="chap04-07.html#chap04-07">[4-7]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command presents a dialog that allows control of the alignment of the cursor to grid points,
+	and the alignment of object edges to grid points.
+	Note that the current alignment of the cursor to grid points is shown in the status area under the heading "ALIGN".
+	</TD><TD><CENTER><IMG SRC="../images/chap04-07.png" ALT="Figure 4.7"></CENTER></TD></TR></TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>New Window <A HREF="chap04-03.html#chap04-03">[4-3]</A></H3>
+	This command creates a new window on the screen that initially contains no cell.
+<P>
+<H3>Delete Window <A HREF="chap04-03.html#chap04-03">[4-3]</A></H3>
+<P>
+	This command deletes the current window from the display.
+<P>
+<!-- NEED 3in -->
+<H3>Window Partitions <A HREF="chap04-03.html#chap04-03">[4-3]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-34.png" ALT="Figure 12.34"></CENTER></TD><TD VALIGN=TOP>
+	These commands control the partitioning of a window into multiple cell displays.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Split</B></TD><TD>
+		This command causes the current editing window to split in half,
+		with the currently edited cell appearing in both halves.
+		Each half may be split again and again, producing an arbitrary number of nonoverlapping windows.
+		When a window is first split,
+		the direction of split is determined by the aspect ratio of the contents.
+		Once split, however, the direction alternated between horizontal and vertical.
+		When the editing window is divided, only one partition is the "current" window,
+		as shown with a green outline.
+		Be careful about the commands that you issue to be sure that the correct window is affected.
+		Generally, the current window switches to whichever one has the cursor.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Delete</B></TD><TD>
+		This command causes the current partition of the editing window to be joined with its neighbor,
+		thus deleting the subwindow.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Make 1 Window</B></TD><TD>
+		This command causes all partitions of the editing window to be deleted,
+		returning to a single window with the currently edited cell.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Adjust Position <A HREF="chap04-03.html#chap04-03">[4-3]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-51.png" ALT="Figure 12.51"></CENTER></TD><TD VALIGN=TOP>
+	These commands control the layout of windows on the display.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Tile Horizontally</B></TD><TD>
+		This command causes the editing windows to be arranged horizontally, one above the other.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Tile Vertically</B></TD><TD>
+		This command causes the editing windows to be arranged vertically, one next to the other.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Cascade</B></TD><TD>
+		This command causes the editing windows to be cascaded, one overlapping the other.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Layer Visibility... <A HREF="chap04-05.html#chap04-05">[4-5]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command presents a dialog in which you can select the layers that are to be visible in the window.
+	Special buttons allow all layers to be made visible or invisible.
+	It is also possible to set visibility according to layers found in external file formats such as GDS II and DXF.
+	Note that this dialog is modeless: it can remain up while other editing is done.
+	<P>
+	The right side of the dialog lets you choose which of the different types of text will be visible
+	(Note that this side is titled "Text visibility options" which means that these settings are saved,
+	whereas those on the left side are not.)
+	</TD><TD><CENTER><IMG SRC="../images/chap04-01.png" ALT="Figure 4.1"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Color Options <A HREF="chap04-06.html#chap04-06">[4-6]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-17.png" ALT="Figure 12.17"></CENTER></TD><TD VALIGN=TOP>
+	These commands allow you to edit the color map for the current technology.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Edit Colors...</B></TD><TD>
+		This command displays a color wheel and a set of options for modifying the various entries.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Highlight Layer...</B></TD><TD>
+		This command prompts for a single layer and rebuilds the color map so that the layer is highlighted.
+		The colors can be restored with "None" button of the dialog or with the <B>Restore Default Colors</B>
+		command below.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Restore Default Colors</B></TD><TD>
+		This command returns the color table to its original values as specified by the current technology.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Black Background Colors</B></TD><TD>
+		This command sets the color table to its original values as specified by the current technology,
+		but with a black background.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>White Background Colors</B></TD><TD>
+		This command sets the color table to its original values as specified by the current technology,
+		but with a white background.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Layer Display Options... <A HREF="chap04-06.html#chap04-06">[4-6]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command displays a dialog for examining and modifying the display of each layer.
+	You can set individual bits in the pattern or you can choose from a set of predefined patterns along the top.
+	You can also choose the color to use.
+	Many layers use their stipple patterns only for printing,
+	but a check box allows you to request that the pattern be used on the display as well.
+	Another check box requests that the stippled polygons be outlined with a solid line.
+	</TD><TD><CENTER><IMG SRC="../images/chap04-02.png" ALT="Figure 4.2"></CENTER></TD></TR></TABLE>
+<P>
+<!-- NEED 5in -->
+<H3>Text Options... <A HREF="chap04-10.html#chap04-10">[4-10]</A>, <A HREF="chap06-08.html#chap06-08">[6-8]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command provides a dialog for setting the default size and placement of all subsequently created text.
+	Text size can be absolute (in points) or relative (in lambda).
+	The "Smart" placement options apply to export names only.
+	The "New text visible only inside cell" option applies to text objects
+	(created with the <B>Text (nonlayout)</B> subcommand of the <B>New Special Object</B> command of the <B>Edit</B> menu).
+	You can also choose which text editor to use when editing large pieces of text.
+	</TD><TD><CENTER><IMG SRC="../images/chap06-08.png" ALT="Figure 6.8"></CENTER></TD></TR></TABLE>
+<P>
+<H3>3D Display <A HREF="chap04-11.html#chap04-11">[4-11]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-36.png" ALT="Figure 12.36"></CENTER></TD><TD VALIGN=TOP>
+	These commands allow you to view the circuit in 3-dimensions.
+	When viewing in 3D, you cannot edit the circuit:
+	you can only control of the 3D view.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>View in 3 Dimensions</B></TD><TD>
+		This switches the display to a 3-dimensional view of the circuit.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>View in 2 Dimensions</B></TD><TD>
+		This switches the display back to a standard 2-dimensional view of the circuit.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Rotate View Point</B></TD><TD>
+		This command sets rotate-mode for the 3D display,
+		in which cursor movement rotates the objects.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Zoom View Point</B></TD><TD>
+		This command sets zoom-mode for the 3D display,
+		in which cursor movement up and down zooms the display in and out.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Pan View Point</B></TD><TD>
+		This command sets pan-mode for the 3D display,
+		in which cursor movement shifts the display.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Twist View Point</B></TD><TD>
+		This command sets twist-mode for the 3D display,
+		in which cursor movement rotates the display of the objects.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>3D Options...</B></TD><TD>
+		This command provides options for the 3D display,
+		including the depth and thickness of individual layers, and whether or not to use perspective.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Component Menu... <A HREF="chap04-08.html#chap04-08">[4-8]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command provides a dialog for adjusting the location and size of the components menu,
+	which is initially on the left.
+	Note that the number of entries is chosen for each technology to include the necessary nodes and arcs.
+	If the new size contains too few entries, some components will be unavailable.
+	If the new size contains too many entries, extra menu items will appear that may be undefined in function.
+	</TD><TD><CENTER><IMG SRC="../images/chap04-04.png" ALT="Figure 4.4"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Messages Window <A HREF="chap04-02.html#chap04-02">[4-2]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-40.png" ALT="Figure 12.40"></CENTER></TD><TD VALIGN=TOP>
+	These commands control the messages window.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Set Font...</B></TD><TD>
+		This command provides a dialog for selecting the font and size of the text in the messages window.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Save Messages</B></TD><TD>
+		This command causes all subsequent text displayed in the messages window to be saved to disk in the file
+		"emessages.txt".
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Clear</B></TD><TD>
+		This command removes all text from the messages window.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Save Window Location</B></TD><TD>
+		This command causes the location of the Messages window to be saved with the options
+		(this is not needed on the Macintosh because changes to the Messages window are always remembered).
+	</TD></TR>
+	</TABLE>
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-06.html#chap12-06"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-06.html#chap12-06">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-08.html#chap12-08">Next</A></TD>
+<TD><A HREF="chap12-08.html#chap12-08"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,802 @@
+Maximum text width to fit in dialog:
+=================================================================
+!CLEAR
+CLEAR:  Clear the status terminal screen.
+
+    Syntax:  CLEAR
+!COMPILE
+COMPILE:  Compile a file creating complex cell descriptions.
+
+    Syntax:  COMPILE filename [ECHO]
+
+    where  "filename" is the name of the disk file to compile.
+           Note that the file name can a list of QUISC commands
+           (must be extension .sci) or an VHDL file (extension
+		   .hdl) in which case the VHDL Compiler is automatically
+		   invoked and a .sci file produced.  If no extension is
+		   specified, .sci is assumed.
+
+           ECHO is an optional flag which causes the echoing of
+		   each command in the .sci file as it is executed.
+!CONNECT
+CONNECT:  Connect the port of a cell to another port or to power
+          or ground.
+
+    Syntax:  CONNECT inst1 port1 inst2 port2
+             CONNECT inst1 port1 POWER | GROUND
+
+    where  the first form connects two ports of the same or two
+           different cells together.
+           the second form connects a port to either power or
+		   ground.
+
+    Note:  Not all individual connections been to be specified.
+           For example, if A is connected to B and B is connected
+		   to C, the connection from A to C is implicitly
+		   understood.
+!CREATE
+CREATE:  Create an object in the QUISC database.
+
+    Syntax:  CREATE option
+
+    where  'option' is what object is to be created.
+
+CREATE CELL:  Create a new complex cell in QUISC.
+
+    Syntax:  CREATE CELL name
+
+    where  'name' is the name for the new complex cell.  Note
+           that names in QUISC are case insensitive (AND2 = and2).
+
+CREATE INSTANCE:  Create a new instance of a cell in the current
+                  selected complex cell.
+
+    Syntax:  CREATE INSTANCE name type
+
+    where  'name' is the name for the new instance.  Note
+           that names in QUISC are case insensitive (AND2 = and2).
+           'type' is the name of the complex or leaf cell that
+           this is an instance of.
+!DELETE
+DELETE:  Clears the entire QUISC database and frees the comsumed
+         memory.
+
+    Syntax:  DELETE
+!ECHO
+ECHO:  Echo a line of text.
+
+    Syntax:  ECHO text
+
+    where    'text' is a string within double quotes.  This
+	         command is mainly used within .SCI files to print
+			 comments during compilation.
+!ENVIRONMENT
+ENVIRIONMENT:  Send a command to the VLSI Layout Tool environment.
+
+    Syntax:  ENVIRONMENT command
+
+    where    'command' is a valid command for the VLSI Layout
+	         Tool
+!EXPORT
+EXPORT:  Export a port within a complex cell.
+
+    Syntax:  EXPORT instance port name type
+
+    where    'instance' is the name of the instance whose port is
+             being exported.
+             'port' is the name of the port on the instance.
+             'name' is the name to be given to the exported port.
+             'type' is the type of the exported port (input,
+			 output, bidirectional).
+!EXTRACT
+EXTRACT:  Extract the entire netlist of connected ports by
+          searching the connection lists.
+
+    Syntax:  EXTRACT [ECHO]
+
+    where    'ECHO' is an optional parameter which causes the
+	         displaying of the resulting connection list.
+!LIBRARY
+LIBRARY:  Read in a library of cells for use with QUISC.
+
+    Syntax:  LIBRARY READ lib_name
+
+    where    'lib_name' is the name of the library to read.  Note
+             that currently this library must be in binary format.
+             Note also that the normal library command can still
+			 be used, but the library from which QUISC get its
+			 leaf cells must be currently selected.
+!MAKE
+MAKE:  Make a placed and routed cell in the Layout Tool Database.
+
+    Syntax:  MAKE
+
+MAKE INFORMATION:  List information about layout without making.
+
+    Syntax:  MAKE INFORMATION
+
+    Output:  If verbose flag is not set, lists estimated X and Y
+	         size of final layout (in microns) and area (in
+			 square microns).  If verbose flag is set, includes
+			 information such as the number of cells, number of
+			 feed throughs, total track length, et cetera.
+
+MAKE SET-CONTROL:  Set various control parameters for make.
+
+    Syntax:  MAKE SET-CONTROL {options}
+
+    where    'options' is one or more of the various control
+	         parameters.
+
+MAKE SET-CONTROL option = VERBOSE or NO-VERBOSE
+
+    Syntax:  MAKE SET-CONTROL [NO-]VERBOSE
+
+             controls whether the output from make concerning
+			 cell statistics (number of cells, total track
+			 length, etc.) is detailed (VERBOSE) or terse
+			 (NO-VERBOSE).
+
+MAKE SET-CONTROL option = MIN-SPACING
+
+    Syntax:  MAKE SET-CONTROL MIN-SPACING value
+
+    where    'value' is the value (in internal units) of the
+	         minimum required spacing between metal layers.  This
+			 value is used to determine positions of routing
+			 tracks.
+
+MAKE SET-CONTROL option = VIA-SIZE
+
+    Syntax:  MAKE SET-CONTROL VIA-SIZE value
+
+    where    'value' is the value (in internal units) of the size
+	         of vias between layer1 and layer2 track routing.
+			 Note that vias are assumed to be square in shape.
+
+MAKE SET-CONTROL option = L1-TRACK-WIDTH
+
+    Syntax:  MAKE SET-CONTROL L1-TRACK-WIDTH value
+
+    where    'value' is the width (in internal units) of Layer 1
+	         track routing.  Note that layer 1 is assumed for
+			 horizontal routing.
+
+MAKE SET-CONTROL option = L2-TRACK-WIDTH
+
+    Syntax:  MAKE SET-CONTROL L2-TRACK-WIDTH value
+
+    where    'value' is the width (in internal units) of Layer 2
+	         track routing.  Note that layer 2 is assumed for
+			 vertical routing.
+
+MAKE SET-CONTROL option = POWER-TRACK-WIDTH
+
+    Syntax:  MAKE SET-CONTROL POWER-TRACK-WIDTH value
+
+    where    'value' is the width (in internal units) of the
+	         power buses used to connect power and ground ports
+			 of leaf cells in the same row.  Note that routing
+			 is done in Layer 1.
+
+MAKE SET-CONTROL option = MAIN-POWER-WIDTH
+
+    Syntax:  MAKE SET-CONTROL MAIN-POWER-WIDTH value
+
+    where    'value' is the width (in internal units) of the
+	         power buses used to connect the power and ground
+			 buses of different rows together.  Note that routing
+			 is done in Layer 1.
+
+MAKE SET-CONTROL option = P-WELL-SIZE
+
+    Syntax:  MAKE SET-CONTROL P-WELL-SIZE value
+
+    where    'value' is the width (in internal units) of an
+	         optional P-well to be placed from one end of each
+			 row to the other other end.  The reason for this
+			 P-well is to join up the P-wells in all individual
+			 cells of the row.  To disable this option, set value
+			 to zero.  Note that the width includes the guards.
+
+MAKE SET-CONTROL option = P-WELL-OFFSET
+
+    Syntax:  MAKE SET-CONTROL P-WELL-OFFSET value
+
+    where    'value' is the offset (in internal units) for
+	         placing the optional P-well from the bottom on the
+			 leaf cells.
+
+MAKE SET-CONTROL option = DEFAULT
+
+    Syntax:  MAKE SET-CONTROL DEFAULT
+
+             Sets all the control parameters to a default setup.  This
+             setup is currently correct for the NCMOS3 technology
+			 from Northern Telecom.  The values are:
+                 NO-VERBOSE
+                 MIN-SPACING        =  500
+                 VIA-SIZE           =  1100
+                 L1-TRACK-WIDTH     =  500
+                 L2-TRACK-WIDTH     =  500
+                 POWER-TRACK-WIDTH  =  900
+                 MAIN-POWER-WIDTH   =  1800
+                 P-WELL-SIZE        =  6000
+                 P-WELL-OFFSET      =  0
+
+MAKE SHOW-CONTROL:  Show the current values for the various
+                    control parameters used by the MAKE command.
+
+    Syntax:  MAKE SHOW-CONTROL
+
+    Output:  The control parameters displayed are:
+
+                 (1) Verbose output - 
+                         TRUE is displayed statistics are
+						 detailed, else FALSE.
+                 (2) Minimum Spacing -
+                         Minimum distance (in internal units)
+						 required between routed metal.
+                 (3) Via size - 
+                         Size of vias between Layer 1 and Layer 2
+						 routing (in internal units).  Note vias
+						 are assumed to be square in shape.
+                 (4) Layer 1 Track Width - 
+                         Width (in internal units) of routing
+						 tracks in Layer 1.
+                 (5) Layer 2 Track Width - 
+                         Width (in internal units) of routing
+						 tracks in Layer 2.
+                 (6) Power Track Width - 
+                         Width (in internal units) of power and
+						 ground buses within a row of leaf cells.
+                 (7) Main Power Bus width - 
+                         Width (in internal units) of power and
+						 ground buses between rows of cells.
+                 (8) P-well size - 
+                         Width (in internal units) of optional
+						 P-well to place from one end of the each
+						 row to the other end.  Set to 0 to
+						 disable.
+                 (9) P-well offset - 
+                         Offset (in internal units) for placing
+						 optional P-well from bottom of cells.
+
+!ORDER
+ORDER:  Order the ports on a leaf cell.
+
+    Syntax:  ORDER cell_name [file_name]
+
+    where    'cell_name' is the name of the leaf cell whose ports
+	         to order.  'file_name' is an optional name of a file
+			 to be used as input instead of manual ordering.
+
+    Note:    The ordering of ports on a leaf cell is done to
+	         maintain a logical ordering between the actual list
+			 of ports and the order of the ports on any tagged
+			 ALS simulation data.
+!PLACE
+PLACE:  Activate QUISC Placement Module.
+
+    Syntax:  PLACE
+
+    Creates placement information for currently selected complex
+	cell.  Note that the cell must contain only leaf cells
+	(achieved by 'PULL' command).
+
+PLACE SET-CONTROL:  Set various control parameters of the QUISC 
+                    Placement Module.
+
+    Syntax:  PLACE SET-CONTROL {options}
+
+    where    'options' is one or more of the various control
+	         parameters.
+
+PLACE SET-CONTROL option  =  VERBOSE or NO-VERBOSE
+
+    Syntax:  PLACE SET-CONTROL [NO-]VERBOSE
+
+             controls whether the output from the Placement
+			 Module concerning intermediate steps is detailed
+			 (VERBOSE) or terse (NO-VERBOSE).  Default is
+			 NO-VERBOSE.
+
+PLACE SET-CONTROL option  =  ROWS
+
+    Syntax:  PLACE SET-CONTROL ROWS number
+
+    where    'number' is the number of rows of cells of
+	         approximately equal length created by the Placement
+			 Alogorithm.  This number directly controls the
+			 aspect ratio of the resulting layout.  Default is
+			 one row.
+
+PLACE SET-CONTROL option  =  SORT or NO-SORT
+
+    Syntax:  PLACE SET-CONTROL [NO-]SORT
+
+             controls whether the Placement Modules sorting
+			 algorithm to optimize placement is envoked (SORT) or
+			 bypassed (NO-SORT).  The sorting algorithm
+			 recursively swaps subtrees of the initial placement
+			 clustering tree to try and minimize total
+             routing track length.  Default is SORT.
+
+PLACE SET-CONTROL option  =  NET-BALANCE or NO-NET-BALANCE
+
+    Syntax:  PLACE SET-CONTROL [NO-]NET-BALANCE
+
+             controls whether after initial placement an
+			 additional placement optimization step (Net
+			 Balancing) is done (NET-BALANCE) or bypassed
+			 (NO-NET-BALANCE).  Default is NO-NET-BALANCE.
+
+PLACE SET-CONTROL option  =  LIMIT-NET-BALANCE
+
+    Syntax:  PLACE SET-CONTROL LIMIT-NET-BALANCE limit
+
+    where    'limit' is the limit of how far (in leaf cells) an
+	         individual cell can be moved during the Net
+			 Balancing algorithm.  The larger the number, the
+			 longer the algorithm requires.  The most gain is
+			 with the first movement, then significantly less 
+             gain of two versus one, and with little gain of
+			 three versus two.  The default is set to two.
+
+PLACE SET-CONTROL option  =  VERTICAL-COST
+
+    Syntax:  PLACE SET-CONTROL VERTICAL-COST factor
+
+    where    'factor' is the multiplying factor used to express
+	         the cost of required vertical tracks versus
+			 horizontal tracks during the Net Balancing placement
+			 optimization step.  Default is two.
+
+PLACE SET-CONTROL option  =  DEFAULT
+
+    Syntax:  PLACE SET-CONTROL DEFAULT
+
+             Sets all the control parameters to the default setup.
+			 The current defaults are:
+                 NO-VERBOSE
+                 ROWS               =  1
+                 SORT
+                 NO-NET-BALANCE
+                 LIMIT-NET-BALANCE  =  2
+                 VERTICAL-COST      =  2
+
+PLACE SHOW-CONTROL:  Displays the current values of the Placement
+                     Control parameters.
+
+    Syntax:  PLACE SHOW-CONTROL
+
+    Output:  The control parameters displayed are:
+
+                 (1) Verbose output -
+                         TRUE if display of intermediate steps is
+						 detailed, else FALSE.
+                 (2) Sort flag -
+                         TRUE if optimizing sorting algorithm
+						 will be used, else FALSE.
+                 (3) Number of rows -
+                         Number of rows of cells which will be
+						 use in the resulting layout.
+                 (4) Net Balancing flag -
+                         TRUE if Net Balancing optimization
+						 algorithm will be used, else FALSE.
+                 (5) Net Balancing limit -
+                         Movement limit of any individual cell 
+						 during Net Balancing optimization.
+                 (6) Vertical Cost multiplier -
+                         Cost multiplier for having to route 
+						 tracks vertically versus horizontally.
+!PULL
+PULL:  Pull (flatten) the currently selected cell by bringing up
+       all the leaf cells.
+
+    Syntax:  PULL [INFORMATION]
+
+    where    'INFORMATION' is an optional flag which will cause
+	         the display of status information during the
+			 flattening operation.
+!ALS
+ALS:  Run the ALS Logic Simulator.
+
+    Syntax:  ALS
+
+    Temporarily spawn a subprocess and run ALS.  This is mainly
+	used after generating a ALS .net netlist file using the
+	SIMULATION WRITE command.
+!QUIT
+QUIT:  Exit the QUISC Silicon Compiler
+
+    Syntax:  QUIT
+!ROUTE
+ROUTE:  Activate the QUISC Routing Module.
+
+    Syntax:  ROUTE
+
+    Creates routing information for the currently selected complex
+	cell. Note that the cell must have previously been placed
+	(using PLACE command).  The router is designed to handle both
+	standard cells and bit slices.
+
+ROUTE SET-CONTROL:  Set the various control parameters used by the
+	router.
+
+    Syntax:  ROUTE SET-CONTROL {options}
+
+    where    'options' is one or more of the various control
+			 parameters.
+
+ROUTE SET-CONTROL option  =  VERBOSE or NO-VERBOSE
+
+    Syntax:  ROUTE SET-CONTROL [NO-]VERBOSE
+
+             Controls whether information displayed during the
+			 routing algorithm is detailed (VERBOSE) or terse
+			 (NO-VERBOSE).  The default is NO-VERBOSE.
+
+ROUTE SET-CONTROL option  =  FEED-THROUGH-SIZE
+
+    Syntax:  ROUTE SET-CONTROL FEED-THROUGH-SIZE size
+
+    where    'size' is the size (in internal units) of the width
+			 of any inserted feed throughs between adjacent cell
+			 on a row.  Feed throughs allow signals to be routed
+			 between non-adjacent rows. The size is the bounding
+			 box size so that two feed throughs can be abutted
+			 and not violate any design rules.
+
+ROUTE SET-CONTROL option  =  PORT-X-MIN-DISTANCE
+
+    Syntax:  ROUTE SET-CONTROL PORT-X-MIN-DISTANCE min_distance
+
+    where    'min_distance' is the minimum required distance in
+			 the horizontal direction (in internal units) between
+			 two adjacent ports which must be connected to.  This
+			 distance is determined by the VIA centre to VIA
+			 center spacing required by the technology.
+
+ROUTE SET-CONTROL option  =  FUZZY-WINDOW-LIMIT
+
+    Syntax:  ROUTE SET-CONTROL FUZZY-WINDOW-LIMIT limit
+
+    where    'limit' is a value in internal units.  When the
+			 router discovers a signal that must be run between
+			 two non-adjacent tracks, it searches the intervening
+			 rows for a port on the same signal that can be
+			 routed to from both above and below and is in a
+			 'target window' to use as a feed through.  This
+             window is defined as the X coordinated between the
+			 ports on the two non-adjacent rows.  If no such
+			 intervening port if found, a feed through is
+			 inserted in the row.  Since an inserted feed through
+			 increases the area of a cell, the search window is
+			 expanded by the FUZZY-WINDOW-LIMIT to see first if
+			 there are any other ports on intervening rows which
+             may be suitable.
+
+ROUTE SET-CONTROL option  =  ACTIVE-DISTANCE
+
+    Syntax:  ROUTE SET-CONTROL ACTIVE-DISTANCE active
+
+    where    'active' is the minimum required distance (in
+			 internal units) between the active areas on adjacent
+			 cells of a row.  The router uses this value to
+			 squeeze cells as close together as possible in the
+			 horizontal direction before routing.
+
+ROUTE SET-CONTROL option  =  DEFAULT
+
+    Syntax:  ROUTE SET-CONTROL DEFAULT
+
+             Sets all the control parameters to a default setup.
+			 This setup is currently correct for the NCMOS3
+			 technology from Northern Telecom.  The values are:
+
+                 NO-VERBOSE
+                 FEED-THROUGH-SIZE    =  1600
+                 PORT-X-MIN_DISTANCE  =  1600
+                 FUZZY-WINDOW-LIMIT   =  6400
+                 ACTIVE-DISTANCE      =  500
+
+ROUTE SHOW-CONTROL:  Show the various control parameters used by
+					 the router.
+
+    Syntax:  ROUTE SHOW-CONTROL
+
+    Output:  The control parameters displayed are:
+
+                 (1) Verbose flag -
+                         TRUE if information displayed during
+						 routing is detailed, else FALSE.
+                 (2) Feed Through Size -
+                         Size in internal units of inserted feed
+						 throughs.
+                 (3) Port X Minimum Distance -
+                         Minimum distance (in internal units)
+						 required between adjacent connected
+						 ports.
+                 (4) Fuzzy Window Limit -
+                         Increased window size for searching for
+						 a port which can be used as a feed
+						 through (in internal units).
+                 (5) Minimum active Distance -
+                         Minimum distance (in internal units)
+						 required between the active regions of
+						 adjacent cells.
+!SET
+SET:  Set one of the various elements of the QUISC database.
+
+    Syntax:  SET option
+
+    where    'option' is the particular database element.
+
+SET LEAF-CELL-NUMBERS:  Set the numbers tagged to leaf cells
+						which are used by QUISC during placement
+						and routing.
+
+    Syntax:  SET LEAF-CELL-NUMBERS cell {option}
+
+    where    'cell' is the name of the leaf cell in the cell
+			 library. 'option' is one or more of the following:
+
+                 TOP-ACTIVE     distance
+                 BOTTOM-ACTIVE  distance
+                 LEFT-ACTIVE    distance
+                 RIGHT-ACTIVE   distance
+
+                 where 'distance' is the distance in internal
+				 units from the associated outside edge of the
+				 cell to any elements such as metal or field.
+				 Note these numbers exists for those layout tools
+				 whose created cells may appear larger
+                 than necessary (e.g. due to P-wells or guards).
+
+SET NODE-NAME:  Set the name of an extracted electrical node for
+				future reference.
+
+    Syntax:  SET NODE-NAME instance port name
+
+    where    'instance' is one instance the node goes to in the
+			 current cell.
+             'port' is the name of the port on the instance
+			 attached to the node.
+             'name' is the name to give the node.
+
+    Note:    Exported nodes are automatically given the name of
+			 the exported port.  The power node is called "power"
+			 and the ground node "ground".  The extracted nodes
+			 are created by the EXTRACT command.
+                 The SET NODE-NAME command is useful to identify
+			 particular nodes when generating a ALS simulation
+			 file or running the VERIFY command.
+            
+SET OUTPUT-DEVICE:  Set the output device to a log file.
+
+    Syntax:  SET OUTPUT-DEVICE file_name
+
+    where    'file_name' is the name of the file to open as a log
+			 file. Note that all regular output from QUISC will
+			 be written to the file only but prompts and error
+			 messages will still appear on the terminal.
+             If file_name is omitted, any previously openned log
+			 file is closed and output is routed to the terminal.
+
+SET PORT-DIRECTION:  Set the directions that a port on a leaf
+					 cell can be attached to.
+
+    Syntax:  SET PORT-DIRECTION cell_name port_name U|D|R|L
+
+    where    'cell_name' is the name of the leaf cell.
+             'port_name' is the name of the port on the leaf cell.
+             'U' represents connection upwards (from top).
+             'D' represents connection downwards (from bottom).
+             'R' represents connection from right side.
+             'L' represents connection from left side.
+
+    Note:    Multiple directions can be given in one command and
+			 order is not significant.
+!SELECT
+SELECT:  Set one of the complex cells as current.
+
+    Syntax:  SELECT cell_name
+
+    where    'cell_name' is the name of the complex cell to be
+			 selected. The cell must be selected before placement
+			 and routing can take place.  Note that the last
+			 created complex cell is automatically selected as
+			 current.
+!SHOW
+SHOW:  Show various elements of the QUISC database.
+
+    Syntax:  SHOW option
+
+    where  'option' is the particular database item(s).
+
+SHOW CELLS:  Show the complex cells in the QUISC database.
+
+    Syntax:  SHOW CELLS
+
+    Note:  The currently selected cell is indicated by an arrow.
+
+SHOW INSTANCES:  Show the instances within a complex cell.
+
+    Syntax:  SHOW INSTANCES [cell [ALL]]
+
+    where  'cell' is the optional name of a complex cell.  If
+		   "cell" is not specified, the currently selected cell
+		   is used.  if 'cell' is specified, an additional
+		   parameter 'ALL' can be given which lists special
+		   instances.  Otherwise only instances of leaf or
+		   complex cells are shown.
+
+    Output:  inst_name    TYPE = inst_type
+
+    where  'inst_name' is the name of the instance.
+           'inst_type' is the complex or leaf cell of this
+		   instance.
+
+SHOW NODES:  Show the electrically extracted nodes for the
+			 currently selected complex cell.
+
+    Syntax:  SHOW NODES
+
+    Output:  NODE number name:
+                 {inst_name    port_name}
+
+    where    'number' is the number of the node.
+             'name' is the name of the node.
+             'inst_name' is the name of the instance.
+             'port_name' is the name of the port on the instance.
+
+SHOW NODES output parameter = 'number'
+
+    'number' is a unique number of the electrical node at the
+	current level of the hierarchy.  Node number 0 is reserved
+	for GROUND and Node number 1 is reserved for POWER.  The rest
+	of the numbers are assigned arbitrarily.
+
+SHOW NODES output parameter = 'name'
+
+    'name' is a alphanumeric name for the node.  The ground node
+	is automatically given the name 'ground' and the power node
+	the name 'power'.  Nodes which are exported at the current
+	level are given the name of the exported port.  All other
+	nodes are given a name of the form:
+        'nXXX'    where XXX is a unique number.
+
+SHOW LEAF-CELL-NUMBERS:  Show numbers tagged to leaf cells which
+						 are used by QUISC during placement and
+						 routing.
+
+    Syntax:  SHOW LEAF-CELL-NUMBERS name
+
+    where    'name' is the name of a leaf cell in the current
+			 library. The current numbers are:
+
+                 - distance from top edge to active region.
+                 - distance from bottom edge to active region.
+                 - distance from left edge to active region.
+                 - distance from right edge to active region.
+
+SHOW PLACEMENT:  Show the resulting placement of cells in a
+				 complex cell after placement.
+
+    Syntax:  SHOW PLACEMENT [cell]
+
+    where    'cell' is the name of the complex cell.  If no cell
+             name is specified, the currently selected cell is
+			 used.
+
+    Output:  ROW #number, SIZE xxx:
+                 {xpos    cell}
+
+    where    'number' is the number of the row.  The bottom row
+			 is number zero and the increment as you go upward.
+             'xxx' is the size of the row (length) in internal
+			 units.
+             'xpos' is the position of the left corner of the
+			 cell in the row in internal units.
+             'cell' is the name of the leaf cell at this position.
+
+SHOW PORTS:  Show the ports of a complex or leaf cell.
+
+    Syntax:  SHOW PORTS [cell]
+
+    where    'cell' is the name of the complex or leaf cell whose
+             ports you wish to see.  If 'cell' is not specified,
+             the ports of the currently selected complex cell are
+             displayed.
+
+    Output:  port    type    direction
+
+    where    'port' is the name of the port.
+             'type' is the type of the port (input, output, power,
+             or ground).
+             'direction' is the directions that the port can be
+             attached to (up, down, left, and/or right).
+
+SHOW ROUTING:  Show the routing channels and tracks created by
+               the QUISC Routing Module.
+
+    Syntax:  SHOW ROUTING [cell]
+
+    where    'cell' is the name of the complex cell for which
+             you want to see the created routing for.  If 'cell'
+             is not specified, the routing for the currently
+             selected complex cell is displayed.
+
+    Output:  { CHANNEL #chan_num:
+                 { TRACK #track_num:
+                     { Node #node_num - (leftx, rightx)
+                         { PORT AT (row_num, xpos) - inst port }
+                     }
+                 }
+             }
+
+    where    'chan_num' is the number of the routing channel.
+			 Number zero is the bottom channel (below row #0) and
+			 the number increases as you go up.
+             'track_num' is the number of the track in the channel.
+             Number zero is the top track in the channel and
+			 subsequent tracks are beneath.
+             'node_num' is the number of the electrically unique
+			 node in the track.
+             'leftx' is the leftmost position of the node.
+             'rightx' is the rightmost position of the node.
+             'row_num' is the number of the row the instance being
+             connected to is in.
+             'xpos' is the X position of the port being connected
+			 to.
+             'inst' is the name of the instance being connected
+			 to.
+             'port' is the name of the port on the instance.
+!SYSTEM
+SYSTEM:  Execute a system command.
+
+    Syntax:  SYSTEM [command {parameters}]
+
+    where   'command' is the system command to be executed.
+            'parameters' is an optional list of parameters passed
+			onto the system command.
+
+    Note:   If no command is given, a system shell (spawned
+			process) is created which allows multiple commands to
+			be given.
+!SIMULATION
+SIMULATION:  Set, display, or generate simulation information for
+			 both complex cells and leaf cells.
+
+    Syntax:  SIMULATION SET cell_name
+             SIMULATION SHOW cell_name
+             SIMULATION WRITE cell_name [file_name]
+             SIMULATION FORMAT type
+
+    where    'cell_name' is the name of the complex or leaf cell.
+             'file_name' is an optional name to call the generated 
+             simulation file.  If file_name is not specified, the
+			 generated file has the name 'cell_name'.NET.
+             'type' is either ALS or SILOS
+
+    Note:    Only complex cells may be specified in SIMULATION
+			 WRITE command. The simulation information for leaf
+			 cells is tagged to the cells and is written with the
+			 cells when they are saved in a library.
+!VERIFY
+VERIFY:  Verify the cells constructed in the QUISC database.
+
+    Syntax:  VERIFY
+
+    This command checks all the cells created in the QUISC
+	database for the following error conditions:
+
+        (1) Power shorted to ground.
+        (2) More than one output driving the same node.
+        (3) Nothing driving a node.
+        (4) Two or more nodes with the same name.
+
+    If an error conditions is found, a warning message giving the
+    name of the cell, the error condition, and the node name is
+	printed.

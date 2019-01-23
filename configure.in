@@ -1,0 +1,64 @@
+dnl Electric(tm) VLSI Design System
+dnl
+dnl File: configure.in
+dnl Written by: Steven M. Rubin, Static Free Software
+dnl
+dnl Copyright (c) 2000-1 Static Free Software.
+dnl
+dnl Electric(tm) is free software; you can redistribute it and/or modify
+dnl it under the terms of the GNU General Public License as published by
+dnl the Free Software Foundation; either version 2 of the License, or
+dnl (at your option) any later version.
+dnl
+dnl This program is distributed in the hope that it will be useful, but
+dnl WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+dnl implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+dnl Process this file with autoconf to produce a configure script
+AC_INIT(src/cons/conlay.c)
+AC_CONFIG_HEADER(src/include/defines.h:src/include/defines.h.in)
+dnl AM_INIT_AUTOMAKE(electric, 6.5)
+dnl AM_PROG_LIBTOOL
+
+dnl Check C compiler
+AC_PROG_CXX
+AC_PROG_GCC_TRADITIONAL
+
+dnl Checks for X stuff
+AC_PATH_XTRA
+AC_CHECK_LIB(Xmu,XmuCompareISOLatin1,XMULIB=-lXmu,XMULIB=,$X_LIBS $X_PRE_LIBS -lXaw -lXt -lXmu -lX11 $X_EXTRA_LIBS)
+AC_CHECK_LIB(Xext,XShmAttach,XEXTLIB="-lXext",XEXTLIB=,$X_LIBS -lX11)
+AC_CHECK_LIB(Xp, XpStartPage, XPLIB="-lXp",XPLIB=,$X_LIBS $XEXTLIB -lX11)
+
+dnl Checks for header files
+AC_HEADER_DIRENT
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS(db.h fcntl.h stdint.h inttypes.h sys/int_types.h locale.h sgtty.h string.h strings.h sys/time.h sys/timeb.h termios.h termio.h unistd.h Xm.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics
+AC_C_CONST
+AC_HEADER_TIME
+AC_STRUCT_TM
+
+dnl Checks for library functions
+AC_FUNC_VFORK
+AC_TYPE_SIGNAL
+AC_FUNC_VPRINTF
+ACX_POSIX_READDIR_R
+AC_CHECK_FUNCS(ftime getcwd gethostid getpagesize gettimeofday getwd qsort scandir setlocale strstr strchr valloc vsnprintf)
+
+PTHREAD_LIBS=-lpthread
+ACX_PTHREAD()
+
+dnl Figure out how to reference 64-bit unsigned integers
+AC_CHECK_TYPE(u_int64_t, long long)
+AC_CHECK_TYPE(uint64_t, long long)
+
+AC_SUBST(x_includes)
+AC_SUBST(x_libraries)
+AC_SUBST(XMULIB)
+AC_SUBST(XPLIB)
+AC_SUBST(XEXTLIB)
+
+AC_OUTPUT(Makefile)

@@ -1,0 +1,194 @@
+Maximum text width to fit in dialog:
+=================================================================
+
+!Mouse Usage
+
+The Main and Extension cursors can be moved by selecting and
+dragging them.  Specific input vectors can be selected by
+clicking on their name.  Once selected, special keys can be
+used to set signals.
+
+!Keyboard Usage
+
+Each command that refers to a signal applies to the one that
+is currently selected, and all actions occur at the time
+indicated by the main cursor.
+
+   l   Set signal low (gate strength)
+   L   Set signal low (node strength, weak)
+  ^L   Set signal low (power strength, strong)
+   h   Set signal high (gate strength)
+   H   Set signal high (node strength, weak)
+  ^H   Set signal high (power strength, strong)
+   x   Set signal undefined (gate strength)
+   X   Set signal undefined (node strength, weak)
+  ^X   Set signal undefined (power strength, strong)
+
+   c   Set signal to be a clock
+   e   Delete all vectors on signal
+   k   Show signal in other windows
+   i   Print information about signal
+
+   a   Add signal to simulation window
+   r   Remove signal from the window
+   s   Save snapshot of simulation window in database
+   q   Terminate this window
+   ?   Display this help message
+
+You may also use standard menu commands to zoom and pan the
+window.
+
+!Menu Usage
+
+The following commands from the Windows menu will affect the
+simulation window: Up and Down will shift the signals that are
+visible; Left and Right will shift the time scale; Zoom In and
+Zoom Out will halve or double the time range; and Focus on
+Highlighted will narrow the time range to that between the Main
+and Extension cursors.
+
+!Clock Command
+
+CLOCK     Generate repetitive waveforms (clocks)
+
+Format:
+CLOCK <node name> PERIOD <period (in secs)>
+                  FREQUENCY <freq (in Hz)>
+
+This command creates a repetitive set of input vectors.  A 50/50
+duty cycle clock can be created by declaring the period or
+frequency of the waveform.
+
+!Erase Command
+
+ERASE     Clear simulator state
+
+This command clears the state and vectors in the simulator.
+
+!Go Command
+
+GO   Run simulation until time limit reached
+
+Format:
+GO <time (in secs)>
+
+This command is used to initiate a simulation run.  A maximum
+time limit must be specified.
+
+e.g. GO 500E-9
+     Run simulation until time=500 ns.
+
+!Level Command
+
+LEVEL     Change display channels to specified level of
+hierarchy.
+
+Format:
+LEVEL UP
+      SET <instance path name>
+
+The hierarchical structure of the database can be traversed with
+this command.  A path name to the desired level must be
+specified by using absolute or relative address form the current
+level.  The simulator updates the display with traces that
+correspond to the new level of hierarchy.
+
+LEVEL UP change the display channels to the parent level of 
+hierarchy.
+LEVEL SET change the display channels to the specified level.
+The level is specified by the instance path name.
+
+!Print Command
+
+PRINT     Display simulation information
+
+Format:
+PRINT DISPLAY
+      INSTANCES
+      NETLIST
+      SIZE
+      STATE <node_name>
+      TREE
+      VECTOR
+      XREF
+
+This command can be used to display simulator database
+information.
+
+The DISPLAY option prints out the graphics display screen
+    status.
+The INSTANCES option prints out instances called by current
+    level of hierarchy.
+The NETLIST option prints out netlist for flattened logic
+    network.
+The SIZE option prints out number of primitives and nodes in 
+    database.
+The STATE option prints out current state of specified node.
+The TREE option generate complete cross reference table from 
+    current level.
+The VECTOR option prints out list of all input vectors.
+The XREF option prints out cross reference table for current
+    level.
+
+!Seed Command
+
+SEED      Control operation of random number generator
+
+Format:
+SEED NO-RESET
+     RESET
+
+This command turns on/off an option that reseeds the random
+number generating function at the beginning of each simulation
+run.  This reseeding action resets the sequence of random
+numbers to a known starting point.  Simulation models that use
+probabilistic timing attributes do not generate repeatable
+results if the random number generator is not reseeded at the
+beginning of each run.
+
+!Set Command
+
+SET       Set node to desired state at specified time
+
+Format:
+SET <node_name> <state> <strength> <time>
+
+The logic state/strength of any node in the network can be set
+with this command.  A node can be specified with absolute or
+relative node addressing schemes.
+
+!Trace Command
+
+TRACE     Turn trace buffer on/off
+
+Format:
+TRACE ON
+      OFF
+
+This command turns on/off the operation of the trace buffer.
+If the trace buffer is disabled the simulation algorithm will
+run faster.  For example, queuing systems do not require timing
+diagram information after internal protocols have been debugged.
+
+!Vector Command
+
+VECTOR    Control simulation test vectors
+
+Format:
+VECTOR DELETE <node name> ALL
+                          TIME <time>
+       LOAD <vector file name>
+       SAVE <vector file name>
+       NEW
+
+A list of input vectors, including clocks, can be saved/loaded
+to/from a disk file with the SAVE/LOAD option.
+
+VECTOR NEW deletes all the vectors from the input vector list.
+It clears the input vectors for all the channels so that the
+designer can start with a new set.
+
+VECTOR DELETE removes vectors from the input vector list for
+a particular node.  The ALL option removes all input vector
+associated with a node.  The TIME option removes a single
+vector from the input list at the specified time.

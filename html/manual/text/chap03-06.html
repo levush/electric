@@ -1,0 +1,175 @@
+<HTML><HEAD><TITLE>Using Electric 3-6: Exports</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-06"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-05.html#chap03-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-6: Exports</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap03-07.html#chap03-07"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<H3>Export Creation</H3>
+<P>
+All nodes in Electric have connection sites, called <I>ports</I>,
+which indicate where wires may be attached.
+The primitive nodes have predefined ports,
+but ports on cell instances must be defined by the user.
+To do this, simply select a port on a node inside the cell,
+and turn it into an <I>export</I>,
+which makes it available on all instances of the current cell.
+Although most ports are on nodes along the edge of the cell,
+Electric makes no port location restrictions,
+so they may appear anywhere.
+<P>
+To see the location of all ports on the selected nodes, use the <B>Show Ports on Node</B>
+command of the <B>Export</B> menu.
+To see all exports that have been defined in the current cell,
+use the <B>Show Exports</B> command of the <B>Export</B> menu.
+The <B>List Exports</B> command gives the same information, but in text form and the <B>Summarize Exports</B>
+command gives a text list that is reduced where sensible.
+<P>
+<TABLE><TR><TD>
+To create an export,
+select a port on a node and use the <B>Create Export...</B> command of the <B>Export</B> menu.
+The resulting dialog requests an export name and some characteristics.
+</TD><TD><CENTER><IMG SRC="../images/chap03-02.png" ALT="Figure 3.2"></CENTER></TD></TR></TABLE>
+<P>
+All export names on a cell must be unique;
+if a nonunique name is given, it is modified to be unique.
+This modification involves adding "_1", "_2", etc. to the end of scalar export names,
+or changing the index (from [1] to [2], etc.) for indexed export names.
+Like cell names, export names may not contain spaces,
+tabs, or unprintable characters.
+Although no case distinction is made between uppercase and lowercase characters,
+the original case usage is preserved.
+<P>
+Behavioral characteristics can be associated with an export by selecting the appropriate field in the export creation dialog.
+These behavior characteristics are stored with the export and used primarily by simulators.
+The characteristics include the following:
+<UL>
+<LI>Directional: "input", "output", and "bidirectional".
+<LI>Supply: "power" and "ground".
+<LI>Clocking: "clock" (a generic clock export) and "clock phase 1" through "clock phase 6".
+<LI>Reference: "reference input", "reference output", and "reference base".
+In addition, reference exports carry an associated export name that is used by the CIF netlister.
+</UL>
+<P>
+The "Always drawn" check box requests that the export label should always appear,
+regardless of the connection or expansion of its cell.
+Typically, an export label on an instance of a cell is not displayed when that port is connected to an arc or when the instance is expanded.
+This check box overrides the suppression.
+<P>
+Another special check box, "Body only," requests that this export not appear when an icon is generated for the cell.
+This is useful for power and ground exports or duplicate connection sites on a single network.
+<P>
+There are three special exporting commands that are primarily used in array-based layout.
+If a cell instance is replicated many times and the instances are wired together,
+then ports on the edge of the array are the only ones that are not wired.
+These ports define the connections for the next level of hierarchy.
+What you want to do is to create exports for all unwired ports on all cell instances.
+To do this, use the <B>Re-Export Everything</B> command of the <B>Export</B> menu,
+which generates unique names as it exports all unwired ports on cell instances.
+To do this same function, but only on the currently highlighted nodes, use <B>Re-Export Highlighted</B>.
+To do this same function, but only for Power and Ground exports, use <B>Re-Export Power and Ground</B>.
+Note that ports on primitive nodes are not exported with these commands.
+See <A HREF="chap06-04.html#chap06-04">Section 6-4</A> for more about arrays,
+and see <A HREF="chap09-05.html#chap09-05">Section 9-5</A> for more on automatic wiring.
+<P>
+Another special case in export creation is the <B>Add Export from Library...</B> command,
+which copies exports from another library to the current one.
+The other library is examined for cells whose names match ones in the current library.
+When a cell is found in the other library,
+all of its exports are copied to the cell in the current library
+(if they don't already exist) and placed in the same location.
+This command is useful in managing standard cell libraries that are imported from other file formats
+(see <A HREF="chap03-09.html#chap03-09">Section 3-9</A> on Standard Cell Libraries).
+Because some formats contain geometry and others contain connectivity,
+this command is needed to put them together.
+<P>
+<!-- NEED 5in -->
+<H3>Export Information</H3>
+<P>
+Exports are selected by clicking on their text,
+or by clicking on the node from which they are exported.
+If a very dense design makes export selection hard,
+you can choose from a list by using the Cell Explorer's contents view (see <A HREF="chap03-07.html#chap03-07">Section 3-7</A>)
+or by using the <B>Select Export...</B>
+subcommand of the <B>Selection</B> command of the <B>Edit</B> menu.
+<P>
+<TABLE><TR><TD>
+Once a port has been exported,
+its characteristics can be modified by selecting the export name and using the <B>Get Info</B>
+command of the <B>Info</B> menu.
+You can change basic export information such as the name, characteristic, and reference name (if applicable).
+You can also change the appearance of the export by editing the size, font, style, placement, and rotation of the name.
+See <A HREF="chap06-08.html#chap06-08">Section 6-8</A> for more about text appearance.
+</TD><TD><CENTER><IMG SRC="../images/chap03-03.png" ALT="Figure 3.3"></CENTER></TD></TR></TABLE>
+<P>
+Buttons at the bottom of the Export Get Info dialog allow you to examine related objects.
+The "See Node" button shows the node on which this export resides,
+and the "Node Info" button brings up a <B>Get Info</B> dialog for that node.
+The "Attributes" button brings up an Attributes dialog for the export
+(see <A HREF="chap06-08.html#chap06-08">Section 6-8</A> for more on Attributes).
+<P>
+You can change the characteristics of many exports by selecting them and setting the "For all selected exports:"
+popup in the <B>Get Info</B> dialog of the <B>Info</B> menu.
+You can change the name of exports by using the <B>Rename Export...</B> command of the <B>Export</B> menu.
+<P>
+<TABLE><TR><TD VALIGN=TOP>
+Ports and exports can be displayed on the screen in many different ways.
+The <B>Port and Export Options...</B> command of the <B>Export</B> menu provides three options:
+"Full Export Names" shows full text names,
+"Short Export Names" shows export names only up to the first nonalphabetic character,
+and "Exports as Crosses" shows crosses at the locations.
+</TD><TD><CENTER><IMG SRC="../images/chap03-09.png" ALT="Figure 3.9"></CENTER></TD></TR></TABLE>
+<P>
+With short names, the exports "Power-left" and "Power-1" are both written as "Power,"
+which allows multiple exports with the same functionality but different names to be displayed as if they have the same name.
+To remove port display completely, use the <B>Layer Visibility</B> command of the <B>Windows</B> menu.
+<P>
+<H3>Export Deletion and Movement</H3>
+<P>
+You can delete an export simply by selecting its name and typing the delete key.
+You can also use the <B>Delete Export</B> command of the <B>Export</B> menu.
+<P>
+To remove many exports at once,
+the <B>Delete All Export on Highlighted</B> command removes all exports on all highlighted nodes.
+Also, the <B>Delete All Export in Area</B> command removes only those exports that are in the selected area
+(use the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I>
+button to define a precise area).
+When an export is deleted, all arcs connected to that port on instances of the current cell
+(higher up the hierarchy) are also deleted.
+<P>
+To move export text, simply select it and drag it.
+The location of the text has no effect on the location of the export:
+moving the text is only for improvement of the display.
+However, if you check "Move node with export name" in the <B>Port and Export Options...</B> dialog,
+then moving an export name will cause the node (and the export) to move as well.
+<P>
+It is sometimes desirable to keep an export but to transfer it to another node.
+If a cell is in use higher in the hierarchy,
+unexporting and then reexporting deletes all existing connections.
+Instead, the <B>Move Export</B> command of the <B>Export</B> menu can be used.
+Before using this command,
+two nodes and their ports must be highlighted with
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I>
+button and
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> button.
+The export is moved from the first node to the second node.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-05.html#chap03-05"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-05.html#chap03-05">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap03-07.html#chap03-07">Next</A></TD>
+<TD><A HREF="chap03-07.html#chap03-07"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

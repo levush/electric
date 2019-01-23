@@ -1,0 +1,243 @@
+<HTML><HEAD><TITLE>Using Electric 7-3: I/O Specifications</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap07-03"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 7: DESIGN ENVIRONMENTS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap07-02.html#chap07-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>7-3: I/O Specifications</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap07-04.html#chap07-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Electric is able to read and write circuits in a number of different formats.
+This is done with the <B>Import</B> and the <B>Export</B> commands of the <B>File</B> menu
+(see <A HREF="chap03-09.html#chap03-09">Section 3-9</A>).
+To properly control translation, the <B>IO Options</B>
+command has many subcommands for the different file types.
+<P>
+Unfortunately, many of these formats are pure geometry with no information about the circuit connections.
+When read, the input formatter creates pure-layer nodes to describe the geometry.
+This means that transistors, contacts, and other multi-layer nodes are not constructed properly.
+Although the cell appears visually correct,
+and can be used to export the same type of file,
+it cannot be analyzed at a circuit level.
+<P>
+A partial solution to this problem exists now.
+The <B>Node Extract</B> subcommand of the <B>Network</B> command of the <B>Tools</B>
+menu will replace the pure-layer nodes in the current cell with connected nodes and arcs.
+It isn't guaranteed to work in all situations, and it doesn't recognize transistors at all.
+However, it starts the conversion process (which must be completed by hand).
+Also, the code is available and some enterprising programmer may want to finish (or rewrite) it.
+<P>
+<H3>CIF Control</H3>
+<P>
+CIF options are controlled with the <B>CIF Options...</B> subcommand of the <B>IO Options</B>
+command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-10.png" ALT="Figure 7.10"></CENTER>
+<P>
+This dialog controls the conversion between layers in Electric and layers in the CIF file.
+By clicking on an Electric layer, you can type a new CIF layer into the dialog.
+<P>
+By default, CIF output writes the entire hierarchy below the current cell.
+If you check the "Output Mimics Display" item,
+cell instances that are unexpanded will be represented as an outline in the CIF file.
+This is useful when the CIF output is intended for hardcopy display,
+and only the screen contents is desired.
+To revert to the default state, uncheck the item.
+<P>
+Another option is whether or not to merge adjoining geometry.
+This is an issue because of the duplication and overlap that occurs wherever arcs and nodes meet.
+The default action is to write each node and arc individually.
+This makes the file larger because of redundant box information,
+however it is faster to generate and uses simpler constructs.
+If you check the "Output Merges Boxes" item,
+all connecting regions on the same layer are merged into one complex polygon.
+This requires more processing, produces a smaller file, and generates more complex constructs.
+<P>
+Another option is whether or not to instantiate the circuit in the CIF.
+By default, the currently displayed cell becomes the top level of the CIF file,
+and is instantiated at the end of the CIF.
+This causes the CIF file to display the current cell.
+If the CIF file is to be used as a library, with no current cell,
+then uncheck the "Output Instantiates Top Level" checkbox, and there will be no invocation of the current cell.
+<P>
+The "Normalize Coordinates" option causes the coordinate system of each CIF cell to be centered at zero.
+<P>
+When reading CIF files, the CIF "wire" statements are assumed to have rounded geometry at the ends and corners.
+If you check the "Input Squares Wires" item,
+CIF input assumes that wire ends are square and extend by half of their width.
+<P>
+You can request that resolution errors be checked during CIF output.
+In addition, by selecting "Show Resolution Errors",
+the errors are can be reviewed, one at a time, after CIF output is done.
+The "Output resolution" field is the minimum coordinate value that can be safely written in CIF
+(due to CIF's use of the centimicron as the smallest unit).
+All geometry of that size or less will be flagged during CIF output.
+For example, current MOSIS rules require that no boundaries be quarter-lambda or less,
+so a value of .25 in this field will detect such violations.
+<P>
+<!-- NEED 5in -->
+<H3>GDS Control</H3>
+<P>
+GDS options are controlled with the <B>GDS Options...</B> subcommand of the <B>IO Options</B>
+command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-12.png" ALT="Figure 7.12"></CENTER>
+<P>
+In GDS files, there are no names for each layer, just numbers.
+It is important that Electric know the meaning of each number so that it can properly read and write GDS files.
+This dialog lets you edit those GDS layer numbers and assign them to different Electric layers.
+<P>
+The list on the left shows all of the Electric layers.
+By clicking on a layer name, its GDS layer numbers are shown in the top-right and can be edited.
+You can place multiple GDS layer numbers in the field, separated by commas.
+When you do this, all of those numbers will be accepted when reading GDS
+(but only the first will be used when writing GDS).
+In addition to GDS layer numbers to use for layout, there are also two other types of GDS layer numbers:
+a <I>pin</I> layer (for exports) and a <I>text</I> layer (for export names).
+<P>
+These dialog elements apply to reading GDS:
+<UL>
+<LI>
+"Input Includes Text".
+Text annotations in the GDS file can often clutter the display,
+so they are ignored during input.
+If you check this item, annotation text will be read and displayed.
+<LI>
+"Input Expands Cells".
+This controls whether cell instances are expanded or not in the Electric circuit.
+By default, cell instances are not expanded (they appear as a simple box).
+If you check this item,
+cells are expanded so that their contents are displayed.
+Expansion of cells can always be changed after reading GDS by using the subcommands of the <B>Expand Cell Instances</B>
+and <B>Unexpand Cell Instances</B> commands of the <B>Cells</B> menu.
+<LI>
+"Input Instantiates Arrays".
+This controls whether or not arrays in the GDS file are instantiated.
+By default, arrays are instantiated fully, but this can consume excessive amounts of memory if there are large arrays.
+If you uncheck this item, only the upper-left and lower-right instance are actually placed.
+<LI>
+"Input Ignores Unknown Layers".
+This controls whether unknown layers in the GDS file will be ignored, or placed in the circuit.
+By default, unknown layers appear as DRC-Nodes
+(special nodes used to indicate DRC errors, which appear as orange squares).
+By checking this item, the unknown layers are simply ignored.
+</UL>
+<P>
+These dialog elements apply to writing GDS:
+<UL>
+<LI>
+"Output Merges Boxes".
+This controls the merging of adjoining geometry.
+This is an issue because of the duplication and overlap that occurs wherever arcs and nodes meet.
+The default action is to write each node and arc individually.
+This makes the file larger because of redundant box information,
+however it is faster to generate and uses simpler constructs.
+If you check this item,
+all connecting regions on the same layer are merged into one complex polygon.
+This requires more processing, produces a smaller file, and generates more complex constructs.
+<LI>
+"Output Writes Export Pins".
+This controls whether pins are written to the GDS file for each export.
+If checked, and there is a valid pin layer, then it is written.
+<LI>
+"Output All Upper Case".
+This controls whether the GDS file uses all upper case.
+The default is to mix upper and lower case, but some systems insist on upper-case GDS.
+<LI>
+"Output default text layer".
+This is the layer number to use when writing text.
+When pins are being written, and there is a text layer number associated with the appropriate Electric layer,
+then that layer number is used instead of this default number.
+<LI>
+"Output Arc Conversion".
+GDS II format is only able to handle straight lines, not curves.
+If your design has any curved geometry,
+the GDS II output will approximate these curves with straight line segments.
+To control how this approximation is handled, there are two factors:
+the maximum <I>angle</I> and the maximum <I>sag</I>.
+The maximum angle is the number of degrees of curvature between line segments
+(so a quarter-circle curve, which is 90 degrees,
+will be broken into 10 lines if the maximum angle is 9 degrees).
+The maximum sag is the maximum distance between the actual curve and the center of the approximating line segment.
+No line segment will be allowed to sag more than this distance.
+These two values can be entered in the "Maximum arc angle" and "Maximum arc sag" areas.
+</UL>
+<P>
+<H3>EDIF Control</H3>
+<P>
+EDIF options are controlled with the <B>EDIF Options...</B>
+subcommand of the <B>IO Options</B> command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-13.png" ALT="Figure 7.13"></CENTER>
+<P>
+This dialog controls whether EDIF output writes schematic or netlist views (the default is netlist).
+It also lets you set a scale factor for EDIF input.
+<P>
+<!-- NEED 2in -->
+<H3>DEF Control</H3>
+<P>
+DEF options are controlled with the <B>DEF Options...</B>
+subcommand of the <B>IO Options</B> command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-17.png" ALT="Figure 7.17"></CENTER>
+<P>
+This dialog controls whether DEF reads physical and/or logical information.
+<P>
+<H3>CDL Control</H3>
+<P>
+CDL options are controlled with the <B>CDL Options...</B>
+subcommand of the <B>IO Options</B> command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-21.png" ALT="Figure 7.21"></CENTER>
+<P>
+This dialog control the library name and path information that is written, and it lets you control
+the conversion of square-bracket characters.
+<P>
+<H3>DXF Control</H3>
+<P>
+DXF options are controlled with the <B>DXF Options...</B>
+subcommand of the <B>IO Options</B> command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-11.png" ALT="Figure 7.11"></CENTER>
+<P>
+This dialog controls the conversion between layers in Electric and layers in the DXF file.
+By clicking on an Electric layer, you can type a new DXF layer into the dialog.
+<P>
+By default, Electric flattens DXF input,
+removing levels of hierarchy and creating a single cell with the DXF artwork.
+By unchecking the "Input flattens hierarchy",
+Electric will preserve the structure of the DXF file.
+<P>
+If a layer name in the DXF file is not found in the list that you setup in Electric, it will be ignored.
+If you check "Input reads all layers", then all layers are read into Electric,
+regardless of whether the layer names are known.
+<P>
+To control scaling, you can change the meaning of units in the DXF file.
+The default unit is "Millimeters", which means that a value of 5 in the DXF file becomes 5 millimeters in Electric.
+<P>
+<H3>SUE Control</H3>
+<P>
+SUE input is controlled with the <B>SUE Options...</B>
+subcommand of the <B>IO Options</B> command of the <B>File</B> menu.
+<P>
+<CENTER><IMG SRC="../images/chap07-23.png" ALT="Figure 7.23"></CENTER>
+<P>
+This dialog controls whether transistors will appears in a standard 3-terminal configuration or in a 4-port configuration with a substrate connection.
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap07-02.html#chap07-02"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap07-02.html#chap07-02">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap07-04.html#chap07-04">Next</A></TD>
+<TD><A HREF="chap07-04.html#chap07-04"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

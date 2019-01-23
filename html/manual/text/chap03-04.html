@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>Using Electric 3-4: Examining Instances</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-04"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-03.html#chap03-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-4: Examining Instances</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap03-05.html#chap03-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+When instances are initially created, they are drawn as black boxes with nothing inside.
+This form of instance display is called <I>unexpanded</I>,
+as opposed to <I>expanded</I> display which shows the actual layout inside the instance.
+To expand an instance, select it and use the subcommands of the <B>Expand Cell Instances</B>
+command of the <B>Cells</B> menu.
+The <B>One Level Down</B> subcommand opens up the next closed level;
+the <B>All the Way</B> subcommand opens up all levels to the bottom;
+and the <B>Specified Amount...</B> lets you type a number of levels of hierarchy to expand.
+These commands expand all highlighted cells.
+If a highlighted cell is already expanded,
+this command expands any subcells inside of the instance, repeatedly down the hierarchy.
+<P>
+Once expanded,
+a cell instance will continue to be drawn with its contents shown until the subcommands of the <B>Unexpand Cell Instances</B>
+command are used.
+These commands return cell instances to their black-box form,
+starting with the deepest subcells that are expanded at the bottom of the hierarchy.
+The <B>One Level Up</B> subcommand closes up the bottommost expanded level;
+the <B>All the Way</B> subcommand closes all levels from the bottom;
+and the <B>Specified Amount...</B> lets you type a number of levels of hierarchy to close.
+<P>
+The expansion information can also be set or reset by using the <B>Get Info</B>
+command of the <B>Info</B> menu and clicking on the "Expanded" or "Unexpanded" buttons.
+<P>
+There are times when you want to see the layout inside of a cell instance, but only temporarily.
+The <B>Look Inside Highlighted</B> command of the <B>Cells</B> menu displays everything in the highlighted area,
+down through all hierarchical levels.
+This is a one-shot display that reverts to unexpanded form if the window is shifted, scaled, or redrawn.
+<P>
+There is a slight difference in specification between the <B>Expand Cell Instances</B>
+subcommands and the <B>Look Inside Highlighted</B> command.
+The <B>Expand Cell Instances</B> subcommands affect cell instances only,
+and thus any instances that are highlighted or in the highlighted area will be completely expanded.
+The <B>Look Inside Highlighted</B> command affects layout display in an area,
+so only those parts of instances that are inside of the highlighted area will be shown.
+Thus, the command <B>Look Inside Highlighted</B> is more precise in what it expands and can be used,
+in conjunction with the
+<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I>
+button, to show only a specific part of the circuit.
+<P>
+Examining cell instances can be quite time consuming,
+especially if you are looking at an entire chip, fully flattened.
+To avoid delays, Electric simplifies the display of cells when the scale grows too tiny.
+These tiny cells get "hashed-out" rather than fully drawn.
+See <A HREF="chap03-07.html#chap03-07">Section 3-7</A> for more information.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-03.html#chap03-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-03.html#chap03-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap03-05.html#chap03-05">Next</A></TD>
+<TD><A HREF="chap03-05.html#chap03-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

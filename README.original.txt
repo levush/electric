@@ -1,11 +1,3 @@
-# electric
-electric vlsi design tool. This is a fork of the "older" C version 7.00 by www.staticfreesoft.com, as java is not suitable for performant a VLSI tool.
-quote from original readme: "To add a Java interpreter" 
-Interpreter, you name it, lets compile and have executeable machine code...
-
-
-
-
 ---------------- This is Electric, Version 7.00 ----------------
 
 This README file contains installation instructions for all 3 of the platforms
@@ -106,6 +98,18 @@ Electric has the option of using TrueType fonts.  If you want this, follow these
   You can see a list of available fonts by setting this environment variable to an unknown name,
   in which case Electric will show all fonts in its error message.
 
+To add Java, follow these instructions:
+> Download the Java Development Kit (JDK) from http://java.sun.com.  Install it.
+  For the purposes of these instructions, assume that it is installed into
+        /usr/java/jdk
+  If you install it elsewhere, adjust these instructions accordingly.
+> After configuration, but before making Electric, edit the "Makefile" and
+  uncomment the lines near the top that enable Java.
+  Change the definition of LANGJAVA_DIR to point to the installed JDK location.
+> On Solaris, add this string to the environment variable LD_LIBRARY_PATH:
+        :/usr/java/jdk/jre/lib/sparc:/usr/java/jdk/jre/lib/sparc/classic:/usr/java/jdk/jre/lib/sparc/native_threads
+> On GNU/Linux, add this string to the environment variable LD_LIBRARY_PATH:
+        :/usr/java/jdk/jre/lib/i386:/usr/java/jdk/jre/lib/i386/classic:/usr/java/jdk/jre/lib/i386/native_threads
 > Be sure to export "LD_LIBRARY_PATH" if your shell requires it.
 
 To add the TCL interpreter, download ActiveTcl from "http://www.tcl.tk" and install it.
@@ -139,6 +143,13 @@ To add the TCL interpreter, follow these instructions:
 > Edit the appropriate "mac" include file in "src/include" (for example, "macsfsheaders.h")
   and uncomment the definition of "FORCETCL".
   
+To add a Java interpreter (System 10 only) follow these instructions:
+> Download Java from "http://java.sun.com" and install it.
+> If using Qt, edit "Makefile" and add Java.  Otherwise:
+  > In the compiler, add an include path to the installed Java "include" directory.
+  > Also in the compiler, add the appropriate Java library to the project.
+> Edit the appropriate "mac" include file in "src/include" (for example, "macsfsheaders.h")
+  and uncomment the definition of "FORCEJAVA".
 
 ---------------- Building (Windows):
 
@@ -153,6 +164,48 @@ Inside of the "Debug" directory, you will find the executable file "Electric".
 Move this file out of the "Debug" directory and place it in the top-level
 directory.  Double-click the "Electric" executable to run the system.
 
+To add the Java interpreter, follow these instructions:
+> Download the Java Development Kit (JDK) from http://java.sun.com.  Install it.
+  The standard location is "C:\Program Files\JavaSDK" (or whatever the version is), and this path
+  will be used here.  If you install it elsewhere, adjust these instructions accordingly.
+> Edit the environment variables in the "System" Control Panel.
+  On some systems, you click on the "Environment" tab; on others, click on the "Advanced"
+  tab and then click the "Environment Variables" button.
+  Under "System variables", select "Path" and in the "Value:" area,
+  add this string to the end:
+        ;C:\Program Files\JavaSDK\jre\bin\classic;C:\Program Files\JavaSDK\bin
+  On some newer versions of the Java Development Kit, you may also have to include this path:
+        ;<CODE>;C:\Program Files\JavaSDK\bin\client
+  On Windows 95 and Windows 98 systems, you may have to edit C:\AUTOEXE.BAT and append
+  this to the PATH variable.  You must restart your computer after making this change.
+> In Visual C++ 5.0 or 6.0, use the "Settings" command of the "Project" menu.  Select the
+  "C/C++" tab and the "Preprocessor" category.  In the "Preprocessor definitions"
+  area, add this to the end:
+          ,FORCEJAVA=1
+  In the "Additional include directories" area add this to the end:
+          ,C:\Program Files\JavaSDK\include,C:\Program Files\JavaSDK\include\win32
+  Select the "Link" tab and the "General" category.  In the "Object/library modules"
+  area, enter this:
+          jvm.lib
+  Select the "Link" tab and the "Input" category.  In the "Additional library path"
+  area, enter this:
+          C:\Program Files\JavaSDK\lib
+> In Visual Studio .NET, right-click on the "Electric" solution and choose "Properties".
+  Select "C/C++" on the left and choose the "General" category under it.
+  In the "Additional Include Directories" area, add this to the end:
+          ;C:\Program Files\JavaSDK\include,C:\Program Files\JavaSDK\include\win32
+  Next choose the "Preprocessor" category of "C/C++" and in the "Preprocessor Definitions"
+  area add this to the end:
+          ;FORCEJAVA=1
+  Select "Linker" on the left and choose the "General" category under it.
+  In the "Additional Library Directories" area, enter this:
+          ;C:\Program Files\JavaSDK\lib
+  Next choose the "Input" category of "Linker" and in the "Additional Dependencies" area
+  enter this:
+          jvm.lib
+> Once Java is installed, you must compile the ROM generator.  In a command window, change
+  directories to the "lib\java" directory and run the command:
+    javac romgen.java
 
 To add the TCL interpreter, follow these instructions:
 > Download ActiveTcl from "http://www.tcl.tk" and install it.

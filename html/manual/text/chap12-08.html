@@ -1,0 +1,337 @@
+<HTML><HEAD><TITLE>Using Electric 12-8: The Info Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-08"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-07.html#chap12-07"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-8: The Info Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-09.html#chap12-09"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-08.png" ALT="Figure 12.8"></CENTER>
+<P>
+This menu provides a collection of information gathering facilities.
+The most useful is <B>Get Info</B> which describes the currently highlighted object.
+Other informational commands exist to describe the circuit.
+<B>Help...</B> and <B>Tutorial</B> functions are available.
+Also, default node and arc creation information can be set.
+<P>
+<!-- NEED 5in -->
+<H3>Get Info <A HREF="chap02-04.html#chap02-04">[2-4]</A>&nbsp;&nbsp;
+<A HREF="chap06-10.html#chap06-10">[6-10]</A>&nbsp;&nbsp;
+<A HREF="chap02-05.html#chap02-05">[2-5]</A>&nbsp;&nbsp;
+<A HREF="chap05-03.html#chap05-03">[5-3]</A>&nbsp;&nbsp;
+<A HREF="chap03-06.html#chap03-06">[3-6]</A>&nbsp;&nbsp;
+<A HREF="chap06-08.html#chap06-08">[6-8]</A></H3>
+<P>
+	This command presents a dialog that shows information and allows modification of the currently highlighted node,
+	arc, export, or text.
+	<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	When a single node is highlighted, this command presents the dialog shown here.
+	This dialog is modeless and can remain on the screen while other editing is done.
+	It always shows information about the currently selected node.
+	The dialog can grow to include more information if the "More" button is clicked.
+	</TD><TD><CENTER><IMG SRC="../images/chap02-01.png" ALT="Figure 2.1"></CENTER></TD></TR></TABLE>
+	Primitive nodes can have their size altered.
+	The "Name" field is simply a documenting message that is displayed on the node.
+	If you uncheck the "Easy to Select" button, you will have to use the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-left  Windows:alt-left  Mac:opt-click">special select</A></I>
+	button to select it in the future.
+	<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	When a single arc is highlighted, this command presents the dialog shown here.
+	All of the options in the <B>Arc</B> menu may be set here.
+	The "Name" field defines a network name for this arc and all others electrically connected to it.
+	You can highlight the nodes on either end of the arc with the "See" buttons,
+	and get information about them with the "Info" buttons.
+	If you uncheck the "Easy to Select" button,
+	you will have to use the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-left  Windows:alt-left  Mac:opt-click">special select</A></I>
+	button to select it in the future.
+	The "Attributes" button lets you edit special attributes on the arc.
+	</TD><TD><CENTER><IMG SRC="../images/chap02-02.png" ALT="Figure 2.2"></CENTER></TD></TR></TABLE>
+	<P>
+	<!-- NEED 3in -->
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap02-12.png" ALT="Figure 2.12"></CENTER></TD><TD VALIGN=TOP>
+	When multiple objects are selected,
+	the dialog lists them and lets you do simple operations on all of them (position, size, width).
+	If two objects are highlighted with
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:left  Windows:left  Mac:click">selection</A></I>
+	and <I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:shift-left  Windows:shift-left  Mac:shift-click">toggle select</A></I> buttons,
+	this dialog also shows the distance between their centers.
+	A popup entry allows you to make the selected objects easy or hard to select
+	(see <A HREF="chap02-01.html#chap02-01">Section 2-1</A>).
+	</TD></TR></TABLE>
+	<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	When an export's name is highlighted, this command presents the dialog shown here.
+	The characteristics of the export can be set; the size,
+	font, style, and rotation of the export name can be set;
+	and the location of the export name relative to the export center can be set.
+	The "Attributes" button lets you edit special attributes on the export.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-03.png" ALT="Figure 3.3"></CENTER></TD></TR></TABLE>
+	<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap06-07.png" ALT="Figure 6.7"></CENTER></TD><TD VALIGN=TOP>
+	When special pieces of text are highlighted, this command presents a customized dialog for that value.
+	For example, when the resistance value on a resistor is selected, this dialog is used.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	When any other text is highlighted, this command presents the dialog shown here.
+	Many factors can be set, including the size, the location relative to the grab-point,
+	and whether to show the name of the attribute that holds this text.
+	</TD><TD><CENTER><IMG SRC="../images/chap06-06.png" ALT="Figure 6.6"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Attributes <A HREF="chap06-08.html#chap06-08">[6-8]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-50.png" ALT="Figure 12.50"></CENTER></TD><TD VALIGN=TOP>
+	The subcommands of this command control additional attributes which can be placed on objects.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Define...</B></TD><TD>
+		This command allows additional attributes to be placed onto parts of the circuit.
+		The five possible locations for attributes are selectable in the upper-left.
+		You can place attributes on (1) the current cell, (2) the currently selected node,
+		(3) exports on the current cell, (4) ports on the currently selected node,
+		and (5) the currently selected arc.
+		When you choose the object on which attributes are being set,
+		you will see a list of attributes in the lower-left.
+		If you have chosen port or export attributes,
+		a list of port/export names is shown in the upper-right.
+		<CENTER><IMG SRC="../images/chap06-18.png" ALT="Figure 6-18"></CENTER>
+		To create a new attribute, enter its name and value, and click "Create Attribute".
+		To modify an attribute, select it and make the appropriate change.
+		The "New Value" button changes the value, and the "Rename Attribute" button changes the ttribute name.
+		Other changes include the size (in absolute or relative units),
+		what is shown (whether the attribute name and/or value is displayed),
+		The offset of the text from the object to which it attaches,
+		the grab point of the text (how it attaches to the object),
+		and whether it is code that must be interpreted.
+		For cell and export attributes, you can check "Instances Inherit"
+		to make instances of these cells automatically inherit the attributes upon creation.
+		Inheritable attribute values can use "++" or "--" to automatically increment or decrement the inherited value
+		(for example, if an inherited attribute has the value "U12++"
+		then the instance will inherit the value "U12" and the prototype attribute will be modified to be "U13++").
+		The "Delete Attribute" button removes an attribute.
+		The "More" button presents a highly-advanced dialog for exploring the internals of the Electric database
+		(this dialog is not documented, and the button should not be used unless you know what you are doing).
+		The buttons in the upper-right control arraying of attributes from one port/export to others.
+		By selecting names and clicking "Add" or "Remove",
+		those port/exports are checked or unchecked in the upper-right list
+		(the "Add All" and "Remove All" control all names).
+		Finally, when a set of ports or exports has been selected,
+		you select an attribute and click "Make Array" to replicate that attribute to all that are selected.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Enumerate...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command finds all occurrences of a particular attribute name and updates the attribute values.
+		Where there is a "?" in the attribute value, it is replaced by a number that is unique.
+		</TD><TD><CENTER><IMG SRC="../images/chap06-19.png" ALT="Figure 6.19"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Attribute Report...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command searches for all attributes of a given name.
+		You can request that the list be saved in a file.
+		</TD><TD><CENTER><IMG SRC="../images/chap06-21.png" ALT="Figure 6.21"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Cell Parameters</B></TD><TD>
+		This command creates parameters in the current cell.
+		Parameters are attributes inside the cell that get copied to all instances of the cell.
+		<P>
+		<CENTER><IMG SRC="../images/chap06-20.png" ALT="Figure 6.20"></CENTER>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Update Inheritance</B></TD><TD>
+		This requests that the selected nodes inherit all inheritable attributes.
+		Those attributes that have already been inherited will not be altered;
+		only new inheritable attributes will be brought from the prototypes to the instances.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Update Inheritance All Libraries</B></TD><TD>
+		This requests that all nodes inherit all inheritable attributes.
+		Those attributes that have already been inherited will not be altered;
+		only new inheritable attributes will be brought from the prototypes to the instances.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Update Locations</B></TD><TD>
+		This requests that the selected nodes adjust the location of all inheritable attributes
+		to match the attribute locations on their example icon (in the schematic).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Update Locations All Libraries</B></TD><TD>
+		This requests that all nodes adjust the location of inheritable attributes
+		to match the attribute locations on their example icon (in the schematic).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>See All Parameters on Node</B></TD><TD>
+		This command sets all parameters on the selected nodes to be visible.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Hide All Parameters on Node</B></TD><TD>
+		This command sets all parameters on the selected nodes to be invisible.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Default Parameter Visibility</B></TD><TD>
+		This command sets all parameters on the selected nodes to be visible or invisible,
+		according to their original definition in the prototype cell.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>List Networks <A HREF="chap06-09.html#chap06-09">[6-9]</A></H3>
+<P>
+	This command lists the named networks in the current cell.
+	Networks can be given names by selecting an arc on the network,
+	using the <B>Get Info</B> command above, and filling in the "Name" field.
+<P>
+<H3>List Connections on Network <A HREF="chap06-09.html#chap06-09">[6-9]</A></H3>
+<P>
+	This command lists the active components connected to the current network.
+	The current network is the collection of nodes and arcs connected to the currently highlighted objects.
+	If a node is highlighted that has multiple networks on it,
+	the particular port that is highlighted on the node determines the network.
+<P>
+<H3>List Exports on Network <A HREF="chap03-07.html#chap03-07">[3-7]</A>&nbsp;&nbsp;
+<A HREF="chap06-09.html#chap06-09">[6-9]</A></H3>
+<P>
+	This command lists all exports on the current network,
+	at all levels of the circuit hierarchy, above and below the current cell.
+	It is useful when checking to see that an export is named uniformly throughout the chip,
+	because all export names are shown.
+<P>
+<H3>List Exports below Network <A HREF="chap03-07.html#chap03-07">[3-7]</A>&nbsp;&nbsp;
+<A HREF="chap06-09.html#chap06-09">[6-9]</A></H3>
+<P>
+	This command lists the exports on the current network and in all cells below this in the hierarchy.
+<P>
+<H3>List Geometry on Network <A HREF="chap06-09.html#chap06-09">[6-9]</A></H3>
+<P>
+	This command computes the geometry connected to the current network and reports
+	the area and perimeter of all connected layers.
+	Only geometry at the current and lower levels of hierarchy are considered.
+<P>
+<H3>List Layer Coverage <A HREF="chap03-07.html#chap03-07">[3-7]</A></H3>
+<P>
+	This command computes, for each layer, the percentage of the cell that is covered by that layer.
+	This is useful because certain fabrication lines insist on a minimum amount of area for each layer.
+<P>
+<H3>Rename Network... <A HREF="chap06-09.html#chap06-09">[6-9]</A></H3>
+<P>
+	This command presents a list of networks in the current cell and lets you rename them.
+<P>
+<HR><BR>
+<P>
+<H3>Help... <A HREF="chap01-10.html#chap01-10">[1-10]</A></H3>
+<P>
+	This command provides information about the use of Electric.
+	A dialog helps to select the subject.
+<P>
+<H3>See Manual</H3>
+<P>
+	This command displays the user's manual in a browser.
+<P>
+<H3>Tutorial <A HREF="chap01-10.html#chap01-10">[1-10]</A></H3>
+<P>
+	This command loads a tutorial package that provides some examples of use.
+<P>
+<HR><BR>
+<P>
+<H3>Option Control <A HREF="chap06-03.html#chap06-03">[6-3]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-52.png" ALT="Figure 12.52"></CENTER></TD><TD VALIGN=TOP>
+	The subcommands of this command control how options, set by the many <B>Option</B> commands, are saved.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Save Options Now </B></TD><TD>
+		This command requests that the current set of options be saved now,
+		rather than waiting for the program to exit.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Saving Options With Libraries... </B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		This command requests that certain Options be saved with the current library.
+		An example of the usefulness of this is when a library of standard cells,
+		designed for the Silicon Compiler,
+		wants to store Silicon Compiler options in it so that the user of the library can have the proper options set.
+		</TD><TD><CENTER><IMG SRC="../images/chap06-11.png" ALT="Figure 6.11"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Examine Saved Options... </B></TD><TD>
+		This command shows all options that are part of the saved options,
+		indicating those that have been changed this session.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Find Options... </B></TD><TD>
+		This command helps you find an option.
+		It presents a list of all options and lets you search for a keyword.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Measure Distance <A HREF="chap04-07.html#chap04-07">[4-7]</A></H3>
+<P>
+	This command allows you to measure the distance between any two points on the display.
+	After issuing it, click in the circuit to set the "starting point".
+	Then click repeatedly in the circuit to define the "ending point" and see the measured distance.
+	To end distance measurement, use this command again.
+	The measured distance can be used by the <B>Array...</B> command to specify spacing.
+	Note that this command is bound to the "M" key (shift-M).
+<P>
+<H3>User Interface</H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-44.png" ALT="Figure 12.44"></CENTER></TD><TD VALIGN=TOP>
+	The subcommands of this command control various aspects of the user interface.
+	</TD></TR></TABLE>
+	<P>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>General Options... <A HREF="chap09-01.html#chap01-09">[9-1]</A></B></TD><TD>
+		This command presents a dialog with options that pertain to the overall running of the system.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Quick Key Options... <A HREF="chap01-09.html#chap01-09">[1-9]</A></B></TD><TD>
+		This allows you to rebind the quick keys
+		(the keys that invoke menu entries).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set Paths...</B></TD><TD>
+		This lets you examine and modify the current directory in which library files can be found.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Show Cursor Coordinates <A HREF="chap04-07.html#chap04-07">[4-7]</A></B></TD><TD>
+		This causes the cursor coordinates to be continuously displayed in the status area
+		(they are shown where the Technology and Lambda information used to be).
+		Issue the command again to remove coordinate display.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Repeat Last Command <A HREF="chap01-09.html#chap01-09">[1-9]</A></B></TD><TD>
+		This causes the last command that was issued to be issued again.
+		It only applies where sensible.
+		If the last command required a dialog, that dialog is brought back, but the values entered into it
+		must be reentered.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Playback Log File... <A HREF="chap06-12.html#chap06-12">[6-12]</A></B></TD><TD>
+		This replays a session log file, which is useful for recreating lost circuitry after a crash.
+		Electric can usually detect when a crash has occurred,
+		so you should not normally need to issue this command.
+	</TD></TR>
+	</TABLE>
+<P>
+</TD></TR></TABLE>
+<P>
+<H3>Check and Repair Libraries <A HREF="chap06-12.html#chap06-12">[6-12]</A></H3>
+<P>
+	This command examines the database for inconsistencies and repairs them whenever possible.
+	Given that Electric is a stable, working program, this command should not uncover any problems.
+	If, however, the system is acting strangely, try saving your library and running this.
+<P>
+<HR><BR>
+<P>
+<H3>About Electric...</H3>
+<P>
+	This command displays a dialog with information about the current version of Electric.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-07.html#chap12-07"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-07.html#chap12-07">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-09.html#chap12-09">Next</A></TD>
+<TD><A HREF="chap12-09.html#chap12-09"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

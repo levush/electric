@@ -1,0 +1,146 @@
+<HTML><HEAD><TITLE>Using Electric 1-4: Macintosh Installation</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap01-04"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 1: INTRODUCTION</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap01-03.html#chap01-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>1-4: Macintosh Installation</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap01-05.html#chap01-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+Macintosh users must run System 7 or later.
+Electric comes with project files for Metrowerks, although it has been built with MPW and THINK_C.
+System 10 users can choose between Qt (which costs money)
+and ProjectBuilder (which is not fully working yet).
+<P>
+The Electric distribution is a single file in UNIX "tar" format, GNU-zipped.
+On the Macintosh, use the program <A HREF="http://www.gzip.org">MacGzip</A> to un-zip the file,
+and <A HREF="http://www.strout.net/macsoft/mactar">MacTar</A> to un-tar the file.
+To install Electric, follow this procedure:
+<UL>
+<LI>After the files have been extracted,
+there will be a top-level directory called <B>electric-</B><I>VERSION</I> with four subdirectories:
+<B>src</B>, <B>lib</B>, <B>examples</B>, and <B>html</B>.
+<LI>Beware of Macintosh line-feed conventions,
+which are different from those on other operating systems.
+If you use an older "tar" program (other than "MacTar"),
+you may need to set the "Convert Newlines" option before extracting the "tar" file.
+Also, if you use "Internet Config", check to be sure its "Change Newline" setting set.
+To be sure that the extraction has worked properly, examine the file <B>cadrc</B>,
+which is in the top level directory.
+This file should have less than 10 lines of text.
+If the file appears as a single line,
+or if there are spurious unprintable characters at the start or end of each line,
+then the text conversion has been done incorrectly.
+<LI>For System 7, 8, and 9, there is a Metrowerks project (called <B>Electric.xml</B>).
+Run Metrowerks, import this file, and save it in the top level,
+alongside the <B>src</B> directory.
+Due to the size of the code that is being built,
+you may have to increase the size of the Metrowerks partition.
+<LI>For System 10, there are two ways to go: <I>Qt</I> or <I>ProjectBuilder</I>.
+Qt is the only fully-working solution, but unfortunately it is not free on the Macintosh
+(it is actually quite expensive).
+Also, you need Qt release 3.1.0 or later.
+To build with Qt, use a terminal window and type <B>./configure</B> to generate a <B>Makefile</B>.
+Edit the <B>Makefile</B> and switch to Qt widgets (uncomment the Qt part, comment the Motif part,
+and in the Qt section, change comments to switch to "Qt on Macintosh").
+Qt also requires that you set "Font Smoothing Style" to "Standard" in the "General" System Preferences.
+If you do not have Qt, then there are ProjectBuilder files (called <B>Electric.pbproj</B>
+and the <B>English.lproj</B> folder).
+Be warned that this is not fully debugged, so use with care.
+<LI>Compile Electric.
+This will create the application <B>Electric</B>.
+<LI>Double-click the <B>Electric</B> application to run the system.
+</UL>
+<P>
+<HR>
+<P>
+Here are some detail on the Electric distribution:
+<UL>
+<LI>The <B>src</B> directory contains the source code.
+It is hierarchically organized by function.
+
+<LI>The <B>html</B> directory contains one subdirectory, <B>manual</B>,
+which is this manual in HTML format.
+To see the document,
+point your browser to the file <B>index.html</B> inside of the <B>manual</B> directory.
+
+<LI>The <B>examples</B> directory has some demo files.
+
+<LI>The IRSIM simulator, LISP interpreter, and Foreign language interfaces are not distributed as part of the GNU download.
+Users who wish to add these facilities must acquire the Static Free Software extras
+<A HREF="http://www.staticfreesoft.com/productsFree.html">described here</A>.
+Use the same procedure to extract this extension file (which will also be a GNU-zipped tar file).
+Extract it into the same location as the main source distribution and it will add the necessary files to the source tree.
+Then import the project file <B>ElectricSFS.xml</B> to create the Metrowerks project for Electric with the language extension.
+
+<LI>To add the TCL interpreter, follow these instructions:
+<UL>
+  <LI>Download ActiveTcl from <A HREF="http://www.tcl.tk">http://www.tcl.tk</A> and install it.
+  <LI>If using Qt/System 10, edit <B>Makefile</B> and add TCL.  Otherwise:
+    <UL>
+    <LI>In the compiler, add an include path to the installed TCL "include" directory.
+    <LI>Also in the compiler, add the appropriate TCL library to the project.
+    </UL>
+  <LI>Edit the appropriate "mac" include file in <B>src/include</B> (for example, <B>macsfsheaders.h</B>)
+  and uncomment the definition of "FORCETCL".
+</UL>
+  
+<LI>To add a Java interpreter (System 10 only) follow these instructions:
+<UL>
+  <LI>Download Java from <A HREF="http://java.sun.com">http://java.sun.com</A> and install it.
+  <LI>If using Qt, edit <B>Makefile</B> and add Java.  Otherwise:
+    <UL>
+    <LI>In the compiler, add an include path to the installed Java "include" directory.
+    <LI>Also in the compiler, add the appropriate Java library to the project.
+    </UL>
+  <LI>Edit the appropriate "mac" include file in <B>src/include</B> (for example, <B>macsfsheaders.h</B>)
+  and uncomment the definition of "FORCEJAVA".
+</UL>
+
+<LI>Installation of Electric requires some care.
+Although Electric will run properly from the directory where it was built,
+you cannot move the executable to a different location and expect it to work.
+This is because Electric makes use of a collection of <I>support files</I>.
+The main support file is called <B>cadrc</B>.
+In addition, Electric needs to find the <B>lib</B> and <B>html</B> directories.
+If these support files cannot be found,
+Electric will not be able to initialize its graphical user interface
+(just type "-quit" to exit the program if this happens).
+It is sufficient to move the support files, along with the executable,
+to a public location.
+Then make an alias to the executable and place that anywhere you like.
+When the alias is run, the directory with the executable will become the current directory,
+and all of the needed support files will be found.
+
+<LI>Electric can speak your language!
+Currently, it has been translated into French.
+Contact Static Free Software if you are interestested in doing a translation.
+To use this facility, you must obtain the Static Free Software
+extras and build the "International" version of Electric in <B>ElectricIntl.xml</B> or <B>ElectricSFSIntl.xml</B>.
+Before compiling, set the
+desired language by changing the routine "elanguage()" in "graph/graphmac.c".
+<BR>
+At any time, you can disable the foreign language and return to English by moving the
+translation files.
+These files are in the "lib/international" folder, with a subfolder
+that has the language name (for example, French translations are in "lib/international/fr").
+Beneath that is a folder called "LC_MESSAGES" and inside of that are the translation files.
+</UL>
+<P>
+<HR>
+<P>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap01-03.html#chap01-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap01-03.html#chap01-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap01-05.html#chap01-05">Next</A></TD>
+<TD><A HREF="chap01-05.html#chap01-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

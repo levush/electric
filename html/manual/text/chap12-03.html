@@ -1,0 +1,308 @@
+<HTML><HEAD><TITLE>Using Electric 12-3: The Cells Menu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap12-03"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 12: MENU SUMMARY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap12-02.html#chap12-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>12-3: The Cells Menu</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap12-04.html#chap12-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+<CENTER><IMG SRC="../images/chap12-03.png" ALT="Figure 12.3"></CENTER>
+<P>
+Cell cells are collections of circuitry.
+Each cell of a cell has a view type (layout, schematic, etc.) and a version number.
+Because cell instances may be placed inside of other cells, the cell notion defines hierarchy in Electric.
+<P>
+<!-- NEED 3in -->
+<H3>Edit Cell... <A HREF="chap03-02.html#chap03-02">[3-2]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command displays an existing cell or creates a new cell in the current window.
+	You are prompted for its name and view type.
+	Use the "New Cell" button to create a new one.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-11.png" ALT="Figure 3.11"></CENTER></TD></TR></TABLE>
+<P>
+<!-- NEED 5in -->
+<H3>Cross-Library Copy... <A HREF="chap03-10.html#chap03-10">[3-10]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	This command presents a dialog that shows cells in two different libraries,
+	and indicating which ones are newer.
+	You can select a cell in either library and copy or move it to the other.
+	In addition, if the cell has subcells or associated views that are newer,
+	they can also be copied.
+	The "Examine Contents" buttons compare the contents cells and displays an indication of whether they are actually different or just out of date.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-05.png" ALT="Figure 3.5"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Duplicate Current Cell <A HREF="chap03-02.html#chap03-02">[3-2]</A></H3>
+<P>
+	This command makes a copy of the cell in the current window and gives it a new name.
+	You will be prompted for the new name.
+	The new cell is placed in the same library as the old one.
+<P>
+<H3>Project Management <A HREF="chap06-11.html#chap06-11">[6-11]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-38.png" ALT="Figure 12.38"></CENTER></TD><TD VALIGN=TOP>
+	This set of commands controls the interactions of multiple users working together on a single library.
+	Subcommands are available for checking cells in and out,
+	for updating your personal copy of the library from a master library, and other features.
+	</TD></TR></TABLE>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>Check In and Out...</B></TD><TD>
+		<TABLE><TR><TD VALIGN=TOP>
+		Presents a dialog showing all cells in the library,
+		and allowing you to check them in and out of the project management system.
+		</TD><TD><CENTER><IMG SRC="../images/chap06-10.png" ALT="Figure 6.10"></CENTER></TD></TR></TABLE>
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Update</B></TD><TD>
+		Updates the current library from the master library.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Check Out This Cell</B></TD><TD>
+		Checks out a cell from the master library.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Check In This Cell</B></TD><TD>
+		Checks the current cell into the master library.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Add This Cell</B></TD><TD>
+		Adds the current cell to the master library (if it is not part of the project management system).
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Delete This Cell</B></TD><TD>
+		Deletes a cell from the master library.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Old Version of This Cell</B></TD><TD>
+		Access old versions of a cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Set User...</B></TD><TD>
+		Sets user identification for project management.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><HR></TD><TD></TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Build Project</B></TD><TD>
+		Converts the current library into a master library for subsequent sharing.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Cell Options... <A HREF="chap03-07.html#chap03-07">[3-7]</A></H3>
+<P>
+	This command presents a dialog that allows cell options to be set.
+	There are check boxes at the top for controling cell modifications, recognizing cell libraries,
+	and recognizing technology editor libraries.
+	Buttons on the right can set or clear these bits for all cells.
+	New instances can be expanded or unexpanded.
+	You can also set each cell's "Characteristic Spacing"
+	(used when arraying, see <A HREF="chap06-04.html#chap06-04">Section 6-4</A>).
+	<P>
+	<CENTER><IMG SRC="../images/chap03-10.png" ALT="Figure 3.10"></CENTER>
+	<P>
+	The bottom half of the dialog has options that apply to all cells.
+	The check box "Check cell dates during creation"
+	causes creation and modification information to be used to ensure that the hierarchy has been built in the proper order.
+	The check box "Switch technology to match current cell"
+	causes the current technology to change whenever the current cell changes so that it is appropriate to that cell.
+	The check box "Place Cell-Center in new cells"
+	requests that all newly created cells have a Cell-Center node (named "Facet-Center" for historical reasons) placed at the origin
+	(see <A HREF="chap03-03.html#chap03-03">Section 3-3</A> for more on Cell centers).
+	The check box "Tiny cell instances hashed out"
+	causes the contents of cell instances to be a gray hash area when zoomed too far out to be distinguishable.
+	You can control the number of lambda per pixel that triggers the hashing-out of cells.
+<P>
+<H3>Cell Explorer... <A HREF="chap03-07.html#chap03-07">[3-7]</A></H3>
+<P>
+	This command splits the current window, and shows a hierarchical "explorer" window in the left half.
+	A recursively indented list of cells-within-cells is listed, and you can explore your circuit's hierarchy.
+	Note that the cell explorer can also be invoked by clicking on the "tree" icon in the lower-left corner of the window.
+<P>
+<HR><BR>
+<P>
+<H3>Describe this Cell <A HREF="chap03-07.html#chap03-07">[3-7]</A></H3>
+<P>
+	This command displays information about the cell in the current window.
+<P>
+<!-- NEED 2in -->
+<H3>General Cell Lists... <A HREF="chap03-07.html#chap03-07">[3-7]</A></H3>
+<P>
+	<TABLE><TR><TD VALIGN=TOP>
+	These presents a dialog for selecting a subset of the cells.
+	<P>
+	The section labeled "Which cells:" selects the cells to be listed
+	(all, only those used/not used in other cells, only those in the current cell,
+	or only "placeholder" cells: those created because of cross-library dependency failures,
+	see Section <A HREF="chap03-09.html#chap03-09">3-9</A>).
+	<P>
+	The section labeled "View filter:" allows only certain views to be displayed.
+	<P>
+	The section labeled "Version filter:" allows removal of older or newer versions of cells.
+	<P>
+	The section labeled "Display ordering:" controls the order in which the selected cells will be listed.
+	<P>
+	The section labeled "Destination:" allows you to dump this listing to a disk file.
+	</TD><TD><CENTER><IMG SRC="../images/chap03-21.png" ALT="Figure 3.21"></CENTER></TD></TR></TABLE>
+<P>
+<H3>Special Cell Lists <A HREF="chap03-07.html#chap03-07">[3-7]</B></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-55.png" ALT="Figure 12.55"></CENTER></TD><TD VALIGN=TOP>
+	This set of commands give specialized information about cells.
+	</TD></TR></TABLE>
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>List Nodes in this Cell</B></TD><TD>
+		This command displays a list of all nodes in the current cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>List Cell Instances</TD><TD>
+		This command displays a list of cell instances contained in the current cell.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>List Cell Usage...</TD><TD>
+		This command prompts for a cell and displays a list of places where the it exists as an instance.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Graphically, Entire Library</B></TD><TD>
+		Creates a graph of every cell in the library.
+		The graph is actually a new cell that contains Artwork components.
+		Thus, it will be stored with the library and may be edited, printed, etc.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Graphically, From Current Cell</B></TD><TD>
+		Creates a graph showing the current cell at the top, and all subcells below it.
+		The graph is actually a new cell that contains Artwork components.
+		Thus, it will be stored with the library and may be edited, printed, etc.
+	</TD></TR>
+	</TABLE>
+<P>
+<HR><BR>
+<P>
+<H3>Down Hierarchy <A HREF="chap03-05.html#chap03-05">[3-5]</A></H3>
+<P>
+	This command changes the current edit window so that the cell whose instance is currently highlighted is now the editable cell.
+	When an icon is selected, its contents (schematic) is edited.
+	If the icon is inside of its own schematic (a documentation feature)
+	then going down does edit the icon.
+<P>
+<H3>Down Hierarchy in Place <A HREF="chap03-05.html#chap03-05">[3-5]</A></H3>
+<P>
+	This command changes the current edit window so that the cell whose instance is currently highlighted is now the editable cell.
+	However, if the instance is transformed (rotated or mirrored), it is edited in that orientation.
+<P>
+<H3>Up Hierarchy <A HREF="chap03-05.html#chap03-05">[3-5]</A></H3>
+<P>
+	This command returns editing to the higher level of hierarchy in which the current cell is instantiated.
+	It thus travels back up the hierarchy that was descended with the <B>Down Hierarchy</B> command.
+	If an export is highlighted, that network is highlighted in the outer cell.
+	If there was no <B>Down Hierarchy</B>, and the higher level cell cannot be determined,
+	a list of possible cells will be presented.
+	Arbitrary depth of hierarchy can be traversed with these two commands by repeating them.
+<P>
+<HR><BR>
+<P>
+<H3>Expand Cell Instances <A HREF="chap03-04.html#chap03-04">[3-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-47.png" ALT="Figure 12.47"></CENTER></TD><TD VALIGN=TOP>
+	These commands cause the highlighted cell instances to be <I>expanded</I>,
+	which means that their contents will be displayed.
+	</TD></TR></TABLE>
+	If their contents is already being displayed, this will cause the contents of any subcells to be displayed,
+	repeatedly down the hierarchy.
+	Once expanded, these cell instances will always display their contents until the <B>Unexpand Cell Instances</B>
+	commands are issued.
+	For a temporary view of the contents of an instance, use <B>Look Inside Highlighted</B>.
+	Note that the expansion information can also be set in the <B>Get Info</B> dialog of the <B>Info</B> menu.
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>One Level Down</B></TD><TD>
+		The next level of unexpanded cells is made visible.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>All the Way</B></TD><TD>
+		All cells from here to the bottom of the hierarchy are made visible.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Specified Amount...</B></TD><TD>
+		You are prompted for a number of levels of hierarchy, and that many levels of depth are made visible.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Unexpand Cell Instances <A HREF="chap03-04.html#chap03-04">[3-4]</A></H3>
+<P>
+	<TABLE><TR><TD><CENTER><IMG SRC="../images/chap12-48.png" ALT="Figure 12.48"></CENTER></TD><TD VALIGN=TOP>
+	These commands cause the highlighted cell instances to be <I>unexpanded</I>,
+	which means that they will be displayed as black boxes.
+	</TD></TR></TABLE>
+	If there are expanded subcells, these are closed first and subsequent commands will unexpand up the hierarchy.
+	Note that the expansion information can also be set in the <B>Get Info</B> dialog of the <B>Info</B> menu.
+	<TABLE>
+	<TR><TD><IMG SRC="../images/indent.png"></TD><TD VALIGN=TOP><B>One Level Up</B></TD><TD>
+		The next level of expanded cells, from the bottom of the hierarchy, is unexpanded.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>All the Way</B></TD><TD>
+		All cells from here to the bottom of the hierarchy are closed.
+	</TD></TR>
+	<TR><TD></TD><TD VALIGN=TOP><B>Specified Amount...</B></TD><TD>
+		You are prompted for a number of levels of hierarchy, and that many levels of depth are closed.
+	</TD></TR>
+	</TABLE>
+<P>
+<H3>Look Inside Highlighted <A HREF="chap03-04.html#chap03-04">[3-4]</A></H3>
+<P>
+	This command displays all layout in the currently highlighted area, all the way down the hierarchy.
+	This "peek" into the cell instances is temporary and will not be shown again if the window is redrawn in any way.
+	To get a permanent view into a cell,
+	use the <B>Expand Cell Instances</B> command above or set the "Expand" option in the <B>Get Info</B>
+	command of the <B>Info</B> menu.
+<P>
+<HR><BR>
+<P>
+<H3>Package into Cell... <A HREF="chap03-08.html#chap03-08">[3-8]</A></H3>
+<P>
+	This command creates a new cell, possibly in a new cell,
+	that contains all of the circuitry in the currently highlighted area.
+	You will be prompted for the new cell name.
+	The highlighted area is defined as the bounding rectangle of everything that is highlighted.
+	Arcs that cross outside of the bounds will not be copied.
+	A more precise way of defining a highlighted area is to use the
+	<I><A HREF="chap01-08.html#chap01-08" TITLE="UNIX:meta-right  Windows:alt-right  Mac:cmd-opt-click">rectangle select</A></I> button.
+<P>
+<H3>Extract Cell Instance <A HREF="chap03-08.html#chap03-08">[3-8]</A></H3>
+<P>
+	This command takes the currently highlighted cell instance and replaces it with its contents.
+	This is conceptually the opposite of <B>Package into Cell...</B> as it removes a level of hierarchy.
+	If multiple cell instances are highlighted, all of them are extracted.
+<P>
+<HR><BR>
+<P>
+<H3>New Version of Current Cell <A HREF="chap03-02.html#chap03-02">[3-2]</A></H3>
+<P>
+	This command makes a copy of the cell in the current window.
+	Version numbers appear in the cell name as a semicolon followed by a number
+	(except for the most recent cell which has no version notation).
+	For example, after the duplication of cell MyCircuit, there will be the cells MyCircuit and MyCircuit;1.
+	The current cell, which has no explicit version number in its name, actually is version 2
+	(smaller version numbers are older).
+<P>
+<H3>Delete Unused Old Versions <A HREF="chap03-02.html#chap03-02">[3-2]</A></H3>
+<P>
+	This command deletes all cells in the current library that are not the most recent version and are not being used as instances in some other cell.
+	It essentially cleans up the library when too many versions have been created.
+	As with all commands, this can be undone with the <B>Undo</B> command of the <B>Edit</B> menu.
+<P>
+<HR><BR>
+<P>
+<H3>Read Text Cell... <A HREF="chap04-10.html#chap04-10">[4-10]</A></H3>
+<P>
+	This command reads a disk file into the current text window.
+	It replaces the existing contents.
+<P>
+<H3>Write Text Cell... <A HREF="chap04-10.html#chap04-10">[4-10]</A></H3>
+<P>
+	This command saves the current text window to disk.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap12-02.html#chap12-02"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap12-02.html#chap12-02">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap12-04.html#chap12-04">Next</A></TD>
+<TD><A HREF="chap12-04.html#chap12-04"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

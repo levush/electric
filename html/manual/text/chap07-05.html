@@ -1,0 +1,72 @@
+<HTML><HEAD><TITLE>Using Electric 7-5: The MOSIS CMOS Technology</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap07-05"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 7: DESIGN ENVIRONMENTS</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap07-04.html#chap07-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>7-5: The MOSIS CMOS Technology</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap07-06.html#chap07-06"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+The MOSIS CMOS technology describes a scalable CMOS process that is fabricated by the
+<A HREF="http://www.mosis.org">MOSIS project</A> of the University of Southern California.
+To obtain this technology,
+use the <B>Change Current Technology...</B> command of the <B>Technology</B> menu and select "mocmossub".
+<P>
+<CENTER><IMG SRC="../images/chap07-02.png" ALT="Figure 7.2"></CENTER>
+<P>
+This technology defaults to 4 metal layers (shown here),
+but can also be changed so that it uses anywhere from 2 to 6 layers of metal.
+It also has 1 polysilicon layer but can be changed to use 2.
+The technology can also be set to use either standard rules (SCMOS),
+submicron rules, or deep rules.
+You can choose whether to allow stacked vias and whether or not to use alternate contact rules.
+All of this is done with the <B>Technology Options...</B> command of the <B>Technology</B> menu.
+<P>
+The MOSIS CMOS technology also has two scalable transistor nodes that can be parameterized to have different widths.
+These transistors are not available by default,
+check "Show Special transistors" in the <B>Technology Options...</B> dialog to see them.
+(Checking that also provides a vertical PNP transistor that has marginal usefulness.)
+The scalable transistors have contacts built into them.
+When created and scaled, their maximum width is shown.
+However, by adding a "width" attribute, they can shrink arbitrarily.
+Note that the ports remain in the same location regardless of the width, thus allowing them to scale without
+affecting constraints.
+<P>
+<CENTER><IMG SRC="../images/chap07-22.png" ALT="Figure 7.22"></CENTER>
+<P>
+The scalable transistor on the left is 3 wide, and the other two are 10 wide.
+However, the scalable transistor on the right has had the "width" attribute set to 8 and so it has shrunk.
+Note that this attribute can be derived from cell parameters, causing different instances of the same
+cell to have different size transistors in it.
+<TABLE><TR><TD>
+If you double-click on a scalable transistor, you get a specialized dialog that allows you to control it.
+You can choose to have zero or 1 contact, and you can tighten the contact spacing.
+</TD><TD><CENTER><IMG SRC="../images/chap07-24.png" ALT="Figure 7.24"></CENTER></TD></TR></TABLE>
+<P>
+Another MOSOS CMOS technology option is to display with "stick figures".
+This is enabled by using the <B>Technology Options...</B>
+command of the <B>Technology</B> menu and checking the "Stick Figures" radio button.
+<P>
+Users of Electric version 6.02 or earlier will have a different MOSIS CMOS technology called "mocmossub".
+This technology attempted to match the submicron rule set,
+but did not do so as accurately as the current "mocmos" technology.
+If you have designs in that technology,
+they will be automatically converted to the new "mocmos" when read in,
+unless you uncheck "Automatically convert to new MOSIS CMOS" in the "MOSIS CMOS Submicron (old)" section of the dialog.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap07-04.html#chap07-04"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap07-04.html#chap07-04">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap07-06.html#chap07-06">Next</A></TD>
+<TD><A HREF="chap07-06.html#chap07-06"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

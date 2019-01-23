@@ -1,0 +1,78 @@
+<HTML><HEAD><TITLE>Using Electric 10-4: Behavioral Models (ALS)</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap10-04"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 10: SIMULATION</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap10-03.html#chap10-03"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>10-4: Behavioral Models (ALS)</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap10-05.html#chap10-05"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+When the VHDL for a circuit is compiled into a netlist, both connectivity and behavior are included.
+This is because the netlist format is hierarchical,
+and at the bottom of the hierarchy are behavioral primitives.
+Electric knows the behavioral primitives for MOS transistors, AND, OR, NAND, NOR, Inverter, and XOR gates.
+Other primitives can be defined by the user, and all of the existing primitives can be redefined.
+<P>
+To create (or redefine) a primitive's behavior, simply create the "netlist"
+view of the cell with that primitive's name.
+Use the <B>Edit Cell...</B> command of the <B>Cells</B> menu and select the "netlist-als-format" view.
+For example, to define the behavior of an ALU cell, edit "alu{net-als}",
+and to redefine the behavior of a two-input And gate, edit "and2{net-als}".
+The compiler copies these textual cells into the netlist description whenever that node is referenced in the VHDL.
+<P>
+A library that contains only behavioral models can be built and kept separately from the current library.
+To identify that library as the location of behavioral models,
+use the <B>Select Behavioral Library...</B> subcommand of the <B>VHDL Compiler</B> command of the <B>Tools</B> menu.
+<P>
+The netlist format provides three different types of defining entities:
+<I>model</I>, <I>gate</I>, and <I>function</I>.
+The model entity describes interconnectivity between other entities.
+It describes the hierarchy and the topology.
+The gate and function entities are at the primitive level.
+The gate uses a truth-table and the function makes reference to C-coded behavior
+(which must be compiled into Electric, see the module "simalsuser.c").
+Both primitive entities also allow the specification of operational parameters such as switching speed,
+capacitive loading and propagation delay.
+(The simulator determines the capacitive load, and thus the event switching delay,
+of each node of the system by considering the capacitive load of each primitive connected to a node as well as taking into account feedback paths to the node.)
+<P>
+<!-- NEED 3in -->
+A sample netlist describing an RS latch model is shown below:
+<P>
+<CENTER><TABLE><TR><TD><CENTER><IMG SRC="../images/chap10-03.png" ALT="Figure 10.3"></CENTER></TD><TD>
+The model declaration for the figure is as follows:
+<PRE>
+      model main(set, reset, q, q_bar)
+      inst1: nor2(reset, q_bar, q)
+      inst2: nor2(q, set, q_bar)
+</PRE>
+The gate description of the nor2 is as follows:
+<PRE>
+      gate nor2(in1, in2, out)
+      t: delta=4.5e-9 + linear=5.0e-10
+      i: in1=L in2=L   o: out=H@2
+      i: in1=H         o: out=L@2
+      i: in2=H         o: out=L@2
+      i:               o: out=X@2
+</PRE>
+</TD></TR></TABLE></CENTER>
+<P>
+When combined, these entities represent a complete description of the circuit.
+Note that when a gate, function, or other model is referenced within a model description,
+there is a one-to-one correspondence between the signal names listed at the calling site and the signal names contained in the header of the called entity.
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap10-03.html#chap10-03"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap10-03.html#chap10-03">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap10-05.html#chap10-05">Next</A></TD>
+<TD><A HREF="chap10-05.html#chap10-05"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>

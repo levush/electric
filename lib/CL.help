@@ -1,0 +1,3177 @@
+Maximum text width to fit in dialog:
+=================================================================
+
+!arc command
+
+This command changes attributes of highlighted arc instances.
+The format is:
+        -arc [not] fixed-angle | rigid | temp-rigid | slide
+        -arc [not] directional | negated | ends-extend |
+                   skip-head | skip-tail
+        -arc toggle fixed-angle | rigid | slide
+        -arc toggle directional | negated | ends-extend |
+                    skip-head | skip-tail
+        -arc name NETNAME
+        -arc not name
+        -arc [not] center | curve
+        -arc reverse
+        -arc shorten
+        -arc constraint CONSTRAINT [add]
+        -arc not constraint
+
+"fixed-angle", "not fixed-angle", "rigid", "not rigid",
+"temp-rigid", "not temp-rigid", "slide" and "not slide" all
+affect constraints on the highlighted arcs.
+
+"directional", "not directional", "negated", "not negated",
+"ends-extend" and "not ends-extend" all affect properties on the
+highlighted arcs.
+
+"skip-head" and "not skip-head" changes the ends-extend, and
+directional property of the highlighted arcs.
+
+"skip-tail" and "not skip-tail" changes the ends-extend, and
+negated property of the highlighted arcs.
+
+"name NETNAME" and "not name" sets or deletes the network name of
+the highlighted arc.  NETNAME is an identifier stored with the
+arc and linked to other arcs on the same electrical network.
+
+"center" and "not center" sets the center of a circle that will
+be used to draw the arc.  The cursor location will be adjusted so
+that it is equidistant from the arc ends.  The "not center"
+option removes the curvature so that the arc is straight.  This
+option is used in circular geometry only.
+
+"curve" also sets arc curvature, but in this case, the arc is set
+so that its curve passes through the cursor.
+
+"reverse" switches the two ends of the arc when they are
+distinguished by the directional, negated, center, or curve
+properties.
+
+"shorten" reduces the selected arcs to their minimal length
+by sliding them in their ports to the edge that is closest to
+their center.
+
+"constraint" sets or removes constraints for the nonstandard
+solvers.  The add clause adds rather than replacing constraints.
+
+To specify the arcs to be modified, use "find".
+To set default characteristics for new arcs, use "defarc".
+The arc constraints are used by the change commands: "move",
+"rotate", "size" and "mirror".
+For more information on named networks, see "help network".
+For more information on standard arc constraints, see "help
+laycon".
+For more information on arc properties, see "help properties".
+For control of nonstandard constraint systems, use "constraint".
+
+!array command
+
+This command replicates the currently highlighted objects.  The
+format is:
+        -array XSIZE[f][s] [YSIZE[f][s] [XOVERLAP [YOVERLAP
+                    [no-names] [diagonal [only-drc-valid]]]]]
+        -array file FILENAME
+
+where XSIZE and YSIZE specify the size of the array and XOVERLAP
+and YOVERLAP are the amount of overlap along the axes (negative
+values cause the objects to be separated).  The default
+value of YSIZE is 1 and the default values of XOVERLAP and
+YOVERLAP are 0.  If either XSIZE or YSIZE ends with the letter
+"f", then the array flips in that dimension so that every other
+row or column is mirrored.  If they end with the letter "s", then
+the array staggers alternate rows and/or columns.  The elements
+of the array are given local names constructed from the indices
+of the array.  This name can be accessed as the variable
+"$~.node_name" on nodes and "$~.arc_name" on arcs, which
+is useful in macros.  If the "no-names" option is specified at
+the end, the array elements are not given local names.
+If the "diagonal" option is specified at the end, the array
+is linear, but both overlap distances are used.
+If the "only-drc-valid" option is specified (only when arraying a
+single node) then the array is only placed where it does not
+cause design-rule violations.
+If there are exports, they are arrayed only if the
+"defnode * copy-ports" command has been issued.
+
+The "file" option causes the named file to be read and used in
+placement.  This file has commands to read cell libraries, place
+the cells, and even route them to core cells.  Thus, it is really
+a pad-frame generator facility.
+
+For example, the command "array 4f 5" will create 4 columns of 5
+objects and the second and fourth columns will be mirrored
+vertically.
+
+For more information about local names see "arc" and "node".
+For more information about macros, see "macbegin" and "macend".
+For more information about variable names, see "var".
+
+!bind command
+
+This command controls the bindings of commands to keys, buttons,
+menu entries, and popup menus.  It also controls bind echoing.
+The format is:
+        -bind set button BUTTON COMMAND
+        -bind set key KEY COMMAND
+        -bind set popup NAME [message TEXT] ENTRY COMMAND
+        -bind set input-popup NAME [message TEXT] ENTRY COMMAND
+        -bind set menu [glyph NODE]
+                       [message TEXT [textsize SIZE]]
+                       [background COL] ROW[w] COLUMN[w] COMMAND
+        -bind get LETTER button BUTTON
+        -bind get LETTER key KEY
+        -bind get LETTER popup NAME ENTRY
+        -bind get LETTER menu ROW COLUMN
+        -bind verbose | no-verbose
+
+"set" causes a binding to change.  "set button" requires a button
+name to be specified. (BUTTON can be "left", "middle", or "right"
+on a three-button mouse, or simply "button" on a one-button mouse.
+On those systems where buttons are sensitive to a double-click,
+shift key, control key, option key, or meta key, prepend the
+letters "d", "s", "c", "o", or "m".  For example, "mleft" is the
+left button with the meta key held and "scmiddle" is the middle
+button with shift and control held down.
+
+"set key" requires a key name to be specified (KEY must be a
+single letter).
+
+"set popup" and "set input-popup" require a popup menu name
+(NAME) and the entry within that menu (ENTRY).  The "input-popup"
+option allows users to type additional parameters to the command
+inside the menu.
+
+"set menu" requires a menu co-ordinate position to be specified
+(ROW is a row number where the bottom row is 0 and COLUMN is a
+column number where the leftmost column is 0).  If the optional
+"w" is placed after the column or row number, it forces the
+meaning of row and column to be reversed whenever the column
+extent is narrower than the row extent (i.e. it forces the first
+number to be the "length" and the second number to be the
+"width").
+
+The "glyph" option of "set menu" causes NODE prototype to be
+displayed in the menu to correspond with the binding.  The
+"message" option of "set menu", "set popup" and "set input-popup"
+causes TEXT to appear in the menu entry.  If the "message" option
+is used with the "glyph" option ("set menu" only) then the TEXT
+is used as an additional variable attribute on the NODE, and has
+the form "ATT.VALUE" where VALUE becomes the string value of
+attribute ATT.  The "textsize" option allows the message size to
+be specified.  The "background" option of "set menu" causes the
+named COL to be used to highlight the menu entry.
+
+In all cases of binding, the COMMAND can be any other command,
+with parameters, that will be executed when the button, key,
+menu, or popup entry is selected.  If the command is "-" then the
+binding will be removed.
+
+"get" obtains the current binding for either key KEY, button
+BUTTON, popup entry ENTRY in menu NAME, or fixed menu row
+ROW and column COLUMN.  The binding is placed in the command
+interpreter variable LETTER.
+
+"verbose" and "no-verbose" set the display of bound commands
+before they are executed.  The default is to display commands
+(verbose).
+
+Examples:
+"bind set menu 1 0 quit" will cause a hit on the upper-left menu
+   entry to quit the program.
+"bind set key W window split" will cause the W key to split the
+   current window.
+"bind set button middle show history" will cause the middle mouse
+   button to print the recent changes.
+"bind set popup harry message "Huh?" 0 help" will cause the first
+   entry of popup menu "harry" to show the message "Huh?" and
+   execute the help command.
+
+!color command
+
+This command manipulates the color map that is used for all
+display.  The format is:
+        -color entry INDEX [VALUE]
+        -color pattern LAYER [VALUE]
+        -color mix
+        -color highlight LAYERS [PERCENTAGE]
+        -color default
+        -color black-background
+        -color white-background
+        -color read MAP-FILE
+        -color write MAP-FILE
+
+"entry" allows display or modification of a single entry in the
+color map.  INDEX is the particular entry and can be specified
+either as a number from 0 to 255 or a combination of layer
+letters.  If VALUE is not specified, the INDEX entry's current
+value is printed.  If VALUE is given, that index is changed to
+the value.  VALUE must be three numbers for red, green, and blue,
+ranging from 0 (off) to 255 (on).
+
+"pattern" allow display or modification of a single entry in the
+pattern table.  LAYER is the particular layer letter to modify.
+If VALUE is not specified, the LAYER entry's current value is
+printed.  If VALUE is given, that layer is changed to the value.
+This is up to eight numbers separated by slashes (/).  These
+numbers form a 16x8 bit pattern for the layer (only the low 16
+bits are used in each number).  If there is no number, but just a
+slash, the previous value for that row is used.  If there are
+less than eight numbers, the sequence is repeated until the 8
+rows are filled.
+
+"mix" allows the interactive selection of the 32 overlappable
+colors from a mixing wheel.
+
+"highlight" modifies the color map so that the overlappable
+layers specified in LAYERS remain full color, and all others are
+washed-out.  Thus, the specified layers are highlighted.  Only
+overlappable layers may be specified.  The other layers are
+reduced to 20% of their saturation (unless a specific PERCENTAGE
+is given).
+
+"default" loads the default color map for the current technology.
+
+"black-background" loads a color map for the current technology
+that has a black background.
+
+"white-background" loads a color map for the current technology
+that has a white background.
+
+"read" reads the disk file MAP-FILE and loads the complete color
+map in that file.  If the file MAP-FILE cannot be found, the file
+MAP-FILE.map will be checked.
+
+"write" writes the current color map to the disk file MAP-FILE.
+
+Examples:
+"color entry 33" will print the color of cell borders.
+"color entry 64 0 0 255" will set the color of the grid to bright
+   blue.
+"color mix" will interactively mix the color map.
+"color pattern c 0x5555/0xAAAA" will set the contact cut pattern
+   to a checkerboard of dots.
+
+For a list of color map entries, use "help map".
+To see which layer letters are available, use "visiblelayers".
+For the format of map files, use "help mapfile".
+
+!commandfile command
+
+This command reads and executes a disk file of commands.  The
+format is:
+        -commandfile FILENAME [verbose]
+
+where FILENAME is the name of a disk file containing commands to
+Electric.  If the file ends with the extension ".mac" then that
+extension need not be specified.  If the optional "verbose"
+appears after the file name, the commands will be printed before
+they are executed.  Otherwise they will be executed silently and
+normal command output will be suppressed.  In command files, any
+lines that are blank or begin with a semicolon (;) are ignored.
+
+To force output to the status terminal while inside a command
+file use "echo".
+
+!constraint command
+
+This command manipulates the constraint solvers in Electric.  The
+format is:
+        -constraint use SOLVER
+        -constraint tell SOLVER MESSAGE
+
+use switches to constraint solver SOLVER.
+
+"tell" sends MESSAGE to solver SOLVER.  In general, this option
+is not undoable.
+
+To see which constraint solvers exist, use "show solvers".
+To see which messages apply to the linear-inequalities solver,
+use "help linear".
+
+!copycell command
+
+This command copies one or more cells.  The format is:
+        -copycell [FROMLIBRARY:]FROMCELL [[TOLIBRARY:]TOCELL]
+
+where FROMCELL is the name of an existing cell in the current
+library (or in the library named FROMLIBRARY if specified) and
+TOCELL is the new cell name in the current library (or in the
+library named TOLIBRARY if specified) that will be created with
+a copy of the contents of FROMCELL.  If TOCELL is not specified,
+it defaults to the same name as FROMCELL (which, when copying
+within the same library, amounts to making a new version of a
+cell).  When crossing libraries, all subcells and associated
+views are also copied.
+
+If the keyword "quiet" is at the end, less information is
+displayed.  If the keyword "move" is at the end, the cells are
+deleted from the original library, and links to them are changed
+to point to the new copies.
+
+If the keyword "use-existing-subcells" is at the end, existing
+cells in the destination library are used instead of making
+cross-library links.
+
+To make a skeleton version of a cell, copy it to the same name
+with the view "{sk}", for example "copycell hardy hardy{sk}".
+
+To make an iconic version of a cell, copy it to the same name
+with the view "{ic}", for example "copycell mylogic{sch}
+mylogic{ic}".  With skeletonization or iconization, the TOCELL
+name can be omitted, for example "copycell hardy {ic}".
+
+!create command
+
+This command creates a node or arc.  The format is:
+        -create [wait-for-down] [remain-highlighted]
+        -create angle [ANGLE]
+        -create join-angle [ANGLE]
+        -create to X Y
+        -create insert|breakpoint
+        -create contents
+
+The default form of the command creates either a node or an arc.
+If the currently highlighted area does not contain two objects,
+a node of the current node type is created at the current cursor
+position.  Otherwise, an arc is created between the two
+highlighted objects.  The current arc type is used as a default,
+but if it cannot be run, any other arc type will be used.  If the
+arc must bend to make the connection, intermediate pin nodes will
+be created.  The nature of the bend and the particular ports to
+use can be guided by the location of the cursor.
+
+"wait-for-down" requires that the button be pushed before the
+creation be done.  Thus, if this command is attached to a button,
+it will require a second button hit to create.
+
+"remain-highlighted" indicates that, after arc creation, the
+originally highlighted nodes are to remain that way.
+
+"angle" and "join-angle" specify that the wire should be run at
+some increment of ANGLE degrees (where the default angle
+increment for the arc is used if no ANGLE is provided).  When the
+currently highlighted area contains two objects, an arc is run
+between them at the desired angle increment.  When only one node
+is highlighted, a wire is drawn from it to the cursor location.
+This wire will then connect to the object under the cursor (with
+the "join-angle" option) or to a newly created pin (with the
+"angle" option or when there is nothing under the cursor).  These
+options are useful for "drawing" wires.
+
+"to" places a new node at the absolute location (X, Y).
+
+"insert" specifies that a new node should be inserted in the
+currently highlighted arc at a point close to the cursor.  The
+current node prototype will be used and connected at the first
+two ports that can take that arc.
+
+"breakpoint" specifies that two new pin nodes connected by an arc
+should be inserted in the currently highlighted arc at a point
+close to the cursor.  The arc thus has a jog in it and one half
+can be shifted away from the other.
+
+"contents" indicates that even if the current cell has an
+alternate icon view, its actual contents should be placed.
+
+The granularity of the object placement can be set with "grid".
+Default characteristics of newly created arcs and nodes are
+   specified with "defarc" and "defnode".
+To select the objects for arc creation, use "find" and
+   "find more".
+To set the default node or arc type, use "find" or "getproto".
+To copy the currently highlighted objects, use "duplicate".
+
+!debug command
+
+This command is not for general consumption.  It prints debugging
+information and patches the database.  The format is:
+        -debug arena [CLUSTER]
+        -debug check-database [verbose]
+        -debug freeze-user-interface
+        -debug internal-errors
+        -debug namespace
+        -debug rtree
+        -debug remove-parameters
+        -debug undo
+
+"arena" prints the entire memory allocation arena or just the
+part for cluster CLUSTER, if specified.
+
+"check-database" examines and fixes internal lists (which should
+already be correct).  If the keyword "verbose" is added, extra
+information is printed during the check.
+
+"freeze-user-interface" makes all macros and other user-interface
+customizations be permanent parts of the database so that it can
+be saved to disk.
+
+"internal-errors" toggles the printing of internal database
+errors (initially on).
+
+"namespace" prints the variable names in the global namespace.
+
+"rtree" prints the R-tree geometric data for the current cell.
+
+"remove-parameters" removes all user-specified settings from
+the database so that the library can be saved without overriding
+these settings when read back in (useful for cell libraries).
+
+"undo" shows a dialog with the change history.
+
+!defarc command
+
+This command manipulates the default arc creation environment.
+The format is:
+        -defarc PROTOTYPE | *
+        -defarc PROTOTYPE [not] (fixed-angle | rigid | slide |
+                directional | negated | ends-extend)
+        -defarc * [not] (fixed-angle | rigid | slide |
+                directional | negated | ends-extend)
+        -defarc (PROTOTYPE | *) default
+        -defarc PROTOTYPE width WIDTH
+        -defarc PROTOTYPE angle ANGLE
+        -defarc PROTOTYPE pin PINNODE
+
+PROTOTYPE is an arc name from the current technology.  If "*" is
+used, the command applies to all arc prototypes (not all of these
+options can apply to all arc prototypes).  If only the PROTOTYPE
+(or "*") is given, the default state is printed for that
+prototype (or all prototypes).
+
+"fixed-angle", "not fixed-angle", "rigid", "not rigid", "slide"
+and "ot slide" all affect default constraints on the indicated
+arc prototypes.
+
+"directional", "not directional", "negated", "not negated",
+"ends-extend" and "not ends-extend" all affect default properties
+on the indicated arc prototypes.
+
+"default" indicates that the creation style should revert to its
+initial state.  When "*" is specified, defaults set on all arcs
+will be removed and individual arc characteristics will prevail.
+
+"width" sets the default width of the specified arcs ("*" cannot
+be used here).  New arcs will be WIDTH wide.
+
+"angle" sets the default angle increment of these arcs to ANGLE
+degrees.  A value of 90 produces Manhattan arcs and a value of 0
+allows any connection angle.
+
+"pin" sets the default pin node to be used when creating the
+specified arcs ("*" cannot be used here).  New arcs will be wired
+with the PINNODE node.
+
+Examples:
+"defarc * rigid" will set all new arcs to be rigid.
+"defarc metal not fixed-angle" will set new Metal arcs to be
+   flexible in their angle.
+"defarc * default" will set new arcs to their initial defaults.
+"defarc diffusion width 5" will set the default width for new
+   Diffusion arcs to 5.
+
+To change the characteristics of existing arcs, use "arc".
+For more information on arc constraints, use "help laycon".
+For more information on arc properties, use "help properties".
+
+!defnode command
+
+This command  changes the default characteristics of newly
+created nodes and affects node prototypes.  The format is:
+        -defnode PRIMITIVE [size X Y]
+        -defnode (CELL | *) [[not] expanded]
+        -defnode * [placement [ANGLE]]
+        -defnode CELL [not] alterable
+        -defnode (CELL | *) [[not] instances-locked]
+        -defnode * [not] locked-primitives
+        -defnode * [not] centered-primitives
+        -defnode * [not] check-dates
+        -defnode * [not] copy-ports
+        -defnode (CELL | *) [not] from-cell-library
+
+The first argument is always a node prototype name: either a
+PRIMITIVE rom the current technology, a CELL name from the
+current library, or "*" which means that the command applies to
+all node prototypes.  If nothing else is given, current defaults
+for that prototype are listed.
+
+"size" indicates that the default size of these newly created
+primitives will be X by Y.
+
+"expanded" indicates that the contents of cells will be visible
+when created.  The negated form, not expanded indicates that the
+contents of cells will not be visible when created but will be
+drawn as boxes with the cell name inside.  If either option is
+set for all cells ("*") then only those currently defined will
+be affected.
+
+"placement" indicates that all newly created node prototypes will
+be oriented at ANGLE degrees.  If ANGLE is not specified, then it
+will be 90 degrees more then the current placement angle.  If the
+letter "t" follows the angle, then nodes are transposed after
+being rotated.
+
+"alterable" indicates that changes may be made to cell contents
+(this is the default state).  "not alterable" locks all changes
+to cell contents (this is useful when the cell is finished and
+should only be viewed, not changed).
+
+"instances-locked" indicates that no changes may be made to instances
+(off by default).  "not instances-locked" locks all instances in
+cells (this is useful when routing around already placed cells
+that should not be further moved, deleted, created, or otherwise
+altered).
+
+"locked-primitives" indicates that changes may be made to
+lockable primitives (this is the default state).
+"not locked-primitives" locks all changes to primitives (this is
+useful when working with array technologies that have lockable
+primitives).
+
+"centered-primitives" indicates that placement of new primitives
+will be done by the node center.  "not centered-primitives" makes
+new nodes be placed by their edge (this is the default).
+
+"check-dates" indicates that the creation and revision dates of
+subcells will be checked and warnings will be issued if a
+cell's revision date is earlier than some of its subcells.
+
+"copy-ports" indicates that subsequent commands which make copies
+of nodes (duplicate, array, and yanknode) will also copy exports
+on those nodes.
+
+"from-cell-library" indicates that the named cells (or all
+cells if "*" is used) are marked as part of a cell-library
+(or not part of a cell-library).  Cell libraries are libraries
+whose contents are unrelated and may be copied into other
+libraries that contain hierarchies.  Cells marked as part of a
+cell-library can be excluded from cell listings, making the
+listings cleaner.
+
+Many of these characteristics are used by the "create" command.
+To change the orientation of existing nodes, use "rotate" or
+   "mirror".
+To change the size of existing nodes, use "size".
+To change the expansion of existing nodes, use "node".
+
+!duplicate command
+
+This command copies the currently highlighted objects, exactly as
+they are, to a new location specified by the cursor.  If there
+are exports, they are duplicated only if the
+"defnode * copy-ports" command has been issued.
+
+To specify the objects to be copied, use "find".
+The granularity of the new object placement can be set with
+   "grid align".
+
+!echo command
+
+This command echoes its arguments back to the status terminal.
+It is only intended for use in command files and macros that
+wish to generate messages.  The format is:
+        -echo MESSAGE
+
+Where the MESSAGE will be printed.
+
+To use command files, see "commandfile".
+For more information about macros, see "macbegin" and "macend".
+
+!editcell command
+
+This command changes the current cell that is being edited.
+The format is:
+        -editcell [CELLNAME] [new-window] [non-redundant]
+
+where CELLNAME is the name of a cell in the current library
+that is to be edited.  If no cell with that name exists, one is
+created.  The display then changes to show the new cell and it
+is available for modification.  If no cellname is specified, the
+currently highlighted cell is selected for editing.
+
+The "new-window" option causes a new display window to be created
+for the cell.
+
+The "non-redundant" option prevents a new window from being
+created if the desired cell is already being displayed.
+
+To specify the cell to edit by default, use "find".
+To rename a cell or cell, use"rename".
+If you go into a cell in the current window you can pop back
+   out to the current window with "outhier".
+
+!erase command
+
+This command erases the currently highlighted objects.  The
+format is:
+        -erase [pass-through]
+        -erase geometry
+        -erase (clean-up | clean-up-all)
+
+If a node is erased, it and all connecting arcs are erased.  If
+the erased node has an export, all arcs to that port in outside
+instantiations of the current cell are erased.  If all arcs on
+a pin are erased, the pin is also deleted.
+
+The "pass-through" option causes the connecting arcs of an erased
+node to be reconnected with a new arc.  This reconnection option
+only works if the node has exactly two arcs of the same type
+connected to it.
+
+The "geometry" option causes everything in the selected area to
+be erased.  Arcs that cross the selection boundary are cropped to
+the boundary edge, thus erasing only the geometry in the selected
+area.
+
+The "clean-up" option causes all stranded pins to be removed,
+oversized pins to be shrunk, extraneous arcs and pins to be
+collapsed, and the cell to be made more "editable".  Zero-size
+nodes are highlighted.
+
+The "clean-up-all" option cleans-up all cells in the library.
+
+To specify the nodes and arcs to be erased, use "find".
+
+!find command
+
+This command selects objects on the display closest to the
+cursor.  The format is:
+        -find [more] [port] [vertex] [extra-info] [exclusively]
+              [within] [no-box] [special]
+        -find area-move | area-size | area-define [wait]
+        -find [port] [extra-info] [more] [still] [no-box]
+              [special] [constrained]
+              interactive | comp-interactive
+        -find vertex within interactive
+        -find constraint-angle ANGLE
+        -find constraint-default [on | off]
+        -find [extra-info] [port] [no-box] all [easy | hard]
+        -find snap-mode (none | center | midpoint | endpoint |
+              tangent | perpendicular | quadrant | intersection)
+        -find (down-stack | up-stack)
+        -find save NAME
+        -find name NAME [extra-info]
+        -find [more] [extra-info] [exclusively] arc ARCNAME
+        -find [more] [extra-info] [exclusively]
+              [vertex] node NODENAME
+        -find [more] [extra-info] export PORTNAME
+        -find object (TYPE ADDR | TYPEADDR)
+        -find clear
+        -find nonmanhattan
+        -find set-easy-selection | set-hard-selection
+        -find deselect-arcs
+
+The default selects the closest node or arc to the cursor.  If
+there is more than one object under the cursor, then successive
+find commands will find all of them in sequence.  Therefore, if
+you don't get the object you want, keep pressing the button.
+
+"more" indicates that the currently highlighted objects should
+remain highlighted and the newly selected object be added to the
+highlight.  Not all commands can handle multiple highlighted
+objects.  A special case of this option is when it is used with
+the "interactive" option.  In this case, it indicates that
+selection should cycle to the next object directly under the
+cursor (if there is one) rather than sticking with the
+highlighted object (which is the default way of doing interactive
+highlighting).
+
+"port" indicates that, in addition to selecting an object, the
+closest port to the cursor should also be highlighted.  This only
+works if a node is selected.
+
+"vertex" indicates that, in addition to selecting an object, the
+closest vertex to the cursor should also be highlighted.  This
+is only valid if a node with an outline description is selected.
+
+"extra-info" indicates that, in addition to highlighting the
+object, additional information should be displayed (the arcs
+connected to a node and the constraints on an arc).
+
+"exclusively" indicates that only arcs of the current arc type or
+nodes of the current node type should be selected.
+
+"within" indicates that the find should take place in the same
+object that is currently highlighted.  This is useful when
+selecting another vertex on the ame node.
+
+"no-box" indicates that no bounding box should be drawn around
+the object that is selected.  The assumption is that some other
+highlighting ("port" or "extra-info") will apply.
+
+"special" indicates that special objects should be selected
+(without this option, instance names and cell centers are not
+selectable).  Also, other objects (cell instances, annotation
+text) can be included in this category so that they are not
+selectable unless "special" is used.
+
+"area-move" sets the lower-left corner of an arbitrary
+rectangular highlight to the current cursor location.
+
+"area-size" stretches the upper-right corner of the arbitrary
+rectangular highlight to the current cursor location.
+
+"area-define" selects a complete rectangular highlight by first
+waiting for a button push, then stretching from that point until
+the button is released.  The "wait" option waits for a click
+before defining the area.
+
+"interactive" implements a Macintosh-like find/move.  Any object
+directly under the cursor will be selected.  If nothing is under
+the cursor, a rectangular region will be obtained as long as the
+cursor is down, and all objects in that region will be selected.
+If the cursor moves after selection, the objects will be moved.
+If a constraint angle is specified (with the "constraint-angle"
+option) and constraining is requested (with the
+"constraint-default" option) then object motion is constrained
+to increments of that angle.  The use of the "constrained" option
+toggles the application of constraints.  When the "interactive"
+option is used with the "within" and "vertex" options, it selects 
+and moves outline points in the current polygonally defined node.
+The "more" option causes cycling of the direct hits under the
+cursor, rather than sticking to the highlighted object, and does
+not move objects. The "still" option causes objects to be found
+only and not moved.
+
+"comp-interactive" implements another part of the Macintosh-like
+find/move by complementing the selection of what is under the
+cursor.  The optional ANGLE constrains moves to increments of
+that angle about the starting point.  The "stil" option causes
+objects to be found only and not moved
+
+"constraint-default" sets the default constraint that will be
+applied to the "interactive" and "comp-interactive" options.
+When on, these commands will constrain object motion to
+certain angles.  When off, these commands will not constrain
+object motion.
+
+"constraint-angle" specifies the angle that object motion will
+be forced into (in degrees about the starting point).
+
+"all" indicates that all objects in the current cell should be
+highlighted.  If "easy" or "hard" is specified, then only nodes
+and arcs that are easy-to-select (or not easy-to-select) will be
+highlighted.
+
+"snap-mode" sets a snap-point selection mode for subsequent
+"find" commands.  The "center" option selects the center of arcs
+and circles; "midpoint" selects the midpoint of lines; "endpoint"
+selects the end points on lines and arcs; "tangent" selects a
+tangent point to arcs and circles (two snap points must exist in
+order to determine proper tangents); "perpendicular" selects a
+close point on lines, arcs, and circles; "quadrant" selects a
+point on an axis on arcs and circles; and "intersection" selects
+an intersection between two objects.
+
+"down-stack" indicates that the current highlight selection
+should be pushed onto a stack.  The highlighting is not changed
+by this option.
+
+"up-stack" indicates that the top entry of the highlight stack
+should be popped off and highlighted.  The cursor position is
+not relevant here.
+
+"save" indicates that the current highlight selection should be
+saved under the name NAME.  The highlighting is not changed by
+this option.
+
+"name" indicates that the highlight selection that was saved with
+the name NAME should be retreived.  The cursor position is not
+relevant here.
+
+"arc" indicates that the arc (or network) named ARCNAME should be
+highlighted.
+
+"node" indicates that the node named NODENAME should be
+highlighted.
+
+"export" indicates that the node with the export named
+PORTNAME should be highlighted.
+
+"object" indicates that the object at address ADDR of type TYPE
+should be highlighted.  If a single keyword is given, it has
+both TYPE and ADDR as one (no separating space).
+
+"clear" indicates that all highlighting should be removed.
+
+"nonmanhattan" indicates that all nonmanhattan geometry should
+be selected.
+
+"set-easy-selection" and "set-hard-selection" cause the selected
+nodes and arcs to be marked "easy to select" (or not "easy to
+select").
+
+"deselect-arcs" causes all selected arcs to be unhighlighted.
+
+To name a node or arc, use the "node" or "arc" commands.
+To set outline information on a node, use the "node trace" command.
+
+!getproto command
+
+This command selects a specified node or arc as
+the current prototype for creation.  The format is:
+        -getproto [node] [TECHNOLOGY:]NODE
+        -getproto [arc] [TECHNOLOGY:]ARC
+        -getproto next-proto | prev-proto | this-proto
+
+"node" and" arc" are optional indicators of the type of object
+being selected.  If not specified, the command will automatically
+determine the intended object.
+
+NODE is the name of the node prototype and it can be preceded by
+a technology name TECHNOLOGY if it is not in the current
+technology.  NODE can also be a complex node prototype from the
+current library.
+
+ARC is the name of the arc prototype and it can be preceded by a
+technology name TECHNOLOGY if the arc prototype is not in the
+current technology.
+
+"next-proto" and "prev-proto" indicate that the next or previous
+prototype in the list is to be selected.
+
+"this-proto" indicates that the cell currently being edited
+should be selected as the current node prototype.  This is useful
+for picking up the cell in one window for creation in another
+window.
+
+The selected object is used by the "create" command.
+Another way to select the current object is with the "find"
+   command.
+
+!grid command
+
+This command controls the display of a grid on the screen and
+the alignment of newly created objects to that grid.
+The format is:
+        -grid [size X [Y]]
+        -grid alignment ALIGNMENT
+        -grid edges ALIGNMENT
+
+With no arguments, the command toggles the display of the grid.
+
+"size" specifies that the grid should be displayed every X by
+Y lambda units on the screen.  With one argument, the grid is
+made X by X units in size.
+
+"alignment" specifies that both coordinates of the cursor will be
+snapped to the nearest ALIGNMENT lambda units when pointing to
+the screen.
+
+"edges" specifies that the edges of manhattan arcs will be
+snapped to the nearest ALIGNMENT lambda units when adjustment
+is allowed within the port areas.  This applies to the "create"
+and "size" commands.  The value zero (the default) indicates
+that no edge alignment is to be done.
+
+!help command
+
+This command displays help about any of the commands in the
+program.  The format is:
+        -help
+        -help manual
+        -help illustrate
+        -help news
+        -help pulldowns
+
+Where the command with no arguments presents this dialog for
+getting help on every command.
+
+"manual" causes the HTML manual to be displayed in a browser.
+
+"illustrate" causes the entire space of Electric commands to be
+converted into a cell that can be viewed and edited.
+
+"news" is a facility that prints the most recent news about
+Electric, from a system-wide information file.
+
+"pulldowns" dumps all pulldown menus to a disk file.
+
+To get help on the single key commands, the commands in the
+menus, or the commands on the buttons, use "bind" to see what
+full command names they are bound to and use help on those
+command names.
+
+!if command
+
+This command conditionally executes another command or macro.
+The format is:
+        -if TERM1 RELATION TERM2 COMMAND
+
+where TERM1 and TERM2 are values that will be compared with the
+RELATION and RELATION is one of ==, !=, >, >=, <, or <=.
+If the relationship holds, then COMMAND will be executed.
+
+!interpret command
+
+This command invokes a language interpreter which provides a
+high-level interface for Electric.  The format is:
+        -interpret [lisp|tcl|java] [CODE]
+        -interpret file (lisp|tcl|java) FILENAME
+
+Where the first argument is an optional language subsystem
+("lisp" is ELK LISP, "tcl" is the TCL language, "java" is JAVA).
+If CODE is given, it is executed immediately.  Otherwise, an
+interpretive session is begun.
+
+If the first argument is "file", then the second argument is the
+language name and the third is a disk file to be read into that
+language interpreter.
+
+When in the interpreter, you can enter code which will be
+evaluated.  Special forms can be used to access the Electric
+database.  You can exit from the interpreter and return to
+Electric with a ^D.
+
+The "var" command allows code to be attached to database objects.
+
+!iterate command
+
+This command repeats the previous command.  The format is:
+        -iterate [COUNT | ARRAY-VARIABLE MACRO]
+        -iterate remembered
+
+where COUNT is the number of times to repeat the last command.
+If the count is not specified, it defaults to 1.
+
+If two arguments are given, they are an ARRAY-VARIABLE and a
+MACRO to run.  The macro is called once for each entry in the
+array, and it is given two parameters: %1 is the type of the
+entry and %2 is the address.
+
+The argument "remembered" causes the last command given to the
+"remember" command to be repeated.
+
+!killcell command
+
+This command deletes a cell from the current library.
+The format is:
+        -killcell CELLNAME
+
+where CELLNAME is the name of an existing cell in the current
+library.  If there are any instantiations of the cell, the
+command will fail and explain why.
+
+To rename a cell or cell, use "rename".
+
+!lambda command
+
+This command changes the value of lambda: the size of a single
+unit.  The ormat is:
+        -lambda
+        -lambda change-lib VALUE
+        -lambda change-all-libs VALUE
+        -lambda change-tech VALUE
+        -lambda display-units (lambda | micron | inch |
+                               centimeter | millimeter |
+                               half-nanometer)
+        -lambda internal-units (millimeter | half-nanometer)
+
+The smallest unit is the half-nanometer (one two-thousandth of
+a micron).  Lambda is the number of half-nanometer per design
+unit.  Thus, if lambda is 2000 and a transistor has the size 2x2,
+then that transistor is 4000x4000, or 2 microns square.  The
+default command prints the values of lambda for all technologies
+in use.
+
+"change-lib" indicates that the entire library should be scaled so
+that all objects remain the same size in lambda units.  All that
+changes is their absolute size in microns, not their relative
+size in lambda.  "change-all-libs" works on all current libraries.
+
+"change-tech" indicates that the value of lambda is all that
+should be changed.  Existing designs will not be scaled and so
+will remain the same in microns but will change in the number
+of lambda units.
+
+The "display-units" option sets the way that distance will be
+presented textually.  The default is "lambda" which causes all
+numbers to be relative to the current lambda grid size.  With
+other units, Electric will use appropriate letters after all
+values (i.e. 12.3u for microns, 15" for inches).
+
+The "internal-units" option sets the minimum database unit.
+The default is half-nanometer, but for larger designs, other
+values can be used to scale the database.
+
+The new value of lambda, VALUE, applies only to the current
+technology.
+
+!library command
+
+This command manipulates libraries of cells and cells.  The
+format is:
+        -library use LIBRARY
+        -library new LIBRARY
+        -library kill [LIBRARY]
+        -library read FILE [binary | text | cif | lef | def |
+                            gds | edif | sue | dxf] [make-current]
+        -library write LIBRARY [binary | text | cif | gds |
+                                edif | dxf | l | plot | hpgl |
+                                eagle | pads | lef |
+                                postscript | printed-postscript]
+        -library purge
+        -library save
+        -library default-path PATH
+
+"use" indicates that LIBRARY should become the current library.
+If the name does not exist, a new library will be created with
+that name.
+
+"new" indicates that LIBRARY should be created, but not set to
+the current library.
+
+"kill" indicates that LIBRARY should be deleted.  The default is
+to kill the current library.  You cannot delete the last library
+because there must always be a current library.  If the library
+to be killed has changed but not saved, you will be asked to
+confirm that you really want to kill it.  This option is not
+undoable.
+
+"read" causes the specified disk file FILE to be read into a
+library.  The additional format options "binary", "text", "cif"
+(Caltech Intermediate Format), "lef" (Library Exchange Format),
+"def" (Design Exchange Format), "gds" (Calma GDS II), "sue"
+(Schematic User Environment), "edif" (Electronic Design
+Interchange Format), and "dxf" (AutoCAD format) indicate the
+style of the library file (the default is "binary").  The
+additional option "make-current" causes this library to become
+the current library after being read.  This option is not undoable.
+
+"write" causes the specified library LIBRARY to be written to
+disk.  The additional format options "binary", "text", "cif",
+"gds", "eagle", "edif", "dxf", "l", "lef", "pads", "plot", "hpgl",
+"postscript", "printed-postscript", and "skill" indicate the style
+of the library file (the default is "binary").  This option is not
+undoable.
+
+"purge" cleans the current library by deleting all cells that
+are have newer versions and are no longer in use.
+
+"save" requests all libraries that have been changed to be
+written in binary format.  This option is not undoable.
+
+"default-path" sets the default location of system library
+files.
+
+To see a list of libraries, use "show libraries".
+To rename a library, use "rename".
+
+!macbegin command
+
+This command marks the start of a set of commands that are to be
+grouped together into a macro.  The format is:
+        -macbegin NAME [verbose | no-execute]
+
+where NAME is the name of the macro.  The optional "verbose"
+switch indicates that the macro commands are to be echoed when
+executed (by default they are not echoed when executed).  The
+switch "no-execute" indicates that the macro is not to be
+executed as it is defined (the default is to execute the commands
+that follow while adding them to the macro definition).
+
+The body of the macro can be parameterized by using the %X
+construct where X is a digit from 1 to 9.  At macro execution,
+the %X will be replaced with the macro parameters.  To specify
+the value to use for a parameter during macro definition or if
+the parameter is defaulted, follow the %X with [value].  For
+example, the sequence:
+        -macbegin node4x4
+        -defnode %1[overglass-node] size 4 4
+        -macend
+will define a macro called "node4x4" which takes one argument:
+a primitive node name.  The definition of the macro will be
+executed and will set the verglass-node to default to 4x4 in
+size.  Instantiations of the macro such as:
+        -node4x4 transistor
+will then set the transistor node to default to 4x4 in size.
+
+The macro of commands is terminated with "macend".
+Execution of a macro can be terminated with "macdone".
+Macros are executed by invoking their name.
+Macros can be attached to keys, buttons, and menus with "bind".
+Macros can be renamed with "rename".
+For information about existing macros, use "show macros".
+For other variable substitutions, see "var".
+
+!macdone command
+
+This command, when executed inside of a macro, causes all
+subsequent commands in that macro to be skipped.  It thus
+returns prematurely from the macro.
+
+The macro of commands is defined with "macbegin" and "macend".
+Macros are executed by invoking their name.
+For information about existing macros, use "show macros".
+Macros can be attached to keys, buttons, and menus with "bind".
+
+!macend command
+
+This command marks the end of a collection
+of commands that are to be grouped together into a macro.
+
+The macro of commands is initiated with "macbegin".
+Execution of a macro can be terminated with "macdone".
+Macros are executed by invoking their name.
+For information about existing macros, use "show macros".
+Macros can be attached to keys, buttons, and menus with "bind".
+
+!menu command
+
+This command controls the display of the menus.  The format is:
+        -menu on | off
+        -menu [top | bottom | left | right]
+              [size (auto | (COLUMNS ROWS))]
+        -menu popup NAME size SIZE
+        -menu popup NAME header MESSAGE
+        -menu setmenubar [POPUPS]
+        -menu dopopup [COMMAND]
+
+"on" and "off" control the display of the fixed menu on the
+screen.
+
+"top", "bottom", "left" and "right" indicate that the fixed menu
+is to be displayed in that location on the screen.
+
+"size" indicates that the fixed menu should be COLUMNS by ROWS in
+size.  If the keyword "auto" is used, the size is automatically
+computed to be right for the current technology.
+
+"popup" indicates that a pop-up menu called NAME is to be
+modified.  The "size" option indicates that the menu will contain
+SIZE entries and will be created if it does not exist.  The
+"header" option sets the menu header to the string MESSAGE.
+
+"setmenubar" allows the POPUPS to be attached to pulldown menus.
+With no arguments, it turns the menu bar off.
+
+"dopopup" causes pop-up menu execution of the specified COMMAND.  If
+no COMMAND is given, pop-up menu execution begins with command
+selection.
+
+To examine or set the entries in the menu, use "bind".
+To invoke a popup menu, issue its name.
+
+!mirror command
+
+This command mirrors the currently highlighted node along a
+specified axis.  The format is:
+        -mirror horizontal | vertical
+        -mirror (horizontal | vertical) about-grab-point
+        -mirror (horizontal | vertical) about-trace-point
+        -mirror (horizontal | vertical) sensibly
+
+"horizontal" indicates horizontal mirroring (about the X axis)
+causing the top and the bottom parts of the node to be exchanged.
+
+"vertical" indicates vertical mirroring where the left and right
+sides of the node are exchanged.
+
+The optional "about-grab-point" indicates that mirroring should
+be done about the grab-point of the node rather than its center.
+
+The optional "about-trace-point" indicates that mirroring should
+be done about the currently highlighted outline point of the node
+rather than its center.  If no outline point is highlighted, the
+first is used.  The node must have outline information.
+
+The optional "sensibly" indicates that the mirroring should go
+about the center, unless there is a grab-point explicitly placed,
+in which case use that.
+
+All arcs connected to that node will alter to stay connected to
+the node.  It may be necessary to move other nodes as well if
+they are attached with the appropriate style of arc.
+
+To specify the node to be mirrored, use "find".
+To specify outline information, use "node".
+To specify the default orientation for new nodes, use "defnode".
+To set arc style, use "arc".
+
+!move command
+
+This command moves the currently highlighted objects.
+The format is:
+        -move
+        -move (left | right | up | down) AMOUNT
+        -move to X Y
+        -move angle ANGLE
+        -move valign (top|bottom|center)
+        -move halign (left|right|center)
+where the command with no arguments moves the currently
+highlighted objects to the location of the cursor.  If the node
+is a cell, its grab point is moved to the location of the
+cursor.  If the selected object has a snap-point, that point is
+moved to the location of the cursor.
+
+"left", "right", "up", and "down" indicate that the current
+objects are to be moved by AMOUNT in that direction (the default
+distance is 1).
+
+"to" indicates that the objects will move to the coordinates
+(X, Y).
+
+"angle" indicates that the objects will move along a line at an
+increment of ANGLE degrees from its current location.
+
+"valign" and "halign" cause all selected objects to be moved to
+align with each other.  Vertically, they can align to the top,
+bottom, or center.  Horizontally, they can align to the left,
+right, or center.
+
+When moving nodes, it may be necessary to stretch and shift
+connecting arcs and to move other nodes if they are attached
+with the appropriate style of arc.
+
+To specify the objects to be moved and a snap point, use "find".
+To set arc style, use "arc".
+
+!node command
+
+This command modifies the characteristics of the currently
+highlighted node instance.  The format is:
+        -node [not] expand [DEPTH]
+        -node name LOCALNAME
+        -node not name
+        -node trace [wait-for-down] [store-trace]
+        -node trace add-point [X Y] | move-point [X Y] |
+                    delete-point
+        -node trace (next-point | prev-point)
+        -node trace construct-annulus INSIDE OUTSIDE
+                                      [SEGMENTS [DEGREES]]
+        -node trace fillet
+        -node trace init-points
+        -node regrid-selected
+        -node cover-implant
+
+"expand" indicates that the contents of the currently highlighted
+cells are to be displayed (and objects inside of them are also
+displayed) with DEPTH more levels of visualization than is
+currently displayed.  If the depth is not specified, it defaults
+to infinity (everything within the highlighted area is shown).
+The normal method of display is un-expanded in which cells are
+shown as empty boxes with port connections.  The "not expand"
+form sets the opposite display.
+
+"name" indicates that the currently highlighted node's name
+should be LOCALNAME.  This name is not to be confused with the
+name of the node prototype: it is simply a local identifier used
+to distinguish the nodes from others in the cell.  The
+"not name" form removes the name.  The name of the currently
+highlighted node can be accessed with: $~.node_name, which is
+useful in macros.
+
+"trace" is used to set outline information in nodes that can be
+polygonally defined.  Such nodes include the pure-layer nodes of
+the layout technologies, most MOS transistors (to make them
+serpentine), and the polygon nodes of the artwork technology.
+The command with no parameters reads a continuous cursor outline
+while any button is held down.  The "wait-for-down" option
+actually waits for the button to be pushed (useful if the command
+was issued from a button push such that the button is already
+down).  The "store" option stores this outline information on the
+currently highlighted node (in all cases, the information is left
+in the command interpreter variable %T).
+
+Single points of an outline can be modified with "add-point" which
+adds the current cursor location to the outline (or the specified
+coordinates if they are given), "move-point" which moves the
+current outline point to the location of the cursor (or the
+specified coordinates if they are given), and "delete-point"
+which deletes the current outline point.
+
+To move around the outline, use the "next-point" and "prev-point"
+options.
+
+A special case of outline setting is the "construct-annulus" option
+which places a ring-shaped structure in the current node.  The
+inside diameter of the ring is given in INSIDE, the outside
+diameter is in OUTSIDE, the number of segments to use when
+approximating a circle may be given in SEGMENTS (it defaults to
+16), and the number of degrees of the circle to construct is
+DEGREES (it defaults to 360).
+
+Another special command is "fillet" which takes two polygonally
+defined nodes, finds the line segments in the two that are
+closest, and modifies them so that they intersect.
+
+The special command "init-points" causes an initial set of points
+to be defined for the selected node.
+
+The "regrid-selected" option adjusts the position of the selected
+objects so that they sit on proper alignment boundaries.
+
+The "cover-implant" option creates pure-layer nodes of implant to
+cover the nodes and arcs that have such implants.  Previous pure-
+layer nodes are removed, and the new ones are made hard-to-select
+(and left highlighted).
+
+To specify the node to be modified, use "find".
+To specify an outline point on a node, use "find vertex".
+Node names are also set by the "array" command.
+Commands for dealing with macros are "macbegin" and "macend".
+Variables can be manipulated with "var".
+
+!offtool command
+
+This command turns an tool off.  The format is:
+        -offtool TOOL [permanently]
+
+where TOOL is the name of an tool that is running (the default
+state for most interactive tools).  If the "permanently" option is
+given, this ommand is not undoable (useful if an tool acts
+incrementally such that "undo" only fires a new action).
+
+The command that reverses this is "ontool".
+To give specific instructions to an tool, use "telltool".
+To see a list of tools, use "show tools".
+
+!ontool command
+
+This command turns an tool on.  The format is:
+        -ontool TOOL: [no-catch-up]
+
+where TOOL is the name of an tool that is not running.  Incremental
+tools will catch up with changes that have been made while they
+were off.  If the "no-catch-up" switch is given, this action
+will be supressed.
+
+The command that reverses this is "offtool".
+To give specific instructions to an tool, use "telltool".
+To see a list of tools, use "show tools".
+
+!outhier command
+
+This command edits a higher level of hierarchy from the current
+cell.  The format is:
+        -outhier [COUNT]
+
+where COUNT, if specified, is the number of levels of
+hierarchical depth to climb out.  If not specified, one level is
+assumed.  The display changes to show the contents of the parent
+cell.  If an export is selected, and only one level of
+hierarchy is specified, the port path is followed.  This may
+result in a popup menu listing the possible choices up the
+hierarchy.
+
+This command recalls the hierarchical path created by a sequence
+of editcell" commands.
+
+!package command
+
+This command packages the objects in the highlighted area into a
+new cell.  The format is:
+        -package NEWNAME
+
+where NEWNAME is the name of a new cell that is to be created
+with the objects in the highlighted area.  The current cell is
+left untouched.  All nodes in the highlighted are packaged.
+Those arcs connecting nodes that are both in the highlighted
+area are also packaged.
+
+To specify the area to be packaged, use "find".
+For the opposite operation, which replaces a cell with its nodes
+   and arcs, use "yanknode".
+
+!port command
+
+This command manipulates the characteristics of ports in the
+current cell. The format is as follows:
+        -port export PORTNAME [specify | (use PORT)]
+                              [always-drawn] [body-only]
+                              [input | output | bidirectional |
+                               power | ground |
+                               refbase | refname NAME |
+                               clock | clock1 | clock2 | clock3 |
+                               clock4 | clock5 | clock6]
+        -port not export [specify | (use PORT) | all | geometry]
+        -port re-export-all
+        -port highlighted-re-export
+        -port identify
+        -port synchronize-library LIBRARY
+        -port move [remain-highlighted]
+        -port change [specify | (use PORT)] [always-drawn]
+                     [body-only]
+                     [input | output | bidirectional | power |
+                      ground | refbase | clock | clock1 |
+                      clock2 | clock3 | clock4 | clock5 |
+                      clock6 | none]
+        -port labels [none | short | long | cross]
+
+"export" indicates that a port on the currently highlighted node
+is to be exported so that it becomes an export on the current cell.
+The name of the export on the current cell will be PORTNAME which
+should be unique among other exports on the current cell (if not,
+letters will be added to the end of it so that it is unique).
+
+"not export" indicates that an port, exported from the currently
+highlighted node, should be removed as an export on the current
+cell.
+
+"re-export-all" indicates that all ports in the current cell
+that are not connected or already exported should be exported.
+This includes only those ports that are on cells (not
+primitives) and have therefore already been exported one level.
+
+"highlighted-re-export" indicates that all ports in the
+highlighted area should be re-exported (if not already exported
+and not connected and not on primitives).
+
+"identify" causes all ports in the current cell to be shown.
+The display is temporary, and goes away when the cell is redrawn.
+
+"synchronize-library" examines library LIBRARY and finds cells
+there with the same name as cells in the current library.  All
+exports in these cells are then copied to the current library.
+This is useful when two libraries are imported, and one has
+exports but the other doesn't.
+
+"move" causes an export to be moved from one node to
+another.  Both nodes and their respective ports must be selected:
+the source port is found with "find port" and the destination
+port is found with "find more port".  The "remain-highlighted"
+option keeps both nodes highlighted.
+
+"change" indicates that a export, from the currently
+highlighted node, should have its characteristics changed.
+
+"labels" indicates how port labels should be displayed on the
+screen.  The options are "none" which causes nothing to be
+displayed at the ports, "cross" which causes small plus-signs
+to be displayed, "short" (the default) which forces the short
+port name to be displayed, and "long" which forces the full
+port name to be displayed.  The difference between "short" and
+"long" port names is that short names stop at the first
+nonalphanumeric character.  If no port label style is given,
+the current port style is printed.
+
+For the "export", "not export" and "change" options, the command
+will attempt to determine which port on the currently highlighted
+node is the port under consideration.  The following options
+will help with that selection.
+
+"specify" indicates that all of the ports on the currently
+highlighted node should be enumerated and that the user should
+be given the chance to select one of them.
+
+"use" indicates that the port named PORT on the currently
+highlighted node is to be affected.
+
+"all" indicates that all ports on the currently highlighted
+node are to be affected (only valid with the un-export option).
+
+"geometry" indicates that only exports in the highlighted area
+will be removed.
+
+For the "export" and "change" options, a number of
+characteristics may be attached to the export.
+These are the options:
+
+"always-drawn" the export name should always be printed (even when
+   the cell is expanded).
+"body-only" the export should not be included on icon views of the
+   cell.
+"input" the export is an input signal to the current cell.
+"output" the export is an output signal to the current cell.
+"bidirectional" the export is a bidirectional signal to the current
+   cell.
+"power" the export is a power source to the current cell.
+"ground" the export is a ground source to the current cell.
+"refin" the export is a bias-level reference input to the current
+   cell.
+"refout" the export is a bias-level reference output to the current
+   cell.
+"clock" the export is a clock signal to the current cell.
+"clock1" the export is clock phase 1 to the current cell.
+"clock2" the export is clock phase 2 to the current cell.
+"clock3" the export is clock phase 3 to the current cell.
+"clock4" the export is clock phase 4 to the current cell.
+"clock5" the export is clock phase 5 to the current cell.
+"clock6" the export is clock phase 6 to the current cell.
+
+To specify the node whose port is to be altered, use "find".
+To change the name of an export, use "rename".
+
+!quit command
+
+This command exits from the design tool.  The format is:
+        -quit
+
+If changes have been made that would be lost by quitting, you
+are asked to confirm that you want to quit.
+
+To find out which libraries have been changed, use "show
+   libraries".
+
+!redraw command
+
+This command re-displays everything on both the status and the
+editing screens.  The format is:
+        -redraw [DISPLAY | * | windows]
+
+If DISPLAY is specified, the screen is redrawn on some other
+display device known to the graphics package (this only works on
+a VAX).  The device "*" indicates a reinitialization of the
+display.  The keyword "windows" requests that only the windows be
+redrawn.  In the default case, the screen is simply redrawn
+which is useful if you suspect that its contents are incorrect.
+
+!remember command
+
+This command takes another command as a parameter, and stores
+it for repeating with the "iterate remembered" command.
+
+!rename command
+
+This command changes the name of virtually anything in the system
+that has a name.  The format of the command is:
+        -rename OLDNAME NEWNAME [WHICH]
+
+where OLDNAME is the name of an existing object and NEWNAME is
+the name to which it will be changed.  The command can change the
+name of any object in the Electric database.  If there is more
+than one object with the old name, the parameter WHICH will
+decide which variable to change (p: primitive node prototype, c:
+cell, a: arc prototype, r: export in the current cell,
+l: library, t: technology, d: command name, m: macro name, u:
+popup menu name, n: network name, or v: database variable).  If
+the parameter is missing and there is ambiguity, you will be
+prompted for the particular one to rename.
+
+To see lists of most object names, use "show".
+
+!replace command
+
+This command replaces the currently highlighted node or arc with
+another in its place with all connecting components intact.
+The format is:
+        -replace NEWTYPE [connected | this-cell | this-library |
+                          universally | ignore-port-names]
+
+where NEWTYPE is the new node or arc prototype that is to be
+inserted where the currently highlighted object resides.  For
+nodes, the new one must have ports at the same position as the
+old one so that the arcs can be run to he same locations.  For
+arcs, the new arc must be able to connect to its two nodes.
+
+The "connected" option will replace all objects of the currently
+highlighted prototype with the new prototype, provided that they
+are electrically connected to the highlighted object.
+
+The "this-cell" option will replace all objects of the currently
+highlighted prototype with the new prototype, throughout this
+cell.
+
+The "this-library" option will replace all objects of the currently
+highlighted prototype with the new prototype, throughout this
+library.
+
+The "universally" option will replace all objects of the
+currently highlighted prototype with the new prototype,
+throughout the library.
+
+The "ignore-port-names" options specifies that ports on replaced
+nodes will be aligned by position only, and not their names.
+
+To specify the node or arc to be replaced, use "find".
+
+!rotate command
+
+This command rotates the currently highlighted node.  The format
+is:
+        -rotate interactively
+        -rotate
+        -rotate ANGLE [more [sensibly]]
+        -rotate ANGLE [more [about-grab-point | about-trace-point]]
+
+The "interactively" option causes graphic selection of the new
+angle by attaching a rotating box to the cursor.
+
+ANGLE is the new angle of rotation, in degrees.  If "more" is
+specified, the new angle is ANGLE degrees more than the current
+angle.
+
+The "sensibly" option causes rotation of cell instances with
+cell centers to be done about that cell center.  When editing
+outlines, it rotates about the current point.
+
+The "about-grab-point" option requests that the rotation go about
+the grab-point rather than the node center.  If there is a snap
+point selected, rotation goes about that.
+
+The "about-trace-point" option requests that the rotation go
+about the currently highlighted outline point rather than the node
+center (the node must have outline information; if there is no
+currently highlighted outline point, the first is used).
+
+All arcs connected to the node will alter to stay connected to
+the node.  It may be necessary to move and rotate other nodes as
+well if they are attached with the appropriate style of arc.
+
+To specify the node to be rotated and a snap point, use "find".
+To set arc style, use "arc".
+To set outline information, use "node".
+To specify the default rotation for newly created nodes, use
+   "defnode".
+
+!show command
+
+This command prints descriptive information.  The format is:
+        -show tools
+        -show bindings keys | menus | (popups [MENU]) | buttons |
+                       all | short
+        -show coverage
+        -show cells [library LIB] [matching WILDCARD]
+        -show dates [CELL]
+        -show environment [authors]
+        -show error (current | next | last)
+        -show cells [dates] [edit] [library LIB]
+                     [matching WILDCARD] [file FILE]
+        -show cells graphically
+        -show cells contained-in-this
+        -show history [BATCH]
+        -show libraries
+        -show macros [MACRO]
+        -show networks
+        -show object [short | long]
+        -show ports [PORTTYPE]
+        -show primitives
+        -show solvers
+        -show technologies
+        -show usage CELL
+        -show views [CELL]
+
+"tools" prints a list of analysis and synthesis tools along with
+their current status.
+
+"bindings" is used to print command bindings.  It requires one of
+the parameters "keys", "menus", "popups", or "buttons" and prints
+current bindings to keys, menu entries, popup menus, or mouse
+buttons.  The "all" option prints all of the above information
+and the "short" option briefly lists the commands bound to the
+mouse buttons and single keys.  The "popups" option can take an
+optional popup menu name to print its contents only.
+
+"coverage" reports the percentage of the current cell that is
+covered by the various layers, all the way down the hierarchy.
+
+"cells", with no options, prints a list of cells in the current
+library.  The "library" option causes the list of cells to be
+made on library LIB.  The "matching" option causes only those
+cells matching the WILDCARD to be listed (the wildcard may have
+"?" and "*" to match any character and any string).
+
+"dates" prints the creation date, revision date, and revision
+number of the current cell.  If a CELL is specified, that
+cell's information is given.
+
+"environment" prints general information about this version of
+Electric.  The "authors" options lists all people who have
+contributed to the code.
+
+"error" prints errors from tools (such as DRC, ERC, or NCC).
+The "next" option shows the next error; the "prev" option shows
+the previous error; and the "current" option repeats the current
+error.
+
+"cells", with no options, prints a list of cells in the current
+library.  The "dates" option includes cell creation and revision
+dates.  The "edit" option uses an editing window on the cell
+names (in which the M(=) key will edit the cell on the current
+line).  With either of these options, the "library" or "matching"
+options can be used, as described in the "show cells" section
+above.  The "file" option (not available with the "edit" option)
+causes the list to be saved in a disk file (tab-separated, for
+spreadsheets).  Two final options must stand alone: "graphically"
+produces a graph showing the hierarchical organization of cells
+in the current library, and "contained-in-this" prints a list of
+subcells immediately inside of the current cell.  For a
+hierarchical list of cells inside the highlighted cell
+instance, use "show object long".  
+
+"history" prints a list of changes that have been made.  If a
+BATCH number is given, full details are printed about that batch
+of changes.
+
+"libraries" prints a list of libraries.
+
+"macros" prints a list of macros.  If MACRO is specified, the
+commands in that macro are printed.
+
+"networks" prints a list of networks in the current cell.
+
+"object" prints information about the currently highlighted
+object.  If the "short" option is used then less information is
+printed.  If the "long" option is used then more information is
+printed.
+
+"port" prints the names of the PORTTYPES requested.  Valid type
+names are the standard export types ("input", "power", etc.)
+The default option is "all", and lists all export types including
+generic.
+
+"primitives" prints the current primitive node prototypes in the
+current technology.
+
+"solvers" prints a list of constraint solvers.
+
+"technologies" prints a list of technologies.
+
+"usage" prints a list of supercells that include instances of
+the specified cell.
+
+"views" prints the current list of views.  If a CELL is given,
+all view associations for that cell are listed.
+
+Tools can be controlled with "offtool", "ontool", and "telltool".
+Cells can be manipulated with "editcell" and "killcell".
+Changes can be manipulated with "undo".
+Libraries can be manipulated with "library".
+Macros can be manipulated with "macbegin" and "macend".
+Constraint solvers can be manipulated with "constraint".
+Technologies can be manipulated with "technology".
+Views can be manipulated with "view".
+All objects can be renamed with "rename".
+
+!size command
+
+This command changes the size of the currently highlighted node
+or arcs.  The format for a node is:
+        -size XSIZE YSIZE [use-transformation]
+        -size center-fixed
+        -size corner-fixed
+
+where XSIZE is the new X dimension of the node and YSIZE is the
+new Y dimension of the node.  For nodes that have highlighted
+areas smaller than the entire node (such as MOS transistors),
+specify the size of that highlighted area and not the entire node.
+
+"use-transformation" indicates that any transformation on the
+node should be applied before setting the size, so that the size
+values make sense with respect to their displayed orientation.
+
+"center-fixed" causes the node to be expanded to the cursor
+position, while holding the node center at a fixed position.
+This means that all four corners of the node will move by the
+same amount away or towards the node center.
+
+"corner-fixed" causes the node to be expanded so that the corner
+closest to the cursor moves to the cursor and the opposite corner
+remains fixed.  All arcs connected to the node will alter to stay
+connected to the node.  It may be necessary to move other nodes
+as well if they are attached with the appropriate style of arc.
+
+For one or more arcs, the format is:
+        -size WIDTH
+        -size center-fixed
+where WIDTH is the new arc width.
+
+"center-fixed" will stretch the arc so that the closest edge to
+the cursor is brought to the cursor and the other edge is moved
+by the same amount.  This option can only accept one highlighted
+arc.
+
+To specify the node or arcs whose size is to be changed, use
+   "find".
+To specify the default size of newly created nodes and arcs,
+   use "defarc" and "defnode".
+To set arc styles for constraint propagation, use "arc".
+Other commands that modify nodes are "move", "rotate", and
+   "mirror".
+
+!spread command
+
+This command spreads open the cell along an axis running through
+the currently highlighted node.  The format is:
+        -spread left | right | up | down [AMOUNT]
+
+where the arguments "left", "right", "up" and "down" cause space
+to be inserted in that direction from the current node.  For
+example, "right" causes all layout to the right to be pushed
+along the horizontal axis.  The amount of the spread defaults
+to the current design-rule spacing for that particular node but
+may be specified as AMOUNT.  Negative values of AMOUNT will
+compact.
+
+To specify the spread pivot node, use "find".
+Real compaction can be done with the compaction tool.
+
+!system command
+
+This command allows you to issue commands that are specific to the
+current operating system.  The format is:
+        -system OPTION
+
+where the OPTION may be "setstatusfont" on the Macintosh or Windows
+to change the messages window font.  On Windows, you may also use
+"print" to print the current cell.
+
+!technology command
+
+This command works with technologies: the environments of design.
+The format is:
+        -technology use TECHNAME
+        -technology autoswitch (on | off)
+        -technology convert TECHNAME
+        -technology document TECHNAME
+        -technology tell TECHNAME MESSAGE
+        -technology kill TECHNAME
+        -technology edit [OPTIONS]
+
+where the "use" option causes the default design technology to
+switch to TECHNAME.  Although one library can have cells in
+different technologies, only one technology can have its color
+map loaded at a time.  Therefore, cells in technologies other
+than the current one may appear with strange colors.
+
+The "autoswitch on" option requests that the current technology
+automatically switch to match the current cell.  "autoswitch off"
+reverts to manual technology switching.
+
+The "convert" option causes the current cell to be converted to
+technology TECHNAME.  The current technology is not altered.
+This option does not work with all combinations of technologies
+and in fact is currently only able to translate from MOS to
+schematic or between similar MOS technologies.
+
+The "document" option causes a disk file to be written that
+describes technology TECHNAME.  The file is called "TECHNAME.doc".
+
+The "tell" option causes the MESSAGE to be sent to technology
+TECHNAME.  The meaning of these messages is technology specific.
+Currently, only the mocmos technology accepts this option.  In
+general, this option is not undoable.
+
+The "kill" option deletes the named technology.  This option is
+not undoable.
+
+The "edit" option allows technology editing by converting
+technologies to libraries, editing the libraries, and converting
+the libraries back to technologies.  You can also create a new
+library that defines a technology.
+
+For more detail on technology editing, use "help tecedit".
+To see a summary of the technologies, use "show technologies".
+
+!telltool command
+
+This command sends information to an tool.  The format is:
+        -telltool TOOL MESSAGE
+
+where TOOL is the name of a synthesis or analysis tool and MESSAGE
+is specific to that tool.  In general, the results of this command
+are not undoable.  The current set of tools is as follows:
+    user             execute the command in MESSAGE
+    io               send MESSAGE to I/O tool
+    compaction       send MESSAGE to compaction tool
+    pla              send MESSAGE to PLA tool
+    routing          send MESSAGE to routing tool 
+    silicon-compiler send MESSAGE to silicon place-and-route tool
+    vhdl-compiler    send MESSAGE to VHDL compiler tool
+    network          send MESSAGE to network tool
+    drc              send MESSAGE to drc tool
+    simulation       send MESSAGE to simulation tool
+
+To start and stop tools, use "ontool" and "offtool".
+See help sections for specific tools.
+
+!terminal command
+
+This command controls characteristics of the status display and
+all input.  The format is:
+        -terminal
+        -terminal length VALUE
+        -terminal width VALUE
+        -terminal input LETTER PROMPT [STYLE]
+        -terminal more (on | off)
+        -terminal [not] lock-keys-on-error
+        -terminal [not] only-informative-messages
+        -terminal [not] display-dialogs
+        -terminal [not] permanent-menu-highlighting
+        -terminal [not] use-electric-commands
+        -terminal [not] track-cursor-coordinates
+        -terminal [not] beep
+        -terminal session playback FILE [all]
+        -terminal session begin-record
+        -terminal session end-record
+        -terminal session rewind-record
+        -terminal session checkpoint-frequency [FREQ]
+
+Where the command with no arguments prints the current status
+display length and width.  If the keywords length or width are
+specified, the next value is the new number of lines down or
+across on the status display.
+
+The "input" option causes a keyword to be read from the terminal
+and stored in the command interpreter variable LETTER.  The user
+will be first prompted with the string in PROMPT.  Command
+completion will be done if STYLE is specified in which case it
+should be one of the keywords "about", "alignment", "annulus",
+"array", "artlook", "attparam", "attreport", "attributes", "change",
+"chglibrary", "cifopt", "cdlopt", "compopt", "copycell",
+"copyrightopt", "defarc", "defnode", "deftext", "delcell", "delview",
+"dependentlibs", "depth3d", "drcopt", "drcrules", "dxfopt", "edifopt",
+"editcell", "edtecarc", "edteclayer", "edtecnode", "enumattrs",
+"ercopt", "ercantennaopt", "cell", "cellinfo", "cellinst",
+"celllist", "fasthenry", "fasthenryarc", "file", "find", 
+"frameopt", "gdsopt", "genopt", "globsignal", "grid", "help",
+"highlayer", "iconopt", "javaopt", labels", "lambda", "layerpatterns",
+"layers", "libopt", "library", "libtotech", "menu", "nccopt", "netopt",
+"newview", "node", "noyes", "ofile", "optionexamine", "optionfind",
+"optionsave", "path", "placetext", "plot", "port", "purelayer",
+"quickkey", "renamecell", "renameexport", "renamelib", "renamenet",
+"renametech", "romgen" "routeopt", "selectarc", "selectnet",
+"selectnode", "selectopt", "selectport", "show", "showdetail",
+"silcomp", "simopt", "spice", "spread", "sueopt", "technology",
+"techopt", "techvars", "textsize", "trace", "variable", "verilog",
+"vhdlopt", "view", "visiblelayers", or "windowview".
+
+"more" controls pausing of the status terminal when it is full of
+new messages.  When "off", the messages will be printed with no
+pause.  When "on" (the default), it will stop after a screenful.
+Type space to see another screen, carriage-return to see one more
+line, and 'q' to stop output.
+
+"lock-keys-on-erro" indicates that the single-key commands should
+be disabled after any error (this is the default state).  This
+feature is disabled with "not lock-keys-on-error".
+
+"only-informative-messages" indicates that terminal output should
+be restricted to those messages that clarify or correct.  Purely
+status messages that the user probably already knows are
+supressed.  This feature is disabled (the default state)
+with "not only-informative-messages".
+
+"display-dialogs" indicates that special-case graphical dialogs
+should be used instead of command completion whenever possible.
+This feature is disabled (the default state) with
+"not display-dialogs".
+
+"permanent-menu-highlighting" indicates that highlighting of the
+fixed menu will stay permanently (the default state) and will
+reflect the current node and arc types.  The alternate state
+is to highlight menu entries when they are selected and remove
+the highlighting when the command is completed.
+
+"use-electric-commands" indicates that the system may refer to
+actual Electric commands in conversation (this is the default).
+When macro packages have heavily redefined the command interface,
+it is preferable to disable this feature (with "not
+use-electric-commands") so that irrelevant command names are not
+used.
+
+"track-cursor-coordinates" indicates that the status display
+should show the X and Y coordinates rather than the current
+technology and lambda value.  The reverse of this is the default
+(show the technology and lambda values).
+
+"beep" indicates whether the system will make beeps on errors
+and for other attention-getting purposes.
+
+The "session" option controls recording and playback of all input
+activity.  By default, sessions are recorded in the file
+".electric_log" unless Electric is invoked with the -n option.
+The "playback" option will read the session log in FILE and
+execute it (if the keyword all appears after the file name, the
+entire file is played back immediately).  The "begin-record"
+option starts logging and the "end-record" option terminates
+session logging.  The "rewind-record" option erases any logging
+done so far and starts the log file at the beginning (this is
+done whenever libraries are saved on disk).  Finally, the
+"checkpoint-frequency" option will set the number of keystrokes
+or button pushes between flushes to the session log file to be
+FREQ.  Without an argument, the current value will be printed
+(default is 10).  This command is not undoable.
+
+To manipulate command interpreter variables, use "var".
+
+!text command
+
+This command performs miscellaneous manipulations on text
+objects.  The format is:
+        -text style [NEWSTYLE]
+        -text size (NEWSIZE | up | down)
+        -text default-style [NEWSTYLE]
+        -text default-size (NEWSIZE | up | down)
+        -text default-horizontal-style [none | inside | outside]
+        -text default-vertical-style [none | inside | outside]
+        -text editor [EDITOR]
+        -text (easy-text-selection | hard-text-selection)
+        -text cut | copy | paste | find STRING
+        -text (read | write) FILE
+        -text (interior-only | exterior)
+        -text (default-interior-only | default-exterior)
+
+"style" modifies the grab-point of the currently highlighted text.
+If a NEWSTYLE is mentioned, that value is used (either centered,
+"boxed", "up", "down", "left", "right", "up-left",
+"up-right", "down-left", or "down-right").  Otherwise, the
+cursor location is used to determine the grab-point.
+
+"size" modifies the size of the currently highlighted text.  The
+value of NEWSIZE can be one of the absolute scales "4p", "6p",
+"8p", "10p", "12p", "14p", "16p", "18p", or "20p".  It can
+also be one of the relative scales small, medium, or large.
+The two options "up" and "down" change the scale by one step.
+
+"default-style" manipulates default grab-points for all
+subsequently created text.  If a NEWSTYLE is mentioned, that
+style becomes the new default.  Otherwise, the current default
+style is printed.
+
+"default-size" manipulates default size for all subsequently
+created text.  If a NEWSIZE, "up", or "down" is mentioned, that
+becomes the new default size.  Otherwise, the current default
+size is printed.
+
+"default-horizontal-style" and "default-vertical-style"
+manipulate the smart placement of export labels.  The "inside"
+and "outside" options override the default style to force the
+export label to be intelligently placed according to the location
+of connecting arcs.
+
+"editor" reports the type of text editor that will be used.  If
+an EDITOR is specified, that becomes the current text editor.
+
+"easy-text-selection" (which is the default) indicates that the
+"find" command will be able to select all text displayed in a
+cell.  The "hard-text-selection" option indicates that the
+"find" command will not be able to select node or arc text
+unless the "port" option is NOT specified.  This means that a
+typical "find" command will only be able to select export
+names.
+
+"cut", "copy", and "paste" are context-dependent.  If the current
+window is an editing window, objects are cut, copied, and pasted.
+If the current window is a text edit window, text is manipulated.
+"cut" places the selected objects in a scrap buffer and removes
+it from the display.  "copy" does the same without removing the
+objects.  "paste" places the contents of the scrap buffer back
+into the display.
+
+"find" searches for the next occurence of STRING and leaves the
+selection over it.
+
+"read" and "write" move the text in the current window's text
+editor to and from disk.  The "read" option replaces the edit
+buffer with the contents of FILE, and the "write" option saves
+the edit buffer to the specified FILE.  These commands are not
+undoable.
+
+"interior-only" and "exterior" control whether the text is shown
+when instances of the current cell are expanded.  By default,
+the text is shown, but with "interior-only" it is not.
+
+"default-interior-only" and "default-exterior" control whether
+default text is shown when instances of the current cell are
+expanded.  By default, the text is shown, but with
+"default-interior-only" it is not.
+
+To see information about the currently highlighted text, use
+   "show object".
+
+!undo command
+
+This command undoes most previous changes.  The format is:
+        -undo [COUNT]
+        -undo save TOTAL
+
+where COUNT is a number of changes to undo.  The default is to
+undo the last user command.  When the current window is a text
+editor, only 1 change can be undone, and the change is not
+visible on the batch list.
+
+"save" indicates that TOTAL changes should be saved for undoing.
+
+To find out what is available for undoing, use "show history".
+Most commands can be undone.  Only very extensive commands, and
+those that write disk files, cannot be undone.  In particular,
+these commands cannot be undone: "constraint tell",
+"library {read/write/save/kill/use}", "technology {tell/kill}",
+"telltool", and "terminal {audit/session}".
+
+!var command
+
+This command manipulates attributes either inside the command
+interpreter or on database variables.  The format is:
+        -var
+        -var examine VARIABLE
+        -var change VARIABLE [not] MODIFIER
+        -var delete VARIABLE
+        -var pick VARIABLE
+        -var textedit VARIABLE
+        -var set VARIABLE VALUE [MODIFIER]
+        -var OPERATOR VARIABLE VALUE [MODIFIER]
+        -var vector DEST SOURCE1 (set|concat|select|pattern|type)
+                        [SOURCE2]
+        -var options [ignore | track]
+        -var reinherit | total-reinherit
+        -var relocate | total-relocate
+        -var visible-all | visible-none | visible-default
+
+Command interpreter variables are those that begin with a % sign
+and database variables are those that begin with a $.  A command
+interpreter variable is a single letter from a to z or from A to
+Z.  Database variables are much more complex (see Attribute help).
+
+If this command is issued with no arguments, it prints the value
+of all command interpreter variables that are set.
+
+"examine" displays the value of the mentioned VARIABLE.
+
+"change" modifies the nature of the mentioned VARIABLE.  The
+MODIFIER affects the value setting as follows: "lisp" makes the
+variable LISP code, "tcl" makes the variable TCL code,
+"java" makes the variable JAVA code, "not language"
+makes the variable be static (not code), "[not] display" changes
+the visibility of the variable on the object, "[not] temporary"
+affects whether the variable is saved on disk, and "[not]
+cannot-change" affects whether the variable is read-only.
+
+"delete" deletes the specified VARIABLE.
+
+"pick" allows menu selection of attributes on the specified
+VARIABLE.
+
+"textedit" allows you to interactively edit the array attribute
+VARIABLE in a text editor window.
+
+"set" will set the VARIABLE to the VALUE.  In addition to
+set, it is possible to mention one of eight OPERATOR values
+("+", "-", "*", "/", "mod", "|", "and" or "or")
+which will modify the VARIABLE by the VALUE.  "|" is string
+concatenation.  The optional MODIFIER affects the value setting
+as follows: "lisp" makes the variable LISP code, "tcl" makes the
+variable TCL code, "java" makes the variable JAVA
+code, "display" causes the variable to be displayed on the object,
+"temporary" makes the variable temporary (not saved on disk),
+"fractional" makes the variable fixed-point and "cannot-change"
+makes the variable read-only.  After the "display" option, you
+may provide two numbers which are the offset of the displayed
+variable, relative to the center of the object on which it is
+displayed.
+
+"options" controls whether changes to option variables will be
+tracked so that the user will be prompted to save those options
+on exit.  "ignore" indicates that subsequent option variable
+changes will be ignored, and "track" (the default) indicates that
+subsequent option variable changes will cause option saving to
+be offered.
+
+"reinherit" and "total-reinherit" cause inheritable attributes on
+a prototype (both node and export) to be applied to instances.
+The "reinherit" works only for the selected instances.  The
+"total-reinherit" works for all instances in all libraries.
+
+"relocate" and "total-relocate" cause parameter attributes on
+instances to be adjusted in location to match the example icon.
+The "relocate" works only for the selected instances.  The
+"total-relocate" works for all instances in all libraries.
+
+"visible-all", "visible-none", and "visible-default" request that
+parameters on the selected nodes become all visible, all invisible,
+or all shown according to their defaults in the cell definition.
+
+Example:
+var set ~.proto.width-in-lambda 12
+var set a $~.proto.width-in-lambda
+var + a 4
+defnode $~.proto size $~.proto.width-in-lambda %a
+
+This creates a new slot called width-in-lambda in the currently
+highlighted object's prototype and sets that slot to the value
+12.  It then copies this value to the command interpreter
+variable %a and adds 4 to it.  Finally, it sets the default size
+of all newly created instances of this prototype to be 12 by 16.
+
+To create macros of commands, use "macbegin" and "macend".
+For conditionals, use "if".
+To manipulate language code, use "interpret".
+
+!view command
+
+This command handles the different views of a cell.
+        -view change CELL NEWVIEW
+        -view new NEWVIEW [ABBREVIATION [text]]
+        -view delete VIEW
+        -view frame (a | b | c | d | e | none) [vertical]
+
+"change" modifies the view type of cell CELL to NEWVIEW.
+
+"new" creates a new view type called NEWVIEW which has the
+abbreviation (used in cell names) ABBREVIATION.  If the keyword
+"text" follows the abbreviation, this view is text-only (like the
+"documentation", "vhdl", and many "netlist" views).
+
+"delete" removes a view type (you can only remove those views
+that you have created, and only if there are no cells using it).
+
+"frame" controls the display of a schematic page frame in the
+current cell.  The frame size may be "a" to "e" size, or
+it may be turned off.  In addition, the optional "vertical"
+parameter causes the page frame to be rotated.
+
+To see the current list of view types, use "show views".
+
+!visiblelayers command
+
+This command controls which layers of the design are to be
+visible on the screen.  The format is:
+        -visiblelayers [LAYERS [no-list]]
+        -visiblelayers * [no-list]
+        -visiblelayers *-LAYERS [no-list]
+        -visiblelayers -LAYERS [no-list]
+        -visiblelayers +LAYERS [no-list]
+
+where LAYERS is a collection of letters, one per layer that is
+to be visible.  If LAYERS is omitted, a list of currently
+visible layers is printed.  The option "*" causes all layers to
+be visible.  The construct "*-LAYER" causes all layers except
+for XXX to be made visible.  The construct "-LAYERS" causes
+those layers to be removed from the list.  The construct
+"+LAYERS" causes those layers to be added to the list.
+Normally, all visible layers are printed after each command
+unless the "no-list" option is given.
+
+The color or pattern of a particular layer can be changed with
+   "color".
+
+!window command
+
+This command controls the layout and contents of windows on the
+editing display.  The format is:
+        -window split [horizontal | vertical]
+        -window (new | delete)
+        -window adjust (horizontal-tile | vertical-tile | cascade)
+        -window 1-window
+        -window (kill | join)
+        -window use WINDOW
+        -window peek
+        -window (in-zoom | out-zoom) [AMOUNT]
+        -window grid-zoom
+        -window all-displayed | highlight-displayed
+        -window trace-displayed | (match WINDOW)
+        -window (up | down | left | right) [AMOUNT]
+        -window cursor-centered | center-highlight
+        -window measure
+        -window zoom-scale [integral | nonintegral]
+        -window dragging [on | off]
+        -window (save VIEWNAME | name VIEWNAME)
+        -window tiny-cells (draw | hash-out [LAMBDAPERPIXEL])
+        -window normal-cursor (standard | pen | tee)
+        -window outline-edit-toggle
+        -window explore
+        -window 3-dimensional (begin | end | rotate | zoom | pan)
+        -window frame (none | title-only | (a|b|c|d|e|half-a [vertical][no-title])
+
+"new" causes a new window frame (a window in the operating
+system's window facility) to be created.  Subsequent "window"
+commands will operate in this window frame.
+
+"delete" causes the current window frame to be deleted.
+
+"adjust" causes the window frames to be organized sensibly
+("horizontal-tile" to tile horizontally, "vertical-tile" to tile
+vertically, and "cascade" to cascade from upper-left to lower-right.
+
+"split" indicates that the currently highlighted window should
+be split into two windows.  The options "horizontal" and
+"vertical" can control the direction of the split (only when
+splitting the entire window).  Splitting can continue
+indefinitely.
+
+"1-window" indicates that there should only be one window on the
+screen.
+
+"kill" and "join" indicate that the currently highlighted window
+should be combined with its adjoining window into one larger
+window.  The "kill" option deletes the current window and the
+"join" option deletes the other.
+
+"use" indicates that the currently highlighted window should be
+set to WINDOW.
+
+"peek" indicates that the currently highlighted area is to be
+completely displayed down to the bottom of the hierarchy.  This
+display does not affect the node expand information and does not
+remain when the window is moved or scaled.
+
+"in-zoom" magnifies the contents of the currently highlighted
+window by a factor of two (or by the specified amount).
+Everything zooms-in and gets larger so that less of the design
+is shown in the current window.
+
+"out-zoom" shrinks the contents of the currently highlighted
+window by a factor of two (or by the specified amount).
+Everything gets smaller and more of the design is shown in the
+current window.
+
+"grid-zoom" changes the scale of the currently highlighted window
+so that the grid is minimally visible.  The grid is turned on.
+
+"all-displayed" changes the contents of the currently highlighted
+window so that the entire cell is centered and fills the window.
+
+"highlight-displayed" changes the contents of the currently
+highlighted window so that the currently highlighted area is
+centered and fills the screen.
+
+"trace-displayed" changes the contents of the currently
+highlighted window so that the outline information in the command
+interpreter variable %T is centered and fills the screen.
+
+"match" indicates that the scale of display in the currently
+highlighted window should be set equal to that in window WINDOW.
+
+"up", "down", "left" and "right" indicate that the currently
+highlighted window should have its contents shifted by AMOUNT.
+The default is half of a screen size.  If the amount has the
+letter "l" after it, the screen will be moved that many lambda
+units rather than screen sizes.
+
+"cursor-centered" changes the contents of the currently
+highlighted window so that the cursor position is centered.
+No change of scale is done.
+
+"measure" allows you to measure the distance between two points
+in the window by clicking at the first point and dragging (with
+the button held) to the second point.  The distance is displayed
+on the line.  This measurement goes away when the button is
+released.
+
+"center-highlight" changes the contents of the currently
+highlighted window so that the currently highlighted area is
+centered.  No change of scale is done.
+
+"zoom-scale" controls the way editing windows are scaled.  When
+"nonintegral" (the default), scaling may be arbitrary and
+continuous.  When "integral", the window scale is adjusted so
+that there are an integral number of pixels per lambda unit
+(or an integral number of lambda units per pixel).  This makes
+window panning and other graphics look better since the circuit
+sits cleanly on pixel boundaries.  However, perfectly smooth
+scaling is not possible.
+
+"dragging" controls the style of cursor-based commands.  When
+"off", the commands will act immediately on the current location
+of the cursor.  When "on" (the default), they will interactively
+show object locations and wait for a button release or keystroke
+to actually complete the command.
+
+"save" causes the current window zoom and pan information to be
+saved with the name VIEWNAME.  The "name" option causes the
+saved VIEWNAME view to be restored.
+
+"tiny-cells" causes tiny cells to be drawn in the requested
+style, either "draw" or "hash-out" (the default: contents are
+not drawn).  If a LAMBDAPERPIXEL is specified, it is the number
+of lambda per pixel above which cells are not drawn.
+
+"normal-cursor" controls the appearance of the cursor when
+command input is expected.  The possible options are "standard"
+(the default), "pen" (to show a pen, typically for polygon edit
+mode), and "tee" to show a "T" (typically in technology edit
+mode).
+
+"outline-edit-toggle" changes the window in and out of "outline
+edit mode".
+
+"explore" toggles the cell explorer, a window that shows all
+cells in hierarchically-indented text.
+
+"3-dimensional" controls the display of 3D views of the circuit.
+"begin" changes the window to a 3D display; "end" restores 2D
+display; "rotate" causes cursor motion in a 3D display to rotate
+the view; "zoom" causes cursor motion in a 3D display to zoom
+the view; and "pan" causes cursor motion in a 3D display to pan
+the view.
+
+"frame" controls the display of a frame for the cell in this window.
+"none" displays no frame, "title-only" shows the title box but no frame.
+The frame sizes can be "a", "b", "c", "d", "e", or "half-a" and can
+be oriented vertially (portrait) with "vertical".  If "no-title" is
+given, show the frame only and no title box.
+
+To specify the outline for the trace-displayed option, use "node
+   trace".
+To expand hierarchical nodes, use "node".
+
+!yanknode command
+
+This command extracts the contents of one or more cells to the
+outer level.  The format is:
+        -yanknode
+
+The currently highlighted cell(s) are removed and replaced with
+their contents.  Arcs to ports in the cells are replaced with
+arcs to the actual nodes in that cell and exports on the
+cell(s) are moved to their respective nodes inside that
+cell(s).  Exports inside the cell(s) are not kept
+unless the "defnode * copy-ports" command has been issued.
+
+To specify the cell(s) to be yanked, use "find".
+The opposite operation, which collects a group of nodes and arcs
+   into a new cell, is "package".
+
+!Arc properties
+
+Arcs may have the following properties associated with them:
+
+Directional arcs have an arrow that points from the tail to the
+head of the arc.  By default, arcs do not have a direction.
+The arc reverse command toggles the directionality and the arc
+skip-head command controls the display of the arrow head.
+
+Negated arcs have a negating bubble on the tail that indicates a
+negation on the connecting node's port.  This only applies to
+technologies where the option makes sense, such as "schematic".
+The arc reverse command toggles which end has the negation and
+the arc skip-tail command controls the display of the bubble.
+
+Arcs with their ends-extended overlap their connection point by
+half their width.  The arc skip-head and arc skip-tail commands
+can exclude either end from being shortened.
+
+!Attributes
+Every object in Electric contains a set of attribute/value pairs
+that are called database variables.  In addition to these
+variables there are command interpreter variables that are
+temporaries available for manipulation.
+
+Command interpreter variables are substituted in any command that
+uses the %X construct where X is a single letter from a to z or
+A to Z.  In general, the lower case command interpreter variables
+should be used when in doubt because the upper case letters are
+used by various macro packages that know what they are doing.
+Also, the "node trace" command stores its data in the command
+interpreter variable %T.
+
+Database variables are substituted in any command that uses the
+$X or $(X) construct where X is a database variable as follows:
+ QUAL [ .SPECS [ INDEX ] ]
+ QUAL := NODE | PRIM | CELL | ARC | LIB | TECH |
+         TOOL | NET | VIEW | CURRENT | OBJECT
+ NODE := node:~ | node:NODE-IN-CURRENT-TECH-OR-LIB
+ PRIM := prim:~ | prim:PRIMITIVE-NODE-IN-CURRENT-TECH
+ CELL := cell:~ | cell:CELL-IN-CURRENT-LIBRARY
+ ARC := arc:~ | arc:ARC-IN-CURRENT-TECHNOLOGY
+ LIB := lib:~ | lib:LIBRARY-NAME
+ TECH := tech:~ | tech:TECHNOLOGY-NAME
+ TOOL := tool:~ | tool:ANALYSIS-OR-SYNTHESIS-TOOL-NAME
+ NET := net:NETWORK-NAME-IN-CURRENT-CELL
+ VIEW := view:VIEW-NAME
+CURRENT := ~ | ~x | ~y | ~o | ~c | ~hl | ~hr | ~ht | ~hb |
+            ~nodes | ~arcs | ~ports | ~nets | ~cells | ~libs
+ OBJECT := NAME-OF-NODE-INSTANCE | NAME-OF-ARC-INSTANCE
+ SPECS := SPEC | SPEC.SPECS
+ SPEC := VARIABLE-NAME-APPLICABLE-TO-CURRENT-CONTEXT
+ INDEX := "[" INTEGER "]"
+
+In general, the ~ indicates the current object.  Thus, tech:~ is
+the current technology, ~ is the currently highlighted object
+(the first if there are many), ~x and ~y are the current X and Y
+coordinates of the cursor, ~o is the other currently highlighted
+object (if two are selected), ~c is the count of the number of
+highlighted objects, and ~hl, ~hr, ~ht, ~hb are the left, right,
+top, and bottom sides of the currently highlighted object.  The
+forms ~nodes, ~arcs, ~ports, ~nets, ~cells, and ~libs give
+arrays of the current nodes, arcs, exports, and nets in the cell,
+current cells in the library, and current libraries.  Arrays may
+be indexed with square brackets.
+
+Examples:
+ echo $tech:nmos.deflambda    prints the value of lambda for nMOS
+ echo (%T[0],%T[1])           prints first coordinate of last
+                              outline
+ echo Cursor at $(~x),$(~y)   prints the current cursor position
+ echo $~cells                 prints a list of all cells
+
+!Color map
+
+This is detailed information about the color command.  There are
+256 entries in the color map, organized as follows:
+   1: black grid (any value with this bit)
+   2: white highlight (any value with this bit)
+   4: special color escape (any value with this bit,
+         see below)
+   8: first overlappable layer (any value with this bit)
+  16: second overlappable layer (any value with this bit)
+  32: third overlappable layer (any value with this bit)
+  64: fourth overlappable layer (any value with this bit)
+ 128: fifth overlappable layer (any value with this bit)
+
+Special colors:
+   4: white                      156: purple
+  12: black                      164: brown
+  20: red                        172: light gray
+  28: blue                       180: dark gray
+  36: green                      188: light red
+  44: cyan                       196: dark red
+  52: magenta                    204: light green
+  60: yellow                     212: dark green
+ 140: gray                       220: light blue
+ 148: orange                     228: dark blue
+  68: cell name and export name  108: highlighted menu border
+  76: cell outline               116: menu text
+  84: window border              124: menu glyphs
+  92: highlighted window border  132: cursor (if settable)
+ 100: menu border                236: unassigned
+ 244: unassigned                 252: unassigned
+
+!Color map file
+
+Color map files are composed of three parts: the header line,
+the color map, and the bit-map information.
+
+The header line is the first line and is simply the name of the
+technology.  In old format files, the technology name is the
+only thing on the line.  On newer format files (re-arranged color
+map), the line begins with the word "technology=".
+
+The color map consists of lines of text with four fields per
+line.  The first three fields are the red, green, and blue
+values for the color map (from 0 to 255).  The last field is the
+high index into which this map entry will go.  This field must
+ascend on each subsequent line and must be 255 on the last line.
+
+After the color map, comes the bit maps for the layers.  The
+first line gives the number of layers.  Following that are bit
+descriptions, one layer per line.  Each line has a layer
+identifying character followed by 8 16-bit numbers (in octal),
+all separated by tabs.  These 8 numbers form a 16x8 bit field
+for the layer.
+
+The "color" command reads and writes these files.
+For the meaning of the color map entries, use "help map".
+
+!Compaction tool
+
+These commands may be given to the compaction tool with
+"telltool compaction":
+ check [DIR [X]] compact cell X in DIR (horizontal/vertical)
+ spread          allow compaction to spread close components
+ not spread      disallow spreading of close components
+ debug [verbose] print [MUCH] debugging info while compacting
+ not debug       turn off debugging output
+
+Compaction may be done simply by turning on the tool.  The
+circuit will be alternately compacted in X and Y after each
+user command.
+
+!Compensation tool
+
+These commands may be given to the compensation tool
+with "telltool compensation":
+ percentage [AMOUNT]               Set/inquire comp. on node
+ remove-percentage                 Remove comp. on node
+ illuminate-percentages            Show compensation percentages
+ compensate                        Compensate cell
+ draw-pre-compensation             Show precompensated geometry
+ uncompensate                      Undo last compensation
+ global-factors (dialog | T L G M) Set global factors
+ make-compensation-table           Display compensation table
+ show-contours                     Color code all contours
+ next-contour-selection            Show next node in contour
+ prev-contour-selection            Show last node in contour
+ detect-special-features           Find features, set comp.
+ detect-layer-intersections        Find special layer crossings
+
+!Design-rule checking
+
+These commands may be given to the design-rule checking tool
+with "telltool drc":
+ check [X]             re-check rules for cell X [current]
+ forget-ignored-errors clears list of ignored errors
+ verbose               print verbose errors
+ not verbose           print brief errors (default)
+ shortcheck run        short circuit check (hierarchically)
+ shortcheck ignore X   ignore cell X from short check
+ shortcheck unignore X include cell X in short check
+ reasonable            check fewer cuts in large contacts
+ not reasonable        check all cuts in large contacts
+ ecadcheck             generate CIF for Dracula (from ECAD)
+ quick-check           hierarchically check current cell
+ quick-select-check    hierarchically check selected area of cell
+ batch run             hierarchically check current cell
+ batch select-run      hierarchically check selected area of cell
+ batch reset-check-dates remove valid-DRC timestamps
+ batch just-1-error    stop checking cell after 1 error
+ batch all-errors      find all errors [def]
+
+!Electrical-rule checking
+
+These commands may be given to the electrical-rule checking tool
+with "telltool erc":
+ well-check            check current cell for well errors
+ antenna-rules         check current cell for antenna errors
+
+!EMACS editing
+
+When the text editor is EMACS, these commands are available:
+  ^A    cursor to start-of-line
+  ^B    backup one character
+  ^D    delete the next character (cannot delete line breaks)
+  ^E    cursor to end-of-line
+  ^F    forward one character
+  ^G    flush state (and force evaluation of changed line)
+  ^H    delete previous character (can't delete line breaks)
+  ^K    delete to end-of-line (or kill line if on a null line)
+  ^L    redraw screen
+ RETURN insert new line (only if at end of line)
+  ^N    next line
+  ^O    insert new line (only if at beginning of line)
+  ^P    previous line
+  ^R    reverse search
+  ^S    forward search
+  ^V    shift screen up one page
+  ^X^V  read text from a file (you are prompted for the file)
+  ^X^W  write text to a file (you are prompted for the file)
+  ^Y    restore line deleted with ^K
+  ^Z    shift screen up one line
+  DEL   delete previous character (can't delete line breaks)
+ M(B)   backup one word
+ M(D)   delete the next word (can't delete line breaks)
+ M(F)   forward one word
+ M(H)   delete the previous word (can't delete line breaks)
+ M(V)   shift screen down one page
+ M(Z)   shift screen down one line
+ M(<)   cursor to beginning of file
+ M(>)   cursor to end of file
+ M(=)   show graphic equivalent to this line (nonEMACS)
+ M(DEL) delete the previous word (can't delete line breaks)
+
+To use this editor, use "text editor emacs".
+Commands that use text editing include "show cells edit",
+"var textedit", "technology edit edit-design-rules", and
+"constraint tell linear text-equivalence".
+
+!ESIM simulator
+
+When you have requested simulation with "esim", the following
+commands are available in the simulator:
+  w node1 node2 ...        show value of nodes after simulation
+  w -node1 -node2 ...      stop showing value the nodes
+  W label node1 ... noden  show the nodes as a bit vector
+  h node1 node2 ...        set the nodes to be high
+  l node1 node2 ...        set the nodes to be low
+  x node1 node2 ...        set the nodes to be undefined
+  v                        show all node values
+  ? node1 node2 ...        explain source of nodes
+  ! node1 node2 ...        determine source of nodes
+  P                        count of undefined pulled-up nodes
+  s                        step the simulation
+  c [n]                    cycle the clock (phi1 and phi2)
+  I                        initialize the simulation
+  @ filename [iter]        take commands from the file
+  D                        toggle the debug switch
+  > filename               breakpoint to a file
+  < filename               restore breakpoint from file
+  L                        reduce network
+  q                        stop simulator, return to Electric
+  p                        pause simulator, return to Electric
+
+!Hierarchical layout
+
+When using the hierarchical layout constraint system (the
+default), arcs may have the following properties:
+
+Fixed-angle arcs must remain at a fixed angle so that when a
+connecting node moves, the other node must also move to keep the
+angle the same.  Non-fixed-angle arcs can change to any angle.
+
+Non-rigid arcs can change length to accommodate changes to
+connecting nodes whereas rigid arcs remain the same length and,
+in addition, remain attached to their nodes at the same angle so
+if a node rotates, its rigid arcs will spin about to remain
+attached in the same place and configuration.
+
+Temporary rigidity applies to the next change only, after which
+the rigidity properties revert to their permanent state.
+
+Slidable arcs are able to slide about within their port area so
+that if the arc moves by a small amount, the node will not also
+move.  Rigid arcs cannot slide and fixed-angle arcs can by
+default.
+
+!I/O tool
+
+These commands may be given to the input/output tool with telltool io:
+ bloat-output LAY AMT            CIF/GDS output bloat LAY by AMT
+ plot not focus                  plot entire cell [def]
+ plot focus-highlighted          plot highlighted area only
+ plot focus-window               plot window area only
+ plot [not] include-date         plot circuit name/date
+ binary no-backup                no backup of library files [def]
+ binary one-level-backup         backup last library file
+ binary many-level-backup        backup all library files
+ binary no-check                 no check after write [def]
+ binary check                    check database after write
+ cif output fully-instantiated   CIF writes all cells [def]
+ cif output exactly-as-displayed CIF writes screen only
+ cif output merge-boxes          CIF combines adjoining boxes
+ cif output individual-boxes     CIF writes each box [default]
+ cif output include-cloak-layer  CIF includes DRC cloak layer
+ cif output ignore-cloak-layer   CIF supresses DRC cloak [def]
+ cif output not-centered         CIF boxes corner-based
+ cif output centered             CIF boxes center-based [def]
+ cif output instantiate-top      CIF includes call to top [def]
+ cif output dont-instantiate-top CIF has no call to top cell
+ cif input rounded-wires         CIF wire input round ends [def]
+ cif input squared-wires         CIF wire input square ends
+ gds input [text | no-text]      GDS input includes text [no-text]
+ gds input [expand | no-expand]  GDS input expands cells [no-expand]
+ gds input [arrays | no-arrays]  GDS input instantiates arrays [no-arrays]
+ gds input unknown-layers        GDS input ignores unknown layers
+ gds input no-unknown-layers     GDS input reads unknown layers [def]
+ gds output merge-boxes          GDS combine adjoining boxes
+ gds output individual-boxes     GDS write individual boxes [def]
+ gds output include-cloak-layer  GDS includes DRC cloak layer
+ gds output ignore-cloak-layer   GDS supresses DRC cloak [def]
+ gds output arc-sag [DIST]       GDS arcs to lines with DIST sag
+ gds output arc-resolution [DEG] GDS arcs to lines every DEG
+ edif [netlist | schematic]      sets EDIF view to use [netlist]
+ postscript plain                sets plain PostScript [def]
+ postscript encapsulated         sets encapsulated PostScript
+ postscript gray-scale           disables color PostScript [def]
+ postscript color                enables solid color PostScript
+ postscript stippled-color       enables stippled color PostScript
+ postscript merged-color         enables merging for proper PostScript
+ postscript printer [wid hei]    sets printer page size [8.5" x 11"]
+ postscript plotter [wid]        sets plotter paper width
+ postscript [rotate | no-rotate] sets rotation on page [no-rotate]
+ postscript auto-rotate          sets automatic rotation to fit on page
+ postscript margin [MARGIN]      sets margin from page edge [0.75"]
+ postscript synchronize FILE     associates current cell with FILE
+ postscript unsynchronize        removes cell association
+ hpgl [1|2 [scale HMMperPIXEL]]  set HPGL level and scaling
+ verbose on                      sets debugging during I/O
+ verbose off                     no debugging during I/O [def]
+ verbose graphical               show input progress
+
+To issue these commands, use "telltool".
+
+!Linear inequalities
+
+These commands may be given to the linear inequalities constraint
+solver with constraint tell linear (remember, you must switch
+to this solver first):
+ solve [X]                 solve in cell X [current cell]
+ implicit-manhattan on|off sets manhattan assumptions
+ text-equivalence OPTION   set text-to-graphics system:
+   go                      turn on text-to-graphics system
+   name-nodes              generate text names for all nodes
+   highlight-equivalent    show text equal to highlighted
+
+When in the text editor window, the command Meta-= will highlight
+the graphics associated with the current text line.  When the
+text-to-graphics system is on, all changes to the text window
+will be updated in graphics and visa-versa.
+
+Arc constraints are inequalities of the form "X==C", "X>=C",
+"X<=C", "Y==C", "Y>=C", or "Y<=C" where C is a constant.
+
+To set constraints on arcs, use "arc constraint".
+To switch to this constraint solver, use "constraint use linear".
+
+!Logical Effort tool
+
+These commands may be given to the Logical Effort tool with
+"telltool logeffort":
+ analyze-path                        analyze path between two arcs
+ analyze-cell					     analyze current cell
+ set-options                         show dialog for controlling tool
+ set-capacitance                     set capacitance on current arc
+ set-node-effort                     set effort on current node
+
+Logical Effort analyzes schematic circuitry and sets an "h" value
+(fanout) that indicates the transistor ratios needed for fast
+implementation.
+
+!Network tool
+
+These commands may be given to the network tool with "telltool
+network":
+ highlight [X]                   highlight network X [selected]
+ name-connections [X]            list nodes on net X [selected]
+ show-all-nets                   list all named nets
+ list-hierarchical-ports [X]     list ALL exports on net [selected]
+ show-geometry                   describe all geometry on net
+ rip-bus                         add wire taps to current bus
+ compare                         compare nets in displayed cells
+ compare highlight-other         show equivalent component
+ compare first-equate            set first of equated pair
+ compare second-equate           set second of equated pair
+ compare set-equates             set equates from node names
+ compare clear-equates           clear list of equated pairs
+ compare [not] examine-hierarchy flatten hierarchy when comparing
+ compare [not] use-port-sequence force port order when comparing
+ compare [not] use-port-names    use export names when comparing
+ like-named-nets OPTION          combine nets with the same name
+ power-and-ground OPTION         unify power and ground nets
+ resistors (ignore | include)    handling of resistors
+ auto-naming [on | off]          set automatic network naming [off]
+ re-number [X]                   reevaluate cell X [current]
+ total-re-number                 reevaluate entire library
+
+To issue these commands, use telltool.  Pairs of nodes from
+different cells can be equated prior to comparing to help the
+process.
+
+To name networks, use "arc name".
+
+!PLA tool
+
+The commands to the nMOS PLA generator are:
+ nmos file X           Set name of matrix file to X ["program"]
+ nmos inputs X         Set number of PLA inputs to X [0]
+ nmos outputs X        Set number of PLA outputs to X [0]
+ nmos pterms X         Set number of product terms to X [0]
+ nmos verbose X        Set message printing to X [OFF]
+ nmos flexible X       Use flexible arcs [ON]
+ nmos fixedangle X     Use fixed-angle arcs [ON]
+ nmos buttingcontact X Use butting (vs. buried) contacts [ON]
+ nmos samesideoutput X Set outputs-on-same-side-as-inputs [OFF]
+ nmos vddwidth X       Set width of power line to X lambda [4]
+ nmos groundwidth X    Set width of ground line to X lambda [4]
+ nmos name X           Set PLA name to X ["Anonymous"]
+
+Sample nMOS Personality File:
+   set inputs = 5  set outputs = 3
+   set pterms = 4
+   begin  ;  Input    Output  (comments follow the semicolon)
+   {       1 2 3 4 5  1 2 3   (...or are between braces)      }
+       {1} 1 0 0 0 1  1 0 1
+       {2} X X X 1 X  1 1 0
+       {3} 0 1 1 0 1  0 1 0
+       {4} 0 0 1 0 1  0 1 1
+   end
+
+The basic way to run this is to give the 'file' option and then
+to turn on the generator ("ontool pla").
+
+The commands to the CMOS PLA generator are:
+ cmos generate-pla  Generate PLA (prompts for AND and OR files)
+ cmos decoder       Build decoder
+ cmos n-plane       Build n-plane
+ cmos p-plane       Build p-plane
+
+Sample CMOS AND File:
+   16 12
+   0 0 0 0 0 0 0 0 0 1 0 0
+   0 0 0 0 1 0 0 0 0 0 0 0
+   0 0 0 0 0 0 0 1 0 0 0 0
+   0 0 1 0 0 0 0 0 0 0 0 0
+   0 0 0 1 0 0 0 0 0 0 0 0
+   0 0 0 0 0 1 0 0 0 0 0 0
+   0 0 0 0 0 0 1 0 0 0 0 0
+   0 0 0 0 0 0 0 0 1 0 0 0
+   0 0 0 0 0 0 0 1 1 1 1 1
+   1 1 1 1 1 1 1 0 0 0 0 0
+   0 0 0 1 1 1 1 0 0 0 0 1
+   1 1 1 0 0 0 0 1 1 1 1 0
+   0 1 1 0 0 1 1 0 0 1 1 0
+   1 0 0 1 1 0 0 1 1 0 0 1
+   1 0 1 0 1 0 1 0 1 0 1 0
+   0 1 0 1 0 1 0 1 0 1 0 1
+
+Sample CMOS OR File:
+   12 4
+   1 0 0 0
+   0 1 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 0 0
+   1 0 1 0
+   0 0 0 1
+
+The basic way to run this is to load the library "pla_mocmos" and
+then give the 'generate' option.
+
+The commands to the general PLA generator are:
+ general new X        Setup PLA with characteristic X
+ general list         Print setup state
+ general run          Generate PLA
+ general verbose      Toggle message printing
+
+This PLA generator is not currently available.
+
+To issue these commands, use "telltool pla".
+
+!Routing tool
+
+These commands may be given to the routing tool with "telltool
+routing":
+ no-stitch                           disable all stitching (def)
+ mimic-stitch enable                 enable mimic stitching
+ mimic-stitch do-now                 mimic the last arc
+ mimic-stitch stitch-only            mimic only stitches (def)
+ mimic-stitch stitch-and-unstitch    mimic can remove stitches
+ mimic-stitch port-specific          mimic cares about ports (def)
+ mimic-stitch port-general           mimic doesn't care about ports
+ mimic-stitch same-arc-count         mimic only wires where arc counts match
+ mimic-stitch any-arc-count          mimic doesn't care about number of arcs
+ auto-stitch enable                  enable automatic stitching
+ auto-stitch stitch-now [X]          auto-stitch cell X [current]
+ auto-stitch highlighted-stitch-now  auto-stitch highlighted area
+ river-route [X]                     river route cell X [current]
+ maze-route route selected           route selected networks
+ maze-route route cell               route entire cell
+ maze-route set grid X Y			 set maze route grid size
+ maze-route set offset X Y			 set maze route offset
+ maze-route set boundary DIST		 set maze route extra boundary
+ maze-route set restrict-port-access toggle port angle enforcement
+ use-arc X                           set stitch arcs (*: default)
+ [not] select                        set interactive routing
+
+River routing replaces "unrouted" arcs from the generic
+technology with real arcs.
+
+!Simulation tool
+
+These commands may be given to the simulation tool with "telltool
+simulation":
+ esim                       use "esim" (see help esim)
+ rsim                       use "rsim"
+ rnl                        use "rnl"
+ cosmos                     deck for "cosmos"
+ maxwell                    deck for "maxwell"
+ mossim                     deck for "mossim"
+ texsim                     deck for "tegas/texsim"
+ salt                       deck for "salt"
+ mars                       deck for "mars"
+ cadat                      deck for "cadat"
+ verilog                    deck for "verilog"
+ verilog [not] use-assign   whether to use "assign" in deck
+ abel-pal                   deck for "abel" PALs
+ generic                    deck for general-purpose simulator
+ silos                      deck for "silos"
+ spice                      deck for "spice"
+ spice level X              set spice level (1, 2, or 3)
+ spice save-output X        spice output in file X
+ spice parse-output X       plot spice output in file X
+ spice format [2|3|hspice|gnucap|smartspice]  set plot format (default: 3)
+ spice output-normal | output-raw | output-smartraw expected SPICE output format
+ spice [not] resistance     include resistance (default: off)
+ spice [not] capacitances   include capacitance (default: off)
+ spice [not] use-nodenames  use Electric node names (default: off)
+ spice [not] plot           set line-printer plots (default: off)
+ spice debug-toggle         toggle debug output (default: off)
+ verilog parse-output FILE	read VCD file and show in simulation window
+ als clock N frequency F    clock N has frequency F
+ als clock N period P       clock N has period P
+ als clock N custom D S C   clock N has dist D, str S, cycles C
+ als erase                  clear simulation structures
+ als go [T]                 simulate T secs (default: infinite)
+ als help SUBJECT           get help on SUBJECT
+ als level up | (set L)     move up or down to level L
+ als print instance         print list of instances
+ als print netlist          print netlist
+ als print size             print simulation sizes
+ als print state N          print state of node N
+ als print vector           print test vectors
+ als print xref             print cross-references
+ als seed [no-]reset        control random number generator
+ als set N (h|l|x) S T      set node to level, str S, time T
+ als trace (on|off)         control redisplay on each change
+ als vector delete N time   T delete vector on node N at time T
+ als vector delete N all    delete all vectors on node N
+ als vector load F          load test vectors from file F
+ als vector save F          save test vectors to file F
+ als vector new             clear all test vectors
+ fasthenry arc add G        add current arc with group name G
+ fasthenry arc remove       remove current arc
+ fasthenry arc thickness [T] set arc thickness to T [rem]
+ fasthenry arc width-subdivisions [W] set arc width subdivisions [rem]
+ fasthenry arc height-subdivisions [H] set arc height subdivisions [rem]
+ fasthenry arc z-head [Z]   set Z height of arc head [rem]
+ fasthenry arc z-tail [Z]   set Z height of arc tail [rem]
+ fasthenry pole single      set single pole analysis
+ fasthenry pole multiple P  set multipole analysis (P poles)
+ fasthenry frequency single set single frequency analysis
+ fasthenry frequency multiple S E R set multiple freq (Start End Runs)
+ fasthenry thickness T      set default thickness to T
+ fasthenry width-subdivisions W set default width subdivisions
+ fasthenry height-subdivisions H set default height subdivisions
+ fasthenry max-segment-length L set maximum segment length
+ fasthenry execute none     no execution after writing deck
+ fasthenry execute run      execution after writing deck
+ fasthenry execute multiple-run parallel execution after writing deck
+ fasthenry postscript on    make PostScript view
+ fasthenry postscript off   no PostScript view
+ fasthenry spice (on | off) controls Spice subcircuit analysis
+ window cursor main T       set main cursor to time T
+ window cursor extension T  set extension cursor to time T
+ window move (left|right) A shift display left or right by A
+ window move (up|down) I    shift display up or down by I
+ window traces more|less    change number of traces on display
+ window traces set A        set number of traces on display to A
+ window zoom (in|out) A     zoom display by factor A
+ window zoom all-displayed  fill display with wave data
+ window zoom cursor         zoom display to enclose cursors
+ window zoom window L U     zoom display to range L to U
+ window 2-state-display     display only ON/OFF on schematic
+ window 12-state-display    display full level/strength (def)
+ window advance-time        advance time to end of simulation
+ window freeze-time         do not advance time after changes (def)
+ window display-waveform    show waveform window (def)
+ window ignore-waveform     do not show waveform window
+ window color S C           set state/level S color to C
+ window clear-saved-signals forget signals saved with all cells
+ resume                     return to simulator after pause
+ no-execute                 write deck only
+ execute-only               write deck and run simulator
+ execute-quietly            write deck and run simulator, ignore sim output
+ execute-and-parse          write deck, run simulator, parse output
+ execute-quietly-and-parse  write deck, run simulator, ignore output, parse output
+ pointout X                 have simulator identify net-node X
+
+The "resume" option only works with the pausable simulators
+"esim", "rnl", "rsim", and "als".
+The "execute" toggle is only sensible for the simulators that
+automatically execute: "esim", "rsim", "rnl", and "spice".
+The "als" simulator runs inside Electric when turned on.
+
+!Technology edit
+
+The technology edit command has the following options.
+        -technology edit (library-to-tech |
+                          library-to-tech-and-C)
+        -technology edit tech-to-library [TECHNOLOGY]
+        -technology edit dependent-libraries [LIBS]
+        -technology edit place-layer SHAPE
+        -technology edit inquire-layer
+        -technology edit change
+        -technology edit change LAYERNAME
+        -technology edit change ARCNAME (yes | no)
+        -technology edit change port-angle ANGLE
+        -technology edit change port-angle-range RANGE
+        -technology edit change NEW-FIELD
+        -technology edit edit-node NODENAME
+        -technology edit edit-arc ARCNAME
+        -technology edit edit-layer LAYERNAME
+        -technology edit edit-subsequent
+        -technology edit (edit-colors | edit-design-rules |
+                          edit-misc-information)
+        -technology edit reorder-arcs | reorder-nodes | reorder-layers
+        -technology edit identify-layers
+        -technology edit identify-ports
+
+The options "library-to-tech" and "library-to-tech-and-C"
+convert the current library to a technology, optionally writing
+C code.
+
+The option "tech-to-library" converts existing technology
+TECHNOLOGY into a library.  It defaults to the current technology.
+
+The option "dependent-libraries" takes a list of library names
+that this one will use when constructing a technology.  With
+no parameter, the list is printed.  If the parameter is "-",
+the list is cleared.  Dependent libraries are scanned in reverse
+order, from the last entry in the list back to the first, with
+the current library implicitly coming before any dependent
+libraries.  Any information in a library that is not in a more
+recent library is included in the technology.  This enables
+hierarchies of technologies to be created that have base
+descriptions and multiple levels of customization.  It is the
+final customization library that contains the dependent library
+list, and this list begins with the base library and continues
+up to, but not including, the final customization library.
+
+The option "place-layer" creates a patch of material of a given
+SHAPE.  The two shapes "port" and "highlight" create port objects
+in node and highlight boxes for both nodes and arcs.  For normal
+geometry, the change option should be used to set the desired
+layer for the material, once placed.
+
+The option "inquire-layer" provides information about the
+currently highlighted object.  This object is presumed to be in
+a technology-library.
+
+The option "change" varies according to what is currently
+highlighted. If two port nodes are highlighted, this command
+connects them.  If a patch of material is highlighted, this
+option takes a new LAYERNAME for the material.  If a "port"
+object is highlighted, this option takes an ARCNAME and an
+indicator (yes or no) as to whether this port can connect to
+the arc.  The "port" objects may also have their port-angle
+and port-angle-range field changed to indicate the
+directionality of the port.  The ANGLE field is from 0 to 359
+degrees, counter-clockwise from rightward.  The RANGE field is
+from 0 to 180 degrees, indicating a spread in either direction
+from the port angle.  Finally, if a piece of text is highlighted
+that gives information about a layer, arc, node, or the
+technology, the change option allows you to change the value
+of this text, dependent on the nature of the message.
+
+The option "edit-node" selects a primitive node in the technology
+that you wish to edit.  All primitive nodes are represented as
+cells with the name "node-" prepended to the primitive name.
+
+The option "edit-arc" selects an arc in the technology that you
+wish to edit.  All arcs are represented as cells with the name
+"arc-" prepended to the arc name.
+
+The option "edit-layer" selects a layer in the technology that
+you wish to edit.  All layers are represented as cells with the
+name "layer-" prepended to the layer name.
+
+The option "edit-subsequent" edits the next layer, arc, or node
+in the technology (depending on what is currently being edited).
+
+The option "edit-colors" allows you to mix the five overlappable
+colors.  It is necessary that five of the layers be given the
+color "overlappable" and be given layer letters before color
+editing can be done.
+
+The option "edit-design-rules" allows you to edit a listing of
+design rule separations in a text editor.  Each line of text
+lists a distance and two layer names (thus it is necessary to
+have defined the layers before doing this).  If the distance
+has the letter "c" in front, then the design rule concerns
+electrically connected layers.
+
+The option "edit-misc-information" allows you to edit global
+factors for the technology.  Currently, this includes the value
+of lambda and the full name of the technology.  The miscellaneous
+information is stored in a cell named "factors".
+
+The options "reorder-arcs", "reorder-nodes", and "reorder-layers"
+bring up dialogs for reordering the arcs, nodes, and layers.
+
+The option "identify-layers" generates a graphical annotation
+of the current node or arc, pointing out the layers and labeling
+them.  This identification is temporary and dissapears when the
+window pans or zooms.
+
+The option "identify-ports" generates a graphical annotation of
+the current node, pointing out the ports and labeling them.
+This identification is temporary and dissapears when the window
+pans or zooms.
+
+For information on color maps, use "help map".
+To rename a node, arc, or layer, rename its cell, including the
+   "node-", "arc-", or "layer-" part.
+
+!VHDL tool
+
+These commands may be given to the vhdl compiler tool with
+"telltool vhdl-compiler":
+ output-format quisc      make QUISC netlists (place-and-route)
+ output-format als        make ALS netlists (simulation)
+ output-format netlisp    make Netlisp netlists (simulation)
+ output-format silos      make SILOS netlists (simulation)
+ output-format rnl        make RNL netlists (simulation)
+ library LIB              use library LIB for ALS behavior
+ [not] external           control external reference errors
+ [not] warn               control warning messages
+ [not] vhdl-on-disk       set VHDL on disk or cell
+ [not] netlist-on-disk    set whether VHDL produces equations
+ make-vhdl                convert current cell to VHDL
+ compile-now              compile current VHDL to netlist

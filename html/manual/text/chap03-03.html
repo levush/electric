@@ -1,0 +1,64 @@
+<HTML><HEAD><TITLE>Using Electric 3-3: Creating Instances</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<!-- PAGE BREAK --><A NAME="chap03-03"></A>
+
+<BR><CENTER><FONT SIZE=6><B>Chapter 3: HIERARCHY</B></FONT></CENTER><BR>
+<CENTER><TABLE WIDTH="90%" BORDER=0><TR>
+<TD><CENTER><A HREF="chap03-02.html#chap03-02"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD>
+<TD><CENTER><H2>3-3: Creating Instances</H2></CENTER></TD>
+<TD><CENTER><A HREF="chap03-04.html#chap03-04"><IMG SRC="../images/iconplug.png" ALT="plug" BORDER=0></A></CENTER></TD></TR></TABLE></CENTER>
+<HR>
+<BR>
+
+To place an instance of a cell in another cell,
+use the "Inst." button in the component menu.
+After choosing a cell from the popup list, click in the edit window to place the instance.
+<P>
+<TABLE><TR><TD><CENTER><IMG SRC="../images/chap03-17.png" ALT="Figure 3.17"></CENTER></TD><TD>
+Another way to place an instance of a cell is to use the <B>New Cell Instance...</B> command of the <B>Edit</B> menu.
+You will be shown a list of cells that are available for creation.
+After selecting one, click to create an instance in the current cell.
+<P>
+Three checkboxes allow you to limit the list of cells.
+By checking "Show relevant cells only" only those cells that have the same view type as the current one will be shown.
+By unchecking "Show old versions" the list will remove old versions of cells.
+By unchecking "Show cells from Cell-Library" the list will remove cells that come from a cell library.
+<P>
+If you place an instance from a different library, that library will be linked to the current one.
+Linked libraries are read from disk together, and form a single hierarchy that spans multiple files.
+See <A HREF="chap03-09.html#chap03-09">Section 3-9</A> for
+more on libraries.
+</TD></TR></TABLE>
+<P>
+An alternate way to create a cell instance is to duplicate an existing one on the screen.
+This requires that an instance of that particular cell already exist.
+Highlight the existing cell and use the <B>Duplicate</B> command of the <B>Edit</B> menu.
+Then move the cursor to the intended location of the new instance and click to create the copy.
+Note that this command copies all attributes of the original node including its orientation.
+<P>
+<TABLE><TR><TD>
+<BR><BR><BR><BR><BR>
+When a cell instance is being created,
+the cursor points to its <I>grab point</I>.
+Normally, the grab point is at the lower-left corner,
+but it can be modified by the placement of a <I>Facet-Center</I> node inside of the cell.
+To place this, use the <B>Cell Center</B> subcommand of the <B>New Special Object</B> command of the <B>Edit</B> menu.
+You must place it inside of the cell definition,
+and it affects the grab point for all subsequent creation of cell instances.
+<BR><BR><BR><BR><BR>
+</TD><TD><CENTER><IMG SRC="../images/chap03-08.png" ALT="Figure 3.8"></CENTER></TD></TR></TABLE>
+
+<P>
+<HR>
+<CENTER><TABLE BORDER=0><TR>
+<TD><A HREF="chap03-02.html#chap03-02"><IMG SRC="../images/iconbackarrow.png" ALT="Prev" BORDER=0></A></TD>
+<TD><A HREF="chap03-02.html#chap03-02">Previous</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="../index.html"><IMG SRC="../images/iconcontarrow.png" ALT="Contents" BORDER=0></A></TD>
+<TD><A HREF="../index.html">Table of Contents</A></TD>
+<TD>&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="chap03-04.html#chap03-04">Next</A></TD>
+<TD><A HREF="chap03-04.html#chap03-04"><IMG SRC="../images/iconforearrow.png" ALT="Next" BORDER=0></A></TD>
+</TR></TABLE></CENTER>
+</BODY>
+</HTML>
