@@ -16,7 +16,9 @@ If not the build will complain about missing Xm.h
 To build it call the usual
 ./configure 
 make
-you find an executeable called electric that you can put as root
+to install issue as root
+make install 
+or do it by hand and find an executeable called electric that you can put 
 to /usr/local/bin 
 
 
