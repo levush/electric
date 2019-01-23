@@ -1,9 +1,28 @@
 # electric
-electric vlsi design tool. This is a fork of the "older" C version 7.00 by www.staticfreesoft.com, as java is not suitable for performant a VLSI tool.
+electric vlsi design tool. 
+This is a fork of the "older" C version 7.00 by www.staticfreesoft.com, as java is not suitable for performant a VLSI tool.
 quote from original readme: "To add a Java interpreter" 
 Interpreter, you name it, lets compile and have executeable machine code...
 
+The development will be centered on building a version for gnu/linux(tm).
 
+How to compile and install:
+---------------------------
+Electric requires good old motif.
+Make sure to have the development files 
+for libmotif (debian: libmotif-dev, fedora or other rpm: motif-devel) installed.
+If not the build will complain about missing Xm.h
+
+To build it call the usual
+./configure 
+make
+you find an executeable called electric that you can put as root
+to /usr/local/bin 
+
+
+
+
+----------------------------------------------------------------
 
 
 ---------------- This is Electric, Version 7.00 ----------------
