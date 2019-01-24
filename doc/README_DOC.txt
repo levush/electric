@@ -1,10 +1,19 @@
 README Documentation
 ---
-The html documentation has been put into another repository, as it
-is really huge and will not be updated too often.
+To generate the html documentation goto the root directory
+of this project and issue
+doxygen doc/Doxyfile
+This takes a while and you need to have a recent graphviz 
+---
+The html documentation is really huge so it will not be in this repo
+and it will not be updated too often.
 See:
 https://github.com/levush/electric-html-doc.git
+And here github also has a limit of 100M on a single file so uploading
+a >500MB tar ball of generated docs does not work there.
+So the tar ball with the docs will need to stay somewhere else :-(
 ---
+If you downloaded the html.tbz tar ball you can decompress it and surf the code:
 The compressed tar ball contains the created doxygen documentation 
 using dot/graphviz.
 To surf the code you dont need graphviz or doxygen.
